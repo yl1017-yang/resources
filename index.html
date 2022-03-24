@@ -9,13 +9,17 @@
 <body>
     <style>
         *{margin:0;padding:0;border:0;list-style:none;font-size:16px;text-decoration:none;line-height:1.6;color:#555;}
-        header{padding:20px 80px;background:#f9f9f9;margin-bottom:40px;}
+        header{padding:2% 6%;background:#f9f9f9;margin-bottom:40px;}
         header h1{font-size:40px;}
-        main{padding:0 80px;display:flex;flex-wrap:wrap;}
+        main{padding:0 6%;display:flex;flex-wrap:wrap;}
         main h2{font-size:24px;margin-bottom:10px;}
         main section{width:50%;padding-bottom:20px;margin-bottom:20px;border-bottom:1px solid #eee;}
         main section dl dt{margin-top:10px;}
         main section dl dt a{color:skyblue;font-weight:bold;}
+        @media all and (max-width:720px) {
+            main{flex-direction:column;}
+            main section{width:100%;}
+        }
     </style>
 
     <header>
