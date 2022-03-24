@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+</head>
+<body>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<style>
+*{margin:0;padding:0;border:0;list-style:none;font-size:16px;text-decoration:none;line-height:1.6;color:#555;}
+
+.tab_area{width:90%;height:auto;overflow:hidden;}
+.tab_area ul{padding:0;margin:0;list-style:none;width:100%;height:auto;overflow:hidden;}
+.tab_area ul li{display: inline-block;width: 33.3333%;float: left;line-height: 40px;text-align: center;cursor: pointer;}
+.tab_area ul li:hover,
+.tab_area ul li.on{background: #ccc;}
+
+.tab_area .conBox{width:100%;height:auto;overflow:hidden;min-height:200px;background:#ccc;display:none;padding:20px;}
+.tab_area .conBox.on{display:block;}
+</style>
+
+
+<script>
+$(function() {
+    $(".tab_area ul li").click(function() {
+        $(".tab_area ul li").removeClass('on');
+        $(".tab_area .conBox").removeClass('on');
+        $(this).addClass('on');
+        $("#" + $(this).data('id')).addClass('on');
+    });
+});
+</script>
+
+
+
+
+<div class="tab_area">
+    <ul>
+        <li data-id="con1" class="on">tab #1</li>
+        <li data-id="con2">tab #2</li>
+        <li data-id="con3">tab #3</li>
+    </ul>
+    <div id="con1" class="conBox on">
+        - content 1
+    </div>
+    <div id="con2" class="conBox">
+        - cont 2
+    </div>
+    <div id="con3" class="conBox">
+        - cont 3
+    </div>
+</div>
+
+
+
+</body>
+</html>
