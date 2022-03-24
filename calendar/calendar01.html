@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+</head>
+<body>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<style>
+*{margin:0;padding:0;border:0;list-style:none;font-size:16px;text-decoration:none;line-height:1.6;color:#555;}
+
+/* 날짜선택 - 달력 */
+.ui-widget{font-family:'Montserrat', 'Noto Sans KR', "맑은 고딕", "malgun gothic", "Apple SD Gothic Neo", "Apple SD 산돌고딕 Neo", "Microsoft NeoGothic", sans-serif;font-size:14px;}
+.calender_section_info{margin-top:40px;}
+.ui-widget-header{position:relative;font-size:20px;font-weight:700;color:#1a1a1a;display:flex;justify-content:center;margin:0 0 25px;}
+.ui-datepicker table{font-size:14px;}
+.ui-datepicker th{font-weight:400;color:#666;}
+.ui-datepicker td{padding:3px 0;}
+.ui-datepicker td span, .ui-datepicker td a{display:block;width:39px;line-height:39px;text-align:center;border-radius:100%;}
+.ui-datepicker-calendar > thead th.ui-datepicker-week-end:first-child span{color:#FF334B;}
+.ui-datepicker-calendar > tbody td.ui-datepicker-week-end:first-child a{color:#FF334B;background:none !important;}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active{margin:0 auto;color:#1a1a1a;font-weight:600;}
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button, .ui-button, .ui-button.ui-state-active{transition:all 2s ease;}
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover{background:#FF781E;color:#fff;}
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight{background:#f4f4f4;color:#1a1a1a;}
+.ui-state-disabled, .ui-widget-content .ui-state-disabled span, .ui-widget-header .ui-state-disabled span{color:#a9a9a9;} /* 이전날짜 비활성 */
+
+.ui-datepicker-prev, .ui-datepicker-next{position:absolute;top:1px;}
+.ui-datepicker-prev{left:85px;width:24px;height:24px;background:url("https://yl1017-yang.github.io/mo-pet-px/images/common/icon_prev_24.png") no-repeat 0 0/100%;}
+.ui-datepicker-next{right:85px;width:24px;height:24px;background:url("https://yl1017-yang.github.io/mo-pet-px//images/common/icon_next_24.png") no-repeat 0 0/100%;}
+.ui-datepicker-prev .ui-icon{display:none;}
+.ui-datepicker-next .ui-icon{display:none;}
+
+.date_input{width:100%;height:50px;text-align:center;color:#fff;font-weight:500;background:#1a1a1a;border-radius:5px;margin-top:20px;}
+.date_input::placeholder{color:#fff;}
+</style>
+
+
+<script>
+
+</script>
+
+
+
+
+<!-- 달력 -->
+<section class="calender_section_info">
+    <div class="inner">
+        <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+        
+        <div id="calender_box"></div>
+        <input type="text" id="date_input" class="date_input" disabled placeholder="날짜를 선택해 주세요">
+
+        <script>
+        $(function() {
+            $.datepicker.setDefaults({
+                closeText: '닫기',
+                currentText: '오늘',
+                dateFormat: 'mm.dd (DD)',
+                prevText: '이전 달',
+                nextText: '다음 달',
+                monthNames: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+                monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+                dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+                dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+                dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+                //showOn:"both",
+                //showOtherMonths: true,
+                selectOtherMonths: true,
+                showMonthAfterYear: true,
+                yearSuffix: '.',
+                minDate: 0, //이전날짜 비활성
+            });
+
+            // 일요일만 선택 막기
+            function noSundays(date) {
+            return [date.getDay() != 0, ''];
+            }
+
+            $('#calender_box').datepicker();
+            $('#date_input').change(function(){
+                $('#calender_box').datepicker('setDate', $(this).val());
+            });
+            $('#calender_box').change(function(){
+                $('#date_input').attr('value',$(this).val());
+            });
+        });
+        </script>
+
+    </div>
+</section>
+<!-- //달력 -->
+
+
+
+</body>
+</html>
