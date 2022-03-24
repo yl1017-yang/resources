@@ -7,249 +7,282 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
 </head>
 <body>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
 <style>
 *{margin:0;padding:0;border:0;list-style:none;font-size:16px;text-decoration:none;line-height:1.6;color:#555;}
 
-a {
-  text-decoration: none;
-}
-
-img {
-  vertical-align: top;
-  border: none;
-}
-
-.slide {
+html,body {
   position: relative;
-  padding-top: 50px;
-  overflow: hidden;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
+button{border:0;cursor:pointer;}
 
-.panel {
-  width: 400%;
-}
-
-.panel:after {
-  content: "";
-  display: block;
-  clear: both;
-}
-
-.panel>li {
-  width: 25%;
-  height: 200px;
-  float: left;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
+.swiper-container {
   position: relative;
+  width: 100%;
+  height: 500px;
+  padding-top:100px;
+  overflow:hidden;
 }
 
-.panel>li:nth-of-type(1) {
-  background-color: pink;
+.swiper-slide {
+  position: relative;
+  box-sizing:border-box;
+  display: flex;
 }
 
-.panel>li:nth-of-type(2) {
-  background-color: skyblue;
-}
-
-.panel>li:nth-of-type(3) {
-  background-color: yellowgreen;
-}
-
-.dot:after {
-  content: "";
+.swiper-slide figure{
   display: block;
-  clear: both;
+  width: 60%;
+  height: 400px;
+  border-radius:20px;
+  overflow:hidden;
+  z-index:0;
+  border:1px solid black;
+}
+.swiper-slide figure img {
+  max-width:100%;
+  transform:scale(1);
+  transition:(50%, 50%);
+  -webkit-transition: transform 5s ease;
+  transition: transform 5s ease;
 }
 
-.dot {
-  position: absolute;
-  left: 50%;
-  bottom: 10%;
-  transform: translateX(-50%);
+.swiper-slide-active figure img{
+    transform:scale(1.2);transition-delay: 1s;
 }
 
-.dot>li {
-  float: left;
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  background-color: #fff;
-  margin-left: 10px;
-  margin-right: 10px;
-  text-indent: -9999px;
-  cursor: pointer;
+/* 텍스트 */
+.swiper-slide .txt-wrap{
+  width:35%;
+  margin-left:30px;
+  font-weight:bold;
+  color:#000;
+  z-index:10;
 }
 
-.dot>li.on {
-  background-color: #342f2f;
+.swiper-slide .txt-wrap h2{
+    font-size:50px;
+    opacity:0;
+    transition: transform 0.55s ease-in-out, opacity 0.55s ease-in-out;    
+}
+.swiper-slide .txt-wrap p{
+    font-size:24px;
+    font-weight:normal;
+    color:#999;
+    opacity: 0;
+    transition: transform 0.55s ease-in-out 0.4s, opacity 0.55s ease-in-out 0.4s;
 }
 
-.prev {
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  background-color: #fff;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 10%;
-  cursor: pointer;
+.swiper-slide-active .txt-wrap h2{
+    opacity:1;
+    transform: translate(0, -30px);
+}
+.swiper-slide-active .txt-wrap p{
+    opacity:1;
+    transform: translate(0, -30px);
 }
 
-.next {
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  background-color: #fff;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 10%;
-  cursor: pointer;
+/* 유틸박스 */
+.slider-main .util-box{
+    position:relative;
+    width:90%;
+    left:30px;
+    bottom:10%;
+    z-index:10;
+}
+
+.slider-main .swiper-button-prev,
+.slider-main .swiper-button-next {
+    /* display: none; 
+    background-image: url(http://www.kangsancons.co.kr/views/res/imgs/common/paging-next.svg);
+    background-size: 100%;
+    background-position: center;
+    outline: none;*/
+    width:60px;
+    height:60px;
+    border:1px solid #000;
+    border-radius:50%;
+    opacity:0.5;
+    transition:opacity 0.4s;
+}
+
+.swiper-button-next:after, .swiper-button-prev:after{
+    font-size:20px !important;
+    color: #000;
+}
+
+.slider-main .swiper-button-prev:hover,
+.slider-main .swiper-button-next:hover {
+    opacity: 1
+}
+
+.slider-main .swiper-button-next {
+    left: 70px;
+    transform: translateY(-8px);
+}
+
+.slider-main .swiper-button-prev {
+    left: 0;
+    right: auto;
+    transform: translateY(-8px);
+}
+
+/* 슬라이더 바 */
+.swiper-horizontal>.swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction{width:auto !important;bottom:auto !important;top:-500px;}
+.slider-main .swiper-pagination{}
+.slider-main .swiper-pagination-bullet{position:relative;width:auto !important;min-height:30px;background:transparent !important;padding:0 10px;opacity:1;color:#888;}
+.slider-main .swiper-pagination-bullet-active{color:#000;}
+.slider-main .swiper-pagination-bullet-active:before{content: "";display:block;position:absolute;top:30%;left:0;width:5px;height:5px;border-radius:100%;background:#000;transition: all .5 ease-in-out;}
+
+/* progress-bar */
+.swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
+    background-color: crimson;
+}
+
+/* play,stop 버튼 */
+.swiper-play-pause {
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	left:50%;
+    margin-left:220px;
+	width: 32px;
+	height: 32px;
+    font-size:0;
+    z-index:50;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    cursor: pointer;
+}
+.pause {
+	background-image: url("https://www.poscochemical.com/images/ico/ico_pause.png");
+}
+.play {
+	background-image: url("https://www.poscochemical.com/images/ico/ico_play.png");
 }
 </style>
 
 
 <script>
 $(function() {
-  slide();
+  var bullet = ['1번탭', '2번탭', '3번탭'];
+  var mainslider = new Swiper('.slider-main', {
+    speed: 1000,
+    autoplay: {
+      delay: 7000,
+      disableOnInteraction: false,
+    },
+    //effect: "fade",
+    allowTouchMove : true,
+    slidesPerView: 1,
+    //mousewheel: true,
+    //keyboard: true,
+  	loop: true,    
+    
+    pagination: {
+        el: '.pagination_bullet',
+        clickable: true,
+        type: 'bullets',
+        renderBullet: function (index, className) {
+    		return '<div class="' + className + '"><span>' + (bullet[index]) + '</span></div>';
+        }
+    },
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+    
 });
 
+//progress Bar 
+var pagingSwiper = new Swiper(".slider-main", { 
+	pagination: { 
+    	el: ".pagination_progress", 
+        type: "progressbar", 
+    }, 
+});
 
-// 슬라이드 
-function slide() {
-  var wid = 0;
-  var now_num = 0;
-  var slide_length = 0;
-  var auto = null;
-  var $dotli = $('.dot>li');
-  var $panel = $('.panel');
-  var $panelLi = $panel.children('li');
+//Main Swiper로 progress Bar 제어 
+mainslider.controller.control = pagingSwiper;
 
-  // 변수 초기화
-  function init() {
-    wid = $('.slide').width();
-    now_num = $('.dot>li.on').index();
-    slide_length = $dotli.length;
-  }
-
-  // 이벤트 묶음
-  function slideEvent() {
-
-    // 슬라이드 하단 dot버튼 클릭했을때
-    $dotli.click(function() {
-      now_num = $(this).index();
-      slideMove();
-    });
-
-    // 이후 버튼 클릭했을때
-    $('.next').click(function() {
-      nextChkPlay();
-    });
-
-    // 이전 버튼 클릭했을때
-    $('.prev').click(function() {
-      prevChkPlay();
-    });
-
-    // 오토플레이
-    autoPlay();
-
-    // 오토플레이 멈춤
-    autoPlayStop();
-
-    // 오토플레이 재시작
-    autoPlayRestart();
-
-    // 화면크기 재설정 되었을때
-    resize();
-  }
-
-  // 자동실행 함수
-  function autoPlay() {
-    auto = setInterval(function() {
-      nextChkPlay();
-    }, 3000);
-  }
-
-  // 자동실행 멈춤
-  function autoPlayStop() {
-    $panelLi.mouseenter(function() {
-      clearInterval(auto);
-    });
-  }
-
-
-  // 자동실행 멈췄다가 재실행
-  function autoPlayRestart() {
-    $panelLi.mouseleave(function() {
-      auto = setInterval(function() {
-        nextChkPlay();
-      }, 3000);
-    });
-  }
-
-  // 이전 버튼 클릭시 조건 검사후 슬라이드 무브
-  function prevChkPlay() {
-    if (now_num == 0) {
-      now_num = slide_length - 1;
+  
+  // swiper Play/Stop
+$('.swiper-play-pause').on("click", function () {
+    var $this = $(this);
+    if ($this.hasClass('pause')) {
+        $this.removeClass('pause').addClass('play').text('Play');
+        mainslider.autoplay.start();
+        mainslider.slideNext();
+        $(".slider-main .swiper-scrollbar .swiper-pagination").eq(0).addClass("animate");
+        
     } else {
-      now_num--;
+		$this.addClass('pause').removeClass('play').text('Pause');
+        mainslider.autoplay.stop();
+        $(".slider-main .swiper-scrollbar .swiper-pagination").removeClass("animate");
     }
-    slideMove();
-  }
+});
+  
 
-  // 이후 버튼 클릭시 조건 검사후 슬라이드 무브
-  function nextChkPlay() {
-    if (now_num == slide_length - 1) {
-      now_num = 0;
-    } else {
-      now_num++;
-    }
-    slideMove();
-  }
-
-  // 슬라이드 무브
-  function slideMove() {
-    $panel.stop().animate({
-      'margin-left': -wid * now_num
-    });
-    $dotli.removeClass('on');
-    $dotli.eq(now_num).addClass('on');
-  }
-
-  // 화면크기 조정시 화면 재설정
-  function resize() {
-    $(window).resize(function() {
-      init();
-      $panel.css({
-        'margin-left': -wid * now_num
-      });
-    });
-  }
-  init();
-  slideEvent();
-}
+});
 </script>
 
 
 
 
-<div class="slide">
-    <ul class="panel">
-      <li>1번슬라이드</li>
-      <li>2번슬라이드</li>
-      <li>3번슬라이드</li>
-    </ul>
-    <ul class="dot">
-      <li class="on">슬라이드 버튼1번</li>
-      <li>슬라이드 버튼2번</li>
-      <li>슬라이드 버튼3번</li>
-    </ul>
-    <div class="prev">이전</div>
-    <div class="next">이후</div>
-</div>
+<div class="swiper-container slider-main">
+
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <div class="txt-wrap">
+            <h2>현대백화점</h2>
+            <p>새로운 계절, 다시 시작을 위한 선물</p>
+        </div>
+        <figure>
+            <img src="https://cdn.pixabay.com/photo/2020/05/08/15/39/new-york-5146247_960_720.jpg" />
+        </figure>
+      </div>
+      
+      <div class="swiper-slide">
+        <div class="txt-wrap">
+            <h2>Ray Of Light, 찬란한 빛의 주얼리</h2>
+            <p>다양한 브랜드에서 적립하고 사용하는 즐거운 일상</p>
+        </div>
+        <figure>
+            <img src="https://cdn.pixabay.com/photo/2021/11/11/09/12/lighthouse-6785763_960_720.jpg" />
+        </figure>
+      </div>
+      
+      <div class="swiper-slide">
+        <div class="txt-wrap">
+            <h2>일상을 바꾸는 메인비주얼</h2>
+            <p>쇼핑이 미션이되고, 걸음이 포인트가되는 즐거운 일상으로 초대합니다.</p>
+        </div>
+        <figure>
+            <img src="https://www.poscochemical.com/resources/images/main/main_visual_bg02.jpg" /> 
+        </figure>
+      </div>
+    </div>
+  
+    <div class="swiper-pagination pagination_progress"></div>
+    <div class="util-box">
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-pagination pagination_bullet"></div>
+  
+      <button class="swiper-play-pause pause" type="button">
+        <span class="blind">재생/멈춤</span>
+      </button>
+    </div>
+  
+  </div>
+  
+
 
 
 
