@@ -12,20 +12,20 @@
 <style>
 *{margin:0;padding:0;border:0;list-style:none;font-size:16px;text-decoration:none;line-height:1.6;color:#555;}
 
-.tab_area{width:90%;height:auto;overflow:hidden;}
-.tab_area ul{padding:0;margin:0;list-style:none;width:100%;height:auto;overflow:hidden;}
-.tab_area ul li{display: inline-block;width: 33.3333%;float: left;line-height: 40px;text-align: center;cursor: pointer;}
+.tab_area{width:80%;margin:50px auto;}
+.tab_area ul{padding:0;margin:0;list-style:none;width:100%;height:auto;display:flex;}
+.tab_area ul li{padding:10px 30px;cursor:pointer;}
 .tab_area ul li:hover,
-.tab_area ul li.on{background: #ccc;}
+.tab_area ul li.on{border-bottom:2px solid blueviolet;color:blueviolet;}
 
-.tab_area .conBox{width:100%;height:auto;overflow:hidden;min-height:200px;background:#ccc;display:none;padding:20px;}
+.tab_area .conBox{display:none;width:100%;height:auto;min-height:200px;border:1px solid #eee;border-radius:10px;padding:20px;overflow:hidden;}
 .tab_area .conBox.on{display:block;}
 </style>
 
 
 <script>
 $(function() {
-    $(".tab_area ul li").click(function() {
+    $(".tab_area ul li").on('click', function(){
         $(".tab_area ul li").removeClass('on');
         $(".tab_area .conBox").removeClass('on');
         $(this).addClass('on');
@@ -39,18 +39,18 @@ $(function() {
 
 <div class="tab_area">
     <ul>
-        <li data-id="con1" class="on">tab #1</li>
-        <li data-id="con2">tab #2</li>
-        <li data-id="con3">tab #3</li>
+        <li data-id="con1" class="on">탭메뉴 #1</li>
+        <li data-id="con2">탭메뉴 #2</li>
+        <li data-id="con3">탭메뉴 #3</li>
     </ul>
     <div id="con1" class="conBox on">
-        - content 1
+        - 111 내용
     </div>
     <div id="con2" class="conBox">
-        - cont 2
+        - 2222 내용
     </div>
     <div id="con3" class="conBox">
-        - cont 3
+        - 333 내용
     </div>
 </div>
 

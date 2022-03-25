@@ -26,35 +26,32 @@ h3{font-size:26px;margin-bottom:10px;}
 .agree_wrap input[type="checkbox"]:disabled + label:before{cursor:not-allowed;opacity:.5;background:#ddd;}
 
 .btn_wrap .btn_agree{display:block;width:100%;padding:2% 0;margin-top:50px;background:blueviolet;color:#fff;text-align:center;border-radius:8px;cursor:pointer}
-.btn_wrap .btn_agree.disabled{background:#e0e0e0;color:#fff;font-weight:300;}
+.btn_wrap .btn_agree:disabled{background:#e0e0e0;color:#fff;font-weight:300;}
 </style>
 
 
 <script>
 $(function() {
 
-    $('.agree_wrap').on('click', '#check_all', function() {
-        $(this).parents('.agree_wrap').find('input[type="checkbox"]').prop('checked', $(this).is(':checked'));
+    $('#check_all').on('click', function(){
+        var is_checked = $(this).prop('checked');
+        $('.agree_wrap .check').prop('checked', is_checked);
+        $(this).prop('checked') ? $('#TestBtn').removeAttr('disabled'):$('#TestBtn').attr('disabled','disabled'); 
     });
 
-    // $('.agree_wrap').on('click', '.check', function() {
-    //     var is_checked = true;
-
-    //     $('.agree_wrap .check').each(function() {
-    //         is_checked = is_checked && $(this).is(":checked");
-    //     })
-    //     $('#check_all').prop("checked", is_checked);
-    //     $('#TestBtn').removeAttr('disabled'):$('#TestBtn').attr('disabled','disabled'); 
-    // }); 
-    $('.agree_wrap').change(function() {
-    });    
-
+    $('.check').on('click', function(){
+        var is_checked = true;
+        $('.agree_wrap .check').each(function() {
+            is_checked = is_checked && $(this).is(":checked");
+        })
+        $('#check_all').prop("checked", is_checked);
+        $('#check_all').prop('checked') ? $('#TestBtn').removeAttr('disabled'):$('#TestBtn').attr('disabled','disabled'); 
+    });
+    
 });
 </script>
 
 
-
-view-source:https://yl1017-yang.github.io/mo-pet-px/reserve/payment.html
 
 <section class="wrap">
     
