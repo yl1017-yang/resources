@@ -46,12 +46,24 @@ $(function() {
     // 두번째 방법
     $('.acodi_list .acodi_title').on('click', function() {
         $('.acodi_list ul li').removeClass('on');
-        $(this).next().stop().slideToggle();
-        $(this).parent('li').addClass('on').siblings('li').children('.acodi_content').slideUp();
+        $(this).next().stop().slideToggle(300);
+        $(this).parent('li').addClass('on').siblings('li').children('.acodi_content').slideUp(300);
         //$('.acodi_list .acodi_title').not(this).next().stop().slideUp(200);
         //$(this).parent('li').addClass('on');
     });
 
+    // 세번째 방법
+    // $('.acodi_list .acodi_title').on('click', function() {
+    //     var $depth = $(this).next();
+    //     if($depth.is(":visible")){
+    //         $depth.slideUp(300);
+    //         $('.acodi_list ul li').removeClass('on');
+    //     } else {
+    //         $(this).parent('li').siblings('li').children('.acodi_content').slideUp(300);
+    //         $(this).parent('li').addClass('on');
+    //         $depth.slideDown(300);
+    //     }
+    // });
 
     $('.acodi_list .acodi_title').eq(0).trigger("click");
 });
