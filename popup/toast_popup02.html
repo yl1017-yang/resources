@@ -12,42 +12,40 @@
 <style>
 *{margin:0;padding:0;border:0;list-style:none;font-size:16px;text-decoration:none;line-height:1.6;color:#555;box-sizing:border-box;-webkit-box-sizing:border-box;}
 .blind{overflow:hidden;position:absolute;clip:rect(0 0 0 0);width:1px;height:1px;line-height:0;margin:-1px}
-body{background:cornsilk;}
+body{background:#eee;}
 
-.toast_box{display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:999;}
+.toast_box{position:fixed;top:0;left:0;width:100%;height:100%;z-index:999;visibility:hidden;}
 .toast_box .toast_content{position:absolute;bottom:-150px;left:0;width:100%;padding:50px 50px 80px 50px;box-shadow:3px 3px 20px 0 rgba(0,0,0,.07);border-radius:14px 14px 0 0;background-color:#fff;}
 .toast_box .btn_close{position:absolute;top:20px;right:30px;width:28px;height:28px;display:block;background:url("../images/close-line-28-black.svg") no-repeat;}
-.toast_box .dim_bg{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);}
+.toast_box .dim_bg{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);opacity:0;transition:all 0.3s ease-in-out;visibility:hidden;}
 
-.btn_buttom{display:inline-block;padding:10px 50px;margin:50px auto;background:blueviolet;border-radius:100px;color:#fff;}
+.toast_box.on{visibility:visible;}
+.toast_box.on .dim_bg{opacity:1;visibility:visible;}
+
+.btn_buttom{display:inline-block;padding:10px 50px;margin:50px auto;background:blueviolet;border-radius:100px;color:#fff;cursor:pointer;}
 </style>
 
 
 <script>
 $(function() {
     $('.btn_buttom').on('click', function() {
-        $(".toast_box .btn_close").show();
-        $(".toast_box" + $(this).attr("href")).fadeIn(200);
-        $(".toast_box").find('.toast_content').animate({bottom:0}, 200);
+        $(".toast_box").addClass('on');
+        $(".toast_box").find('.toast_content').animate({bottom:0}, 300);
         $("html, body").css({'height':$(window).height(), 'overflow':'hidden'});
     });
     $('.toast_box .btn_close').on('click', function() {
-        $(".btn_buttom").show();
-        $(".toast_box").fadeOut(300);
+        $(".toast_box").removeClass('on');
         $(".toast_box").find('.toast_content').animate({bottom:-150}, 300);
         $("html, body").css({'height':'auto', 'overflow':'auto'});
     });
 });
 </script>
 
-
-
-<a href="#cate_pop1" class="btn_buttom">토스트 배너01 (a)</a>
-<a href="#cate_pop2" class="btn_buttom">토스트 배너01 (a)</a>
+<button type="button" class="btn_buttom">토스트 배너 (버튼형)</button>
 
 
 <!-- [D] 버튼클릭시 토스트배너 -->
-<div id="cate_pop1" class="toast_box">
+<div class="toast_box">
     <div class="dim_bg"></div>
     <div class="toast_content">
         <a href="#" class="btn_close"><span class="blind">닫기</span></a>
@@ -58,20 +56,6 @@ $(function() {
             Toast 팝업은 무언가 액션을 시작했을 때, 종료되었을 때, 상태가 바뀌었을 때 등등의 경우 알려주는 팝업입니다. <br>
             따로 닫기 버튼을 두지 않고 일정 시간이 지나면 자동으로 사라집니다. <br>
             https://yozm.wishket.com/magazine/detail/1272/
-        </div>
-    </div>
-</div>
-<!-- //[D] 버튼클릭시 토스트배너 -->
-
-
-<!-- [D] 버튼클릭시 토스트배너 -->
-<div id="cate_pop2" class="toast_box">
-    <div class="dim_bg"></div>
-    <div class="toast_content">
-        <a href="#" class="btn_close"><span class="blind">닫기</span></a>
-        <div>
-            두번째 토스트 팝업<br>
-            하단에서 나오는 토스트배너 내용<br>
         </div>
     </div>
 </div>
