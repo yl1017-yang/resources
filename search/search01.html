@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+</head>
+<body>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<style>
+*{margin:0;padding:0;border:0;list-style:none;font-size:16px;text-decoration:none;line-height:1.6;color:#555;box-sizing:border-box;-webkit-box-sizing:border-box;}
+
+/*통합검색*/
+.h-search-wrap{width:500px;text-align:right;}
+.h-search-btn {display:block;position:relative;width:42px;height:42px;cursor:pointer;background:url("https://yl1017-yang.github.io/resources/images/search-line-black.svg") no-repeat;}
+.h-search-btn .h-ico-search{opacity:1;transform:scale(1);transition:all .2s ease;}
+
+.search-box{display:none;position:fixed;width:100%;background-color:#fff;top:0;left:0;z-index:3000;
+    transition: top .5s;box-shadow: 0 30px 150px 0 rgba(0, 0, 0, 0.3);padding: 0 20px;
+}
+
+.search-wrap{max-width:800px;margin:0 auto;padding:7.15rem 0;transition:padding 0.3s ease;}
+.search-wrap .search-hash{padding:18px 0 0;}
+.close-sch-btn {position:fixed;z-index:100;right: 3%;top: 24px;width: 42px;height: 42px;transform:scale(0);opacity:0;transition:all .2s ease;overflow:hidden;}
+
+.h-search-btn.open .h-ico-search{opacity:0;transform:scale(0);}
+.search-box.open .close-sch-btn{transform:scale(1);opacity:1;}
+</style>
+
+
+<script>
+$(function() {
+
+
+});
+</script>
+
+샘플 https://www.mobis.co.kr/kr/util/integrated_search.do
+
+<h3>통합검색</h3>
+
+<div class="h-search-wrap">
+    <button class="h-search-btn" title="통합검색">
+        <i class="h-ico-search"></i>
+    </button>
+</div>
+
+
+</body>
+</html>
