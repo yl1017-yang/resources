@@ -18,7 +18,7 @@ table{width:100%;border-collapse:collapse;border-spacing:0;table-layout:fixed;}
 fieldset, legend{background-color:transparent;}
 caption, legend, .blind{position:absolute!important;height:1px!important;width:1px!important;overflow:hidden!important;clip:rect(1px 1px 1px 1px)!important;clip:rect(1px,1px,1px,1px)!important;}
 a{color:inherit;text-decoration:none;cursor:pointer;}
-button{border:none;box-shadow:none;background:transparent;cursor:pointer;outline:none;border-radius:0;font-size:100%;}
+button{border:none;box-shadow:none;background:transparent;cursor:pointer;outline:none;border-radius:0;font:inherit;}
 button:focus{outline:auto;}
 
 /* *:focus{outline:2px dashed #CC1424!important;z-index:500;} */
@@ -27,7 +27,7 @@ button:focus{outline:auto;}
 a, button, [role=button], [role=link], [role=tab]{-webkit-touch-callout:none;}
 
 /* form select */
-input,textarea,select{box-sizing:border-box;-webkit-appearance:none;-moz-appearance:none;appearance:none;border:none;}
+input,textarea,select{box-sizing:border-box;-webkit-appearance:none;-moz-appearance:none;appearance:none;border:none;font:inherit;}
 input[type='text'], input[type='password']{resize:none;box-shadow:none !important;border-radius:0;outline:none;}
 input:checked{-webkit-appearance:checkbox;}
 input[type='text']::-ms-clear, input[type='tel']::-ms-clear{display:none;}
