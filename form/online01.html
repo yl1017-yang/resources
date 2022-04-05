@@ -75,7 +75,7 @@ function sendit_bottom(){
       form.name.focus();
   } else if(form.company.value.trim() ==''){
       alert('기관 또는 기업명을 입력해 주세요.');
-      form.company.focus();      
+      form.company.focus();
   } else if(form.email.value.trim() ==''){
       alert('이메일을 입력해 주세요.');
       form.email.focus();
@@ -88,6 +88,16 @@ function sendit_bottom(){
   }
 }
 
+//이메일 유효성 정규식검사
+function isEmail(email) {
+  var regExp=/([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/; 
+  return (email != '' && email != 'undefined' && regExp.test(email));
+}
+// 연락처 번호 체크 정규식
+function isTel(asValue) {
+  var regExp = /^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$/;
+  return regExp.test(asValue);
+}
 
 $(function() {
   //온라인문의 폼 - id type
@@ -106,9 +116,17 @@ $(function() {
       alert('이메일을 입력해 주세요.');
       $('#email2').focus();
       return false;
+    } else if (!isEmail( $('#email2').val() )) {
+      alert('이메일 형식이 잘못되었습니다.');
+      $('#email2').focus();
+      return false;
     }
     if ($('#tel2').val().trim() =='') {
       alert('연락처를 입력해 주세요.');
+      $('#tel2').focus();
+      return false;
+    } else if (!isTel( $('#tel2').val() )) {
+      alert('숫자 사이에 \'-\'를 넣어주세요');
       $('#tel2').focus();
       return false;
     }
@@ -134,10 +152,11 @@ $(function() {
     $('html, body').css({'height':'auto', 'overflow':'auto'});
   }
 
-  // popupClose.on('click', function() {
-  //   $('#agree2').prop('checked') == true;
-  //   $('#agree2:checked + label:before').focus();
-  // });
+  $('.dialog_popup .btn_close').on('click', function() {
+    if ($('#agree2').prop('checked') != true) {
+      $('#agree2:checked + label:before').focus();
+    }    
+  });
 
   //문의사항내용 - 1000자이내
   $('#contents').on('keyup', function() {
@@ -158,8 +177,9 @@ $(function() {
 샘플 https://www.sssak.co.kr/kr/<br>
 로그인 참고 : https://dololak.tistory.com/728<br>
 https://velog.io/@xyunkyung/HTML-JQuery-%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85-%ED%8F%BC<br>
-https://dreamjy.tistory.com/27<br>
-https://mainichibenkyo.tistory.com/153
+https://mainichibenkyo.tistory.com/153<br>
+https://suyou.tistory.com/150<br>
+https://redcow77.tistory.com/492
 
 
 <h3>온라인문의 폼 - onclick type</h3>
