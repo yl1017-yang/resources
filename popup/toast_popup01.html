@@ -14,10 +14,12 @@
 <style>
 body{background:cornsilk;}
 
-.toast_box{display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:999;}
-.toast_box .toast_content{position:absolute;bottom:-150px;left:0;width:100%;padding:50px 50px 80px 50px;box-shadow:3px 3px 20px 0 rgba(0,0,0,.07);border-radius:14px 14px 0 0;background-color:#fff;}
-.toast_box .btn_close{position:absolute;top:20px;right:30px;width:28px;height:28px;display:block;background:url("../images/close-line-28-black.svg") no-repeat;}
-.toast_box .dim_bg{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);}
+.dialog_popup{display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:999;}
+.dialog_popup .dialog_wrap{position:absolute;bottom:-150px;left:0;width:100%;padding:50px 50px 80px 50px;box-shadow:3px 3px 20px 0 rgba(0,0,0,.07);border-radius:14px 14px 0 0;background-color:#fff;}
+.dialog_popup .dialog_wrap .btn_close{position:absolute;top:20px;right:30px;width:28px;height:28px;display:block;background:url("../images/close-line-28-black.svg") no-repeat;}
+.dialog_popup .dialog_wrap .dialog_header h2{font-size:25px;font-weight:bold;color:blueviolet;margin-bottom:10px;}
+.dialog_popup .dialog_wrap .dialog_content{}
+.dialog_popup .dim_bg{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);}
 
 .btn_buttom{display:inline-block;padding:10px 50px;margin:50px auto;background:blueviolet;border-radius:100px;color:#fff;}
 </style>
@@ -26,17 +28,21 @@ body{background:cornsilk;}
 <script>
 $(function() {
     $('.btn_buttom').on('click', function() {
-        $(".toast_box .btn_close").show();
-        $(".toast_box" + $(this).attr("href")).fadeIn(200);
-        $(".toast_box").find('.toast_content').animate({bottom:0}, 200);
+        $(".dialog_popup .btn_close").show();
+        $(".dialog_popup" + $(this).attr("href")).fadeIn(200);
+        $(".dialog_popup").find('.dialog_wrap').animate({bottom:0}, 200);
         $("html, body").css({'height':$(window).height(), 'overflow':'hidden'});
     });
-    $('.toast_box .btn_close').on('click', function() {
-        $(".btn_buttom").show();
-        $(".toast_box").fadeOut(300);
-        $(".toast_box").find('.toast_content').animate({bottom:-150}, 300);
+
+    $(".dialog_popup .btn_close").on('click', popupClose);
+    $(".dialog_popup .dim_bg").on('click', popupClose);
+
+    function popupClose() {    	
+    	$(".btn_buttom").show();
+        $(".dialog_popup").fadeOut(300);
+        $(".dialog_popup").find('.dialog_wrap').animate({bottom:-150}, 300);
         $("html, body").css({'height':'auto', 'overflow':'auto'});
-    });
+    }  
 });
 </script>
 
@@ -47,11 +53,14 @@ $(function() {
 
 
 <!-- [D] 버튼클릭시 토스트배너 -->
-<div id="cate_pop1" class="toast_box">
+<div id="cate_pop1" class="dialog_popup">
     <div class="dim_bg"></div>
-    <div class="toast_content">
-        <a href="#" class="btn_close"><span class="blind">닫기</span></a>
-        <div>
+    <div class="dialog_wrap">
+        <div class="dialog_header">
+            <h2>토스트 팝업 타이틀</h2>
+            <a href="#" class="btn_close"><span class="blind">닫기</span></a>
+        </div>
+        <div class="dialog_content">
             바텀 모달 팝업<br>
             토스트 팝업<br>
             하단에서 나오는 토스트배너 내용<br>
@@ -65,11 +74,14 @@ $(function() {
 
 
 <!-- [D] 버튼클릭시 토스트배너 -->
-<div id="cate_pop2" class="toast_box">
+<div id="cate_pop2" class="dialog_popup">
     <div class="dim_bg"></div>
-    <div class="toast_content">
-        <a href="#" class="btn_close"><span class="blind">닫기</span></a>
-        <div>
+    <div class="dialog_wrap">
+        <div class="dialog_header">
+            <h2>토스트 팝업 타이틀</h2>
+            <a href="#" class="btn_close"><span class="blind">닫기</span></a>
+        </div>
+        <div class="dialog_content">
             두번째 토스트 팝업<br>
             하단에서 나오는 토스트배너 내용<br>
         </div>

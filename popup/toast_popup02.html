@@ -52,10 +52,10 @@ a.btn_open{background-color:crimson;}
 <script>
 $(function() {
 	var popup = $('.dialog_popup');
-    
+
     $('.btn_open').on('click', function() {
         var value = $(this).attr('data-value');
-        //var value = $(this).data("value");        
+        //var value = $(this).data("value");
         $('.dialog_popup[data-value='+value+']').addClass('on');
         //popup.find('.dialog_wrap').animate({bottom:0}, 400);
         $('html, body').css({'height':$(window).height(), 'overflow':'hidden'});
@@ -64,11 +64,11 @@ $(function() {
     $(".btn_close").on('click', popupClose);
     $(".dialog_popup .dim_bg").on('click', popupClose);
     
-    function popupClose() {    	
+    function popupClose() {
     	popup.removeClass('on');
         //popup.find('.dialog_wrap').animate({bottom:"-100%"}, 600);
         $('html, body').css({'height':'auto', 'overflow':'auto'});
-    }    
+    }
 });
 </script>
 

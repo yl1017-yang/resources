@@ -19,7 +19,7 @@
 /* transition: all 250ms linear; */
 transition: opacity 250ms 250ms ease, transform 300ms 250ms ease;
 }
-.pop_wrap.active{opacity:1;z-index:1998;visibility:visible;overflow:auto;-webkit-overflow-scrolling:touch;}
+.pop_wrap.on{opacity:1;z-index:1998;visibility:visible;overflow:auto;-webkit-overflow-scrolling:touch;}
 .pop_wrap .pop_inner{width:100%;min-height:100%;display:flex;justify-content:center;align-items:center;box-sizing:border-box;}
 .pop_wrap .pop_content{position:relative;width:500px;padding:60px 50px 30px;box-shadow:3px 3px 20px 0 rgba(0,0,0,.05);border-radius:10px;background-color:#fff;border:solid 1px #f2f2f2;box-sizing:border-box;}
 /* .pop_wrap .pop_close{display:block;position:absolute;width:33px;height:33px;right:30px;top:30px;text-indent:-999em;background:url(https://www.lgensol.com/assets/img/icon/x-o.svg) 50% 50% no-repeat;overflow:hidden} */
@@ -36,7 +36,7 @@ transition: opacity 250ms 250ms ease, transform 300ms 250ms ease;
 $(function(){
 
 function openPop(href){
-    $('.pop_wrap' + href).addClass('active');
+    $('.pop_wrap' + href).addClass('on');
 }
 
 $('.btn_pop').on('click',function(){
@@ -46,13 +46,13 @@ $('.btn_pop').on('click',function(){
 });
 
 function closePop() {
-    $('.pop_wrap').removeClass('active');
+    $('.pop_wrap').removeClass('on');
+    $('body').css({'height':'auto', 'overflow':'auto'});
 }
 
 $('.pop_wrap .pop_close').on('click', function(e){
     e.preventDefault();
     closePop();
-    $('body').css({'height':'auto', 'overflow':'auto'});
 });
 
 // 빈영역 클릭 닫기
