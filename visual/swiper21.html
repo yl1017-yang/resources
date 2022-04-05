@@ -47,11 +47,11 @@ transform:rotate(-45deg);-webkit-transform:rotate(-45deg);-moz-transform:rotate(
 <script>
 $(function() {
 
-var wid = $(".slider").width();
-var btn = $(".btn li.on").index();
-var panel = $(".panel li").length;
+var wid = $('.slider').width();
+var btn = $('.btn li.on').index();
+var panel = $('.panel li').length;
 
-$(".prev").click(function() {
+$('.prev').click(function() {
   if (btn == 0) {
     btn = panel - 1;
   } else {
@@ -60,7 +60,7 @@ $(".prev").click(function() {
   showSlide();
 });
 
-$(".next").click(function() {
+$('.next').click(function() {
   if (btn == 2) {
     btn = 0;
   } else {
@@ -70,19 +70,19 @@ $(".next").click(function() {
 });
   
 setInterval(function() {
-    $(".next").click();
+    $('.next').click();
   }, 4000);
 
-$(".btn li").click(function() {
+$('.btn li').click(function() {
   btn = $(this).index();
   showSlide();
 });
 
 function showSlide() {
-  $(".btn li").removeClass("on");
-  $(".btn li").eq(btn).addClass("on"); 
-  $(".panel li").stop(true, true).fadeOut(1000);
-  $(".panel li").eq(btn).stop(true, true).fadeIn(1000);    
+  $('.btn li').removeClass('on');
+  $('.btn li').eq(btn).addClass('on'); 
+  $('.panel li').stop(true, true).fadeOut(1000);
+  $('.panel li').eq(btn).stop(true, true).fadeIn(1000);
 }
 
 });

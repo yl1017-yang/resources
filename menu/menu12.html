@@ -35,27 +35,27 @@
 
 <script>
 function gnbMenu(depth1, depth2, depth3) {
-	var $gnb = $(".gnb"),
-    	$gnbDep1 = $(".gnbDep1", $gnb);
+	var $gnb = $('.gnb'),
+    	$gnbDep1 = $('.gnbDep1', $gnb);
 	
-	$(".gnb > li .gnbDep2").hide();
+	$('.gnb > li .gnbDep2').hide();
     
     $gnbDep1.on('mouseenter focusin', function(){        
 		$(this).children('.gnbDep2').stop().fadeIn('100');
         
         var bgHeight = $(this).find('.gnbDep2').innerHeight();
-        $(".header").find('.gnb_bg').stop().animate({height: bgHeight}, 300);
+        $('.header').find('.gnb_bg').stop().animate({height: bgHeight}, 300);
     });
     
     $gnbDep1.on('mouseleave focusout',function(){
         $(this).children('.gnbDep2').stop().fadeOut('0');        
         
-        $(".header").find('.gnb_bg').stop().animate({height:0}, 400);
+        $('.header').find('.gnb_bg').stop().animate({height:0}, 400);
     });
     
     if ($gnbDep1.length > depth1-1) {
-        $gnbDep1.eq(depth1-1).find("> a").addClass("on");
-        $gnbDep1.eq(depth1-1).find(".gnbDep2 > li").eq(depth2-1).find("> a").addClass("on");
+        $gnbDep1.eq(depth1-1).find('> a').addClass('on');
+        $gnbDep1.eq(depth1-1).find('.gnbDep2 > li').eq(depth2-1).find('> a').addClass('on');
 	}
 }
 </script>

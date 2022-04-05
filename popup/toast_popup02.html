@@ -16,7 +16,7 @@ body{background:#eee;}
 
 .dialog_popup{position:fixed;top:0;left:0;width:100%;height:100%;z-index:999;}
 .dialog_popup .dialog_wrap{position:absolute;left:0;right:0;width:100%;padding:50px 50px 80px 50px;box-shadow:3px 3px 8px 0 rgba(0,0,0,0.4);border-radius:14px 14px 0 0;background-color:#fff;}
-.dialog_popup .dialog_wrap .btn_close{position:absolute;top:20px;right:30px;width:28px;height:28px;display:block;background:url("../images/close-line-28-black.svg") no-repeat;}
+.dialog_popup .dialog_wrap .btn_close{position:absolute;top:20px;right:30px;width:28px;height:28px;display:block;background:url('../images/close-line-28-black.svg') no-repeat;}
 .dialog_popup .dialog_wrap .dialog_header h2{font-size:25px;font-weight:bold;color:blueviolet;margin-bottom:10px;}
 .dialog_popup .dialog_wrap .dialog_content{}
 .dialog_popup .dim_bg{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);}
@@ -55,18 +55,18 @@ $(function() {
 
     $('.btn_open').on('click', function() {
         var value = $(this).attr('data-value');
-        //var value = $(this).data("value");
+        //var value = $(this).data('value');
         $('.dialog_popup[data-value='+value+']').addClass('on');
         //popup.find('.dialog_wrap').animate({bottom:0}, 400);
         $('html, body').css({'height':$(window).height(), 'overflow':'hidden'});
     });
 
-    $(".btn_close").on('click', popupClose);
-    $(".dialog_popup .dim_bg").on('click', popupClose);
+    $('.btn_close').on('click', popupClose);
+    $('.dialog_popup .dim_bg').on('click', popupClose);
     
     function popupClose() {
     	popup.removeClass('on');
-        //popup.find('.dialog_wrap').animate({bottom:"-100%"}, 600);
+        //popup.find('.dialog_wrap').animate({bottom:'-100%'}, 600);
         $('html, body').css({'height':'auto', 'overflow':'auto'});
     }
 });

@@ -29,19 +29,19 @@
 
 <script>
 $(function() {
-	$(".gnb ul li .dep2").hide();
+	$('.gnb ul li .dep2').hide();
     
-    $(".gnb ul > li").on('mouseenter focusin', function(){
+    $('.gnb ul > li').on('mouseenter focusin', function(){
         $(this).find('.dep1').addClass('on');
 //        $(this).find('.dep2').stop().slideDown('300');
 		$(this).find('.dep2').stop().fadeIn('300');
-        $(".gnb").find('.gnb_bg').stop(true, false).animate({"height":"150"}, 300);
+        $('.gnb').find('.gnb_bg').stop(true, false).animate({'height':'150'}, 300);
         
     }).on('mouseleave focusout',function(){
         $(this).find('.dep1').removeClass('on');
 //        $(this).find('.dep2').stop().slideUp('300');
         $(this).find('.dep2').stop().fadeOut('0');
-        $(".gnb").find('.gnb_bg').stop(true, false).animate({"height":"0"}, 300);
+        $('.gnb').find('.gnb_bg').stop(true, false).animate({'height':'0'}, 300);
     });
     
 

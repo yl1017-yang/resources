@@ -151,10 +151,10 @@ html,body {
     cursor: pointer;
 }
 .pause {
-	background-image: url("https://www.poscochemical.com/images/ico/ico_pause.png");
+	background-image: url('https://www.poscochemical.com/images/ico/ico_pause.png');
 }
 .play {
-	background-image: url("https://www.poscochemical.com/images/ico/ico_play.png");
+	background-image: url('https://www.poscochemical.com/images/ico/ico_play.png');
 }
 
 
@@ -205,7 +205,7 @@ $(function() {
       delay: 7000,
       disableOnInteraction: false,
     },
-    effect: "fade",
+    effect: 'fade',
     allowTouchMove : true,
     slidesPerView: 1,
     mousewheel: true,
@@ -216,19 +216,19 @@ $(function() {
   	/* loop: true,  */
     
     scrollbar: {
-      el: ".swiper-scrollbar", 
+      el: '.swiper-scrollbar', 
     },    
     
     on: {
       init: function () {
-        $(".swiper-scrollbar .swiper-scrollbar-drag").removeClass("animate");
-        $(".swiper-scrollbar .swiper-scrollbar-drag").eq(0).addClass("animate");
+        $('.swiper-scrollbar .swiper-scrollbar-drag').removeClass('animate');
+        $('.swiper-scrollbar .swiper-scrollbar-drag').eq(0).addClass('animate');
       },
       slideChangeTransitionStart: function () {
-        $(".swiper-scrollbar .swiper-scrollbar-drag").removeClass("animate");
+        $('.swiper-scrollbar .swiper-scrollbar-drag').removeClass('animate');
       },
       slideChangeTransitionEnd: function () {
-        $(".swiper-scrollbar .swiper-scrollbar-drag").eq(0).addClass("animate");
+        $('.swiper-scrollbar .swiper-scrollbar-drag').eq(0).addClass('animate');
       }
       
     },
@@ -246,21 +246,21 @@ $(function() {
       
   }); 
   
-  $(".swiper-scrollbar .swiper-scrollbar-drag").eq(0).addClass("animate");
+  $('.swiper-scrollbar .swiper-scrollbar-drag').eq(0).addClass('animate');
   
   // swiper Play/Stop
-$('.swiper-play-pause').on("click", function () {
+$('.swiper-play-pause').on('click', function () {
     var $this = $(this);
     if ($this.hasClass('pause')) {
         $this.removeClass('pause').addClass('play').text('Play');
         mainslider.autoplay.start();
         /* mainslider.slideNext(); */
-        $(".swiper-scrollbar .swiper-scrollbar-drag").eq(0).addClass("animate");
+        $('.swiper-scrollbar .swiper-scrollbar-drag').eq(0).addClass('animate');
         
     } else {
 		$this.addClass('pause').removeClass('play').text('Pause');
         mainslider.autoplay.stop();
-        $(".swiper-scrollbar .swiper-scrollbar-drag").removeClass("animate");
+        $('.swiper-scrollbar .swiper-scrollbar-drag').removeClass('animate');
     }
 });
   

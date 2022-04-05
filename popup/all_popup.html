@@ -38,14 +38,14 @@ $(function() {
 // 전체메뉴보기
 $('.allmenu_btn').on('click', function() {
   $(this).hide();
-  $(".allmenu_btn_close").show();
-  $(".allmenu_area").stop().slideToggle(300); //슬라이딩효과
-  //$(".allmenu_area").fadeIn(300); //페이드효과
+  $('.allmenu_btn_close').show();
+  $('.allmenu_area').stop().slideToggle(300); //슬라이딩효과
+  //$('.allmenu_area').fadeIn(300); //페이드효과
 });
 $('.allmenu_btn_close').on('click', function() { //닫기버튼만 닫힘
-  $(".allmenu_btn").show();
-  $(".allmenu_area").stop().delay(100).slideUp(300); //슬라이딩
-  //$(".allmenu_area").fadeOut(300); //페이드효과
+  $('.allmenu_btn').show();
+  $('.allmenu_area').stop().delay(100).slideUp(300); //슬라이딩
+  //$('.allmenu_area').fadeOut(300); //페이드효과
 });
 
 

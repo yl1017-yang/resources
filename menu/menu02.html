@@ -25,8 +25,8 @@
 
 <script>
 $(function() {
-	$(".gnb ul li .dep2").hide();
-    $(".gnb ul > li").on('mouseenter focusin', function(){
+	$('.gnb ul li .dep2').hide();
+    $('.gnb ul > li').on('mouseenter focusin', function(){
         $(this).find('.dep1').addClass('on');
         $(this).find('.dep2').stop().slideDown('300');
     }).on('mouseleave focusout',function(){

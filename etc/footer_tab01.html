@@ -34,9 +34,9 @@ $(window).on('load scroll', function(){
     
     if(scrollTop >= 100) {
         if ((scrollTop > lastScrollTop) && (lastScrollTop>0)) {
-            $(".scroll_header").css("top","-100px");
+            $('.scroll_header').css('top','-100px');
         } else {
-            $(".scroll_header").css("top","0px");
+            $('.scroll_header').css('top','0px');
         }
 
         lastScrollTop = scrollTop;
@@ -48,9 +48,9 @@ $(window).on('load scroll', function(){
 $(function() {
     $(window).on('load scroll', function(){
 		 if( Math.round( $(window).scrollTop()) == $(document).height() - $(window).height() ){
-			 $("#scrollTop").addClass("active");
+			 $('#scrollTop').addClass('active');
 		 }else{
-			 $("#scrollTop").removeClass("active");
+			 $('#scrollTop').removeClass('active');
 		 }
 	 });
 });

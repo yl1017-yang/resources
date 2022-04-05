@@ -25,11 +25,11 @@
 
 <script>
 $(function() {
-    $(".tab_area ul li").on('click', function(){
-        $(".tab_area ul li").removeClass('on');
-        $(".tab_area .conBox").removeClass('on');
+    $('.tab_area ul li').on('click', function(){
+        $('.tab_area ul li').removeClass('on');
+        $('.tab_area .conBox').removeClass('on');
         $(this).addClass('on');
-        $("#" + $(this).data('id')).addClass('on');
+        $('#' + $(this).data('id')).addClass('on');
     });
 });
 </script>

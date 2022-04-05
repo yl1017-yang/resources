@@ -18,12 +18,12 @@ h3{font-size:26px;margin-bottom:10px;}
 
 /* 체크박스 디자인 */
 .agree_wrap{display:flex;flex-direction:column;}
-.agree_wrap input[type="checkbox"]{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
-.agree_wrap input[type="checkbox"] + label{display:inline-block;position:relative;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;}
-.agree_wrap input[type="checkbox"] + label:before{content:'';display:inline-block;width:20px;height:20px;margin:-2px 8px 0 0;vertical-align:middle;text-align:center;background:#fff;border:1px solid #ddd;border-radius:6px;}
-.agree_wrap input[type="checkbox"]:checked + label:before{content:'';border:1px solid #666;background:#666 url('../images/check-line-16.svg') no-repeat 50%;}
-.agree_wrap input[type="checkbox"]:checked:disabled + label:before{content:'';color:#fff;background:#ddd url('../images/check-line-16.svg') no-repeat 50%;border:1px solid #aaa;}
-.agree_wrap input[type="checkbox"]:disabled + label:before{cursor:not-allowed;opacity:.5;background:#ddd;}
+.agree_wrap input[type='checkbox']{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
+.agree_wrap input[type='checkbox'] + label{display:inline-block;position:relative;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;}
+.agree_wrap input[type='checkbox'] + label:before{content:'';display:inline-block;width:20px;height:20px;margin:-2px 8px 0 0;vertical-align:middle;text-align:center;background:#fff;border:1px solid #ddd;border-radius:6px;}
+.agree_wrap input[type='checkbox']:checked + label:before{content:'';border:1px solid #666;background:#666 url('../images/check-line-16.svg') no-repeat 50%;}
+.agree_wrap input[type='checkbox']:checked:disabled + label:before{content:'';color:#fff;background:#ddd url('../images/check-line-16.svg') no-repeat 50%;border:1px solid #aaa;}
+.agree_wrap input[type='checkbox']:disabled + label:before{cursor:not-allowed;opacity:.5;background:#ddd;}
 
 .btn_wrap .btn_agree{display:block;width:100%;padding:2% 0;margin-top:50px;background:blueviolet;color:#fff;text-align:center;border-radius:8px;cursor:pointer}
 .btn_wrap .btn_agree:disabled{background:#e0e0e0;color:#fff;font-weight:300;}
@@ -42,9 +42,9 @@ $(function() {
     $('.check').on('click', function(){
         var is_checked = true;
         $('.agree_wrap .check').each(function() {
-            is_checked = is_checked && $(this).is(":checked");
+            is_checked = is_checked && $(this).is(':checked');
         })
-        $('#check_all').prop("checked", is_checked);
+        $('#check_all').prop('checked', is_checked);
         $('#check_all').prop('checked') ? $('#TestBtn').removeAttr('disabled'):$('#TestBtn').attr('disabled','disabled'); 
     });
     

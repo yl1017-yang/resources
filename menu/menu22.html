@@ -77,38 +77,38 @@ body.fixed{overflow:hidden;} /* 모바일 오픈시 스크롤바 삭제 */
 <script>
 function gnbMenu(depth1, depth2, depth3) {
 	
-    var $moGnbWrap = $(".moGnbWrap"),
-    	$moGnbTab = $(".moBox > ul > li", $moGnbWrap),
-    	$moGnb = $(".moGnb", $moGnbWrap),
-        $moGnbLi = $(".moGnb > li", $moGnbWrap),
-        $moBtnOpen = $(".moBtnOpen"),
-        $moBtnClose = $(".moBtnClose"),
-        $moGnbBg = $(".moGnbBg");
+    var $moGnbWrap = $('.moGnbWrap'),
+    	$moGnbTab = $('.moBox > ul > li', $moGnbWrap),
+    	$moGnb = $('.moGnb', $moGnbWrap),
+        $moGnbLi = $('.moGnb > li', $moGnbWrap),
+        $moBtnOpen = $('.moBtnOpen'),
+        $moBtnClose = $('.moBtnClose'),
+        $moGnbBg = $('.moGnbBg');
     
     // 모바일 - 전체내용 오픈
-    $moBtnOpen.on("click", function(e) {
+    $moBtnOpen.on('click', function(e) {
     	e.preventDefault();
         
         $moGnbWrap.show(10,function(){
 			$(this).addClass('show').attr('tabindex',0).focus();
 		});
         //$moGnbWrap.fadeIn(250).addClass('show');
-        //$moGnbWrap.find(".scroll").stop().animate({left:0}, 300);
-        $("body").addClass('fixed');
+        //$moGnbWrap.find('.scroll').stop().animate({left:0}, 300);
+        $('body').addClass('fixed');
         $moGnbBg.fadeIn();
     });
     
-    $moBtnClose.on("click", function(e) {
+    $moBtnClose.on('click', function(e) {
     	e.preventDefault();
         
     	$moBtnOpen.show();
         $moGnbWrap.fadeOut(250).removeClass('show');
-        //$moGnbWrap.find(".scroll").stop().animate({left:-100}, 300);
-        $("body").removeClass('fixed');
+        //$moGnbWrap.find('.scroll').stop().animate({left:-100}, 300);
+        $('body').removeClass('fixed');
         $moGnbBg.fadeOut();
     });	
         
-	$moGnbBg.on("click", function(e) {
+	$moGnbBg.on('click', function(e) {
     	e.preventDefault();
         
     	$moGnbWrap.fadeOut(250).removeClass('show');        
@@ -116,61 +116,61 @@ function gnbMenu(depth1, depth2, depth3) {
     });
     
     // 모바일 - 대메뉴 탭메뉴
-    $(".moBox .show").show();
+    $('.moBox .show').show();
     
-    $moGnbTab.children("a").on("click", function(e) {    
+    $moGnbTab.children('a').on('click', function(e) {    
 		e.preventDefault();        
         
-        var $depthtab = $(this).next("ul");
-        if($depthtab.is(":visible")){
-            $(this).removeClass("on");            
+        var $depthtab = $(this).next('ul');
+        if($depthtab.is(':visible')){
+            $(this).removeClass('on');            
             //$depthtab.fadeOut();
         } else {
-        	$moGnbTab.children("a").removeClass("on");
-            $(".moGnb").fadeOut();
-            //$(this).parent().siblings().find("ul").fadeOut();
-            $(this).addClass("on");
+        	$moGnbTab.children('a').removeClass('on');
+            $('.moGnb').fadeOut();
+            //$(this).parent().siblings().find('ul').fadeOut();
+            $(this).addClass('on');
             $depthtab.fadeIn();
         }
      });
     
     
     // 모바일 - 1,2DEPTH 오픈
-    $moGnbLi.children("a").on("click", function(e) {
+    $moGnbLi.children('a').on('click', function(e) {
     //$moGnbLi.find('> a').on('click', function(e) { //2차뎁스만 사용시
     	e.preventDefault();
         
-        var $depth = $(this).next("ul");
-        if($depth.is(":visible")){        
-            $(this).removeClass("on");
+        var $depth = $(this).next('ul');
+        if($depth.is(':visible')){        
+            $(this).removeClass('on');
             $depth.slideUp(300);
         } else {
-        	$moGnbLi.children("a").removeClass("on");
-            //$moGnb.find("li > a").removeClass("on");
-            $(this).parent().siblings().find("ul").slideUp(300);
-            $(this).addClass("on");
+        	$moGnbLi.children('a').removeClass('on');
+            //$moGnb.find('li > a').removeClass('on');
+            $(this).parent().siblings().find('ul').slideUp(300);
+            $(this).addClass('on');
             $depth.slideDown(300);
         }
     });
     
-    $(".moGnb .depth1 > li").children("a").on('click', function() {
-        var $depth = $(this).next("ul");
-        if($depth.is(":visible")){
-        	$(this).removeClass("on");
+    $('.moGnb .depth1 > li').children('a').on('click', function() {
+        var $depth = $(this).next('ul');
+        if($depth.is(':visible')){
+        	$(this).removeClass('on');
             $depth.slideUp(300);
         } else {
-        	$(".moGnb .depth1 > li").children("a").removeClass("on");
-            $(this).parent().siblings().find("ul").slideUp(300);
-            $(this).addClass("on");
+        	$('.moGnb .depth1 > li').children('a').removeClass('on');
+            $(this).parent().siblings().find('ul').slideUp(300);
+            $(this).addClass('on');
             $depth.slideDown(300);
         }
     });
     
     //모바일 - 페이지 인식
 	if ($moGnbLi.length > depth1-1) {
-        $moGnbLi.eq(depth1-1).find("> a").addClass("on");
-        $moGnbLi.eq(depth1-1).find(".depth1 > li").eq(depth2-1).find("> a").addClass("on");
-        $moGnbLi.eq(depth1-1).find(".depth1 > li").eq(depth2-1).find(".depth2 > li").eq(depth3-1).find("> a").addClass("on");
+        $moGnbLi.eq(depth1-1).find('> a').addClass('on');
+        $moGnbLi.eq(depth1-1).find('.depth1 > li').eq(depth2-1).find('> a').addClass('on');
+        $moGnbLi.eq(depth1-1).find('.depth1 > li').eq(depth2-1).find('.depth2 > li').eq(depth3-1).find('> a').addClass('on');
 	}
     
 }

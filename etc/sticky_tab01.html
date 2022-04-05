@@ -41,11 +41,11 @@ header{position:fixed;top:0;width:100%;height:6.5vw;line-height:6.5vw;text-align
 <script>
 $(function() {
 
-var $tab = $(".sticky_tab_wrap");
-var $tabLink = $(".sticky_tab_wrap .sticky_tab a");
+var $tab = $('.sticky_tab_wrap');
+var $tabLink = $('.sticky_tab_wrap .sticky_tab a');
 //var navHeight = parseInt($tab.css('paddingTop'));
-var navHeight = $(".sticky_tab_wrap").outerHeight();
-var headerHeight = $("header").outerHeight();
+var navHeight = $('.sticky_tab_wrap').outerHeight();
+var headerHeight = $('header').outerHeight();
 
 //스크롤시 탭메뉴 상단 고정
 $(window).on('scroll load', function(){
@@ -55,31 +55,31 @@ $(window).on('scroll load', function(){
 //탭메뉴 상단고정 함수
 function navScroll() {
     var scrollTop = $(window).scrollTop() + 1;
-    var navTop = $(".sticky_tab_wrap").offset().top - headerHeight;
-    var navBottom = $(".contents").offset().top;
+    var navTop = $('.sticky_tab_wrap').offset().top - headerHeight;
+    var navBottom = $('.contents').offset().top;
 
     if (scrollTop >= navTop && scrollTop <= navBottom) {
-        $tab.addClass("fixed");
+        $tab.addClass('fixed');
     } else {
-        $tab.removeClass("fixed");
-        $(".sticky_tab li").removeClass("on");
+        $tab.removeClass('fixed');
+        $('.sticky_tab li').removeClass('on');
     }
 
     $tabLink.each(function () {
-        var $content = $($(this).attr("href"));
+        var $content = $($(this).attr('href'));
         var conOffsetTop = $content.offset().top - navHeight - headerHeight;
 
         if (scrollTop >= conOffsetTop) {
-            $(this).parent().addClass("on").siblings().removeClass("on");
+            $(this).parent().addClass('on').siblings().removeClass('on');
         }
 
         // 내용 넘어갈때 마지막 탭메뉴 on, 탭 제거
-        var contentOffsetTop = $(".contents").offset().top - headerHeight;
+        var contentOffsetTop = $('.contents').offset().top - headerHeight;
         if (scrollTop >= contentOffsetTop) {
-            $tab.removeClass("fixed");
-            $(".contents_tab").addClass("fixed");
+            $tab.removeClass('fixed');
+            $('.contents_tab').addClass('fixed');
         } else {
-            $(".contents_tab").removeClass("fixed");
+            $('.contents_tab').removeClass('fixed');
         }
         
         // 반응형 가로사이즈 설정
@@ -90,21 +90,21 @@ function navScroll() {
 }
 
 //탭링크 클릭시 헤당 섹션으로 부드럽게 이동시키기
-$tabLink.on("click", function (e) {
+$tabLink.on('click', function (e) {
     e.preventDefault();
-    var $content = $($(this).attr("href"));        
+    var $content = $($(this).attr('href'));        
     var contentOffsetTop = $content.offset().top - navHeight - headerHeight;
-    $("html, body").stop().animate({ scrollTop: contentOffsetTop + "px" }, 400);
+    $('html, body').stop().animate({ scrollTop: contentOffsetTop + 'px' }, 400);
 });
 
 //section 가로,세로 전체사이즈 구현
 $(window).resize(function() {    	
-    $(".section").css("width", $(window).width());
-    $(".section").css("height", $(window).height() - 80 ); // - 80 상단탭 세로사이즈 제외
+    $('.section').css('width', $(window).width());
+    $('.section').css('height', $(window).height() - 80 ); // - 80 상단탭 세로사이즈 제외
 });
 
 //setTimeout(function() {
-$(window).trigger("resize");
+$(window).trigger('resize');
 //}, 500);
 
 });

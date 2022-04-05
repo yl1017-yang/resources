@@ -90,7 +90,7 @@ html,body {
 	padding: 0;
 	width: 20px;
 	height: 20px;
-	background: url("http://www.kyowonedu.com/static/images/main/bg_swiper_sprite2.png") no-repeat;
+	background: url('http://www.kyowonedu.com/static/images/main/bg_swiper_sprite2.png') no-repeat;
     font-size:0;
     border:1px solid #fff;
 }
@@ -137,7 +137,7 @@ html,body {
 	right: 0;
 	width: 10px;
 	height: 14px;
-	background: url("http://www.kyowonedu.com/static/images/main/bg_swiper_sprite2.png") no-repeat -39px 0;
+	background: url('http://www.kyowonedu.com/static/images/main/bg_swiper_sprite2.png') no-repeat -39px 0;
     font-size:0;
 }
 
@@ -190,28 +190,28 @@ var mainslider = new Swiper('.slider-main', {
   on : {
       slideChangeTransitionStart : function(){
       $('.swiper-timer .time').css({
-          "width": "0%"
+        'width': '0%'
       }).stop().animate({
-          "width": "100%"
+        'width': '100%'
       }, 6000)
       }
   }
 });
 
 // swiper Play/Stop
-$('.swiper-play-pause').on("click", function () {
+$('.swiper-play-pause').on('click', function () {
   var $this = $(this);
   if ($this.hasClass('pause')) {
-      $this.removeClass('pause').css({"background-position-x" : "-39px"});
+      $this.removeClass('pause').css({'background-position-x' : '-39px'});
       mainslider.autoplay.start();
       $('.swiper-timer .time').stop().animate({
-      "width": "100%"
+        'width': '100%'
       }, 6000);
   } else {
-      $this.addClass('pause').css({"background-position-x" : "-58px"});
+      $this.addClass('pause').css({'background-position-x' : '-58px'});
       mainslider.autoplay.stop();
       $('.swiper-timer .time').stop().animate({
-      "width": "0%"
+        'width': '0%'
       }, 0);
   }
 });

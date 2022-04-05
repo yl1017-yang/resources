@@ -212,10 +212,10 @@
     cursor: pointer;
 }
 .main-wrap .pause {
-	background-image: url("https://www.poscochemical.com/images/ico/ico_pause.png");
+	background-image: url('https://www.poscochemical.com/images/ico/ico_pause.png');
 }
 .main-wrap .play {
-	background-image: url("https://www.poscochemical.com/images/ico/ico_play.png");
+	background-image: url('https://www.poscochemical.com/images/ico/ico_play.png');
 }
 </style>
 
@@ -228,7 +228,7 @@ $(function() {
       delay: 7000,
       disableOnInteraction: false,
     },
-    //effect: "fade", //coverflow, fade
+    //effect: 'fade', //coverflow, fade
     slidesPerView: 2,
     //allowTouchMove : true,
     //mousewheel: true,
@@ -268,18 +268,18 @@ $('.nav li').on("click", function () {
 
   
 // swiper Play/Stop
-$('.swiper-play-pause').on("click", function () {
+$('.swiper-play-pause').on('click', function () {
     var $this = $(this);
     if ($this.hasClass('pause')) {
         $this.removeClass('pause').addClass('play').text('Play');
         mainslider.autoplay.start();
         mainslider.slideNext();
-        $(".slider-main .swiper-scrollbar .swiper-pagination").eq(0).addClass("animate");
+        $('.slider-main .swiper-scrollbar .swiper-pagination').eq(0).addClass('animate');
         
     } else {
 		$this.addClass('pause').removeClass('play').text('Pause');
         mainslider.autoplay.stop();
-        $(".slider-main .swiper-scrollbar .swiper-pagination").removeClass("animate");
+        $('.slider-main .swiper-scrollbar .swiper-pagination').removeClass('animate');
     }
 });
   
