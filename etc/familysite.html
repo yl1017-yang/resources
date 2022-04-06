@@ -33,7 +33,7 @@
 $(function() {
 
 // 패밀리사이트
-$('.familysite_area > a').on('click',function(e){
+$('.familysite_area > a').on('click',function(e) {
      e.preventDefault();
      if($(this).parent().hasClass('on')){
          $(this).parent().removeClass('on').find('ul').slideUp(200);

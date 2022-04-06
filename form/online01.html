@@ -152,15 +152,9 @@ $(function() {
     $('html, body').css({'height':'auto', 'overflow':'auto'});
   }
 
-  // $('.dialog_popup .btn_close').on('click', function() {
-  //   if ($('#agree2').prop('checked') != true) {
-  //     $('#agree2:checked + label:before').focus();
-  //   }    
-  // });
-
   //문의사항내용 - 1000자이내
   $('#contents').on('keyup', function() {
-		$('#review_cnt').html(' <span>'+ $(this).val().length +'</span> / 최대 1000자');
+		$('#review_cnt').html('<span>'+ $(this).val().length +'</span> / 최대 1000자');
     
 		if($(this).val().length > 1000) {
 			$(this).val($(this).val().substring(0, 1000));
@@ -179,7 +173,8 @@ $(function() {
 https://velog.io/@xyunkyung/HTML-JQuery-%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85-%ED%8F%BC<br>
 https://mainichibenkyo.tistory.com/153<br>
 https://suyou.tistory.com/150<br>
-https://redcow77.tistory.com/492
+https://redcow77.tistory.com/492<br>
+view-source:https://www.idbins.com/FWCUSV1278.do
 
 
 <h3>온라인문의 폼 - onclick type</h3>
