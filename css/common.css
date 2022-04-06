@@ -23,14 +23,14 @@ table{width:100%;border-collapse:collapse;border-spacing:0;table-layout:fixed;}
 fieldset, legend{background-color:transparent;}
 caption, legend, .blind{position:absolute !important;height:1px !important;width:1px !important;overflow:hidden !important;clip:rect(1px 1px 1px 1px) !important;clip:rect(1px,1px,1px,1px) !important;}
 a{color:inherit;text-decoration:none;cursor:pointer;}
-button{border:none;box-shadow:none;background:transparent;cursor:pointer;outline:none;border-radius:0;font:inherit;}
+button{border:none;box-shadow:none;background:transparent;cursor:pointer;outline:none;border-radius:0;font-size:inherit;font-family:inherit;color:inherit;}
 button:focus{outline-style:auto;outline: 2px solid -webkit-focus-ring-color;}
 
 /* 아이폰(사파리) 터치 메뉴 활성화 관련 */
 a, button, [role=button], [role=link], [role=tab]{-webkit-touch-callout:none;}
 
 /* form select */
-input,textarea,select{box-sizing:border-box;-webkit-appearance:none;-moz-appearance:none;appearance:none;border:none;outline-style:none;border-radius:0;font:inherit;}
+input,textarea,select{box-sizing:border-box;-webkit-appearance:none;-moz-appearance:none;appearance:none;border:none;outline-style:none;border-radius:0;font-size:inherit;font-family:inherit;color:inherit;}
 input[type='text'], input[type='password']{resize:none;box-shadow:none !important;border-radius:0;outline:none;}
 input:checked{-webkit-appearance:checkbox;}
 input[type='text']::-ms-clear, input[type='tel']::-ms-clear{display:none;}
