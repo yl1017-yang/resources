@@ -72,6 +72,9 @@ h3{font-size:30px;margin-bottom:20px;}
 /* 달력 - 버튼 시작,끝 */
 .calender_section_start{position:relative;width:75%;margin:60px auto;}
 .calender_section_start .date3_input{width:200px;height:50px;border:1px solid #ddd;border-radius:5px;}
+
+#selected_dates{display:inline-block;}
+.selected-date{display:inline-block;width:200px;line-height:50px;background-color:#1a1a1a;color:#fff;vertical-align:middle;text-align:center;}
 </style>
 
 
@@ -174,7 +177,32 @@ $(function() {
     });
     $('#with-altField').change(function(){
         $('#altField').attr('value',$(this).val());
-    });  
+    });
+
+    // inline multi2222
+    $('#mdp-demo').multiDatesPicker({
+    altField: '#altField2',
+        dateFormat: "yy.dd.mm",
+        pickableRange: 6,
+        adjustRangeToDisabled: true,
+        onSelect: function(dateText, inst) {
+            showDateSelection();
+        }
+    });
+
+    function showDateSelection() {
+    var allDatesArray = $("#altField2").val();
+    var array = allDatesArray.split(",");
+    var srt = '';
+    if (allDatesArray != '') {
+        $.each(array, function(i) {
+        srt += "<span class='selected-date'>" + array[i] + "</span>";
+        });
+    } else {
+        srt = "";
+    }
+    $("#selected_dates").html(srt);
+    }
 
 });
 </script>
@@ -191,7 +219,9 @@ https://demos.jquerymobile.com/1.4.5/datepicker/<br>
 종류다향 <br>
 https://ui.toast.com/tui-date-picker <br>
 https://nhn.github.io/tui.date-picker/latest/tutorial-example01-basic <br>
-https://ui.alopex.io/development/component/datepicker
+https://ui.alopex.io/development/component/datepicker<br>
+
+http://jsfiddle.net/jm3cpdfc/5/
 </div>
 
 <!-- inline 달력 -->
@@ -209,6 +239,15 @@ https://ui.alopex.io/development/component/datepicker
 <input type="text" id="altField" class="date_input" readonly value="" placeholder="멀티 날짜를 선택해 주세요">
 </section>
 <!-- //inline 멀티달력 -->
+
+<!-- inline 멀티달력22 -->
+<section class="calender_section">
+    <h3>inline 멀티달력2222</h3>
+    <div id="mdp-demo"></div>
+    <input type="text" id="altField2" class="selected-date" readonly value="" placeholder="멀티 날짜222를 선택해 주세요">
+    <div id="selected_dates"></div>
+</section>
+<!-- //inline 멀티달력22 -->
 
 
 <!-- 개별 -->

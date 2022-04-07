@@ -102,17 +102,17 @@ function isTel(asValue) {
 $(function() {
   //온라인문의 폼 - id type
   $('#form_bottom2').on('submit',function(){
-    if ($.trim($('#name2').val()) == '') {
+    if ($('#name2').val().trim() =='') {
       alert('이름을 입력해 주세요.');
       $('#name2').focus();
       return false;
     }
-    if ($.trim($('#company2').val()) == '') {
+    if ($('#company2').val().trim() =='') {
       alert('기관 또는 기업명을 입력해 주세요.');
       $('#company2').focus();
       return false;
     }
-    if ($.trim($('#email2').val()) == '') {
+    if ($('#email2').val().trim() =='') {
       alert('이메일을 입력해 주세요.');
       $('#email2').focus();
       return false;
@@ -121,7 +121,7 @@ $(function() {
       $('#email2').focus();
       return false;
     }
-    if ($.trim($('#tel2').val()) == '') {
+    if ($('#tel2').val().trim() =='') {
       alert('연락처를 입력해 주세요.');
       $('#tel2').focus();
       return false;
@@ -130,12 +130,11 @@ $(function() {
       $('#tel2').focus();
       return false;
     }
-    if ($('#agree2').is(":checked") == false) {
+    if ($('#agree2').prop('checked') == false) {
       alert('개인정보취급방침에 동의해 주세요.');
       $('#agree2').focus();
       return false;
     }
-    $("#form_bottom2").submit();
   });
 
   //개인정보취급방침 - 모달팝업
@@ -153,15 +152,6 @@ $(function() {
     $('html, body').css({'height':'auto', 'overflow':'auto'});
   }
 
-  //문의사항내용 - 1000자이내
-  $('#contents').on('keyup', function() {
-		$('#review_cnt').html('<span>'+ $(this).val().length +'</span> / 최대 1000자');
-    
-		if($(this).val().length > 1000) {
-			$(this).val($(this).val().substring(0, 1000));
-			$('#review_cnt').html('1000 / 1000');
-		}
-	});
 
 });
 
@@ -169,7 +159,8 @@ $(function() {
 </script>
 
 
-샘플 https://www.sssak.co.kr/kr/<br>
+https://www.winix.com/kr/login/login.html<br>
+로그인 참고 : https://dololak.tistory.com/728<br>
 https://velog.io/@xyunkyung/HTML-JQuery-%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85-%ED%8F%BC<br>
 https://mainichibenkyo.tistory.com/153<br>
 https://suyou.tistory.com/150<br>
@@ -177,7 +168,7 @@ https://redcow77.tistory.com/492<br>
 view-source:https://www.idbins.com/FWCUSV1278.do
 
 
-<h3>온라인문의 폼 - onclick type</h3>
+<h3>로그인폼</h3>
 
 <form method="post" action="../form/online01.html" name="form_bottom" onsubmit="sendit_bottom();return false;">
     <div class="inquiry_wrap">
@@ -244,7 +235,6 @@ view-source:https://www.idbins.com/FWCUSV1278.do
           </label>
         </div>
         <button type="submit" class="btn_inquiry" name="submit" id="submit">온라인 문의</button>
-        <button type="button" class="btn_inquiry" onclick="location.reload();">다시작성</button>
       </div>
 
     </div>
