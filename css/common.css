@@ -44,8 +44,8 @@ input[type='radio'],
 input[type='checkbox']{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
 
 /* input textarea focus */
-input[type='text'], textarea{transition:all 0.1s ease-in-out !important;}
-input[type='text']:focus, textarea:focus{border:2px solid #555 !important;}
+input[type='text'], input[type='password'], textarea{transition:all 0.1s ease-in-out !important;}
+input[type='text']:focus, input[type='password']:focus,textarea:focus{border:2px solid #555 !important;}
 
 /* placeholder, focus */
 ::placeholder{font-size:inherit;color:#999;letter-spacing:-0.0375em;opacity:1;}

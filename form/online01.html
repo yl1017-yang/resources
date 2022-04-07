@@ -84,6 +84,7 @@ function sendit_bottom(){
       form.tel.focus();
   } else {    
       form.submit();
+      //form.action = "login_ok.php";
       alert('온라인 문의가 완료되었습니다.');
   }
 }
@@ -180,11 +181,13 @@ view-source:https://www.idbins.com/FWCUSV1278.do
 <h3>온라인문의 폼 - onclick type</h3>
 
 <form method="post" action="../form/online01.html" name="form_bottom" onsubmit="sendit_bottom();return false;">
+  <fieldset>
+    <legend>온라인문의 폼 필드</legend>
     <div class="inquiry_wrap">
 
       <div class="form_box">
         <div class="form_item">
-          <span class="form_input_item"><input type="text" name="name" id="name" class="inquiry_input"><label for="name">이름<i>*</i></label></span>
+          <span class="form_input_item"><input type="text" name="name" id="name" class="inquiry_input" autofocus=""><label for="name">이름<i>*</i></label></span>
           <span class="form_input_item"><input type="text" name="company" id="company" class="inquiry_input"><label for="company">기관 또는 기업<i>*</i></label></span>
         </div>
         <div class="form_item">
@@ -210,6 +213,7 @@ view-source:https://www.idbins.com/FWCUSV1278.do
       </div>
 
     </div>
+  </fieldset>
 </form>
 
 
@@ -217,11 +221,13 @@ view-source:https://www.idbins.com/FWCUSV1278.do
 <h3>온라인문의 폼 - ID type</h3>
 
 <form method="post" action="../form/online01.html" name="form_bottom2" id="form_bottom2">
+  <fieldset>
+    <legend>온라인문의 폼 필드</legend>
     <div class="inquiry_wrap">
 
       <div class="form_box">
         <div class="form_item">
-          <span class="form_input_item"><input type="text" name="name2" id="name2" class="inquiry_input"><label for="name2">이름<i>*</i></label></span>
+          <span class="form_input_item"><input type="text" name="name2" id="name2" class="inquiry_input"  autofocus=""><label for="name2">이름<i>*</i></label></span>
           <span class="form_input_item"><input type="text" name="company2" id="company2" class="inquiry_input"><label for="company2">기관 또는 기업<i>*</i></label></span>
         </div>
         <div class="form_item">
@@ -248,6 +254,7 @@ view-source:https://www.idbins.com/FWCUSV1278.do
       </div>
 
     </div>
+  </fieldset>
 </form>
 
 
