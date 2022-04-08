@@ -71,11 +71,15 @@ h3{font-size:30px;text-align:center;margin:30px 0 10px;}
 
 <script>
 $(function() {
+    //클릭시 폼상단
+    top_pos = $('.acodi_list').offset().top;  
+
     // ver1
     $('.acodi_list .acodi_title').on('click', function() {
         $('.acodi_list ul li').removeClass('on');
         $(this).next().stop().slideToggle(300);
         $(this).parent('li').addClass('on').siblings('li').children('.acodi_content').slideUp(300);
+        $('html, body').animate({scrollTop:top_pos});
         //$('.acodi_list .acodi_title').not(this).next().stop().slideUp(200);
         //$(this).parent('li').addClass('on');
     });
