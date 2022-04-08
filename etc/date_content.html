@@ -50,17 +50,21 @@ function calc_time(){
 
   $('.coupon_wrap').hide();
 
-  if(today == 6) {
+  if(today == 8) {
     $('.out1').show();
-    $('.out1 p').text(today);
-  } else if(today == 7) {
+    $('.out1 p').text(date);
+    console.log(date);
+  } else if(today == 9) {
     $('.out2').show();
-    $('.out2 p').text(today);
-  } else if(today == 8) {
+    $('.out2 p').text(date);
+    console.log(date);
+  } else if(today == 10) {
     $('.out3').show();
-    $('.out3 p').text(today);
+    $('.out3 p').text(date);
+    console.log(date);
   } else {
     $('.out4').show();
+    $('.out4 p').text(date);
   }
 }
 
