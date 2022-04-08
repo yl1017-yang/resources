@@ -101,21 +101,27 @@ function isTel(asValue) {
 }
 
 $(function() {
+  //클릭시 폼상단
+  top_pos = $('#form_bottom2').offset().top;  
+
   //온라인문의 폼 - id type
   $('#form_bottom2').on('submit',function(){
     if ($.trim($('#name2').val()) == '') {
       alert('이름을 입력해 주세요.');
       $('#name2').focus();
+      $('html, body').animate({scrollTop:top_pos});
       return false;
     }
     if ($.trim($('#company2').val()) == '') {
       alert('기관 또는 기업명을 입력해 주세요.');
       $('#company2').focus();
+      $('html, body').animate({scrollTop:top_pos});
       return false;
     }
     if ($.trim($('#email2').val()) == '') {
       alert('이메일을 입력해 주세요.');
       $('#email2').focus();
+      $('html, body').animate({scrollTop:top_pos});
       return false;
     } else if (!isEmail( $('#email2').val() )) {
       alert('이메일 형식이 잘못되었습니다.');
@@ -125,6 +131,7 @@ $(function() {
     if ($.trim($('#tel2').val()) == '') {
       alert('연락처를 입력해 주세요.');
       $('#tel2').focus();
+      $('html, body').animate({scrollTop:top_pos});
       return false;
     } else if (!isTel( $('#tel2').val() )) {
       alert('숫자 사이에 \'-\'를 넣어주세요');
@@ -134,6 +141,7 @@ $(function() {
     if ($('#agree2').is(":checked") == false) {
       alert('개인정보취급방침에 동의해 주세요.');
       $('#agree2').focus();
+      $('html, body').animate({scrollTop:top_pos});
       return false;
     }
     $("#form_bottom2").submit();
@@ -286,7 +294,8 @@ view-source:https://www.idbins.com/FWCUSV1278.do
 </div>
 <!-- //[D] 모달팝업 -->
 
-<br><br><br>
+
+<div style="height:500px"></div>
 
 </body>
 </html>
