@@ -25,16 +25,20 @@
 
 <script>
 $(function() {
+    //클릭시 폼상단
+    top_pos = $('.tab_area').offset().top;
+
     $('.tab_area ul li').on('click', function(){
         $('.tab_area ul li').removeClass('on');
         $('.tab_area .conBox').removeClass('on');
         $(this).addClass('on');
         $('#' + $(this).data('id')).addClass('on');
+        $('html, body').animate({scrollTop:top_pos});
     });
 });
 </script>
 
-
+<div style="height:100px"></div>
 
 
 <div class="tab_area">
@@ -55,6 +59,8 @@ $(function() {
 </div>
 
 
+
+<div style="height:1000px"></div>
 
 </body>
 </html>

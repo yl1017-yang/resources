@@ -24,6 +24,9 @@
 
 <script>
 $(function() {
+    //클릭시 폼상단
+    top_pos = $('.tab_area').offset().top;
+
     $('.tab_menu a').on('click', function(e) {
         e.preventDefault();
         var idx = $(this).index();
@@ -33,6 +36,7 @@ $(function() {
         //$($(this).attr('href')).addClass('on');
         tabarea.find('.tab_content').eq(idx).addClass('on');
         $(this).addClass('on');
+        $('html, body').animate({scrollTop:top_pos});
     });
 });
 </script>
@@ -81,6 +85,10 @@ $(function() {
     </div>
 </div>
 
+
+
+
+<div style="height:1000px"></div>
 
 
 </body>
