@@ -23,10 +23,10 @@
 
 /* 별점 */
 /* .rating_wrap .rate_check + label{position:relative;display:inline-block;margin-left:-4px;z-index:10;width:48px;height:48px;background:url('../images/star-filled-empty-22.svg') no-repeat 0 0/100%;cursor:pointer;}
-.rating_wrap .rate_check.on + label{background-image:url('../images/star-filled-22.svg') !important;} */
-.rating_wrap{display:inline-block;}
-.rating_wrap .rate_check + label{float:right;z-index:10;width:48px;height:48px;background:url('../images/star-filled-empty-22.svg') no-repeat 0 0/100%;cursor:pointer;}
-.rating_wrap .rate_check:checked ~ label{display:inline-block;background-image:url('../images/star-filled-22.svg') !important;}
+.rating_wrap .rate_check.on + label{background-image:url('../images/star-filled-22.svg');} */
+.rating_wrap{display:inline-block;direction:rtl;}
+.rating_wrap .rate_check + label{display:inline-block;width:48px;height:48px;background:url('../images/star-filled-empty-22.svg') no-repeat 0 0/100%;cursor:pointer;z-index:10;}/* float:right; */
+.rating_wrap .rate_check:checked ~ label{display:inline-block;background-image:url('../images/star-filled-22.svg');}
 
 /* 버튼 */
 .bottom_box{padding-top:40px;margin-top:40px;border-top:1px solid #eee;}

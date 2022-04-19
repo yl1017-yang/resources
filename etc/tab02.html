@@ -31,6 +31,7 @@ $(function() {
         e.preventDefault();
         var idx = $(this).index();
         var tabarea = $(this).closest('.tab_area');
+        
         tabarea.find('.tab_menu a').removeClass('on');
         tabarea.find('.tab_content').removeClass('on');
         //$($(this).attr('href')).addClass('on');
