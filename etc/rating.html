@@ -24,13 +24,14 @@
 /* 별점 */
 /* .rating_wrap .rate_check + label{position:relative;display:inline-block;margin-left:-4px;z-index:10;width:48px;height:48px;background:url('../images/star-filled-empty-22.svg') no-repeat 0 0/100%;cursor:pointer;}
 .rating_wrap .rate_check.on + label{background-image:url('../images/star-filled-22.svg');} */
-.rating_wrap{display:inline-block;direction:rtl;}
+.rating_wrap{display:flex;flex-direction:row-reverse;justify-content:flex-end;}/* display:inline-block;direction:rtl; */
 .rating_wrap .rate_check + label{display:inline-block;width:48px;height:48px;background:url('../images/star-filled-empty-22.svg') no-repeat 0 0/100%;cursor:pointer;z-index:10;}/* float:right; */
 .rating_wrap .rate_check:checked ~ label{display:inline-block;background-image:url('../images/star-filled-22.svg');}
 
 /* 버튼 */
 .bottom_box{padding-top:40px;margin-top:40px;border-top:1px solid #eee;}
 .bottom_box .btn_comfirm{display:inline-block;width:100%;padding:20px 0;color:#fff;font-size:20px;background-color:#383532;border-radius:10px;}
+.bottom_box .btn_reset{display:inline-block;width:100%;padding:10px 0;border:1px solid #333;background:#fff;font-size:20px;border-radius:10px;margin-top:10px;}
 
 /* 이미지 추가하기 */
 .review_content_wrap .input_wrap{margin-bottom:5px;}
@@ -38,7 +39,7 @@
 .review_content_wrap .btn_add_photo{position:relative;display:block;width:100%;padding:16px 0;background:#fff;border:1px solid #333;border-radius:10px;color:#1a1a1a;font-weight:500;text-align:center;}
 
 .review_content_wrap .photo_box_wrap{display:flex;flex-wrap:wrap;}
-.review_content_wrap .photo_box{position:relative;width:9vw;height:9vw;overflow:hidden;border-radius:4px;margin-bottom:1vw;margin-left:1vw;}
+.review_content_wrap .photo_box{position:relative;width:15vw;height:15vw;overflow:hidden;border-radius:4px;margin-bottom:1vw;margin-left:1vw;}
 .review_content_wrap .photo_box:nth-child(4n+1){margin-left:0;}
 .review_content_wrap .photo_box .img{width:100%;height:100%;}
 .review_content_wrap .photo_box .btn_photo_del{position:absolute;top:0;right:0;width:36px;height:36px;background:url('../images/close-line-28-black.svg') no-repeat 50% 50%/100%;cursor:pointer;}
@@ -82,6 +83,7 @@
 
             <div class="bottom_box">
                 <button type="submit" class="btn_comfirm" name="submit" id="submit">저장</button>
+                <button type="reset" class="btn_reset" name="reset" id="reset">초기화</button>
             </div>
         </fieldset>
     </form>
@@ -95,13 +97,16 @@ $(function() {
     //상품후기 저장폼
     $('#form_review').on('submit',function(){
         if ($('input[name=rating]').val()) {
-        alert('별점은 필수선택 입니다.');
-        return false;
+            alert('별점은 필수선택 입니다.');
+            return false;
+        } else if ($('input[name=rating]:checked').val()) {
+            console.log($(this).val())
+            alert('완료');
         }
         
         if ($.trim($('#review_textarea').val()) =='') {
-        alert('상품 후기 내용은 최소 10자 이상, 1,000자 이내로 작성해 주세요.');
-        $('#review_textarea').focus();
+            alert('상품 후기 내용은 최소 10자 이상, 1,000자 이내로 작성해 주세요.');
+            $('#review_textarea').focus();
         return false;
         }
         
@@ -109,12 +114,12 @@ $(function() {
     });
 
     //별점 체크 https://miuus.tistory.com/2
-    $('.rate_check').on('click', function() {
-        // $(this).parent().children('input').removeClass('on');
-        // $(this).addClass('on').prevAll('input').addClass('on');
-        // console.log($(this).attr("value"));
-        // return false;
-    });
+    // $('.rate_check').on('click', function() {
+    //     $(this).parent().children('input').removeClass('on');
+    //     $(this).addClass('on').prevAll('input').addClass('on');
+    //     console.log($(this).attr("value"));
+    //     return false;
+    // });
 
     //textarea 최소/최대글자수 
     $('#review_textarea').on('keyup', function() {
