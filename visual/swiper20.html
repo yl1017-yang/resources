@@ -18,7 +18,7 @@
   overflow: hidden;
 }
 .panel {
-  width: 400%;
+  width: 400%;position:relative;left:0;top:0;
 }
 .panel:after {
   content: "";
@@ -143,6 +143,8 @@ function slide() {
 
     // 화면크기 재설정 되었을때
     resize();
+
+    swiper();
   }
 
   // 자동실행 함수
@@ -207,9 +209,49 @@ function slide() {
       });
     });
   }
+
+
+
+function swiper() {
+
+var is_draggable = false;
+var x = 0;
+var pos_x = 0;
+
+$('.panel').mousemove(function(e) {
+    if(is_draggable) {
+        x = parseInt($(this).css('left')) - (pos_x - e.pageX);
+        pos_x = e.pageX;
+        $(this).css({ 'left' : x});
+    }
+    return false;
+  });
+
+$('.panel').mousedown(function(e) {
+    pos_x = e.pageX;
+    is_draggable = true;
+    return false;
+  });
+
+$('.panel').mouseup(function() {
+    is_draggable = false;
+    return false;
+  });
+
+$('.panel').dblclick(function() {
+    window.close();
+  });
+
+}
+
+  
   init();
   slideEvent();
+  
 }
+
+
+
 </script>
 
 
@@ -230,7 +272,7 @@ function slide() {
     <div class="next">이후</div>
 </div>
 
-
+<div>https://chicpro.dev/jquery-%EC%9D%B4%EB%AF%B8%EC%A7%80-mouse-drag-%EA%B8%B0%EB%8A%A5/</div>
 
 </body>
 </html>
