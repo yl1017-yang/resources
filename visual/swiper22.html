@@ -12,241 +12,212 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
 <style>
-html,body {
-  position: relative;
-  height: 100%;
-}
-*{
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
+*{ box-sizing: border-box; padding: 0; margin: 0; list-style: none;color: #555;font-weight: bold;}
 
-.slide {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow: hidden;
-  position: relative;
-  width: 100%;
-  user-select: none;
-}
-.slide_item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  left: 0px;
-  width: 100%;
-  height: 300px;
-  flex-shrink: 0;
-  transition: left 0.15s;
-}
-.slide_button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: calc(50% - 16px);
-  width: 32px;
-  height: 32px;
-  border-radius: 100%;
-  background-color: #cccc;
-  cursor: pointer;
-}
-
-.slide_prev_button {
-  left: 10px;
-}
-.slide_next_button {
-  right: 10px;
-}
-
-.slide_item:nth-child(1) {
-  background-color: darkgoldenrod;
-}
-.slide_item:nth-child(2) {
-  background-color: aqua;
-}
-.slide_item:nth-child(3) {
-  background-color: blueviolet;
-}
-.slide_item:nth-child(4) {
-  background-color: burlywood;
-}
-.slide_item:nth-child(5) {
-  background-color: cornflowerblue;
-}
-
-/* 페이지네이션 스타일 */
-.slide_pagination {
-  display: flex;
-  gap: 5px;
-  position: absolute;
-  bottom: 0;
-    left: 50%;
-  transform: translateX(-50%);
-}
-.slide_pagination > li {
-  color: #7fb5ff88;
-  cursor: pointer;
-  font-size: 25px;
-}
-.slide_pagination > li.active {
-  color: #7fb5ff;
-}
+.slide_box {position:relative;width:90%;margin:auto;overflow-x:hidden;}
+.slide_list{display:flex;}
+.slide_box .slide_content{width:100%;height:400px;}
+.slide_box .slide_content > p{text-align:center;font-size:100px;}
+.slide_box .slide_content{background: #ddbdff;}
+.slide_box .slide_content:nth-child(2) { background: #9fd6c2; }
+.slide_box .slide_content:nth-child(3) { background: #abe2f7; }
+.slide_box .slide_content:nth-child(4) { background: #f08c78; }
+.slide_box .slide_btn_box > button{position:absolute;top:50%;transform:translateY(-50%);width:50px;height:50px;font-size:16px;color:#fff;background:#444;border-radius:100%;border:0;cursor:pointer;}
+.slide_box .slide_btn_box > .slide_btn_prev{left:15px;}
+.slide_box .slide_btn_box > .slide_btn_next{right: 15px;}
+.slide_box .slide_pagination{position:absolute;left:50%;transform:translateX(-50%);bottom:10px;}
+.slide_box .slide_pagination .dot{display:inline-block;width:15px;height:15px;margin:0 5px;overflow:hidden;background:#ddd;border-radius:100%;transition:0.3s;}
+.slide_box .slide_pagination .dot.dot_active{background:#333;}
+.slide_box .slide_pagination .dot a{display:block;width:100%;height:100%;}
 </style>
 
-
-
-
-
-<div class="slide slide_wrap">
-  <div class="slide_item">1</div>
-  <div class="slide_item">2</div>
-  <div class="slide_item">3</div>
-  <div class="slide_item">4</div>
-  <div class="slide_item">5</div>
-  <div class="slide_prev_button slide_button">◀</div>
-  <div class="slide_next_button slide_button">▶</div>
-  <ul class="slide_pagination"></ul>
+<div>
+  https://im-developer.tistory.com/97#google_vignette<br>
+  자동 무한루프 슬라이드<br>
+  - 자동슬라이드<br>
+  - 무한루프<br>
+  - 마우스 드래그<br>
+  - 모바일 스와이프
 </div>
 
-<div>https://devinus.tistory.com/46</div>
 
+
+<div class="slide_box">
+  <div class="slide_list">
+    <div class="slide_content">
+      <p>1</p>
+    </div>
+    <div class="slide_content">
+      <p>2</p>
+    </div>
+    <div class="slide_content">
+      <p>3</p>
+    </div>
+    <div class="slide_content">
+      <p>4</p>
+    </div>
+  </div>
+
+  <div class="slide_btn_box">
+    <button type="button" class="slide_btn_prev">&#10094;</button>
+    <button type="button" class="slide_btn_next">&#10095;</button>
+  </div>
+  <ul class="slide_pagination"></ul>
+</div>
 
 
 
 <script>
-const slide = document.querySelector(".slide");
-let slideWidth = slide.clientWidth;
+(function() {
+  const slideBox = document.querySelector('.slide_box');
+  const slideList = document.querySelector('.slide_list');
+  const slideContents = document.querySelectorAll('.slide_content');
+  const slideBtnNext = document.querySelector('.slide_btn_next');
+  const slideBtnPrev = document.querySelector('.slide_btn_prev');
+  const pagination = document.querySelector('.slide_pagination');
+  const slideLen = slideContents.length;
+  const slideWidth = slideList.clientWidth;
+  const slideSpeed = 200;
+  const startNum = 0;
 
-// 버튼 엘리먼트 선택하기
-const prevBtn = document.querySelector(".slide_prev_button");
-const nextBtn = document.querySelector(".slide_next_button");
+  slideList.style.width = slideWidth * (slideLen + 2) + "px";
 
-// 슬라이드 전체를 선택해 값을 변경해주기 위해 슬라이드 전체 선택하기
-const slideItems = document.querySelectorAll(".slide_item");
-const maxSlide = slideItems.length;
+  let firstChild = slideList.firstElementChild;
+  let lastChild = slideList.lastElementChild;
+  let clonedFirst = firstChild.cloneNode(true);
+  let clonedLast = lastChild.cloneNode(true);
 
-// 버튼 클릭할 때 마다 현재 슬라이드가 어디인지 알려주기 위한 변수
-let currSlide = 1;
+  slideList.appendChild(clonedFirst);
+  slideList.insertBefore(clonedLast, slideList.firstElementChild);
 
-const pagination = document.querySelector(".slide_pagination");
-
-for (let i = 0; i < maxSlide; i++) {
-  if (i === 0) pagination.innerHTML += `<li class="active">•</li>`;
-  else pagination.innerHTML += `<li>•</li>`;
-}
-
-const paginationItems = document.querySelectorAll(".slide_pagination > li");
-
-
-function nextMove() {  
-  currSlide++;
-  // 마지막 슬라이드 이상으로 넘어가지 않게 하기 위해서
-  if (currSlide <= maxSlide) {
-    const offset = slideWidth * (currSlide - 1);
-    slideItems.forEach((i) => {
-      i.setAttribute("style", `left: ${-offset}px`);
-    });
-    // 슬라이드 이동 시 현재 활성화된 pagination 변경
-    paginationItems.forEach((i) => i.classList.remove("active"));
-    paginationItems[currSlide - 1].classList.add("active");
-  } else {
-    currSlide--;
+  let pageChild = '';
+  for (var i = 0; i < slideLen; i++) {
+    pageChild += '<li class="dot';
+    pageChild += (i === startNum) ? ' dot_active' : '';
+    pageChild += '" data-index="' + i + '"><a href="#"></a></li>';
   }
-}
+  pagination.innerHTML = pageChild;
+  const pageDots = document.querySelectorAll('.dot');
 
-function prevMove() {
-  currSlide--;
-  // 1번째 슬라이드 이하로 넘어가지 않게 하기 위해서
-  if (currSlide > 0) {
-    const offset = slideWidth * (currSlide - 1);
-    slideItems.forEach((i) => {
-      i.setAttribute("style", `left: ${-offset}px`);
-    });
-    // 슬라이드 이동 시 현재 활성화된 pagination 변경
-    paginationItems.forEach((i) => i.classList.remove("active"));
-    paginationItems[currSlide - 1].classList.add("active");
-  } else {
-    currSlide++;
+  slideList.style.transform = "translate3d(-" + (slideWidth * (startNum + 1)) + "px, 0px, 0px)";
+
+  let curIndex = startNum;
+  let curSlide = slideContents[curIndex];
+  curSlide.classList.add('slide_active');
+
+  function nextMove() {
+    if (curIndex <= slideLen - 1) {
+      slideList.style.transition = slideSpeed + "ms";
+      slideList.style.transform = "translate3d(-" + (slideWidth * (curIndex + 2)) + "px, 0px, 0px)";
+    }
+
+    if (curIndex === slideLen - 1) {
+      setTimeout(function() {
+        slideList.style.transition = "0ms";
+        slideList.style.transform = "translate3d(-" + slideWidth + "px, 0px, 0px)";
+      }, slideSpeed);
+      console.log(slideList, curIndex);
+      curIndex = -1;
+    }
+    curSlide.classList.remove('slide_active');
+    pageDots[(curIndex === -1) ? slideLen - 1 : curIndex].classList.remove('dot_active');
+    curSlide = slideContents[++curIndex];
+    curSlide.classList.add('slide_active');
+    pageDots[curIndex].classList.add('dot_active');
   }
-}
 
-nextBtn.addEventListener("click", () => {
-  nextMove(); 
-});
+  function prevMove() {
+    if (curIndex >= 0) {
+      slideList.style.transition = slideSpeed + "ms";
+      slideList.style.transform = "translate3d(-" + (slideWidth * curIndex) + "px, 0px, 0px)";
+    }
+    if (curIndex === 0) {
+      setTimeout(function() {
+        slideList.style.transition = "0ms";
+        slideList.style.transform = "translate3d(-" + (slideWidth * slideLen) + "px, 0px, 0px)";
+      }, slideSpeed);
+      curIndex = slideLen;
+    }
+    curSlide.classList.remove('slide_active');
+    pageDots[(curIndex === slideLen) ? 0 : curIndex].classList.remove('dot_active');
+    curSlide = slideContents[--curIndex];
+    curSlide.classList.add('slide_active');
+    pageDots[curIndex].classList.add('dot_active');
+  }
 
-prevBtn.addEventListener("click", () => {
-  prevMove();
-});
-
-window.addEventListener("resize", () => {
-  slideWidth = slide.clientWidth;
-});
-
-setInterval(function() {
-  nextMove();
-}, 3000); 
-
-// 각 페이지네이션 클릭 시 해당 슬라이드로 이동하기
-for (let i = 0; i < maxSlide; i++) {
-  paginationItems[i].addEventListener("click", () => {
-    currSlide = i + 1;
-    // 슬라이드를 이동시키기 위한 offset 계산
-    const offset = slideWidth * (currSlide - 1);
-    // 각 슬라이드 아이템의 left에 offset 적용
-    slideItems.forEach((i) => {
-      i.setAttribute("style", `left: ${-offset}px`);
-    });
-    // 슬라이드 이동 시 현재 활성화된 pagination 변경
-    paginationItems.forEach((i) => i.classList.remove("active"));
-    paginationItems[currSlide - 1].classList.add("active");
+  slideBtnNext.addEventListener("click", () => {
+    nextMove();
   });
-}
 
-// 드래그(스와이프) 이벤트를 위한 변수 초기화
-let startPoint = 0;
-let endPoint = 0;
-
-// PC 클릭 이벤트 (드래그)
-slide.addEventListener("mousedown", (e) => {
-  console.log("mousedown", e.pageX);
-  startPoint = e.pageX; // 마우스 드래그 시작 위치 저장
-});
-
-slide.addEventListener("mouseup", (e) => {
-  console.log("mouseup", e.pageX);
-  endPoint = e.pageX; // 마우스 드래그 끝 위치 저장
-  if (startPoint < endPoint) {
-    // 마우스가 오른쪽으로 드래그 된 경우
-    console.log("prev move");
+  slideBtnPrev.addEventListener("click", () => {
     prevMove();
-  } else if (startPoint > endPoint) {
-    // 마우스가 왼쪽으로 드래그 된 경우
-    console.log("next move");
-    nextMove();
-  }
-});
+  });
 
-// 모바일 터치 이벤트 (스와이프)
-slide.addEventListener("touchstart", (e) => {
-  console.log("touchstart", e.touches[0].pageX);
-  startPoint = e.touches[0].pageX; // 터치가 시작되는 위치 저장
-});
-slide.addEventListener("touchend", (e) => {
-  console.log("touchend", e.changedTouches[0].pageX);
-  endPoint = e.changedTouches[0].pageX; // 터치가 끝나는 위치 저장
-  if (startPoint < endPoint) {
-    // 오른쪽으로 스와이프 된 경우
-    console.log("prev move");
-    prevMove();
-  } else if (startPoint > endPoint) {
-    // 왼쪽으로 스와이프 된 경우
-    console.log("next move");
-    nextMove();
-  }
-});
+  let autoPlayStart = setInterval(nextMove, 3000);
+  slideBox.addEventListener("mouseenter", (e) => {
+    clearInterval(autoPlayStart);
+  });
+  slideBox.addEventListener("mouseleave", (e) => {
+    autoPlayStart = setInterval(nextMove, 3000);
+  });
+
+  let curDot;
+  Array.prototype.forEach.call(pageDots, function(dot, i) {
+    dot.addEventListener('click', function(e) {
+      e.preventDefault();
+      curDot = document.querySelector('.dot_active');
+      curDot.classList.remove('dot_active');
+
+      curDot = this;
+      this.classList.add('dot_active');
+
+      curSlide.classList.remove('slide_active');
+      curIndex = Number(this.getAttribute('data-index'));
+      curSlide = slideContents[curIndex];
+      curSlide.classList.add('slide_active');
+      slideList.style.transition = slideSpeed + "ms";
+      slideList.style.transform = "translate3d(-" + (slideWidth * (curIndex + 1)) + "px, 0px, 0px)";
+    });
+  });
+
+
+  let startPoint = 0;
+  let endPoint = 0;
+
+  slideList.addEventListener("mousedown", (e) => {
+    console.log("mousedown", e.pageX);
+    startPoint = e.pageX;
+  });
+
+  slideList.addEventListener("mouseup", (e) => {
+    console.log("mouseup", e.pageX);
+    endPoint = e.pageX;
+    if (startPoint < endPoint) {
+      console.log("prev move");
+      prevMove();
+    } else if (startPoint > endPoint) {
+      console.log("next move");
+      nextMove();
+    }
+  });
+
+  slideList.addEventListener("touchstart", (e) => {
+    console.log("touchstart", e.touches[0].pageX);
+    startPoint = e.touches[0].pageX;
+  });
+  slideList.addEventListener("touchend", (e) => {
+    console.log("touchend", e.changedTouches[0].pageX);
+    endPoint = e.changedTouches[0].pageX;
+    if (startPoint < endPoint) {
+      console.log("prev move");
+      prevMove();
+    } else if (startPoint > endPoint) {
+      console.log("next move");
+      nextMove();
+    }
+  });
+
+})();
 </script>
 
 
