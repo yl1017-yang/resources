@@ -266,7 +266,7 @@
 
    slideList.addEventListener("mousedown", (e) => {
      console.log("mousedown", e.pageX);
-     //stopSlide();
+     stopSlide();
      startPoint = e.pageX;
      e.preventDefault();
      slideList.addEventListener("mousemove", (e) => {
@@ -301,9 +301,14 @@
    });
 
    slideList.addEventListener("touchstart", (e) => {
-     //stopSlide();
+     stopSlide();
      console.log("touchstart", e.touches[0].pageX);
      startPoint = e.touches[0].pageX;
+   });
+
+   slideList.addEventListener("thouchmove", (e) => {
+   	e.preventDefault();
+   	stopSlide();
    });
 
    slideList.addEventListener("touchend", (e) => {
