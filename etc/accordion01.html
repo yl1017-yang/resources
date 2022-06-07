@@ -72,8 +72,7 @@ h3{font-size:30px;text-align:center;margin:30px 0 10px;}
 <script>
 $(function() {
     //클릭시 폼상단
-    top_pos = $('.acodi_list').offset().top;  
-
+    top_pos = $('.acodi_list').offset().top;
     // ver1
     $('.acodi_list .acodi_title').on('click', function() {
         $('.acodi_list ul li').removeClass('on');
@@ -85,6 +84,7 @@ $(function() {
     });
 
     // ver2
+    top_pos2 = $('.acodi_list2').offset().top;
     $('.acodi_list2 .acodi_title').each(function() {
         $(this).on('click', function() {
             if (!$(this).closest('.acodi_list2 ul li').hasClass('on')) {
@@ -92,6 +92,7 @@ $(function() {
                 $(this).closest('.acodi_list2 ul li').addClass('on');
                 $('.acodi_content').stop().slideUp(200);
                 $(this).next().stop().slideToggle(200);
+                $('html, body').animate({scrollTop:top_pos2});
             } else {
                 $(this).next().stop().slideUp(200);
                 $('.acodi_list2 ul li').removeClass('on');
