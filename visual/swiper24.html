@@ -93,7 +93,7 @@
    const thumb = document.querySelector('.slide_thumb');
    const slideLen = slideContents.length;
    const slideWidth = slideList.clientWidth;
-   const slideSpeed = 400;
+   const slideSpeed = 300;
    const startNum = 0;
 
    slideList.style.width = slideWidth * (slideLen + 2) + "px";
@@ -206,7 +206,10 @@
      stopSlide();
    });
    slideBox.addEventListener("touchend", (e) => {
-     autoSlide();
+    setTimeout(function () {
+        clearInterval(autoPlayStart);
+        autoSlide();
+      }, 3000);
    });
 
 
