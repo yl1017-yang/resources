@@ -207,7 +207,7 @@
    });
    slideBox.addEventListener("touchend", (e) => {
     setTimeout(function () {
-        clearInterval(autoPlayStart);
+        stopSlide();
         autoSlide();
       }, 3000);
    });
