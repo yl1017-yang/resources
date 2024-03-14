@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <style>
+      *{padding:0;margin:0;border:0;box-sizing:border-box;}
+      body{background:#444;}
+      .tab-wrap{display:flex;flex-direction:row-reverse;align-items:flex-end;width:1110px;height:100%;margin:0 auto;background:#fff;}
+      .car-title{text-align:center;padding:40px;color:#fff;}
+
+      .tab-list{}
+      .tab-list .tab-list-btn{display:block;width:150px;height:100px;cursor:pointer;transition:all 0.4s ease;}
+      .tab-list .tab-list-btn.is-show{background:#ddd;}
+      .tab-content{display:none;transition:all 0.4s ease;height:540px;}
+      .tab-content.is-show{display:block;}
+
+      .img-list-wrap{position:relative;width:960px;height:540px;-webkit-backface-visibility:hidden;overflow-x:hidden;}
+      .img-list{display:flex;position:relative;width:100%;height:100%;user-select:none;}
+      .img-list > .img-item{position:relative;width:100%;height:100%;flex-shrink:0;cursor:pointer;border:1px solid blue}/* flex-shrink:0;white-space:nowrap; */
+      .car1 > .img-item{background:url(images/3D_L.jpg) no-repeat;}
+      .car2 > .img-item{background:url(images/ABP_L.jpg) no-repeat;}
+
+      .img-item:nth-child(1){background-position:0 0;}
+      .img-item:nth-child(2){background-position:-960px 0;}
+      .img-item:nth-child(3){background-position:-1920px 0;}
+      .img-item:nth-child(4){background-position:-2880px 0;}
+      .img-item:nth-child(5){background-position:-3840px 0;}
+      .img-item:nth-child(6){background-position:-4800px 0;}
+
+      .img-item:nth-child(7){background-position:0 -540px;}
+      .img-item:nth-child(8){background-position:-960px -540px;}
+      .img-item:nth-child(9){background-position:-1920px -540px;}
+      .img-item:nth-child(10){background-position:-2880px -540px;}
+      .img-item:nth-child(11){background-position:-3840px -540px;}
+      .img-item:nth-child(12){background-position:-4800px -540px;}
+
+      .img-item:nth-child(13){background-position:0 -1080px;}
+      .img-item:nth-child(14){background-position:-960px -1080px;}
+      .img-item:nth-child(15){background-position:-1920px -1080px;}
+      .img-item:nth-child(16){background-position:-2880px -1080px;}
+      .img-item:nth-child(17){background-position:-3840px -1080px;}
+      .img-item:nth-child(18){background-position:-4800px -1080px;}
+
+      .img-item:nth-child(19){background-position:0 -1620px;}
+      .img-item:nth-child(20){background-position:-960px -1620px;}
+      .img-item:nth-child(21){background-position:-1920px -1620px;}
+      .img-item:nth-child(22){background-position:-2880px -1620px;}
+      .img-item:nth-child(23){background-position:-3840px -1620px;}
+      .img-item:nth-child(24){background-position:-4800px -1620px;}
+
+      .img-item:nth-child(25){background-position:0 -2160px;}
+      .img-item:nth-child(26){background-position:-960px -2160px;}
+      .img-item:nth-child(27){background-position:-1920px -2160px;}
+      .img-item:nth-child(28){background-position:-2880px -2160px;}
+      .img-item:nth-child(29){background-position:-3840px -2160px;}
+      .img-item:nth-child(30){background-position:-4800px -2160px;}
+
+      .img-item:nth-child(31){background-position:0 -2700px;}
+      .img-item:nth-child(32){background-position:-960px -2700px;}
+      .img-item:nth-child(33){background-position:-1920px -2700px;}
+      .img-item:nth-child(34){background-position:-2880px -2700px;}
+      .img-item:nth-child(35){background-position:-3840px -2700px;}
+      .img-item:nth-child(36){background-position:-4800px -2700px;}
+    </style>
+
+    <div class="car-title">
+      <h1>css, js를 사용 드래그 이벤트를 사용하여 자동차 360도 회전</h1>
+      <p>https://pulmuone.atlassian.net/wiki/spaces/~235846725/pages/2679504902/Javascript</p>
+    </div>
+
+    <div class="tab-wrap">
+      <div class="tab-list">
+        <a href="#none" class="tab-list-btn is-show"><img src="images/icon01.png"></a>
+        <a href="#none" class="tab-list-btn"><img src="images/icon02.png"></a>
+        <a href="#none" class="tab-list-btn"><img src="images/icon03.png"></a>
+      </div>
+      
+      <div class="tab-content is-show">
+        <div class="img-list-wrap">
+          <div class="img-list car1">
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content">
+        <!-- <div class="img-list car2">
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+        </div> -->
+      </div>
+
+      <div class="tab-content">
+        내용33333333333333
+      </div>
+    </div>
+
+    <!-- 
+      https://devinus.tistory.com/46
+      https://velog.io/@hijiwon/javascript-%ED%83%AD-%EB%A9%94%EB%89%B4 
+    -->
+
+    <script>
+      (function() {
+        // 탭메뉴
+        const tabListBtn = document.querySelectorAll(".tab-list-btn");
+        const tabContent = document.querySelectorAll(".tab-content");
+
+        tabListBtn.forEach((tab, idx) => {
+          tab.addEventListener("click", (e) => {
+            tabContent.forEach((content) => {
+              content.classList.remove("is-show");
+            });
+
+            tabListBtn.forEach((btn) => {
+              btn.classList.remove("is-show");
+            });
+
+            tabListBtn[idx].classList.add("is-show");
+            tabContent[idx].classList.add("is-show");
+          });
+        });
+        
+        //360도 회전
+        const imgIist = document.querySelector(".img-list");
+        const imgItem = document.querySelectorAll(".img-item");
+        let imgLength = imgItem.length;
+        let imgWidth = imgIist.clientWidth;
+        let imgSpeed = 2200;
+        let startNum = 0;
+
+        // imgIist.style.width = imgWidth * (imgLength + 1) + "px";
+        imgIist.style.transform = "translate3d(-" + (imgWidth * (startNum + 1)) + "px, 0px, 0px)";
+        console.log("imgWidth:" + imgIist.clientWidth, "--imgLength:" + imgItem.length);
+
+        let curIndex = startNum;
+        let curSlide = imgItem[curIndex];
+        curSlide.classList.add('slide_active');
+
+        function nextMove(){
+          if (curIndex <= imgLength - 1) {
+            imgIist.style.transition = imgSpeed + "ms";
+            imgIist.style.transform = "translate3d(-" + (imgWidth * (curIndex + 1)) + "px, 0px, 0px)";
+          } 
+
+          if (curIndex === imgLength - 1) {
+            setTimeout(function(){
+              imgIist.style.transition = "0ms";
+              imgIist.style.transform = "translate3d(-" + imgWidth + "px, 0px, 0px)";
+            }, imgSpeed);
+            curIndex = -1;
+          }
+
+          curSlide.classList.remove('slide_active');
+          curSlide = imgItem[++curIndex];
+          curSlide.classList.add('slide_active');
+        }
+
+        function prevMove(){
+          if (curIndex >= 0) {
+            imgIist.style.transition = imgSpeed + "ms";
+            imgIist.style.transform = "translate3d(-" + (imgWidth * curIndex) + "px, 0px, 0px)";
+          } 
+
+          if (curIndex === 0) {
+            setTimeout(function(){
+              imgIist.style.transition = "0ms";
+              imgIist.style.transform = "translate3d(-" + (imgWidth * imgLength) + "px, 0px, 0px)";
+            }, imgSpeed);
+            curIndex = imgLength;
+          }
+
+          curSlide.classList.remove('slide_active');
+          curSlide = imgItem[--curIndex];
+          curSlide.classList.add('slide_active');
+        }
+
+        // let autoPlayStart = setInterval(nextMove, 1000);
+
+        // function autoSlide() {
+        //   clearInterval(autoPlayStart);
+        //   autoPlayStart = setInterval(nextMove, 1000);
+        // }
+
+        // function stopSlide() {
+        //   clearInterval(autoPlayStart);
+        // }        
+
+        // 마우스 드래그
+        let isDragging = false;
+        let startX = 0;
+        let endX = 0;
+
+        imgIist.addEventListener("mousedown", (e) => {
+          console.log("mousedown", e.pageX);
+          isDragging = true;
+          startX = e.pageX;
+        });
+
+        imgIist.addEventListener("mousemove", (e) => {
+          console.log("mousemove", e.pageX);
+          if (!isDragging) return;
+
+          endX = e.pageX;
+          if (startX < endX) {
+            console.log("prev move");
+            prevMove();
+          } else if (startX > endX) {
+            console.log("next move");
+            nextMove();
+          }
+        });
+
+        imgIist.addEventListener("click", (e) => {
+          e.preventDefault();
+        });
+
+        imgIist.addEventListener("mouseup", (e) => {
+          isDragging = false;
+        });
+
+        imgIist.addEventListener('mouseleave', () => {
+          isDragging = false;
+        });
+
+        // 모바일 터치 드래그
+        imgIist.addEventListener("touchstart", (e) => {
+          console.log("touchstart", e.touches[0].pageX);
+          startX = e.touches[0].pageX;
+        });
+        imgIist.addEventListener("touchend", (e) => {
+          console.log("touchend", e.changedTouches[0].pageX);
+          endX = e.changedTouches[0].pageX;
+          if (startX < endX) {
+            console.log("prev move");
+            prevMove();
+          } else if (startX > endX) {
+            console.log("next move");
+            nextMove();
+          }
+        });
+
+      })();
+    </script>
+  </body>
+</html>
