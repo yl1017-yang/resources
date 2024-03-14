@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+</head>
+<body>
+
+<link rel="stylesheet" href="../css/common.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<style>
+/* 아래로 스크롤하면 배경이 사라지고 위로 스크롤 하면 배경이 생깁니다. */
+.scroll_header{position:fixed;top:0;left:50%;z-index:100;width:100%;padding:10px 0;background-color:palevioletred;color:#fff;text-align:center;transform:translate(-50%);transition:all .3s}
+
+/* 맨하단 왔을시 top버튼 */
+#scrollTop{display:block;opacity:0;position:fixed;right:-100px;bottom:30px;width:50px;height:50px;font-size:14px;color:#fff;background:#444;border:0;background-size:cover;z-index:999;transition:all 0.5s ease;}
+#scrollTop.active{opacity:1;right:10px;}
+
+
+.content_wrap>div{height:1500px}
+div.content{width:100%;margin:0 auto}
+.hide {display:none}
+</style>
+
+
+<script>
+var lastScrollTop = 0;
+
+$(window).on('load scroll', function(){
+    var scrollTop = $(this).scrollTop();
+    
+    if(scrollTop >= 100) {
+        if ((scrollTop > lastScrollTop) && (lastScrollTop>0)) {
+            $('.scroll_header').css('top','-100px');
+        } else {
+            $('.scroll_header').css('top','0px');
+        }
+
+        lastScrollTop = scrollTop;
+        console.log(scrollTop)
+    }
+});
+
+// 스크롤 하단 도달시 top버튼
+$(function() {
+    $(window).on('load scroll', function(){
+		 if( Math.round( $(window).scrollTop()) == $(document).height() - $(window).height() ){
+			 $('#scrollTop').addClass('active');
+		 }else{
+			 $('#scrollTop').removeClass('active');
+		 }
+	 });
+});
+</script>
+
+
+
+<!-- 스크롤 상단 -->
+<div class="scroll_header">
+    아래로 스크롤하면 배경이 사라지고<br>
+    위로 스크롤 하면 배경이 생깁니다.<br>
+    스크롤 하단 top 버튼 생성
+</div>
+
+<!-- 하단 top 버튼 -->
+<button id="scrollTop" type="button" onclick="scrollToTop();">Top</button>
+
+<div class="content_wrap">
+    <div class="content" style="background:#eee;">
+        아래로 스크롤하면 사라지는 header fixed menu (설명/예제)<br>
+        https://codepen.io/yoonsangwon/pen/BayppGN<br>
+        https://yoonsidae.tistory.com/35
+    </div>
+</div>
+
+
+</body>
+</html>

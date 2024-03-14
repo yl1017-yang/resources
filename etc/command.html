@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+</head>
+<body>
+
+<link rel="stylesheet" href="../css/common.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<style>
+.box_area{width:50%;background:#eee;margin:100px auto;padding:100px;border-radius:20px;}
+#copyInput{width:550px;height:50px;padding:10px;}
+.copy_btn{width:120px;height:50px;padding:10px;background:#444;color:#fff;}
+</style>
+
+
+<script>
+    function copyToClipboard() {
+      var input = document.querySelector('#copyInput');
+      try {
+        input.select();
+        var returnValue = document.execCommand('copy');
+        console.debug(returnValue);
+        if (!returnValue) {
+          throw new Error('copied nothing');
+        }
+        alert('복사 되었습니다.');
+      } catch (e) {
+        prompt('Copy to clipboard: Ctrl+C, Enter', input.value);
+      }
+    }
+
+    window.eventCode = 'dddd';
+    document.addEventListener("DOMContentLoaded",()=>{
+        var copyUrl = "https://shop.pulmuone.co.kr/events/reply?event=582";
+        if(window.eventCode){
+            copyUrl = `${copyUrl}?code=${window.eventCode}`
+        }
+        document.querySelector('#copyInput').value = copyUrl;
+    });
+</script>
+
+
+<h1>참고내용 : https://noritersand.github.io/javascript/javascript-특정-문자를-클립보드로-복사하기/</h1>
+
+
+<div class="box_area">
+    <input type="text" id="copyInput" name="copyInput" readonly />
+    <button type="button" onclick="copyToClipboard()" class="copy_btn">눌러서 복사</button>
+</div>
+
+
+
+</body>
+</html>

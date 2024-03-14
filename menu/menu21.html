@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+</head>
+<body>
+
+<link rel="stylesheet" href="../css/common.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<style>
+.contents{background-color:skyblue;height:2000px;padding:120px;font-size:24px;text-align:right}
+
+/* 모바일 전체메뉴 */
+/* body.fixed{overflow:hidden;} 모바일 오픈시 스크롤바 삭제 */
+.moGnbBg{display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.5);z-index:0;}
+
+.moGnbWrap{display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;}
+.moGnbWrap .scroll{position:absolute;top:0;right:-100px;width:50%;min-height:100vh;overflow-y:auto;background-color:rgba(255,255,255,1);box-shadow:0 -10px 10px rgb(0 0 0 / 10%);} /* right:애니메이션, width:전체화면 */
+.moGnbWrap h2{padding:30px;}
+
+.moGnbWrap .moGnb .depth1, .moGnbWrap .moGnb .depth2{display:none;}
+.moGnbWrap .moGnb{width:100%;height:auto;position:absolute;top:150px;left:0;border:1px solid red}
+.moGnbWrap .moGnb > li > a{display:block;padding:20px 10px;font-size:18px;color:#000;font-weight:bold;border-top:1px solid #ddd;}
+.moGnbWrap .moGnb .depth1 > li > a{display:block;padding:10px 5px 10px 20px;font-size:15px;color:#555;}
+.moGnbWrap .moGnb .depth2 > li > a{display:block;padding:10px 5px 10px 30px;font-size:13px;color:#999;}
+
+/* on 효과 */
+.moGnbWrap .moGnb li{position:relative;}
+.moGnbWrap .moGnb > li > a.on{color:violet;}
+.moGnbWrap .moGnb > li > a:before{content:'';position:absolute;right:20px;top:32px;transform:translateY(-50%);width:14px;height:2px;border-radius:1px;background-color:#444;}
+.moGnbWrap .moGnb > li > a:after{content:'';position:absolute;right:25px;top:25px;transform:translateX(-50%);width:2px;height:14px;border-radius:1px;background-color:#444;transition:0.3s;}
+.moGnbWrap .moGnb > li > a.on:after{transform:translateX(-50%) rotate(90deg);}
+
+.moGnbWrap .moGnb .depth1 > li > a.on{background:#eee;color:#000;font-weight:bold;}
+.moGnbWrap .moGnb .depth1 > li > a:before{content:'';position:absolute;right:20px;top:20px;transform:translateY(-50%);width:10px;height:2px;border-radius:1px;background-color:#aaa;}
+.moGnbWrap .moGnb .depth1 > li > a:after{content:'';position:absolute;right:23px;top:15px;transform:translateX(-50%);width:2px;height:10px;border-radius:1px;background-color:#aaa;transition:0.3s;}
+.moGnbWrap .moGnb .depth1 > li > a.on:after{transform:translateX(-50%) rotate(90deg);}
+
+.moGnbWrap .moGnb .depth2 > li > a.on{color:#000;text-decoration:underline;font-weight:bold;}
+
+/* 버튼 아이콘 */
+.moBtnOpen{position:absolute;top:0;right:0;width:60px;height:60px;background:#444;color:#fff;}
+.moBtnClose{position:absolute;top:0;right:0;width:60px;height:60px;background:#444;color:#fff;z-index:20;}
+
+.moBtnOpen .bar1{display:block;position:absolute;width:26px;height:2px;left:18px;top:18px;opacity:1;background:#eee;border-radius:10px;}
+.moBtnOpen .bar2{display:block;position:absolute;width:26px;height:2px;left:18px;top:26px;opacity:1;background:#eee;border-radius:10px;}
+.moBtnOpen .bar3{display:block;position:absolute;width:22px;height:2px;left:18px;top:34px;opacity:1;background:#eee;border-radius:10px;}
+
+.moBtnClose:before{content:'';display:block;position:absolute;width:24px;height:2px;left:26%;top:47%;opacity:1;background-color:#fff;border-radius:10px;transform:rotate(-45deg);-webkit-transform:rotate(-45deg);-moz-transform:rotate(-45deg);-o-transform:rotate(-45deg);-ms-transform:rotate(-45deg);}
+.moBtnClose:after{content:'';display:block;position:absolute;width:24px;height:2px;left:26%;top:47%;opacity:1;background-color:#fff;border-radius:10px;transform:rotate(45deg);-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);-o-transform:rotate(45deg);-ms-transform:rotate(45deg);}
+</style>
+
+
+<script>
+function gnbMenu(depth1, depth2, depth3) {
+	
+    var $moGnbWrap = $('.moGnbWrap'),
+    	$moGnb = $('.moGnb', $moGnbWrap),
+        $moGnbLi = $('.moGnb > li', $moGnbWrap),
+        $moBtnOpen = $('.moBtnOpen'),
+        $moBtnClose = $('.moBtnClose'),
+        $moGnbBg = $('.moGnbBg');
+    
+    // 모바일 - 전체내용 오픈
+    $moGnbWrap.hide();
+    $moBtnOpen.on('click', function(e) {
+    	e.preventDefault();
+    	$(this).hide();
+        
+        //$('body').addClass('fixed');
+        $moGnbWrap.fadeIn(200);
+        $moGnbWrap.find('.scroll').stop().animate({right:0}, 300);        
+        $moGnbBg.fadeIn();
+		$('body').css({'height':$(window).height(), 'overflow':'hidden'});
+    });
+    
+    $moBtnClose.on('click', function(e) {
+    	e.preventDefault();
+        
+        //$('body').removeClass('fixed');
+    	$moBtnOpen.show();
+        $moGnbWrap.fadeOut(200);
+        $moGnbWrap.find('.scroll').stop().animate({right:-100}, 300);
+        $moGnbBg.hide();
+        $('body').css({'height':'auto', 'overflow':'auto'});
+    });	
+        
+	$moGnbBg.on('click', function(e) {
+    	e.preventDefault();
+        
+    	$moGnbWrap.stop().fadeOut(200);        
+        $moGnbWrap.find('.scroll').animate({right:0}, 300);
+        $moBtnOpen.show();
+    });
+    
+    // 모바일 - 1,2DEPTH 오픈
+    $moGnbLi.children('a').on('click', function(e) {
+    //$moGnbLi.find('> a').on('click', function(e) { //2차뎁스만 사용시
+    	e.preventDefault();
+        
+        var $depth = $(this).next('ul');
+        if($depth.is(':visible')){        
+            $(this).removeClass('on');
+            $depth.slideUp(300);
+        } else {
+        	$moGnbLi.children('a').removeClass('on');
+            //$moGnb.find('li > a').removeClass('on');
+            $(this).parent().siblings().find('ul').slideUp(300);            
+            $(this).addClass('on');
+            $depth.slideDown(300);
+        }
+    });
+    
+    $('.moGnb .depth1 > li').children('a').on('click', function() {
+        var $depth = $(this).next('ul');
+        if($depth.is(':visible')){
+        	$(this).removeClass('on');
+            $depth.slideUp(300);
+        } else {
+        	$('.moGnb .depth1 > li').children('a').removeClass('on');
+            $(this).parent().siblings().find('ul').slideUp(300);
+            $(this).addClass('on');
+            $depth.slideDown(300);
+        }
+    });
+    
+    //모바일 - 페이지 인식
+	if ($moGnbLi.length > depth1-1) {
+        $moGnbLi.eq(depth1-1).find('> a').addClass('on');
+        $moGnbLi.eq(depth1-1).find('.depth1 > li').eq(depth2-1).find('> a').addClass('on');
+        $moGnbLi.eq(depth1-1).find('.depth1 > li').eq(depth2-1).find('.depth2 > li').eq(depth3-1).find('> a').addClass('on');
+	}
+    
+    //모바일 - 2depth 오픈
+    if ( depth1 >= 0 && depth2 >= 0 ) {
+        $moGnbLi.eq(depth1-1).addClass('on').children('.depth1').show().children('li').eq(depth2-1).addClass('on').children('.depth2').show();
+    }
+    
+}
+</script>
+
+
+
+
+
+
+<script type="text/javascript">
+    $(function() {
+        gnbMenu(3,2,3); //초기번호 1
+    });
+    </script>
+    
+    <!-- 모바일 네이게이션 오픈 -->
+    <button class="moBtnOpen" title="네비게이션 열기">
+        <span class="blind">전체메뉴보기</span>
+        <span class="bar1"></span><span class="bar2"></span><span class="bar3"></span>
+    </button>
+    
+    
+    <!-- 모바일 전체메뉴 -->
+    <div class="moGnbWrap">
+        <div class="moGnbBg"></div>
+        <div class="scroll">
+            <button class="moBtnClose" title="네비게이션 닫기"><span class="blind">전체메뉴닫기</span></button>
+            <h2>
+                모바일 3차 메뉴
+            </h2>
+            
+            <ul class="moGnb">
+                <li>
+                    <a href="#none">1차메뉴</a>
+                    <ul class="depth1">
+                        <li>
+                            <a href="#none">1-1차메뉴</a>
+                            <ul class="depth2">
+                                <li><a href="https://www.naver.com/">1-1차내용-1(링크)</a></li>
+                                <li><a href="https://www.daum.net/">1-1차내용-2(링크)</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#none">1-2차메뉴</a>
+                            <ul class="depth2">
+                                <li><a href="#none">1-2차내용-1</a></li>
+                                <li><a href="#none">1-2차내용-2</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#none">1-3차메뉴</a>
+                            <ul class="depth2">
+                                <li><a href="#none">1-3차내용-1</a></li>
+                                <li><a href="#none">1-3차내용-2</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <a href="#none">2차메뉴</a>
+                    <ul class="depth1">
+                        <li>
+                            <a href="#none">2-1차메뉴</a>
+                            <ul class="depth2">
+                                <li><a href="#none">2-1차내용-1</a></li>
+                                <li><a href="#none">2-1차내용-2</a></li>
+                                <li><a href="#none">2-1차내용-3</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#none">2-2차메뉴</a>
+                            <ul class="depth2">
+                                <li><a href="#none">2-2차내용-1</a></li>
+                                <li><a href="#none">2-2차내용-2</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>            
+                
+                <li>
+                    <a href="#none">3차메뉴</a>
+                    <ul class="depth1">
+                        <li>
+                            <a href="#none">3-1차메뉴</a>
+                            <ul class="depth2">
+                                <li><a href="#none">3-1차내용-1</a></li>
+                                <li><a href="#none">3-1차내용-2</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#none">3-2차메뉴</a>
+                            <ul class="depth2">
+                                <li><a href="#none">3-2차내용-1</a></li>
+                                <li><a href="#none">3-2차내용-2</a></li>
+                                <li><a href="#none">3-2차내용-3</a></li>
+                                <li><a href="#none">3-2차내용-4</a></li>
+                                <li><a href="#none">3-2차내용-5</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <a href="#none">4차메뉴-2차없음</a>                
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+    <!-- //모바일 전체메뉴 -->
+    
+    <div class="contents">
+        모바일 3차 뎁스 클릭<br>
+        <a href="https://www.daum.net/">링크 테스트▶</a>
+        
+    </div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+</head>
+<body>
+
+<link rel="stylesheet" href="../css/common.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<style>
+.wrap{padding:2% 5%;}
+.section{border:1px solid #eee;border-radius:15px;padding:2% 5%;margin-bottom:20px;}
+h3{font-size:26px;margin-bottom:10px;}
+
+/* 체크박스 디자인 */
+.agree_wrap{display:flex;flex-direction:column;}
+.agree_wrap input[type='checkbox']{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
+.agree_wrap input[type='checkbox'] + label{display:inline-block;position:relative;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;}
+.agree_wrap input[type='checkbox'] + label:before{content:'';display:inline-block;width:20px;height:20px;margin:-2px 8px 0 0;vertical-align:middle;text-align:center;background:#fff;border:1px solid #ddd;border-radius:6px;}
+.agree_wrap input[type='checkbox']:checked + label:before{content:'';border:1px solid #666;background:#666 url('../images/check-line-16.svg') no-repeat 50%;}
+.agree_wrap input[type='checkbox']:checked:disabled + label:before{content:'';color:#fff;background:#ddd url('../images/check-line-16.svg') no-repeat 50%;border:1px solid #aaa;}
+.agree_wrap input[type='checkbox']:disabled + label:before{cursor:not-allowed;opacity:.5;background:#ddd;}
+
+.btn_wrap .btn_agree{display:block;width:100%;padding:2% 0;margin-top:50px;background:blueviolet;color:#fff;text-align:center;border-radius:8px;cursor:pointer}
+.btn_wrap .btn_agree:disabled{background:#e0e0e0;color:#fff;font-weight:300;}
+</style>
+
+
+<script>
+$(function() {
+
+    $('#check_all').on('click', function(){
+        var is_checked = $(this).prop('checked');
+        $('.agree_wrap .check').prop('checked', is_checked);
+        $(this).prop('checked') ? $('#TestBtn').removeAttr('disabled'):$('#TestBtn').attr('disabled','disabled'); 
+    });
+
+    $('.check').on('click', function(){
+        var is_checked = true;
+        $('.agree_wrap .check').each(function() {
+            is_checked = is_checked && $(this).is(':checked');
+        })
+        $('#check_all').prop('checked', is_checked);
+        $('#check_all').prop('checked') ? $('#TestBtn').removeAttr('disabled'):$('#TestBtn').attr('disabled','disabled'); 
+    });
+    
+});
+</script>
+
+
+
+<section class="wrap">
+    
+    <h3>전체 동의하기</h3>
+
+    <div class="agree_wrap">
+        <input type="checkbox" id="check_all" >
+        <label for="check_all">전체 동의</label>
+
+        <input type="checkbox" id="check_1" class="check" >
+        <label for="check_1">개인정보 처리방침 동의</label>
+
+        <input type="checkbox" id="check_2" class="check" >
+        <label for="check_2">서비스 이용약관 동의</label>
+        
+        <input type="checkbox" id="check_3" class="check" >
+        <label for="check_3">마케팅 수신 동의</label>
+    </div>
+
+    <div class="btn_wrap">
+        <button type="button" disabled="disabled" id="TestBtn" class="btn_agree">동의하기</button>
+    </div>
+
+
+</section>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+</head>
+<body>
+
+<link rel="stylesheet" href="../css/common.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<style>
+body{background:#eee;}
+
+.dialog_popup{position:fixed;top:0;left:0;width:100%;height:100%;z-index:999;}
+.dialog_popup .dialog_wrap{position:absolute;left:0;right:0;width:100%;padding:50px 50px 80px 50px;box-shadow:3px 3px 8px 0 rgba(0,0,0,0.4);border-radius:14px 14px 0 0;background-color:#fff;}
+.dialog_popup .dialog_wrap .btn_close{position:absolute;top:20px;right:30px;width:28px;height:28px;display:block;background:url('../images/close-line-28-black.svg') no-repeat;}
+.dialog_popup .dialog_wrap .dialog_header h2{font-size:25px;font-weight:bold;color:blueviolet;margin-bottom:10px;}
+.dialog_popup .dialog_wrap .dialog_content{}
+.dialog_popup .dim_bg{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);}
+
+.dialog_popup{transition:all 0.1s ease-in-out;visibility:hidden;}
+.dialog_popup.on{visibility:visible;}
+.dialog_popup .dim_bg{opacity:0;transition:all 0.3s ease-in-out;}
+.dialog_popup.on .dim_bg{opacity:1;}
+
+/* 토스트팝업 */
+.dialog_popup .dialog_wrap{bottom:-100%;transition:all 0.6s ease-in-out;visibility:hidden;}
+.dialog_popup.on .dialog_wrap{bottom:0;visibility:visible;}
+
+/* 모달팝업 */
+.modal_popup .dialog_wrap{width:500px;min-height:250px;bottom:auto !important;top:55%;left:50%;transform:translate(-50%, -55%);padding:30px 40px;border-radius:14px;transition:all 0.3s ease-in-out;opacity:0;}
+.modal_popup.on .dialog_wrap{top:50%;opacity:1;}
+
+/* top 팝업 */
+.top_popup .dialog_wrap{top:-100%;bottom:auto !important;padding:30px 40px;border-radius:0;box-shadow:0 !important;transition:all 0.5s ease-in-out;opacity:0;}
+.top_popup.on .dialog_wrap{top:0;bottom:auto !important;height:100%;visibility:visible;opacity:1;}
+
+/* left 팝업 */
+.left_popup .dialog_wrap{bottom:auto !important;left:-100%;right:auto;height:100%;padding:30px 40px;border-radius:0;box-shadow:0 !important;transition:all 0.4s ease-in-out;opacity:0;}
+.left_popup.on .dialog_wrap{bottom:auto !important;left:0;right:auto;visibility:visible;opacity:1;}
+
+/* right 팝업 */
+.right_popup .dialog_wrap{bottom:auto !important;left:auto;right:-100%;height:100%;padding:30px 40px;border-radius:0;box-shadow:0 !important;transition:all 0.4s ease-in-out;opacity:0;}
+.right_popup.on .dialog_wrap{bottom:auto !important;left:auto;right:0;visibility:visible;opacity:1;}
+
+/* 버튼 */
+.btn_wrap{margin:50px auto;text-align:center;}
+.btn_open{display:inline-block;padding:10px 50px;margin:10px 0;background-color:blueviolet;border-radius:100px;color:#fff;cursor:pointer;}
+a.btn_open{background-color:crimson;}
+</style>
+
+
+<script>
+$(function() {
+	var popup = $('.dialog_popup');
+
+    $('.btn_open').on('click', function() {
+        var value = $(this).attr('data-value');
+        //var value = $(this).data('value');
+        $('.dialog_popup[data-value='+value+']').addClass('on');
+        //popup.find('.dialog_wrap').animate({bottom:0}, 400);
+        $('html, body').css({'height':$(window).height(), 'overflow':'hidden'});
+    });
+
+    $('.btn_close').on('click', popupClose);
+    $('.dialog_popup .dim_bg').on('click', popupClose);
+    
+    function popupClose() {
+    	popup.removeClass('on');
+        //popup.find('.dialog_wrap').animate({bottom:'-100%'}, 600);
+        $('html, body').css({'height':'auto', 'overflow':'auto'});
+    }
+});
+</script>
+
+
+
+
+<div class="btn_wrap">
+    <button type="button" class="btn_open" data-value="pop1">토스트 팝업1 (button)</button>
+    <button type="button" class="btn_open" data-value="pop2">토스트 팝업2 (button)</button>
+
+    <a href="#" class="btn_open" data-value="pop3">top_popup 팝업 (a)</a>
+    <a href="#" class="btn_open" data-value="pop4">left_popup 팝업 (a)</a>
+    <a href="#" class="btn_open" data-value="pop5">right_popup 팝업 (a)</a>
+    <a href="#" class="btn_open" data-value="pop6">중앙 모달팝업 (a)</a>
+</div>
+
+<div>
+https://webclub.tistory.com/189<br>
+https://webclub.tistory.com/366
+</div>
+
+<!-- [D] 토스트팝업 -->
+<div class="dialog_popup" data-value="pop1">
+    <div class="dim_bg"></div>
+    <div class="dialog_wrap">
+        <div class="dialog_header">
+            <h2>토스트 팝업 타이틀</h2>
+            <a href="#" class="btn_close"><span class="blind">닫기</span></a>
+        </div>
+        <div class="dialog_content">
+            바텀 모달 팝업<br>
+            토스트 팝업<br>
+            하단에서 나오는 토스트배너 내용<br>
+            Toast 팝업은 무언가 액션을 시작했을 때, 종료되었을 때, 상태가 바뀌었을 때 등등의 경우 알려주는 팝업입니다. <br>
+            따로 닫기 버튼을 두지 않고 일정 시간이 지나면 자동으로 사라집니다. <br>
+            https://yozm.wishket.com/magazine/detail/1272/
+        </div>
+    </div>
+</div>
+<!-- //[D] 토스트팝업 -->
+
+<!-- [D] 토스트팝업 -->
+<div class="dialog_popup" data-value="pop2">
+    <div class="dim_bg"></div>
+    <div class="dialog_wrap">
+        <div class="dialog_header">
+            <a href="#" class="btn_close"><span class="blind">닫기</span></a>
+        </div>
+        <div class="dialog_content">
+            토스트 팝업<br>
+            하단에서 나오는 토스트배너 내용<br>
+            toast box fade
+        </div>
+    </div>
+</div>
+<!-- //[D] 토스트팝업 -->
+
+<!-- [D] top_popup 팝업 -->
+<div class="dialog_popup top_popup" data-value="pop3">
+    <div class="dim_bg"></div>
+    <div class="dialog_wrap">
+        <div class="dialog_header">
+            <h2>top_popup 타이틀</h2>
+            <a href="#" class="btn_close"><span class="blind">닫기</span></a>
+        </div>
+        <div class="dialog_content">
+            토스트 팝업<br>
+            하단에서 나오는 토스트배너 내용<br>
+            Toast 팝업은 무언가 액션을 시작했을 때, 종료되었을 때, 상태가 바뀌었을 때 등등의 경우 알려주는 팝업입니다. <br>
+            따로 닫기 버튼을 두지 않고 일정 시간이 지나면 자동으로 사라집니다.
+        </div>
+    </div>
+</div>
+<!-- //[D] top_popup 팝업 -->
+
+<!-- [D] left_popup 팝업 -->
+<div class="dialog_popup left_popup" data-value="pop4">
+    <div class="dim_bg"></div>
+    <div class="dialog_wrap">
+        <div class="dialog_header">
+            <h2>left_popup 타이틀</h2>
+            <a href="#" class="btn_close"><span class="blind">닫기</span></a>
+        </div>
+        <div class="dialog_content">
+            토스트 팝업<br>
+            하단에서 나오는 토스트배너 내용<br>
+            Toast 팝업은 무언가 액션을 시작했을 때, 종료되었을 때, 상태가 바뀌었을 때 등등의 경우 알려주는 팝업입니다. <br>
+            따로 닫기 버튼을 두지 않고 일정 시간이 지나면 자동으로 사라집니다.
+        </div>
+    </div>
+</div>
+<!-- //[D] left_popup 팝업 -->
+
+<!-- [D] right_popup 팝업 -->
+<div class="dialog_popup right_popup" data-value="pop5">
+    <div class="dim_bg"></div>
+    <div class="dialog_wrap">
+        <div class="dialog_header">
+            <h2>right_popup 타이틀</h2>
+            <a href="#" class="btn_close"><span class="blind">닫기</span></a>
+        </div>
+        <div class="dialog_content">
+            토스트 팝업<br>
+            하단에서 나오는 토스트배너 내용<br>
+            Toast 팝업은 무언가 액션을 시작했을 때, 종료되었을 때, 상태가 바뀌었을 때 등등의 경우 알려주는 팝업입니다. <br>
+            따로 닫기 버튼을 두지 않고 일정 시간이 지나면 자동으로 사라집니다.
+        </div>
+    </div>
+</div>
+<!-- //[D] right_popup 팝업 -->
+
+
+<!-- [D] 모달팝업 -->
+<div class="dialog_popup modal_popup" data-value="pop6">
+    <div class="dim_bg"></div>
+    <div class="dialog_wrap">
+        <div class="dialog_header">
+            <h2>모달 팝업 타이틀</h2>
+            <a href="#" class="btn_close"><span class="blind">닫기</span></a>
+        </div>
+        <div class="dialog_content">
+            레이어 팝업<br>
+            하단에서 나오는 토스트배너 내용<br>
+            toast box fade
+        </div>
+    </div>
+</div>
+<!-- //[D] 모달팝업 -->
+
+
+
+
+</body>
+</html>

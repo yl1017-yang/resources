@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<title>스마트 명함</title>
+
+	<link href="./css/common_new.css" rel="stylesheet" type="text/css" media="all">
+
+	<script src="./js/jquery-3.5.1.min.js"></script>
+	<script src="./js/html2canvas.min.js"></script>
+	<script src="./js/swiper.min.js"></script>
+	<script src="./js/common_new.js"></script>
+	<script src="./js/kakao.min.js"></script>
+</head>
+
+<body class="page-card intro">
+	<header class="header">
+		<strong class="header-tit">
+			BUSINESS CARD
+		</strong>
+	</header>
+	
+	<!-- 인트로 -->
+	<div id="intro" class="intro-wrap">
+		<h1 class="tit_app">
+			<img src="./images/common/tit_app.png" class="img_title" alt="스마트 명함 서비스">
+		</h1>
+		<div class="visual">
+			<div class="pocket">
+				<img src="./images/common/img_introcard.png" class="img_card" alt="">
+			</div>
+			<div class="particle">
+				<i class="circle small color1" data-seq="01"></i>
+				<i class="circle small color2" data-seq="02"></i>
+				<i class="circle small color3" data-seq="03"></i>
+				<i class="circle large color1" data-seq="04"></i>
+				<i class="circle small color4" data-seq="05"></i>
+				<i class="circle small color5" data-seq="06"></i>
+				<i class="circle small color6" data-seq="07"></i>
+				<i class="circle small color1" data-seq="08"></i>
+				<i class="circle small color2" data-seq="09"></i>
+				<i class="circle large color2" data-seq="10"></i>
+				<i class="circle small color3" data-seq="11"></i>
+				<i class="circle small color3" data-seq="12"></i>
+				<i class="circle small color4" data-seq="13"></i>
+				<i class="circle small color5" data-seq="14"></i>
+				<i class="circle large color3" data-seq="15"></i>
+				<i class="circle small color6" data-seq="16"></i>
+				<i class="circle small color1" data-seq="17"></i>
+				<i class="circle small color4" data-seq="18"></i>
+				<i class="circle large color4" data-seq="19"></i>
+				<i class="circle small color5" data-seq="20"></i>
+				<i class="circle small color6" data-seq="21"></i>
+			</div>
+		</div>
+		<div class="btns-fixed-area">
+			<button type="button" class="btn-normal" target="_blank" id="startApp" ><span>명함 만들기</span></button>
+		</div>
+	</div>
+	<!-- //인트로 -->
+	
+	<article class="page-wrap type-fix" >
+		<div class="content-wrap type-cardview">
+			
+			<div class="section_output" id="screenCard">
+				<!-- card type 2 -->
+				<div class="card type-02">
+					<img src="./images/template/type02.png">
+					<div class="item name" data-id="txtName">홍길동</div><!-- 이름 -->
+					<div class="group part">
+						<span class="item" data-id="txtPart1">ㅇㅇ</span><!-- 사업단 -->
+						<span class="item" data-id="txtPart2">ㅇㅇㅇ</span><!-- 지점 -->
+					</div>
+					<div class="group info">
+						<div class="item" data-id="txtAddress">06194 서울시 강남구 테헤란로 432 DB금융센터 15층</div><!-- 주소 -->
+						<div>
+							<span class="item mp1" data-id="txtMP1">010-0000-0000</span><!-- 모바일폰 -->
+							<span class="item mp2" data-id="txtMP2">010-0000-0000</span><!-- 모바일폰2 -->
+							<span class="item tel" data-id="txtTel">02-0000-0000</span><!-- 사무실전화 -->
+						</div>
+						<div>
+							<span class="item fax" data-id="txtFax">02-0000-0000</span><!-- 팩스 -->
+							<span class="item email" data-id="txtEmail">dbxxxx@idbins.com</span><!-- 이메일 -->
+						</div>
+						<div>http://www.idbins.com</div>
+					</div>
+				</div>
+				<!-- //card type 2 -->
+				
+				<!-- card type 6 -->
+				<div class="card type-06">
+					<img src="./images/template/type06.png">
+					<div class="group namebox">
+						<span class="item name" data-id="txtName">홍길동</span><!-- 이름 -->
+						<span class="item position" data-id="txtPosition">팀장</span><!-- 직급 -->
+					</div>
+					<div class="group part">
+						<span class="item" data-id="txtPart1">ㅇㅇ</span><!-- 사업단 -->
+						<span class="item" data-id="txtPart2">ㅇㅇㅇ</span><!-- 지점 -->
+					</div>
+					<div class="group info">
+						<div class="item" data-id="txtAddress">06194 서울시 강남구 테헤란로 432 DB금융센터 15층</div><!-- 주소 -->
+						<div>
+							<span class="item mp1" data-id="txtMP1">010-0000-0000</span><!-- 모바일폰 -->
+							<span class="item tel" data-id="txtTel">02-0000-0000</span><!-- 사무실전화 -->
+							<span class="item fax" data-id="txtFax">02-0000-0000</span><!-- 팩스 -->
+						</div>
+						<div>
+							<span class="item email" data-id="txtEmail">dbxxxx@idbins.com</span><!-- 이메일 -->
+							<span>http://www.idbins.com</span>
+						</div>
+					</div>
+				</div>
+				<!-- //card type 6 -->
+				
+				<!-- card type 9 -->
+				<div class="card type-09">
+					<img src="./images/template/type09.png">
+					<div class="group item name" data-id="txtName">홍길동</div><!-- 이름 -->
+					<div class="group part">
+						<span class="item" data-id="txtPart1">ㅇㅇ</span><!-- 사업단 -->
+						<span class="item" data-id="txtPart2">ㅇㅇㅇ</span><!-- 지점 -->
+					</div>
+					<div class="group info">
+						<div>
+							<span class="item mp1" data-id="txtMP1">010-0000-0000</span><!-- 모바일폰 -->
+							<span class="item mp2" data-id="txtMP2">010-0000-0000</span><!-- 모바일폰2 -->
+						</div>
+						<div>
+							<span class="item tel" data-id="txtTel">02-0000-0000</span><!-- 사무실전화 -->
+							<span class="item fax" data-id="txtFax">02-0000-0000</span><!-- 팩스 -->
+						</div>
+					</div>
+					<div class="group info1">
+						<div class="item address" data-id="txtAddress">06194 서울시 강남구 테헤란로 432 DB금융센터 15층</div><!-- 주소 -->
+						<div>http://www.idbins.com</div>
+					</div>
+				</div>
+				<!-- //card type 9 -->
+				
+				<!-- card type 1 -->
+				<div class="card type-01">
+					<img src="./images/template/type01.png">
+					<div class="item name" data-id="txtName">홍길동</div><!-- 이름 -->
+					<div class="item mp1" data-id="txtMP1">010-0000-0000</div><!-- 모바일폰 -->
+					
+					<div class="group part">
+						<span class="item" data-id="txtPart1">ㅇㅇ</span><!-- 사업단 -->
+						<span class="item" data-id="txtPart2">ㅇㅇㅇ</span><!-- 지점 -->
+					</div>
+					<div class="group info">
+						<div class="item" data-id="txtAddress">06194 서울시 강남구 테헤란로 432 DB금융센터 15층</div><!-- 주소 -->
+						<div>
+							<span class="item tel" data-id="txtTel">02-0000-0000</span><!-- 사무실전화 -->
+							<span class="item fax" data-id="txtFax">02-0000-0000</span><!-- 팩스 -->
+							<span class="item email" data-id="txtEmail">dbxxxx@idbins.com</span><!-- 이메일 -->
+						</div>
+					</div>
+				</div>
+				<!-- //card type 1 -->
+				
+				<!-- card type 3 -->
+				<div class="card type-03">
+					<img src="./images/template/type03.png">
+					<div class="item name" data-id="txtName">홍길동</div><!-- 이름 -->
+					<div class="group part">
+						<span class="item" data-id="txtPart1">ㅇㅇ</span><!-- 사업단 -->
+						<span class="item" data-id="txtPart2">ㅇㅇㅇ</span><!-- 지점 -->
+					</div>
+					<div class="group info">
+						<div>
+							<span class="item mp1" data-id="txtMP1">010-0000-0000</span><!-- 모바일폰 -->
+							<span class="item mp2" data-id="txtMP2">010-0000-0000</span><!-- 모바일폰2 -->
+						</div>
+						<div>
+							<span class="item tel" data-id="txtTel">02-0000-0000</span><!-- 사무실전화 -->
+							<span class="item fax" data-id="txtFax">02-0000-0000</span><!-- 팩스 -->
+						</div>
+						<div class="item" data-id="txtAddress">06194 서울시 강남구 테헤란로 432 DB금융센터 15층</div><!-- 주소 -->
+						<div>
+							<span class="item email" data-id="txtEmail">dbxxxx@idbins.com</span><!-- 이메일 -->
+						</div>
+					</div>
+				</div>
+				<!-- //card type 3 -->
+				
+				<!-- card type 4 -->
+				<div class="card type-04">
+					<img src="./images/template/type04.png">
+					<div class="item name" data-id="txtName">홍길동</div><!-- 이름 -->
+					<div class="group part">
+						<span class="item" data-id="txtPart1">ㅇㅇ</span><!-- 사업단 -->
+						<span class="item" data-id="txtPart2">ㅇㅇㅇ</span><!-- 지점 -->
+					</div>
+					<div class="group info">
+						<div>
+							<span class="item mp1" data-id="txtMP1">010-0000-0000</span><!-- 모바일폰 -->
+							<span class="item mp2" data-id="txtMP2">010-0000-0000</span><!-- 모바일폰2 -->
+						</div>
+						<div>
+							<span class="item tel" data-id="txtTel">02-0000-0000</span><!-- 사무실전화 -->
+						</div>
+						<div>
+							<span class="item fax" data-id="txtFax">02-0000-0000</span><!-- 팩스 -->
+						</div>
+					</div>
+					<div class="group info1">
+						<div>
+							<span class="item" data-id="txtAddress1">06194</span><!-- 우편번호 -->
+						</div>
+						<div>
+							<span class="item" data-id="txtAddress2">서울시 강남구 테헤란로 432 DB금융센터 15층</span><!-- 주소 -->
+						</div>
+						<div>
+							<span class="item email" data-id="txtEmail">dbxxxx@idbins.com</span><!-- 이메일 -->
+						</div>
+					</div>
+				</div>
+				<!-- //card type 4 -->
+				
+				<!-- card type 10 -->
+				<div class="card type-10">
+					<img src="./images/template/type10.png">
+					<div class="group namebox">
+						<span class="item name" data-id="txtName">홍길동</span><!-- 이름 -->
+						<span class="item position" data-id="txtPosition">팀장</span><!-- 직급 -->
+					</div>
+					<div class="group part">
+						<span class="item" data-id="txtPart1">ㅇㅇ</span><!-- 사업단 -->
+						<span class="item" data-id="txtPart2">ㅇㅇㅇ</span><!-- 지점 -->
+					</div>
+					<div class="group info">
+						<div>
+							<span class="item tel" data-id="txtTel">02-0000-0000</span><!-- 사무실전화 -->
+						</div>
+						<div>
+							<span class="item mp1" data-id="txtMP1">010-0000-0000</span><!-- 모바일폰 -->
+						</div>
+						<div>
+							<span class="item fax" data-id="txtFax">02-0000-0000</span><!-- 팩스 -->
+						</div>
+						<div>
+							<span class="item email" data-id="txtEmail">dbxxxx@idbins.com</span><!-- 이메일 -->
+						</div>
+					</div>
+					<div class="group info1">
+						<div>http://www.idbins.com</div>
+						<div class="item address" data-id="txtAddress">06194 서울시 강남구 테헤란로 432 DB금융센터 15층</div><!-- 주소 -->
+					</div>
+				</div>
+				<!-- //card type 10 -->
+					
+				<!-- card type 7 -->
+				<div class="card type-07">
+					<img src="./images/template/type07.png">
+					<div class="group namebox">
+						<span class="item name" data-id="txtName">홍길동</span><!-- 이름 -->
+						<span class="item position" data-id="txtPosition">팀장</span><!-- 직급 -->
+					</div>
+					<div class="group part">
+						<span class="item" data-id="txtPart1">ㅇㅇ</span><!-- 사업단 -->
+						<span class="item" data-id="txtPart2">ㅇㅇㅇ</span><!-- 지점 -->
+					</div>
+					<div class="group info">
+						<div class="item" data-id="txtAddress">06194 서울시 강남구 테헤란로 432 DB금융센터 15층</div><!-- 주소 -->
+						<div>
+							<span class="item mp1" data-id="txtMP1">010-0000-0000</span><!-- 모바일폰 -->
+							<span class="item tel" data-id="txtTel">02-0000-0000</span><!-- 사무실전화 -->
+							<span class="item fax" data-id="txtFax">02-0000-0000</span><!-- 팩스 -->
+						</div>
+						<div>
+							<span class="item email" data-id="txtEmail">dbxxxx@idbins.com</span><!-- 이메일 -->
+							<span>http://www.idbins.com</span>
+						</div>
+					</div>
+				</div>
+				<!-- //card type 7 -->
+				
+				<!-- card type 8 -->
+				<div class="card type-08">
+					<img src="./images/template/type08.png">
+					<div class="group namebox">
+						<span class="item name" data-id="txtName">홍길동</span><!-- 이름 -->
+						<span class="item position" data-id="txtPosition">팀장</span><!-- 직급 -->
+					</div>
+					<div class="group part">
+						<span class="item" data-id="txtPart1">ㅇㅇ</span><!-- 사업단 -->
+						<span class="item" data-id="txtPart2">ㅇㅇㅇ</span><!-- 지점 -->
+					</div>
+					<div class="group mp1">
+						<span data-id="txtMP1">010-0000-0000</span><!-- 모바일폰 -->
+					</div>
+					<div class="group info">
+						<div class="item" data-id="txtAddress">06194 서울시 강남구 테헤란로 432 DB금융센터 15층</div><!-- 주소 -->
+						<div>
+							
+							<span class="item tel" data-id="txtTel">02-0000-0000</span><!-- 사무실전화 -->
+							<span class="item fax" data-id="txtFax">02-0000-0000</span><!-- 팩스 -->
+						</div>
+						<div>
+							<span class="item email" data-id="txtEmail">dbxxxx@idbins.com</span><!-- 이메일 -->
+							<span>http://www.idbins.com</span>
+						</div>
+					</div>
+				</div>
+				<!-- //card type 8 -->
+					
+				<!-- card type 5 -->
+				<div class="card type-05">
+					<img src="./images/template/type05.png">
+					<div class="group namebox">
+						<span class="item name" data-id="txtName">홍길동</span><!-- 이름 -->
+						<div class="part">
+							<span class="item" data-id="txtPart1">ㅇㅇ</span><!-- 사업단 -->
+							<span class="item" data-id="txtPart2">ㅇㅇㅇ</span><!-- 지점 -->
+						</div>
+					</div>
+					<div class="group info">
+						<div>
+							<span class="item mp1" data-id="txtMP1">010-0000-0000</span><!-- 모바일폰 -->
+							<span class="item mp2" data-id="txtMP2">010-0000-0000</span><!-- 모바일폰2 -->
+						</div>
+						<div>
+							<span class="item tel" data-id="txtTel">02-0000-0000</span><!-- 사무실전화 -->
+							<span class="item fax" data-id="txtFax">02-0000-0000</span><!-- 팩스 -->
+						</div>
+						<div class="item" data-id="txtAddress">06194 서울시 강남구 테헤란로 432 DB금융센터 15층</div><!-- 주소 -->
+					</div>
+				</div>
+				<!-- //card type 5 -->
+				
+				<!-- card type 11 -->
+				<div class="card type-11">
+					<img src="./images/template/type11.png">
+					<div class="group namebox">
+						<span class="item name" data-id="txtName">홍길동</span><!-- 이름 -->
+						<span class="item position" data-id="txtPosition">팀장</span><!-- 직급 -->
+					</div>
+					<div class="group part">
+						<span class="item" data-id="txtPart1">ㅇㅇ</span><!-- 사업단 -->
+						<span class="item" data-id="txtPart2">ㅇㅇㅇ</span><!-- 지점 -->
+					</div>
+					<div class="group info">
+						<div>
+							<span class="item mp1" data-id="txtMP1">010-0000-0000</span><!-- 모바일폰 -->
+							<span class="item tel" data-id="txtTel">02-0000-0000</span><!-- 사무실전화 -->
+							<span class="item fax" data-id="txtFax">02-0000-0000</span><!-- 팩스 -->
+						</div>
+						<div class="item address" data-id="txtAddress">서울시 강남구 테헤란로 432 DB금융센터 15층</div><!-- 주소 -->
+						<div>
+							<span class="item email" data-id="txtEmail">dbxxxx@idbins.com</span><!-- 이메일 -->
+							<span class="homepage">http://www.idbins.com</span>
+						</div>
+					</div>
+				</div>
+				<!-- //card type 11 -->
+			</div>
+			
+		</div>
+		
+		<div class="content-wrap type-info">
+			<fieldset class="field-wrap">
+				<legend>명함 정보 입력</legend>
+				
+				<div class="field-item n1">
+					<label class="field-label" for="inpName">이름</label>
+					<div class="field-group">
+						<input class="field-input" value="" type="text" title="이름" id="inpName" placeholder="이름 입력">
+						<span class="line"></span>
+					</div>
+				</div>
+				
+				<div class="field-item n1_1">
+					<label class="field-label" for="inpPosition">직급</label>
+					<div class="field-group">
+						<input class="field-input" value="" type="text" title="직급" id="inpPosition" placeholder="직급 입력">
+						<span class="line"></span>
+					</div>
+				</div>
+				
+				<div class="field-item n2">
+					<label class="field-label" for="inpPart1">사업단</label>
+					<div class="field-group">
+						<input class="field-input" value="" type="text" title="사업단" id="inpPart1" placeholder="사업단 입력">
+						<span class="line"></span>
+					</div>
+				</div>
+				
+				<div class="field-item n3">
+					<label class="field-label" for="inpPart2">지점</label>
+					<div class="field-group">
+						<input class="field-input" value="" type="text" title="지점" id="inpPart2" placeholder="지점 입력">
+						<span class="line"></span>
+					</div>
+				</div>
+				
+				<div class="field-item n4">
+					<label class="field-label" for="inpAddress">우편번호 및 주소</label>
+					<div class="field-group">
+						<input class="field-input" value="" type="tel" title="우편번호 및 주소" id="inpAddress" placeholder="00000 서울시 ...">
+						<span class="line"></span>
+					</div>
+				</div>
+				
+				<div class="field-item n4_1">
+					<label class="field-label" for="inpAddress">우편번호</label>
+					<div class="field-group">
+						<input class="field-input" value="" type="text" title="우편번호" id="inpAddress1" placeholder="00000">
+						<span class="line"></span>
+					</div>
+				</div>
+				
+				<div class="field-item n4_2">
+					<label class="field-label" for="inpAddress">주소</label>
+					<div class="field-group">
+						<input class="field-input" value="" type="text" title="주소" id="inpAddress2" placeholder="서울시 ...">
+						<span class="line"></span>
+					</div>
+				</div>
+				
+				<div class="field-item n5">
+					<label class="field-label" for="inpMP1">모바일폰 번호1</label>
+					<div class="field-group">
+						<input class="field-input" value="" type="tel" title="모바일폰 1" id="inpMP1" placeholder="">
+						<span class="line"></span>
+					</div>
+				</div>
+				<div class="field-item n6">
+					<label class="field-label" for="inpMP2">모바일폰 번호2</label>
+					<div class="field-group">
+						<input class="field-input" value="" type="tel" title="모바일폰 2" id="inpMP2" placeholder="">
+						<span class="line"></span>
+					</div>
+				</div>
+				<div class="field-item n7">
+					<label class="field-label" for="inpTel">사무실번호</label>
+					<div class="field-group">
+						<input class="field-input" value="" type="tel" title="사무실번호" id="inpTel" placeholder="">
+						<span class="line"></span>
+					</div>
+				</div>
+				<div class="field-item n8">
+					<label class="field-label" for="inpFax">팩스번호</label>
+					<div class="field-group">
+						<input class="field-input" value="" type="tel" title="팩스번호" id="inpFax" placeholder="">
+						<span class="line"></span>
+					</div>
+				</div>
+				
+				<div class="field-item n9">
+					<label class="field-label" for="inpEmail">메일주소</label>
+					<div class="field-group">
+						<input class="field-input" value="" type="email" title="메일주소" id="inpEmail" placeholder="">
+						<span class="line"></span>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+
+		<div class="btns-fixed-area">
+			<button type="button" class="btn-weak ui-reselect" target="_blank"><span>디자인 선택</span></button>
+			<button type="button" class="btn-normal" target="_blank" id="issueCard"><span>확인</span></button>
+		</div>
+	</article>
+	
+	<div class="img-view">
+		<div class="img-view-wrap">
+			<img src="./images/common/txt_guide.png" alt="명함 이미지를 꾸~ 눌러 저장해주세요!" class="txt">
+			<div id="imageView"></div>
+		</div>
+		<div class="btns-fixed-area">
+			<button type="button" class="btn-weak ui-remake" target="_blank"><span>명함 다시 만들기</span></button>
+			<button type="button" class="btn-normal" target="_blank" id="sendCard"><span>카카오톡 전달</span></button>
+		</div>
+	</div>
+	
+	<div class="card-select">
+		<div class="card-select-wrap">
+			<h2>원하시는 <br>명함 디자인을 선택하세요.</h2>
+			<button type="button" class="btn-close"><span class="blind">닫기</span></button>
+			
+			<div class="list section_output">
+				<button type="button" data-type="2">
+					<div class="card type-02">
+						<img src="./images/template/type02.png">
+						<div class="item name" data-id="txtName">홍길동</div><!-- 이름 -->
+						<div class="group part">
+							<span class="item" data-id="txtPart1">ㅇㅇ</span><!-- 사업단 -->
+							<span class="item" data-id="txtPart2">ㅇㅇㅇ</span><!-- 지점 -->
+						</div>
+						<div class="group info">
+							<div class="item" data-id="txtAddress">06194 서울시 강남구 테헤란로 432 DB금융센터 15층</div><!-- 주소 -->
+							<div>
+								<span class="item mp1" data-id="txtMP1">010-0000-0000</span><!-- 모바일폰 -->
+								<span class="item mp2" data-id="txtMP2">010-0000-0000</span><!-- 모바일폰2 -->
+								<span class="item tel" data-id="txtTel">02-0000-0000</span><!-- 사무실전화 -->
+							</div>
+							<div>
+								<span class="item fax" data-id="txtFax">02-0000-0000</span><!-- 팩스 -->
+								<span class="item email" data-id="txtEmail">dbxxxx@idbins.com</span><!-- 이메일 -->
+							</div>
+							<div>http://www.idbins.com</div>
+						</div>
+					</div>
+				</button>
+				
+				<button type="button" data-type="6">
+					<div class="card type-06">
+						<img src="./images/template/type06.png">
+						<div class="group namebox">
+							<span class="item name" data-id="txtName">홍길동</span><!-- 이름 -->
+							<span class="item position" data-id="txtPosition">팀장</span><!-- 직급 -->
+						</div>
+						<div class="group part">
+							<span class="item" data-id="txtPart1">ㅇㅇ</span><!-- 사업단 -->
+							<span class="item" data-id="txtPart2">ㅇㅇㅇ</span><!-- 지점 -->
+						</div>
+						<div class="group info">
+							<div class="item" data-id="txtAddress">06194 서울시 강남구 테헤란로 432 DB금융센터 15층</div><!-- 주소 -->
+							<div>
+								<span class="item mp1" data-id="txtMP1">010-0000-0000</span><!-- 모바일폰 -->
+								<span class="item tel" data-id="txtTel">02-0000-0000</span><!-- 사무실전화 -->
+								<span class="item fax" data-id="txtFax">02-0000-0000</span><!-- 팩스 -->
+							</div>
+							<div>
+								<span class="item email" data-id="txtEmail">dbxxxx@idbins.com</span><!-- 이메일 -->
+								<span>http://www.idbins.com</span>
+							</div>
+						</div>
+					</div>
+				</button>
+				
+				<button type="button" data-type="9">
+					<div class="card type-09">
+						<img src="./images/template/type09.png">
+						<div class="group item name" data-id="txtName">홍길동</div><!-- 이름 -->
+						<div class="group part">
+							<span class="item" data-id="txtPart1">ㅇㅇ</span><!-- 사업단 -->
+							<span class="item" data-id="txtPart2">ㅇㅇㅇ</span><!-- 지점 -->
+						</div>
+						<div class="group info">
+							<div>
+								<span class="item mp1" data-id="txtMP1">010-0000-0000</span><!-- 모바일폰 -->
+								<span class="item mp2" data-id="txtMP2">010-0000-0000</span><!-- 모바일폰2 -->
+							</div>
+							<div>
+								<span class="item tel" data-id="txtTel">02-0000-0000</span><!-- 사무실전화 -->
+								<span class="item fax" data-id="txtFax">02-0000-0000</span><!-- 팩스 -->
+							</div>
+						</div>
+						<div class="group info1">
+							<div class="item address" data-id="txtAddress">06194 서울시 강남구 테헤란로 432 DB금융센터 15층</div><!-- 주소 -->
+							<div>http://www.idbins.com</div>
+						</div>
+					</div>
+				</button>
+				
+				<button type="button" data-type="1">
+					<div class="card type-01">
+						<img src="./images/template/type01.png">
+						<div class="item name" data-id="txtName">홍길동</div><!-- 이름 -->
+						<div class="item mp1" data-id="txtMP1">010-0000-0000</div><!-- 모바일폰 -->
+						
+						<div class="group part">
+							<span class="item" data-id="txtPart1">ㅇㅇ</span><!-- 사업단 -->
+							<span class="item" data-id="txtPart2">ㅇㅇㅇ</span><!-- 지점 -->
+						</div>
+						<div class="group info">
+							<div class="item" data-id="txtAddress">06194 서울시 강남구 테헤란로 432 DB금융센터 15층</div><!-- 주소 -->
+							<div>
+								<span class="item tel" data-id="txtTel">02-0000-0000</span><!-- 사무실전화 -->
+								<span class="item fax" data-id="txtFax">02-0000-0000</span><!-- 팩스 -->
+								<span class="item email" data-id="txtEmail">dbxxxx@idbins.com</span><!-- 이메일 -->
+							</div>
+						</div>
+					</div>
+				</button>
+				
+				<button type="button" data-type="3">
+					<div class="card type-03">
+						<img src="./images/template/type03.png">
+						<div class="item name" data-id="txtName">홍길동</div><!-- 이름 -->
+						<div class="group part">
+							<span class="item" data-id="txtPart1">ㅇㅇ</span><!-- 사업단 -->
+							<span class="item" data-id="txtPart2">ㅇㅇㅇ</span><!-- 지점 -->
+						</div>
+						<div class="group info">
+							<div>
+								<span class="item mp1" data-id="txtMP1">010-0000-0000</span><!-- 모바일폰 -->
+								<span class="item mp2" data-id="txtMP2">010-0000-0000</span><!-- 모바일폰2 -->
+							</div>
+							<div>
+								<span class="item tel" data-id="txtTel">02-0000-0000</span><!-- 사무실전화 -->
+								<span class="item fax" data-id="txtFax">02-0000-0000</span><!-- 팩스 -->
+							</div>
+							<div class="item" data-id="txtAddress">06194 서울시 강남구 테헤란로 432 DB금융센터 15층</div><!-- 주소 -->
+							<div>
+								<span class="item email" data-id="txtEmail">dbxxxx@idbins.com</span><!-- 이메일 -->
+							</div>
+						</div>
+					</div>
+				</button>
+				
+				<button type="button" data-type="4">
+					<div class="card type-04">
+						<img src="./images/template/type04.png">
+						<div class="item name" data-id="txtName">홍길동</div><!-- 이름 -->
+						<div class="group part">
+							<span class="item" data-id="txtPart1">ㅇㅇ</span><!-- 사업단 -->
+							<span class="item" data-id="txtPart2">ㅇㅇㅇ</span><!-- 지점 -->
+						</div>
+						<div class="group info">
+							<div>
+								<span class="item mp1" data-id="txtMP1">010-0000-0000</span><!-- 모바일폰 -->
+								<span class="item mp2" data-id="txtMP2">010-0000-0000</span><!-- 모바일폰2 -->
+							</div>
+							<div>
+								<span class="item tel" data-id="txtTel">02-0000-0000</span><!-- 사무실전화 -->
+							</div>
+							<div>
+								<span class="item fax" data-id="txtFax">02-0000-0000</span><!-- 팩스 -->
+							</div>
+						</div>
+						<div class="group info1">
+							<div>
+								<span class="item" data-id="txtAddress1">06194</span><!-- 우편번호 -->
+							</div>
+							<div>
+								<span class="item" data-id="txtAddress2">서울시 강남구 테헤란로 432 DB금융센터 15층</span><!-- 주소 -->
+							</div>
+							<div>
+								<span class="item email" data-id="txtEmail">dbxxxx@idbins.com</span><!-- 이메일 -->
+							</div>
+						</div>
+					</div>
+				</button>
+				
+				<button type="button" data-type="10">
+					<div class="card type-10">
+						<img src="./images/template/type10.png">
+						<div class="group namebox">
+							<span class="item name" data-id="txtName">홍길동</span><!-- 이름 -->
+							<span class="item position" data-id="txtPosition">팀장</span><!-- 직급 -->
+						</div>
+						<div class="group part">
+							<span class="item" data-id="txtPart1">ㅇㅇ</span><!-- 사업단 -->
+							<span class="item" data-id="txtPart2">ㅇㅇㅇ</span><!-- 지점 -->
+						</div>
+						<div class="group info">
+							<div>
+								<span class="item tel" data-id="txtTel">02-0000-0000</span><!-- 사무실전화 -->
+							</div>
+							<div>
+								<span class="item mp1" data-id="txtMP1">010-0000-0000</span><!-- 모바일폰 -->
+							</div>
+							<div>
+								<span class="item fax" data-id="txtFax">02-0000-0000</span><!-- 팩스 -->
+							</div>
+							<div>
+								<span class="item email" data-id="txtEmail">dbxxxx@idbins.com</span><!-- 이메일 -->
+							</div>
+						</div>
+						<div class="group info1">
+							<div>http://www.idbins.com</div>
+							<div class="item address" data-id="txtAddress">06194 서울시 강남구 테헤란로 432 DB금융센터 15층</div><!-- 주소 -->
+						</div>
+					</div>
+				</button>
+				
+				<button type="button" data-type="7">
+					<div class="card type-07">
+						<img src="./images/template/type07.png">
+						<div class="group namebox">
+							<span class="item name" data-id="txtName">홍길동</span><!-- 이름 -->
+							<span class="item position" data-id="txtPosition">팀장</span><!-- 직급 -->
+						</div>
+						<div class="group part">
+							<span class="item" data-id="txtPart1">ㅇㅇ</span><!-- 사업단 -->
+							<span class="item" data-id="txtPart2">ㅇㅇㅇ</span><!-- 지점 -->
+						</div>
+						<div class="group info">
+							<div class="item" data-id="txtAddress">06194 서울시 강남구 테헤란로 432 DB금융센터 15층</div><!-- 주소 -->
+							<div>
+								<span class="item mp1" data-id="txtMP1">010-0000-0000</span><!-- 모바일폰 -->
+								<span class="item tel" data-id="txtTel">02-0000-0000</span><!-- 사무실전화 -->
+								<span class="item fax" data-id="txtFax">02-0000-0000</span><!-- 팩스 -->
+							</div>
+							<div>
+								<span class="item email" data-id="txtEmail">dbxxxx@idbins.com</span><!-- 이메일 -->
+								<span>http://www.idbins.com</span>
+							</div>
+						</div>
+					</div>
+				</button>
+				
+				<button type="button" data-type="8">
+					<div class="card type-08">
+						<img src="./images/template/type08.png">
+						<div class="group namebox">
+							<span class="item name" data-id="txtName">홍길동</span><!-- 이름 -->
+							<span class="item position" data-id="txtPosition">팀장</span><!-- 직급 -->
+						</div>
+						<div class="group part">
+							<span class="item" data-id="txtPart1">ㅇㅇ</span><!-- 사업단 -->
+							<span class="item" data-id="txtPart2">ㅇㅇㅇ</span><!-- 지점 -->
+						</div>
+						<div class="group mp1">
+							<span data-id="txtMP1">010-0000-0000</span><!-- 모바일폰 -->
+						</div>
+						<div class="group info">
+							<div class="item" data-id="txtAddress">06194 서울시 강남구 테헤란로 432 DB금융센터 15층</div><!-- 주소 -->
+							<div>
+								
+								<span class="item tel" data-id="txtTel">02-0000-0000</span><!-- 사무실전화 -->
+								<span class="item fax" data-id="txtFax">02-0000-0000</span><!-- 팩스 -->
+							</div>
+							<div>
+								<span class="item email" data-id="txtEmail">dbxxxx@idbins.com</span><!-- 이메일 -->
+								<span>http://www.idbins.com</span>
+							</div>
+						</div>
+					</div>
+				</button>
+				
+				<button type="button" data-type="5">
+					<div class="card type-05">
+						<img src="./images/template/type05.png">
+						<div class="group namebox">
+							<span class="item name" data-id="txtName">홍길동</span><!-- 이름 -->
+							<div class="part">
+								<span class="item" data-id="txtPart1">ㅇㅇ</span><!-- 사업단 -->
+								<span class="item" data-id="txtPart2">ㅇㅇㅇ</span><!-- 지점 -->
+							</div>
+						</div>
+						<div class="group info">
+							<div>
+								<span class="item mp1" data-id="txtMP1">010-0000-0000</span><!-- 모바일폰 -->
+								<span class="item mp2" data-id="txtMP2">010-0000-0000</span><!-- 모바일폰2 -->
+							</div>
+							<div>
+								<span class="item tel" data-id="txtTel">02-0000-0000</span><!-- 사무실전화 -->
+								<span class="item fax" data-id="txtFax">02-0000-0000</span><!-- 팩스 -->
+							</div>
+							<div class="item" data-id="txtAddress">06194 서울시 강남구 테헤란로 432 DB금융센터 15층</div><!-- 주소 -->
+						</div>
+					</div>
+				</button>
+				
+				<button type="button" data-type="11">
+					<div class="card type-11">
+						<img src="./images/template/type11.png">
+						<div class="group namebox">
+							<span class="item name" data-id="txtName">홍길동</span><!-- 이름 -->
+							<span class="item position" data-id="txtPosition">팀장</span><!-- 직급 -->
+						</div>
+						<div class="group part">
+							<span class="item" data-id="txtPart1">ㅇㅇ</span><!-- 사업단 -->
+							<span class="item" data-id="txtPart2">ㅇㅇㅇ</span><!-- 지점 -->
+						</div>
+						<div class="group info">
+							<div>
+								<span class="item mp1" data-id="txtMP1">010-0000-0000</span><!-- 모바일폰 -->
+								<span class="item tel" data-id="txtTel">02-0000-0000</span><!-- 사무실전화 -->
+								<span class="item fax" data-id="txtFax">02-0000-0000</span><!-- 팩스 -->
+							</div>
+							<div class="item address" data-id="txtAddress">서울시 강남구 테헤란로 432 DB금융센터 15층</div><!-- 주소 -->
+							<div>
+								<span class="item email" data-id="txtEmail">dbxxxx@idbins.com</span><!-- 이메일 -->
+								<span class="homepage">http://www.idbins.com</span>
+							</div>
+						</div>
+					</div>
+				</button>
+				
+				<!--<div class="card ready">
+						준비중입니다.
+				</div>-->
+					
+			</div>
+		</div>
+	</div>
+	
+<script>
+;(function($, win, doc, undefined){
+	$(doc).ready(function(){
+		app.init();
+		Kakao.init("927a4c657d2a48f88218197e23d32fe7");
+		
+		/*$('#startApp').on('click', function() {
+			$('#intro').fadeOut(function() {
+				$(this).removeClass("show");
+				$('body').removeClass('scroll_disable');
+			});
+		});*/
+		$('input[name=design]').on("change", function() {
+			app.templateType = $('input[name=design]:checked').val();
+			app.formInit(app.templateType);
+		});
+		
+		$("#issueCard").on("click", function() {
+			$(window).scrollTop(0);
+			//app.formSubmit(app.templateType);
+			app.convertImage('#screenCard');
+		});
+			
+		$("#reloadIssue").on("click", function() {
+			var $viewCont = $(".section_view");
+			var $imageView = $("#imageView");
+	
+			$viewCont.fadeOut(function() {
+				$imageView.html('');
+				$(this).find(".wrap_button").hide();
+				
+				app.formInit(app.templateType);
+				$('body').removeClass('scroll_disable');
+			});
+		});
+		
+		$("#sendCard").on("click", function() {  
+            $(window).scrollTop(0);
+
+            console.log("[sendKakao] ::: " );
+            var sendUrl = "https://d.directdb.co.kr/mobile/images/mobile/bikeuse/bg_msg.png";
+            //var sendPhoneNo = final_phone;
+            //sendPhoneNo = sendPhoneNo.replace(/\-/g,'');
+            
+            Kakao.Link.sendDefault({
+                  objectType: 'feed',
+                  content: {
+                    title: '전자명함서비스',
+                    description: 'DB손해보험 설계사입니다. 보험가입 문의주시면 친철히 상담해드리겠습니다.',
+                    imageUrl: sendUrl,
+                    imageWidth:600,
+                    imageHeight:390,
+                    link: {
+                      mobileWebUrl: sendUrl,
+                      		webUrl: sendUrl,
+                    },
+                  },
+                  buttons: [
+	                  {
+						title: 'DB손해보험으로 이동',
+						link: {
+	                  			mobileWebUrl: 'https://m.idbins.com',
+	                  			webUrl: 'https://www.idbins.com',
+	                    },
+	                  },
+	                  {
+						title: 'DB다이렉트로 이동',
+	                	link:{
+	                			mobileWebUrl: 'https://m.directdb.co.kr',
+                  				webUrl: 'https://www.directdb.co.kr',
+	                	},
+	                  },
+             	 ]
+             });   
+		  });
+		
+	});
+})(jQuery, window, document);
+</script>
+	
+</body>
+</html>

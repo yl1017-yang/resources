@@ -1,0 +1,62 @@
+@charset "utf-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400&display=swap');
+
+*{border:0;margin:0;padding:0;list-style:none;text-decoration:none;color:#fff;}
+/* body{overflow:hidden;image-rendering:-webkit-optimize-contrast;} 
+body:before, body:after{image-rendering:-webkit-optimize-contrast;} 
+img{image-rendering:-webkit-optimize-contrast;transform:translateZ(0);backface-visibility:hidden;} */
+input, button{font-size:inherit;font-weight:bold;}
+
+.thumb-wrap{position:relative;height:100vh;background:#444;overflow-x:hidden;font-size:16px;}
+.thumb-wrap .title{font-size:14px;padding:20px 0 0 150px;}
+.thumb-wrap .title h3{font-size:20px;}
+
+.thumb-wrap nav{position:fixed;top:0;left:0;width:120px;height:100vh;background:#eee;z-index:1;}
+.thumb-wrap nav a{display:block;color:#000;padding:10px;font-weight:bold;text-align:center;}
+.thumb-wrap nav a:nth-child(-n+2){padding:24px 10px;}
+.thumb-wrap nav a span{display:block;color:#000;}
+.thumb-wrap nav a.is-active{background:#444;color:#fff;border-radius:10px 0 0 10px;margin-left:10px;}
+.thumb-wrap nav a.is-active span{color:#fff;}
+.thumb-wrap nav img{height:52px;}
+
+.btn-box-wrap{position:sticky;top:0;left:0;max-width:1050px;width:100%;padding:20px 0 10px 20px;margin-left:120px;background:#444;display:flex;flex-wrap:wrap;justify-content:space-between;z-index:10;}
+.btn-box{padding-bottom:10px;display:flex;align-items:center;}
+.btn-normal{line-height:50px;background:#bbb;color:#000;border-radius:10px;cursor:pointer;text-align:center;margin:0 3px;padding:0 14px;}
+.btn-small{line-height:40px;background:#bbb;font-size:14px;color:#000;border-radius:10px;cursor:pointer;text-align:center;margin:0 3px;padding:0 10px;}
+.btn-upload{background: hotpink;}
+.bi-pulmuone{background:yellowgreen;}
+.bi-orga{background:gold;}
+.real-upload{display:none;} 
+
+/* BI */
+.image-preview p{position:absolute;top:55px;right:55px;width:234px;height:267px;background:url(./logo/bi-pulmuone.png) 50% 50%/100% no-repeat;overflow:hidden;} 
+.image-preview .bi-pulmuone{background:url(./logo/bi-pulmuone.png) 50% 50%/100% no-repeat;}
+.image-preview .bi-orga{background:url(./logo/bi-orga.png) 50% 50%/100% no-repeat;}
+.image-preview .bi-water{background:url(./logo/bi-water.png) 50% 50%/100% no-repeat;}
+.image-preview .bi-foodmerce{background:url(./logo/bi-foodmerce.png) 50% 50%/100% no-repeat;}
+.image-preview .bi-danone{background:url(./logo/bi-danone.png) 50% 50%/100% no-repeat;width:300px;}
+.image-preview .bi-none{background:none;}
+
+/* 수량,파일명 */
+.input-box{width:100%;display:flex;flex-wrap:wrap;align-items:center;}
+.input-box label{font-size:20px;font-weight:bold;margin:0 10px 0 20px;}
+.input-box label:nth-of-type(1){margin-left:10px;}
+.image-preview .number{display:none;}
+.image-preview .number-show{position:absolute;bottom:50px;right:50px;width:234px;height:234px;background:#8cc63f;font-size:116px;letter-spacing:-8px;font-family:'Lato';border-radius:100%;display:flex;align-items:center;justify-content:center;}
+.input{width:70px;height:50px;color:#000;font-size:20px;text-align:center;border-radius:10px;}
+.image-preview .number-show::before{content:'X';font-size:82px;margin:5px 10px 0 0;}
+.input-name{width:40%;text-align:left;}
+
+/* 이미지박스 */
+.image-preview-box{min-width:1000px;margin-left:170px;padding-bottom:40px;}
+.image-preview{width:100%;height:100%;display:flex;flex-wrap:wrap;gap:20px 40px;} 
+.image-preview.del{display:none;}
+
+.image-preview .img-box{position:relative;padding:80px;width:1000px;height:1000px;background:#fff;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;box-sizing:border-box;align-content:center;} /* overflow:hidden; */
+.image-preview .img-box img{display:block;max-width:100%;max-height:100%;background:none;overflow:hidden;}
+.image-preview .img-box-row .number-show{bottom:18px;right:22px;width:128px;height:128px;font-size:60px;letter-spacing:-4px;}
+.image-preview .img-box-row .number-show::before{font-size:44px;margin:5px 4px 0 0;}
+
+/* 체크박스 */
+.check-box{position:absolute;top:0;left:-35px;width:30px;height:30px;cursor:pointer;}

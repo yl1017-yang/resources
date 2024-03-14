@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+</head>
+<body>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+<link rel="stylesheet" href="../css/common.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<style>
+.main-wrap{position:relative;width:100%;margin-top:50px;overflow:hidden;}
+
+.slider-main {
+  position: relative;
+  margin-left:40%;
+  width: 100%;
+  height: 400px;
+  overflow:hidden;
+}
+
+.slider-main .swiper-slide {
+  position: relative;
+  box-sizing:border-box;
+  display: flex;
+}
+
+.slider-main .swiper-slide figure{
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius:20px;
+  margin-right:20px;
+  overflow:hidden;
+  z-index:0;
+}
+.slider-main .swiper-slide figure img {
+  max-width:100%;
+  min-height:100%;
+  transform:scale(1);
+  transition:(50%, 50%);
+  -webkit-transition: transform 5s ease;
+  transition: transform 5s ease;
+}
+
+.slider-main .swiper-slide-active figure img{
+    transform:scale(1.2);transition-delay: 1s;
+}
+
+/* 텍스트 */
+.slider-main .swiper-slide .txt-wrap{
+  width:35%;
+  margin:30px 10px 0 30px;
+  font-weight:bold;
+  color:#000;
+  z-index:10;
+}
+
+.slider-main .swiper-slide .txt-wrap h2{
+    font-size:50px;
+    opacity:0;
+    transition: transform 0.55s ease-in-out, opacity 0.55s ease-in-out;
+}
+.slider-main .swiper-slide .txt-wrap p{
+    margin-top:20px;
+    font-size:24px;
+    font-weight:normal;
+    color:#999;
+    opacity: 0;
+    transition: transform 0.55s ease-in-out 0.4s, opacity 0.55s ease-in-out 0.4s;
+}
+
+.slider-main .swiper-slide-active .txt-wrap h2{
+    opacity:1;
+    transform: translate(0, -30px);
+}
+.slider-main .swiper-slide-active .txt-wrap p{
+    opacity:1;
+    transform: translate(0, -30px);
+}
+
+/* 텍스트 - 분리 */
+.main-wrap .text_box{position:relative;top:20px;left:30px;width:35%;margin-left:30px;}
+.main-wrap .text_box li{position:absolute;top:0;transition: transform 0.35s ease-in-out, opacity 0.35s ease-in-out;opacity:0;}
+.main-wrap .text_box li h2{font-size:38px;font-weight:bold;}
+.main-wrap .text_box li p{ margin-top:16px;font-size:24px;color:#999;}
+.main-wrap .text_box li.on{transform: translate(-30px, 0);opacity:1;}
+
+/* 탭메뉴 */
+.main-wrap .nav{display:flex;}
+.main-wrap .nav li{padding:30px 20px;}
+.main-wrap .nav li a{display:block;color:#999;}
+.main-wrap .nav li.on a{font-weight:bold;color:violet;}
+
+/* 유틸박스 */
+.main-wrap .util-box{
+    position:relative;
+    width:100%;
+    height:80px;
+    top:-80px;
+    left:30px;
+    z-index:100;
+}
+
+.main-wrap .swiper-button-prev,
+.main-wrap .swiper-button-next {
+    /* display: none; 
+    background-image: url(http://www.kangsancons.co.kr/views/res/imgs/common/paging-next.svg);
+    background-size: 100%;
+    background-position: center;
+    outline: none;*/
+    top:auto;
+    bottom:0;
+    width:30px;
+    height:30px;
+    opacity:0.5;
+    transition:opacity 0.4s;
+    z-index:50;
+}
+
+.main-wrap .swiper-button-next:after, 
+.main-wrap .swiper-button-prev:after{
+    font-size:20px !important;
+    color: #000;
+}
+
+.main-wrap .swiper-button-prev:hover,
+.main-wrap .swiper-button-next:hover {
+    opacity: 1
+}
+
+.main-wrap .swiper-button-next {
+    left: 50px;
+    transform: translateY(0);
+}
+
+.main-wrap .swiper-button-prev {
+    left: 0;
+    right: auto;
+    transform: translateY(0);
+}
+
+.main-wrap .swiper-pagination {
+  width:auto !important;
+  bottom: auto !important;
+}
+
+/* 슬라이더 바 */
+.main-wrap .swiper-pagination .swiper-pagination-bullet {
+    position: relative;
+    width: 90px;
+    height: 0;
+    border-radius: 0;
+    opacity: 1;
+    font-size: 18px;
+    font-weight:bold;
+    text-align: left;
+    color: rgba(0, 0, 0, 0.3);
+}
+
+.main-wrap .swiper-pagination .swiper-pagination-bullet:after,
+.main-wrap .swiper-pagination .swiper-pagination-bullet:before{
+    content: '';
+    position:absolute;
+    left:0px;
+    width:100%;
+    bottom:-35px;
+    height:4px;
+    background-color:#000;
+    opacity:0.4;
+}
+
+.main-wrap .swiper-pagination .swiper-pagination-bullet:before{
+    width:0%;
+}
+
+.main-wrap .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active{
+    color:#000;
+}
+
+.main-wrap .swiper-pagination  .swiper-pagination-bullet.swiper-pagination-bullet-active:before{
+    animation: progressbar 4.5s linear;
+    animation-fill-mode: forwards;
+    opacity: 1;
+}
+
+@keyframes progressbar {
+    100% {
+        width: 100%;
+    }
+}
+
+
+/* play,stop 버튼 */
+.main-wrap .swiper-play-pause {
+	display: block;
+	position: absolute;
+	bottom: 10%;
+	left:50%;
+    margin-left:220px;
+	width: 32px;
+	height: 32px;
+    font-size:0;
+    z-index:50;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    cursor: pointer;
+}
+.main-wrap .pause {
+	background-image: url('https://www.poscochemical.com/images/ico/ico_pause.png');
+}
+.main-wrap .play {
+	background-image: url('https://www.poscochemical.com/images/ico/ico_play.png');
+}
+</style>
+
+
+<script>
+$(function() {
+  var mainslider = new Swiper('.slider-main', {
+    speed: 300,
+    autoplay: {
+      delay: 7000,
+      disableOnInteraction: false,
+    },
+    //effect: 'fade', //coverflow, fade
+    slidesPerView: 2,
+    //allowTouchMove : true,
+    //mousewheel: true,
+    //keyboard: true,
+  	loop: true,
+    observer: true,
+    observeParents: true,
+    
+    pagination: {
+        el: '.swiper-pagination',
+        type: 'bullets',
+        clickable: true,
+        renderBullet: function (index, dot) {
+          return '<span class="' + dot + '">' +'0' +  (index + 1) + '</span>';
+        }
+    },
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+
+});
+
+//탭메뉴
+mainslider.on('slideChange', function () {
+    //var index = mainslider.activeIndex - 1;
+    $('.nav li').removeClass('on');
+    $('.nav li').eq(this.realIndex).addClass('on');//index , this.realIndex 선택 (https://lpla.tistory.com/118) 참고
+    $('.text_box li').removeClass('on');
+    $('.text_box li').eq(this.realIndex).addClass('on');
+});
+//$('.nav ul li').mouseenter(function(){
+$('.nav li').on("click", function () {
+    var index = $(this).index();
+    mainslider.slideToLoop(index,300,false);
+});
+
+  
+// swiper Play/Stop
+$('.swiper-play-pause').on('click', function () {
+    var $this = $(this);
+    if ($this.hasClass('pause')) {
+        $this.removeClass('pause').addClass('play').text('Play');
+        mainslider.autoplay.start();
+        mainslider.slideNext();
+        $('.slider-main .swiper-scrollbar .swiper-pagination').eq(0).addClass('animate');
+        
+    } else {
+		$this.addClass('pause').removeClass('play').text('Pause');
+        mainslider.autoplay.stop();
+        $('.slider-main .swiper-scrollbar .swiper-pagination').removeClass('animate');
+    }
+});
+  
+
+});
+</script>
+
+
+
+
+<div>
+    h포인트 샘플<br>
+    https://codeboxtool.tistory.com/16?category=766939<br>
+    https://lpla.tistory.com/118<br>
+    https://lpla.tistory.com/173
+    </div>
+    
+    <div class="main-wrap">
+    <!-- 네비 탭 -->
+    <ul class="nav">
+        <li class="on"><a href="#">첫번재</a></li>
+        <li><a href="#">두번재</a></li>
+        <li><a href="#">세번재</a></li>
+    </ul>
+    <!-- //네비 탭 -->
+    
+    <!-- 텍스트 -->
+    <ul class="text_box">
+        <li class="on">
+            <h2>1일상을 바꾸는 메인비주얼</h2>
+             <p>쇼핑이 미션이되고, 걸음이 포인트가되는 즐거운 일상으로 초대합니다.</p>
+        </li>
+        <li>
+            <h2>2현대백화점</h2>
+              <p>새로운 계절, 다시 시작을 위한 선물</p>
+        </li>
+        <li>
+           <h2>3찬란한 빛의 주얼리</h2>
+           <p>다양한 브랜드에서 적립하고 사용하는 즐거운 일상</p>
+        </li>
+    </ul>
+    <!-- //텍스트 -->
+    
+    
+    <div class="swiper-container slider-main">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <!-- <div class="txt-wrap">
+              <h2>1일상을 바꾸는 메인비주얼</h2>
+              <p>쇼핑이 미션이되고, 걸음이 포인트가되는 즐거운 일상으로 초대합니다.</p>
+          </div> -->
+          <figure>
+              <img src="https://cdn.pixabay.com/photo/2020/05/08/15/39/new-york-5146247_960_720.jpg" />
+          </figure>
+        </div>
+        
+        <div class="swiper-slide">
+          <!-- <div class="txt-wrap">
+              <h2>2현대백화점</h2>
+              <p>새로운 계절, 다시 시작을 위한 선물</p>
+          </div> -->
+          <figure>
+              <img src="https://cdn.pixabay.com/photo/2021/11/11/09/12/lighthouse-6785763_960_720.jpg" />
+          </figure>
+        </div>
+        
+        <div class="swiper-slide">
+          <!-- <div class="txt-wrap">
+              <h2>3찬란한 빛의 주얼리</h2>
+              <p>다양한 브랜드에서 적립하고 사용하는 즐거운 일상</p>
+          </div> -->
+          <figure>
+              <img src="https://www.poscochemical.com/resources/images/main/main_visual_bg02.jpg" /> 
+          </figure>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 유틸박스 -->
+      <div class="util-box">
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-pagination"></div>
+    
+        <button class="swiper-play-pause pause" type="button">
+          <span class="blind">재생/멈춤</span>
+        </button>
+      </div>
+    <!-- //유틸박스 -->
+      
+    </div>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+</head>
+<body>
+
+<link rel="stylesheet" href="../css/common.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<style>
+.event_wrap, header, .nav_wrap, .nav_scroll, .nav_list{width:550px !important;margin:0 auto !important;}
+header{position:fixed;top:0;width:100%;height:50px;text-align:center;font-size:20px;color:#fff;background:#000;z-index:20;}  /* 상단헤더 : height:50px */
+.visual{height:400px;background:#444;color:#fff;font-size:30px;display:flex;align-items:center;justify-content:center;}
+.section{position:relative;text-align:center;font-size:30px;font-weight:bold;color:#222;padding:80px;height:800px;}
+.section:nth-of-type(1){background:skyblue;}
+.section:nth-of-type(2){background:yellowgreen;}
+.section:nth-of-type(3){background:pink;}
+.section:nth-of-type(4){background:#eee;}
+.section:nth-of-type(5){background:moccasin;}
+.section:nth-of-type(6){background:mediumaquamarine;}
+
+/* 탭네비 */
+.nav_wrap{position:relative;z-index:10;padding-top:70px;background:#239241;scroll-snap-type: x mandatory;} /* padding-top:70px - 네비 영역 제외 */
+.nav_wrap .nav_scroll{position:absolute;top:0;left:0;height:70px;background:#239241;transform: translate(0, 0);} /* height:70px - 네비 세로값 */
+.nav_wrap.is_fixed .nav_scroll{position:fixed;top:50px;left:50%;transform:translateX(-50%);width:100%;}  /* top:50px - 상단헤더 영역 제외 */
+.nav_scroll{overflow-x:scroll;white-space:nowrap;-webkit-overflow-scrolling:touch;-ms-overflow-style:none;scrollbar-width:none;}
+.nav_scroll::-webkit-scrollbar{display:none;}
+
+.nav_wrap .nav_list{position:relative;display:flex;height:100%;}
+.nav_wrap .nav_list > li{display:flex;align-items:center;}
+.nav_wrap .nav_list > li a{display:block;position:relative;width:100%;height:100%;font-size:16px;font-weight:700;color:#fff;padding:0 40px;display:flex;align-items:center;justify-content:center;}
+.nav_wrap .nav_list > li a:after{content:'';position:absolute;top:0;left:0;width:1px;height:100%;background:#91c9a0;}
+.nav_wrap .nav_list > li.on a{color:#ebff46;background:#1a7d34;}
+</style>
+
+
+
+<script>
+  $(function() {
+
+    var $nav = $(".nav_wrap");
+    var $navList = $(".nav_list a");
+    var headerHeight = $(".header").outerHeight(); //상단헤더
+    var navHeight = $(".nav_wrap").outerHeight(); //네비영역
+    
+
+    $(window).on("scroll load", function () {
+      var scrollTop = $(window).scrollTop() + 1;
+      var navTop = $nav.offset().top - headerHeight;
+      var bottom = $("#dummy").offset().top - navHeight;
+      
+      if ( scrollTop >= navTop && scrollTop <= bottom ) {
+        $nav.addClass("is_fixed");
+      } else {
+        $nav.removeClass("is_fixed");
+        $(".nav_list li").removeClass("on");
+      }
+
+      $navList.each(function () {
+        var $content = $($(this).attr("href"));
+        var contentOffsetTop = $content.offset().top - navHeight - headerHeight;
+        
+        if (scrollTop >= contentOffsetTop) {
+          $(this).parent().addClass("on").siblings().removeClass("on");
+
+          var target = $(this).parents();
+          muCenter(target);
+        }
+      });
+
+      function muCenter(target){
+        var box = $(".nav_scroll");
+        var targetPos = target.position();
+        var boxHarf = box.width()/2;
+        var pos;
+        var listWidth = 0;
+        
+        box.find(".nav_slide").each(function(){ 
+          listWidth += $(this).outerWidth(); 
+        });
+        
+        var selectTargetPos = targetPos.left + target.outerWidth()/2;
+        if (selectTargetPos <= boxHarf) {
+          pos = 0;
+        } else if ((listWidth - selectTargetPos) <= boxHarf) {
+          pos = listWidth - box.outerWidth();
+        } else {
+          pos = selectTargetPos - boxHarf;
+        }
+        box.stop().animate({ scrollLeft: pos }, 200);
+      }
+    });
+    
+    $navList.on("click", function (e) {
+      e.preventDefault();
+      var $content = $($(this).attr("href"));
+      var contentOffsetTop = $content.offset().top - navHeight - headerHeight;
+      $("html, body").animate({ scrollTop: contentOffsetTop + "px" }, 500);
+    });
+
+    //마우스 드래그
+    // var isDragging = false;
+    // var x, y, pre_x, pre_y;
+    // var $scrWrap = $('.nav_scroll');
+
+    // $scrWrap.on('mousedown', function(e) {
+    //   isDragging = true;
+    //   var obj = $(this);
+    //   x = obj.scrollLeft();
+    //   y = obj.scrollTop();
+
+    //   pre_x = e.screenX;
+    //   pre_y = e.screenY;
+    //   onclick = false;
+    //   console.log("mousedown");
+    // });
+    // $scrWrap.on('mousemove', function(e) {
+    //   if (isDragging) {
+    //     var obj = $(this);
+    //     obj.scrollLeft(x - e.screenX + pre_x);
+    //     obj.scrollTop(y - e.screenY + pre_y);
+    //     console.log("mousemove--");
+    //     return false;
+    //   }
+    // });
+    // $scrWrap.on('mouseup', function(e) {
+    //   isDragging = false;
+    //   $(this).off('click');
+    //   console.log("mouseup",e.screenX);
+    //   return false;
+    // });
+
+
+    // 마우스 드래그 바닐라스크립트
+    // https://github.com/dev-song/mini-projects/blob/master/projects/JavaScript30/Day%2027/tutorial-Click-and-Drag/index.html
+    const slider = document.querySelector('.nav_scroll');
+    let isMouseDown = false;
+    let startX, scrollLeft;
+
+    slider.addEventListener('mousedown', (e) => {
+      isMouseDown = true;
+
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    });
+    
+    slider.addEventListener('mouseleave', () => {
+      isMouseDown = false;
+    });
+    
+    slider.addEventListener('mouseup', () => {
+      isMouseDown = false;
+    });
+
+    slider.addEventListener('mousemove', (e) => {
+      if (!isMouseDown) return;
+
+      e.preventDefault();
+      const x = e.pageX - slider.offsetLeft;
+      const walk = (x - startX) * 1;
+      slider.scrollLeft = scrollLeft - walk;
+    });
+
+
+  });
+</script>
+
+
+<main class="event_wrap">
+  <header class="header">상단헤더</header>
+
+
+  <div class="visual">
+    상단이미지
+  </div>
+
+  <!-- 네비탭메뉴 -->
+  <div class="nav_wrap">
+    <div class="nav_scroll">
+      <ul class="nav_list">
+        <li class="nav_slide">
+          <a href="#content1">첫번째 50% 상품 쿠폰</a>
+        </li>
+        <li class="nav_slide">
+          <a href="#content2">두번째 하나 더 증정</a>
+        </li>
+        <li class="nav_slide">
+          <a href="#content3">세번째 1주년 특가</a>
+        </li>
+        <li class="nav_slide">
+          <a href="#content4">네번째 추가 할인 쿠폰</a>
+        </li>
+        <li class="nav_slide">
+          <a href="#content5">마지막50% 페이백</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- //네비탭메뉴 -->
+
+  <!-- 컨텐츠 -->
+  <section id="content1" class="section">
+    <p>
+        본문내용 111
+    </p>
+  </section>
+  <section id="content2" class="section">
+    <p>
+        본문내용 222
+    </p>
+  </section>
+  <section id="content3" class="section">
+    <p>
+        본문내용 333
+    </p>
+  </section>
+  <section id="content4" class="section">
+    <p>
+        본문내용 444
+    </p>
+  </section>
+  <section id="content5" class="section">
+    <p>
+        본문내용 555
+    </p>
+  </section>
+  <div id="dummy"></div>
+  <!-- //컨텐츠 -->
+  
+
+  <div style="background:#f4f4f4;height:1000px;">본문내용 끝나고 시작된 내용</div>
+
+
+</main>
+
+
+
+</body>
+</html>

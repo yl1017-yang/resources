@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+</head>
+<body>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+<link rel="stylesheet" href="../css/common.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<style>
+html,body {
+  position: relative;
+  height: 100%;
+}
+
+body {
+  background: #eee;
+  font-size: 16px;
+  color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+.swiper-container {
+  width: 100%;
+  height: 100vh;
+  overflow:hidden;
+}
+
+.swiper-slide {
+  position: relative;  
+  box-sizing:border-box;
+  
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  
+}
+
+.swiper-slide img {
+  position:absolute;
+  top:0; left:0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper-slide .description,
+.swiper-slide .title {
+  z-index:10;
+  display: block;  
+  opacity: 0;
+  -webkit-transition: 0.6s ease 0.5s; transition: 0.6s ease 0.5s;
+}
+
+.swiper-slide-active .description,
+.swiper-slide-active .title {
+  opacity: 1;  
+}
+
+.swiper-slide-active .title {
+  margin-bottom: 0.8rem;
+  font-size: 50px;
+  color: #fff;
+  -webkit-transition: opacity 0.6s ease 0.5s; transition: opacity 0.6s ease 0.5s;
+}
+
+.swiper-slide-active .description {
+  font-size: 20px;
+  color: #fff;
+  -webkit-transition: opacity 0.6s ease 0.9s; transition: opacity 0.6s ease 0.9s;  
+}
+
+/* 모듈바 */
+.swiper-container .util-box{position:absolute;bottom:100px;left:30%;width:500px;}
+
+.swiper-horizontal>.swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction{
+    bottom:50px !important;color:#fff;font-size:24px;
+}
+
+.swiper-button-next, .swiper-button-prev {
+  color: #fff !important;
+  transition:all .3s ease;
+  top:0 !important;
+  margin-top:-60px !important;
+}
+
+.swiper-button-next:after, .swiper-button-prev:after{
+    font-size:30px !important;
+}
+
+.swiper-button-next:hover, .swiper-button-prev:hover {
+  transform:translateX(0);
+  opacity:0.5;
+}
+
+
+/* 하단 프레그레스바 */
+.swiper-progress-bar {
+  position: relative;
+  width: 100%;
+  display: block;
+  z-index: 1;
+  height: 3px;  
+}
+
+.swiper-progress-bar .slide_progress-bar {
+  position: absolute;
+  height: 3px;
+  background: rgba(999, 999, 999, 0.4);
+  width: auto;
+  clear: both;
+  opacity: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.swiper-progress-bar .slide_progress-bar:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #fff;
+  height: 100%;
+  width: 0;
+  content: "";
+}
+
+.swiper-progress-bar.active .slide_progress-bar {
+  opacity: 1;
+}
+
+.swiper-progress-bar.animate .slide_progress-bar:after {
+  -webkit-transition: width linear;
+  transition: width linear;
+  -webkit-transition-delay: unset;
+          transition-delay: unset;
+  width: 100%;
+  -webkit-transition-duration: 5s;
+          transition-duration: 5s;
+}
+
+/* .swiper-pause{position:absolute;top:0;left:0;background:#fff;padding:10px;z-index:50;}
+.swiper-play{position:absolute;top:0;left:70px;background:#fff;padding:10px;z-index:50;} */
+</style>
+
+
+<script>
+$(function() {
+  var swiper = new Swiper('.slide-main', {
+    autoplay: {
+      delay: 4000,
+      disableOnInteraction: false
+    },
+    speed: 500,
+    mousewheel: true,
+    loop: true,    
+    pagination: {
+      el: '.swiper-pagination',
+      type: 'fraction'
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev'
+    },
+    on: {
+      init: function () {
+        $('.swiper-progress-bar').removeClass('animate');
+        $('.swiper-progress-bar').removeClass('active');
+        $('.swiper-progress-bar').eq(0).addClass('animate');
+        $('.swiper-progress-bar').eq(0).addClass('active');
+      },
+      slideChangeTransitionStart: function () {
+        $('.swiper-progress-bar').removeClass('animate');
+        $('.swiper-progress-bar').removeClass('active');
+        $('.swiper-progress-bar').eq(0).addClass('active');
+      },
+      slideChangeTransitionEnd: function () {
+        $('.swiper-progress-bar').eq(0).addClass('animate');
+      }
+    }
+  });
+  
+  $('.swiper-pause').click(function(){
+	swiper.autoplay.stop();
+    $('.swiper-progress-bar').removeClass('animate');
+})
+$('.swiper-play').click(function(){
+	swiper.autoplay.start();
+    $('.swiper-progress-bar').eq(0).addClass('animate');
+})
+  
+});
+</script>
+
+
+
+<!-- Slider main container -->
+<div class="swiper-container slide-main">
+  
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <div class="title">swiper progressbar</div>
+        <div class="description">https://codepen.io/rogerkuik/pen/xxVOvEY</div>
+        <img src="https://cdn.pixabay.com/photo/2015/07/28/22/01/office-865091_960_720.jpg" />
+      </div>
+      <div class="swiper-slide">
+        <div class="title">Slide 2</div>
+        <div class="description">Lorem ipsum dolor sit amet</div>
+        <img src="https://cdn.pixabay.com/photo/2015/12/04/14/49/hand-1076597_960_720.jpg" />
+      </div>
+      <div class="swiper-slide">
+        <div class="title">Slide 3</div>
+        <div class="description">Lorem ipsum dolor sit amet</div>
+        <img src="https://cdn.pixabay.com/photo/2021/03/29/12/16/stairs-6133971_960_720.jpg" />
+      </div>
+    </div>
+    
+    <div class="util-box">
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>  
+    
+    <div class="swiper-progress-bar">
+      <span class="slide_progress-bar"></span>
+    </div>
+    
+    <button class="swiper-pause" type="button">정지</button>
+    <button class="swiper-play" type="button">재생</button>
+    </div>
+   
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+</head>
+<body>
+
+<link rel="stylesheet" href="../css/common.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<style>
+h3{font-size:30px;text-align:center;margin:30px 0 10px;}
+
+/* ver1 */
+.acodi_list{margin:2% 4%;}
+.acodi_list ul li{border:1px solid #eee;border-radius:10px;margin-bottom:10px;}
+.acodi_list ul li.on{border:1px solid #444;}
+.acodi_list .acodi_title{display:flex;position:relative;cursor:pointer;padding:16px 30px;}
+.acodi_list .acodi_title .title_q{position:absolute;display:inline-block;top:16px;left:30px;width:30px;height:30px;line-height:30px;background:#ddd;font-size:16px;text-align:center;color:#fff;border-radius:100%;}
+.acodi_list ul li.on .title_q{background:blueviolet;}
+.acodi_list .acodi_title .title_area{display:block;font-size:20px;font-weight:600;padding-left:40px;}
+.acodi_list .acodi_title:after{content:'';position:absolute;top:20px;right:20px;width:20px;height:20px;background:url('../images/down-line-20.svg') no-repeat 100%;}
+.acodi_list ul li.on .acodi_title:after{transform:rotate(180deg);}
+
+.acodi_list .acodi_content{display:none;position:relative;padding:0 30px 20px 30px;}
+.acodi_list .acodi_content .content_a{position:absolute;display:inline-block;top:0;left:30px;width:30px;height:30px;line-height:30px;background:yellowgreen;font-size:16px;text-align:center;color:#fff;border-radius:100%;}
+.acodi_list .acodi_content .content_area{display:block;padding-left:40px;}
+
+/* ver2 */
+.acodi_list2{margin:2% 4%;}
+.acodi_list2 ul{border-top:1px solid #ddd;}
+.acodi_list2 ul li{border-bottom:1px solid #ddd;padding:20px 30px;}
+.acodi_list2 ul li.on{}
+.acodi_list2 .acodi_title{display:flex;position:relative;cursor:pointer;}
+.acodi_list2 .acodi_title .title_q{position:absolute;display:inline-block;top:0;left:0;width:30px;height:30px;line-height:30px;font-size:18px;font-weight:600;text-align:center;color:#555;border-radius:100%;}
+.acodi_list2 .acodi_title .title_area{display:inline-block;font-size:20px;font-weight:600;padding-left:40px;}
+
+.acodi_list2 ul li.on .title_q{color:blueviolet;}
+.acodi_list2 ul li.on .acodi_title .title_area{color:blueviolet;}
+.acodi_list2 .acodi_title:after{content:'';position:absolute;top:5px;right:0;width:20px;height:20px;background:url('../images/down-line-20.svg') no-repeat 100%;}
+.acodi_list2 ul li.on .acodi_title:after{transform:rotate(180deg);}
+
+.acodi_list2 .acodi_content{display:none;position:relative;margin-top:20px;}
+.acodi_list2 .acodi_content .content_a{position:absolute;display:inline-block;top:0;left:0;width:30px;height:30px;line-height:30px;font-size:18px;font-weight:600;text-align:center;color:#555;border-radius:100%;}
+.acodi_list2 .acodi_content .content_area{display:inline-block;padding-left:40px;}
+
+
+/* ver3 */
+.acodi_list3{margin:2% 4%;}
+.acodi_list3 ul{border-top:1px solid #ddd;}
+.acodi_list3 ul li{border-bottom:1px solid #ddd;padding:20px 30px;}
+.acodi_list3 ul li.on{}
+.acodi_list3 .acodi_title{display:flex;position:relative;cursor:pointer;}
+.acodi_list3 .acodi_title .title_q{position:absolute;display:inline-block;top:0;left:0;width:30px;height:30px;line-height:30px;font-size:18px;font-weight:600;text-align:center;color:#555;border-radius:100%;}
+.acodi_list3 .acodi_title .title_area{display:inline-block;font-size:20px;font-weight:600;padding-left:40px;}
+
+.acodi_list3 ul li.on .title_q{color:blueviolet;}
+.acodi_list3 ul li.on .acodi_title .title_area{color:blueviolet;}
+.acodi_list3 .acodi_title:after{content:'';position:absolute;top:5px;right:0;width:20px;height:20px;background:url('../images/down-line-20.svg') no-repeat 100%;}
+.acodi_list3 ul li.on .acodi_title:after{transform:rotate(180deg);}
+
+.acodi_list3 .acodi_content{display:none;position:relative;margin-top:20px;}
+.acodi_list3 .acodi_content .content_a{position:absolute;display:inline-block;top:0;left:0;width:30px;height:30px;line-height:30px;font-size:18px;font-weight:600;text-align:center;color:#555;border-radius:100%;}
+.acodi_list3 .acodi_content .content_area{display:inline-block;padding-left:40px;}
+
+</style>
+
+
+<script>
+$(function() {
+    //클릭시 폼상단
+    top_pos = $('.acodi_list').offset().top;
+    // ver1
+    $('.acodi_list .acodi_title').on('click', function() {
+        $('.acodi_list ul li').removeClass('on');
+        $(this).next().stop().slideToggle(300);
+        $(this).parent('li').addClass('on').siblings('li').children('.acodi_content').slideUp(300);
+        $('html, body').animate({scrollTop:top_pos});
+        //$('.acodi_list .acodi_title').not(this).next().stop().slideUp(200);
+        //$(this).parent('li').addClass('on');
+    });
+
+    // ver2
+    top_pos2 = $('.acodi_list2').offset().top;
+    $('.acodi_list2 .acodi_title').each(function() {
+        $(this).on('click', function() {
+            if (!$(this).closest('.acodi_list2 ul li').hasClass('on')) {
+                $('.acodi_list2 ul li').removeClass('on');
+                $(this).closest('.acodi_list2 ul li').addClass('on');
+                $('.acodi_content').stop().slideUp(200);
+                $(this).next().stop().slideToggle(200);
+                $('html, body').animate({scrollTop:top_pos2});
+            } else {
+                $(this).next().stop().slideUp(200);
+                $('.acodi_list2 ul li').removeClass('on');
+            }
+        });
+    });
+
+    // ver3
+    $('.acodi_list3 .acodi_title').on('click', function() {
+        // var $depth = $(this).next();
+        // if($depth.is(":visible")){
+        //     $depth.slideUp(200);
+        //     $('.acodi_list3 ul li').removeClass('on');
+        // } else {
+        //     $(this).parent('li').children('.acodi_content').slideUp(300);
+        //     $(this).parent('li').addClass('on');
+        //     $depth.slideDown(200);
+        // }
+        $('.acodi_list ul li').removeClass('on');
+        $(this).next().stop().slideToggle(300);
+        $(this).parent('li').addClass('on');
+    });
+
+    $('.acodi_list .acodi_title').eq(0).trigger("click");
+});
+</script>
+
+
+
+
+
+<h3>아코디언 - ver1</h3>
+<div>참고사이트 : https://www.h-point.co.kr/cu/cmct/faqDtlList.nhd</div>
+<div class="acodi_list">
+    <ul>
+        <li>
+            <div class="acodi_title">
+                <span class="title_q">Q</span>
+                <span class="title_area">[카테고리] 아코디언 내용</span>
+            </div>
+            <div class="acodi_content">
+                <span class="content_a">A</span>
+                <span class="content_area">아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용</span>
+            </div>
+        </li>
+        <li>
+            <div class="acodi_title">
+                <span class="title_q">Q</span>
+                <span class="title_area">[애플] 아코디언 두번째 내용</span>
+            </div>
+            <div class="acodi_content">
+                <span class="content_a">A</span>
+                <span class="content_area">아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용</span>
+            </div>
+        </li>
+        <li>
+            <div class="acodi_title">
+                <span class="title_q">Q</span>
+                <span class="title_area">[마소] 아코디언 세번째 내용</span>
+            </div>
+            <div class="acodi_content">
+                <span class="content_a">A</span>
+                <span class="content_area">아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용</span>
+            </div>
+        </li>
+        <li>
+            <div class="acodi_title">
+                <span class="title_q">Q</span>
+                <span class="title_area">[엔비디아] 아코디언 네번째 내용</span>
+            </div>
+            <div class="acodi_content">
+                <span class="content_a">A</span>
+                <span class="content_area">아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용</span>
+            </div>
+        </li>
+    </ul>
+</div>
+
+
+
+
+
+<h3>아코디언 - ver2</h3>
+<div>참고사이트 : https://www.iaanapt.co.kr/faq</div>
+<div class="acodi_list2">
+    <ul>
+        <li>
+            <div class="acodi_title">
+                <span class="title_q">Q</span>
+                <span class="title_area">[카테고리] 아코디언 내용</span>
+            </div>
+            <div class="acodi_content">
+                <span class="content_a">A</span>
+                <span class="content_area">아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용</span>
+            </div>
+        </li>
+        <li>
+            <div class="acodi_title">
+                <span class="title_q">Q</span>
+                <span class="title_area">[애플] 아코디언 두번째 내용</span>
+            </div>
+            <div class="acodi_content">
+                <span class="content_a">A</span>
+                <span class="content_area">아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용</span>
+            </div>
+        </li>
+        <li>
+            <div class="acodi_title">
+                <span class="title_q">Q</span>
+                <span class="title_area">[마소] 아코디언 세번째 내용</span>
+            </div>
+            <div class="acodi_content">
+                <span class="content_a">A</span>
+                <span class="content_area">아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용</span>
+            </div>
+        </li>
+        <li>
+            <div class="acodi_title">
+                <span class="title_q">Q</span>
+                <span class="title_area">[엔비디아] 아코디언 네번째 내용</span>
+            </div>
+            <div class="acodi_content">
+                <span class="content_a">A</span>
+                <span class="content_area">아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용</span>
+            </div>
+        </li>
+    </ul>
+</div>
+
+
+
+<h3>아코디언(all 펼처짐) - ver3</h3>
+<div></div>
+<div class="acodi_list3">
+    <ul>
+        <li>
+            <div class="acodi_title">
+                <span class="title_q">Q</span>
+                <span class="title_area">[카테고리] 아코디언 내용</span>
+            </div>
+            <div class="acodi_content">
+                <span class="content_a">A</span>
+                <span class="content_area">아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용</span>
+            </div>
+        </li>
+        <li>
+            <div class="acodi_title">
+                <span class="title_q">Q</span>
+                <span class="title_area">[애플] 아코디언 두번째 내용</span>
+            </div>
+            <div class="acodi_content">
+                <span class="content_a">A</span>
+                <span class="content_area">아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용</span>
+            </div>
+        </li>
+        <li>
+            <div class="acodi_title">
+                <span class="title_q">Q</span>
+                <span class="title_area">[마소] 아코디언 세번째 내용</span>
+            </div>
+            <div class="acodi_content">
+                <span class="content_a">A</span>
+                <span class="content_area">아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용</span>
+            </div>
+        </li>
+        <li>
+            <div class="acodi_title">
+                <span class="title_q">Q</span>
+                <span class="title_area">[엔비디아] 아코디언 네번째 내용</span>
+            </div>
+            <div class="acodi_content">
+                <span class="content_a">A</span>
+                <span class="content_area">아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용 아코디언 내용</span>
+            </div>
+        </li>
+    </ul>
+</div>
+
+
+
+
+</body>
+</html>

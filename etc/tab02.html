@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+</head>
+<body>
+
+<link rel="stylesheet" href="../css/common.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<style>
+.tab_area{width:80%;margin:50px auto;}
+.tab_area .tab_menu{width:100%;height:auto;display:flex;}
+.tab_area .tab_menu a{display:block;padding:10px 30px;transition:all 0.2s ease-in-out;}
+.tab_area .tab_menu a:hover,
+.tab_area .tab_menu a.on{border-bottom:2px solid blueviolet;color:blueviolet;background-color:blueviolet;color:#fff;}
+.tab_area .tab_content{display:none;width:100%;height:auto;min-height:200px;border:1px solid #eee;padding:20px;overflow:hidden;transition:all 0.3s ease-in-out;}
+.tab_area .tab_content.on{display:block;}
+</style>
+
+
+<script>
+$(function() {
+    //클릭시 폼상단
+    top_pos = $('.tab_area').offset().top;
+
+    $('.tab_menu a').on('click', function(e) {
+        e.preventDefault();
+        var idx = $(this).index();
+        var tabarea = $(this).closest('.tab_area');
+        
+        tabarea.find('.tab_menu a').removeClass('on');
+        tabarea.find('.tab_content').removeClass('on');
+        //$($(this).attr('href')).addClass('on');
+        tabarea.find('.tab_content').eq(idx).addClass('on');
+        $(this).addClass('on');
+        $('html, body').animate({scrollTop:top_pos});
+    });
+});
+</script>
+
+
+<div> 탭여러개 : 
+    https://mansu.tistory.com/33?category=850466
+</div>
+
+
+<div class="tab_area">
+    <div class="tab_menu">
+        <a href="#" class="on">탭메뉴 #1</a>
+        <a href="#">탭메뉴 #2</a>
+        <a href="#">탭메뉴 #3</a>
+    </div>
+
+    <div class="tab_content on">
+        - 111 내용
+    </div>
+    <div class="tab_content">
+        - 2222 내용
+    </div>
+    <div class="tab_content">
+        - 333 내용
+    </div>
+</div>
+
+
+
+<div class="tab_area">
+    <div class="tab_menu">
+        <a href="#" class="on">탭메뉴 #1</a>
+        <a href="#">탭메뉴 #2</a>
+        <a href="#">탭메뉴 #3</a>
+    </div>
+
+    <div class="tab_content on">
+        - 111 내용
+    </div>
+    <div class="tab_content">
+        - 2222 내용
+    </div>
+    <div class="tab_content">
+        - 333 내용
+    </div>
+</div>
+
+
+
+
+<div style="height:1000px"></div>
+
+
+</body>
+</html>

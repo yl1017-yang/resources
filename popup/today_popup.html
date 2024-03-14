@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+</head>
+<body>
+
+<!-- <link rel="stylesheet" href="../css/common.css"> -->
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<div>
+  <div>jquery 레이어 팝업 오늘 하루 그만 보기 쿠키설정 <br>https://triplexlab.tistory.com/5</div>
+</div>
+
+<style>
+  .pop {margin:0 auto;width:650px;}
+  .pop {display:none;}
+  .pop:before {display:block; content:""; position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,.5);}
+  .pop .layerBox {position:fixed; left:50%; top:50%; transform:translate(-50%, -50%);  background:#fff;border:0;}
+  .pop .layerBox .cont {}
+  .pop .layerBox .close{position:relative;background:#eee;line-height:50px;padding:0 20px;}
+  .pop .layerBox .btnClose{display:inline-block;position:absolute; right:20px; top:0;color:#444; font-size:13px; text-decoration:none;}
+  .pop .layerBox .btnClose a{color:#444;text-decoration:none;}
+  .pop .layerBox .btnTodayHide {font-size:14px; font-weight:600; text-decoration:none;cursor:pointer}
+
+  @media all and (max-width:720px) {
+    .pop{margin:0 auto; width:100%;}
+    .pop .layerBox{width:90%;height:auto;}
+    .pop .layerBox .cont img{width:100%}    
+  }
+</style>
+
+<div id="pop" class="pop">
+  <div class="layerBox">
+      <div class="cont">
+          <img alt src='http://tmccorp.cafe24.com/web/upload/multi_popup/2208_ASpopup.jpg'>
+          lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+      </div>
+      <div class="close">
+          <span id="check" class="btnTodayHide"><input type="checkbox" value="checkbox" name="chkbox" id="chkday"/><label for="chkday">오늘 하루동안 보지 않기</label></span>
+          <span id="close" class="btnClose"> <a href="#0">창닫기</a></span>
+      </div>
+  </div>
+</div>
+
+<div class="contents">
+  <h1 class="title">page title</h1>
+  <p>
+      lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+  </p>
+  <!-- 이하 가독성을 위해 dummy text 삭제 -->
+</div>
+
+<script>
+  (function(){
+      const pop = document.querySelector('#pop');
+      const close = document.querySelector('#close');
+      const shortcode_date = '2022-12-30T24:00:00'  // 끝나는 날짜를 설정
+
+      // 쿠키 가져오기
+      const getCookie = function (cname) {
+          const name = cname + "=";
+          const ca = document.cookie.split(';');
+          for(let i = 0; i <ca.length; i++) {
+              const c = ca[i];
+              while (c.charAt(0)==' ') c = c.substring(1);
+              if (c.indexOf(name) != -1) return c.substring(name.length,c.length);
+          }
+          return "";
+      };
+
+      // 24시간 기준 쿠키 설정하기  
+      const setCookie = function (cname, cvalue, exdays) {
+          const todayDate = new Date();
+          todayDate.setTime(todayDate.getTime() + (exdays*24*60*60*1000));    
+          const expires = "expires=" + todayDate.toUTCString();
+          document.cookie = cname + "=" + cvalue + "; " + expires;
+      };
+
+      const couponClose = function(){
+          if(document.querySelector('input[name="chkbox"]').checked === true){
+              setCookie("close","Y",1);
+          }
+          pop.style.display = 'none';
+      };
+
+      const cookiedata = document.cookie;
+      if(cookiedata.indexOf("close=Y")<0){
+          pop.style.display = 'block';
+      }else{
+          pop.style.display = 'none';
+      }
+
+      close.addEventListener('click', function(){
+          couponClose();
+      });
+  })();
+</script>
+
+
+</body>
+</html>

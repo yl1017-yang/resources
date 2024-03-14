@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+
+<link rel="stylesheet" href="../css/common.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<style>
+*{ box-sizing: border-box; padding: 0; margin: 0; list-style: none;color: #555;font-weight: bold;}
+
+.slide_box{position:relative;width:90%;margin:auto;padding-bottom:140px;overflow-x:hidden;-webkit-backface-visibility:hidden;}
+.slide_box .slide_list{display:flex;}
+.slide_box .slide_content{position:relative;width:100%;}
+.slide_box .slide_content img{width:100%;height:100%;}
+.slide_box .slide_content a{display:block;width:100%;height:100%;}
+.slide_box .slide_content p{position:absolute;top:0;left:0;font-size:100px;color:#fff;}
+.slide_box .slide_btn_box > button{position:absolute;top:50%;transform:translateY(-50%);width:60px;height:60px;font-size:16px;color:#fff;background:#444;border-radius:100%;border:0;cursor:pointer;}
+.slide_box .slide_btn_box > .slide_btn_prev{left:15px;}
+.slide_box .slide_btn_box > .slide_btn_next{right: 15px;}
+.slide_box .slide_pagination{position:absolute;left:50%;transform:translateX(-50%);bottom:110px;}
+.slide_box .slide_pagination .dot{display:inline-block;width:15px;height:15px;margin:0 5px;overflow:hidden;background:#ddd;border-radius:100%;transition:0.3s;}
+.slide_box .slide_pagination .dot.dot_active{background:#333;}
+.slide_box .slide_pagination .dot a{display:block;width:100%;height:100%;}
+
+.slide_box .slide_thumb{position:absolute;width:100%;bottom:0;}
+.slide_box .slide_thumb .thumb{display:inline-block;width:100px;height:100px;margin:0 5px;overflow:hidden;background:#ddd;transition:0.2s;}
+.slide_box .slide_thumb .thumb.thumb_active{border:3px solid red}
+.slide_box .slide_thumb .thumb a{display:block;width:100%;height:100%;}
+</style>
+
+
+
+
+<div>
+https://im-developer.tistory.com/97#google_vignette<br>
+https://www.bsidesoft.com/285<br>
+</div>
+
+
+<div class="slide_box">
+  <div class="slide_list">
+    <div class="slide_content">
+      <a href="https://shop.pulmuone.co.kr/shop/goodsView?goods=178">
+        <p>1</p>
+        <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_960_720.jpg">
+      </a>
+    </div>
+    <div class="slide_content">
+      <a href="https://shop.pulmuone.co.kr/shop/goodsView?goods=1112">
+        <p>2</p>
+        <img src="https://cdn.pixabay.com/photo/2013/04/03/21/25/flower-100263_960_720.jpg">
+      </a>
+    </div>
+    <div class="slide_content">
+      <a href="https://shop.pulmuone.co.kr/shop/goodsView?goods=425">
+        <p>3</p>
+        <img src="https://cdn.pixabay.com/photo/2022/05/16/19/14/road-7201023_960_720.jpg">
+      </a>
+    </div>
+    <div class="slide_content">
+      <a href="#">
+        <p>4</p>
+        <img src="https://cdn.pixabay.com/photo/2016/07/30/00/03/winding-road-1556177_960_720.jpg">
+      </a>
+    </div>
+  </div>
+
+  <div class="slide_btn_box">
+    <button type="button" class="slide_btn_prev">&#10094;</button>
+    <button type="button" class="slide_btn_next">&#10095;</button>
+  </div>
+  <ul class="slide_pagination"></ul>
+  <ul class="slide_thumb"></ul>
+</div>
+
+
+
+
+<script>
+ (function () {
+    const slideBox = document.querySelector('.slide_box');
+    const slideList = document.querySelector('.slide_list');
+    const slideContents = document.querySelectorAll('.slide_content');
+    const slideBtnNext = document.querySelector('.slide_btn_next');
+    const slideBtnPrev = document.querySelector('.slide_btn_prev');
+    const pagination = document.querySelector('.slide_pagination');
+    const thumb = document.querySelector('.slide_thumb');
+    const slideLen = slideContents.length;
+    const slideWidth = slideList.clientWidth;
+    const slideSpeed = 200;
+    const startNum = 0;
+
+    slideList.style.width = slideWidth * (slideLen + 2) + "px";
+
+    let firstChild = slideList.firstElementChild;
+    let lastChild = slideList.lastElementChild;
+    let clonedFirst = firstChild.cloneNode(true);
+    let clonedLast = lastChild.cloneNode(true);
+
+    slideList.appendChild(clonedFirst);
+    slideList.insertBefore(clonedLast, slideList.firstElementChild);
+
+    let pageChild = '';
+    for (var i = 0; i < slideLen; i++) {
+      pageChild += '<li class="dot';
+      pageChild += (i === startNum) ? ' dot_active' : '';
+      pageChild += '" data-index="' + i + '"><a href="#"></a></li>';
+    }
+    pagination.innerHTML = pageChild;
+    const pageDots = document.querySelectorAll('.dot');
+
+    const img = document.querySelector('img');
+    const src = img.src;
+    console.log(src);
+
+    let thumbChild = '';
+    for (var j = 0; j < slideLen; j++) {
+      thumbChild += '<li class="thumb';
+      thumbChild += (j === startNum) ? ' thumb_active' : '';
+      thumbChild += '" data-index="' + j + '"><a href="#"></a></li>';
+    }
+    thumb.innerHTML = thumbChild;
+    const pageThumb = document.querySelectorAll('.thumb');
+
+    slideList.style.transform = "translate3d(-" + (slideWidth * (startNum + 1)) + "px, 0px, 0px)";
+
+    let curIndex = startNum;
+    let curSlide = slideContents[curIndex];
+    curSlide.classList.add('slide_active');
+
+    function nextMove() {
+      if (curIndex <= slideLen - 1) {
+        slideList.style.transition = slideSpeed + "ms";
+        slideList.style.transform = "translate3d(-" + (slideWidth * (curIndex + 2)) + "px, 0px, 0px)";
+      }
+
+      if (curIndex === slideLen - 1) {
+        setTimeout(function () {
+          slideList.style.transition = "0ms";
+          slideList.style.transform = "translate3d(-" + slideWidth + "px, 0px, 0px)";
+        }, slideSpeed);
+        console.log(slideList, curIndex);
+        curIndex = -1;
+      }
+      curSlide.classList.remove('slide_active');
+      pageDots[(curIndex === -1) ? slideLen - 1 : curIndex].classList.remove('dot_active');
+      pageThumb[(curIndex === -1) ? slideLen - 1 : curIndex].classList.remove('thumb_active');
+      curSlide = slideContents[++curIndex];
+      curSlide.classList.add('slide_active');
+      pageDots[curIndex].classList.add('dot_active');
+      pageThumb[curIndex].classList.add('thumb_active');
+    }
+
+    function prevMove() {
+      if (curIndex >= 0) {
+        slideList.style.transition = slideSpeed + "ms";
+        slideList.style.transform = "translate3d(-" + (slideWidth * curIndex) + "px, 0px, 0px)";
+      }
+      if (curIndex === 0) {
+        setTimeout(function () {
+          slideList.style.transition = "0ms";
+          slideList.style.transform = "translate3d(-" + (slideWidth * slideLen) + "px, 0px, 0px)";
+        }, slideSpeed);
+        curIndex = slideLen;
+      }
+      curSlide.classList.remove('slide_active');
+      pageDots[(curIndex === slideLen) ? 0 : curIndex].classList.remove('dot_active');
+      pageThumb[(curIndex === slideLen) ? 0 : curIndex].classList.remove('thumb_active');
+      curSlide = slideContents[--curIndex];
+      curSlide.classList.add('slide_active');
+      pageDots[curIndex].classList.add('dot_active');
+      pageThumb[curIndex].classList.add('thumb_active');
+    }
+
+    slideBtnNext.addEventListener("click", () => {
+      nextMove();
+      console.log("nextMove");
+    });
+
+    slideBtnPrev.addEventListener("click", () => {
+      prevMove();
+      console.log("prevMove");
+    });
+
+    let autoPlayStart = setInterval(nextMove, 3000);
+    slideBox.addEventListener("mouseenter", (e) => {
+      e.preventDefault();
+      clearInterval(autoPlayStart);
+    });
+    slideBox.addEventListener("mouseleave", (e) => {
+      e.preventDefault();
+      autoPlayStart = setInterval(nextMove, 3000);
+    });
+    slideBox.addEventListener("touchstart", (e) => {
+      clearInterval(autoPlayStart);
+    });
+    slideBox.addEventListener("touchend", (e) => {
+      setTimeout(function () {
+        clearInterval(autoPlayStart);
+        autoPlayStart = setInterval(nextMove, 3000);
+      }, 1000);
+    });
+
+    let curDot;
+    Array.prototype.forEach.call(pageDots, function (dot, i) {
+      dot.addEventListener('click', function (e) {
+        e.preventDefault();
+        curDot = document.querySelector('.dot_active');
+        curDot.classList.remove('dot_active');
+        curDot = this;
+        this.classList.add('dot_active');
+        curSlide.classList.remove('slide_active');
+        curIndex = Number(this.getAttribute('data-index'));
+        curSlide = slideContents[curIndex];
+        curSlide.classList.add('slide_active');
+        slideList.style.transition = slideSpeed + "ms";
+        slideList.style.transform = "translate3d(-" + (slideWidth * (curIndex + 1)) + "px, 0px, 0px)";
+
+        curThumb = document.querySelector('.thumb_active');
+        curThumb.classList.remove('thumb_active');
+        pageThumb[curIndex].classList.add('thumb_active');
+
+      });
+    });
+    
+    let curThumb;
+    Array.prototype.forEach.call(pageThumb, function (thumb, j) {
+      thumb.addEventListener('click', function (e) {
+        e.preventDefault();
+        curThumb = document.querySelector('.thumb_active');
+        curThumb.classList.remove('thumb_active');
+        curThumb = this;
+        this.classList.add('thumb_active');
+
+        curSlide.classList.remove('slide_active');
+        curIndex = Number(this.getAttribute('data-index'));
+        curSlide = slideContents[curIndex];
+        curSlide.classList.add('slide_active');
+        slideList.style.transition = slideSpeed + "ms";
+        slideList.style.transform = "translate3d(-" + (slideWidth * (curIndex + 1)) + "px, 0px, 0px)";
+
+        curDot = document.querySelector('.dot_active');
+        curDot.classList.remove('dot_active');
+        pageDots[curIndex].classList.add('dot_active');
+      });
+    });
+
+    let startPoint = 0;
+    let endPoint = 0;
+    var stopFunc = function (e) {
+      e.preventDefault();
+      return false;
+    };
+    
+    var all = document.querySelectorAll('*');
+
+    slideList.addEventListener("mousedown", (e) => {
+      console.log("mousedown", e.pageX);
+      startPoint = e.pageX;
+      e.preventDefault();
+      slideList.addEventListener("mousemove", (e) => {
+        for (var idx in all) {
+          var el = all[idx];
+          if (el.addEventListener) {
+            el.addEventListener('click', stopFunc, true);
+          }
+        }
+      });
+    });
+
+    slideList.addEventListener("mouseup", (e) => {
+      console.log("mouseup", e.pageX);
+      endPoint = e.pageX;
+      if (startPoint < endPoint) {
+        console.log("prev move");
+        prevMove();
+      } else if (startPoint > endPoint) {
+        console.log("next move");
+        nextMove();
+      }
+      slideList.addEventListener("mousemove", (e) => {
+        for (var idx in all) {
+          var el = all[idx];
+          if (el.addEventListener) {
+            el.removeEventListener('click', stopFunc, true);
+          }
+        }
+      });
+    });
+
+    slideList.addEventListener("touchstart", (e) => {
+      console.log("touchstart", e.touches[0].pageX);
+      startPoint = e.touches[0].pageX;
+    });
+    slideList.addEventListener("touchend", (e) => {
+      console.log("touchend", e.changedTouches[0].pageX);
+      endPoint = e.changedTouches[0].pageX;
+      if (startPoint < endPoint) {
+        console.log("prev move");
+        prevMove();
+      } else if (startPoint > endPoint) {
+        console.log("next move");
+        nextMove();
+      }
+    });
+
+  })();
+</script>
+
+
+
+
+
+
+
+
+</body>
+</html>

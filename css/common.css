@@ -1,0 +1,59 @@
+@charset "utf-8";
+/* *******************************************************
+ * filename : common.css
+ * description : 공통 컨텐츠 CSS
+ * date : 2022-08-10
+******************************************************** */
+
+@import url("./fonts.css");
+
+/* reset */
+a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0;border:0;font:inherit;vertical-align:baseline;-ms-overflow-style:scrollbar;box-sizing:border-box;-webkit-box-sizing:border-box;}
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block;}
+body{font-family:'Montserrat', 'Noto Sans KR', '맑은 고딕', 'malgun gothic', 'Apple SD Gothic Neo', 'Apple SD 산돌고딕 Neo', 'Microsoft NeoGothic', sans-serif;font-size:100%;font-weight:400;color:#777;line-height:1.5;letter-spacing:-0.0375em;word-wrap:break-word;word-break:break-all;-webkit-text-size-adjust:none;-ms-text-size-adjust:100%;text-size-adjust:none;}
+
+/* basic tags selector */
+img{max-width:100%;vertical-align:middle;}
+strong, b{font-family:inherit;font-weight:700;}
+em,address{font-style:normal;}
+blockquote,q{quotes:none;}
+blockquote:after,blockquote:before,q:after,q:before{content:'';content:none;}
+ol,ul,li{list-style:none;}
+table{width:100%;border-collapse:collapse;border-spacing:0;table-layout:fixed;}
+fieldset, legend{background-color:transparent;}
+caption, legend, .blind{position:absolute !important;height:1px !important;width:1px !important;overflow:hidden !important;clip:rect(1px 1px 1px 1px) !important;clip:rect(1px,1px,1px,1px) !important;}
+a{color:inherit;text-decoration:none;cursor:pointer;}
+button{border:none;box-shadow:none;background:transparent;cursor:pointer;outline:none;border-radius:0;font-size:inherit;font-family:inherit;color:inherit;}
+button:focus{outline-style:auto;outline: 2px solid -webkit-focus-ring-color;}
+
+/* 아이폰(사파리) 터치 메뉴 활성화 관련 */
+a, button, [role=button], [role=link], [role=tab]{-webkit-touch-callout:none;}
+
+/* form select */
+input,textarea,select{box-sizing:border-box;-webkit-appearance:none;-moz-appearance:none;appearance:none;border:none;outline-style:none;border-radius:0;font-size:inherit;font-family:inherit;color:inherit;}
+input[type='text'], input[type='password']{resize:none;box-shadow:none !important;border-radius:0;outline:none;}
+input:checked{-webkit-appearance:checkbox;}
+input[type='text']::-ms-clear, input[type='tel']::-ms-clear{display:none;}
+input[disabled], select[disabled], input[readonly], textarea[disabled], button[disabled] {cursor:default;}
+input, textarea{-webkit-tap-highlight-color:rgba(0, 0, 0, 0)}
+select{vertical-align:middle;border-radius:0;outline:none;background:transparent;}
+select::-ms-expand{display:none;}
+
+/* checkbox, radio 이미지형 */
+input[type='radio'],
+input[type='checkbox']{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
+
+/* input textarea focus */
+input[type='text'], input[type='password'], textarea{transition:all 0.1s ease-in-out !important;}
+input[type='text']:focus, input[type='password']:focus,textarea:focus{border:2px solid #555 !important;}
+
+/* placeholder, focus */
+::placeholder{font-size:inherit;color:#999;letter-spacing:-0.0375em;opacity:1;}
+::-webkit-input-placeholder{font-size:inherit;color:#999;letter-spacing:-0.0375em;opacity:1;}
+:-moz-placeholder{font-size:inherit;color:#999;letter-spacing:-0.0375em;opacity:1;}
+::-moz-placeholder{font-size:inherit;color:#999;letter-spacing:-0.0375em;opacity:1;}
+:-ms-input-placeholder{font-size:inherit;color:#999;letter-spacing:-0.0375em;opacity:1;}
+input[type='text']:focus::-webkit-input-placeholder{visibility:hidden}
+input[type='text']:focus:-moz-placeholder{visibility:hidden}
+input[type='text']:focus::-moz-placeholder{visibility:hidden}
+input[type='text']:focus:-ms-input-placeholder{visibility:hidden}

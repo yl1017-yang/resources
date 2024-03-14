@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+</head>
+<body>
+
+<link rel="stylesheet" href="../css/common.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<style>
+.wrap{padding:5%;}
+.section{border:1px solid #eee;border-radius:15px;padding:2% 5%;margin-bottom:30px;}
+h3{font-size:26px;margin:0 0 10px;}
+
+/* 셀렉트박스 폼 */
+.select_form{width:300px;height:50px;line-height:50px;border-radius:4px;border:1px solid #ddd;background:#fff;padding:0 20px;transition:all 1s;}
+.select_form:hover{border:1px solid #444;}
+
+
+/* 셀렉트박스 div디자인 */
+.select_wrap{}
+
+
+
+</style>
+
+
+<script>
+$(function() {
+
+    $('#check_all').on('click', function(){
+        var is_checked = $(this).prop('checked');
+        $('.agree_wrap .check').prop('checked', is_checked);
+        $(this).prop('checked') ? $('#TestBtn').removeAttr('disabled'):$('#TestBtn').attr('disabled','disabled'); 
+    });
+
+    $('.check').on('click', function(){
+        var is_checked = true;
+        $('.agree_wrap .check').each(function() {
+            is_checked = is_checked && $(this).is(':checked');
+        })
+        $('#check_all').prop('checked', is_checked);
+        $('#check_all').prop('checked') ? $('#TestBtn').removeAttr('disabled'):$('#TestBtn').attr('disabled','disabled'); 
+    });
+    
+});
+</script>
+
+
+
+<section class="wrap">
+    <section class="section">
+    
+        <h3>셀렉트박스</h3>
+        <form name="" action="#" method="post">
+            <fieldset>
+                <legend>셀렉트박스 타이틀</legend>
+                <select id="deptCd" name="deptCd" class="select_form" title="셀렉트 선택">
+                    <option value="">-- 선택하세요 --</option>
+                    <option value="FM">가정의학과</option>
+                    <option value="INF">감염내과</option>
+                    <option value="END">내분비내과</option>
+                    <option value="RHE">류마티스내과</option>
+                    <option value="ANE">마취통증의학과</option>
+                    <option value="RO">방사선종양학과</option>                
+                </select>
+            </fieldset>
+        </form>
+
+    </section>
+
+
+
+
+    <section class="section">
+
+        <h3>셀렉트박스 DIV사용</h3>
+        <div class="select_wrap">
+            <div>
+                -- 선택하세요 --
+            </div>
+        </div>
+
+    </section>
+
+
+</section>
+
+
+</body>
+</html>

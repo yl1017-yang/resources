@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+</head>
+<body>
+    
+<link rel="stylesheet" href="../css/common.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<style>
+header{background-color:pink;padding:50px;}
+
+/*input*/
+.label{display:block;font-size:0.889rem;color:#242424;font-weight:600;transform: skew(-.03deg);}
+.input1{width:100%;height:52px;font-size:1rem;line-height:1em;border-bottom:1px solid #DBDBDB;padding-right:30px;}
+.input1:focus{border-bottom:1px solid #242424;}
+.input1::-moz-placeholder{color:#A8A8A8;font-size:1em;letter-spacing:-.6px;}
+.input1:-ms-input-placeholder{color:#A8A8A8;font-size:1em;letter-spacing:-.6px;}
+.input1::placeholder{color:#A8A8A8;font-size:1em;letter-spacing:-.6px;}
+.input1:not(:-moz-placeholder-shown) {border-bottom:1px solid #242424;}
+.input1:not(:-ms-input-placeholder) {border-bottom:1px solid #242424;}
+.input1:not(:placeholder-shown) {border-bottom:1px solid #242424;}
+
+/*통합검색 버튼*/
+.h_search_wrap{}
+.h_search_wrap .h_search_btn{display:block;position:relative;width:42px;height:42px;cursor:pointer;background:url('../images/search-line-black.svg') no-repeat center;}
+.h_search_wrap .h_search_btn .h-ico-search{width:20px;height:20px;opacity:1;transform:scale(1);transition:all .2s ease;}
+.h_search_wrap .h_search_btn.open .h-ico-search{transform:scale(0);opacity:0;}
+
+/*통합검색 내용*/
+.search_box{display:none;position:fixed;width:100%;background-color:#fff;top:0;left:0;z-index:3000;box-shadow:0 20px 100px 0 rgba(0, 0, 0, 0.3);padding:0 20px;}
+.search_wrap{max-width:800px;margin:0 auto;padding:7.15rem 0;}/* transition:padding 0.3s ease; */
+.search_wrap .search_inner{width:100%;max-width:800px;}
+.search_wrap .search_hash{padding:18px 0 0;}
+.search_box .btn_close_sch{position:fixed;z-index:100;right:3%;top:24px;width:42px;height:42px;transform:scale(0);opacity:0;transition:all .2s ease;overflow:hidden;}
+.search_box.open .btn_close_sch{transform:scale(1);opacity:1;}
+.search_box .btn_close_sch .ico_close{display:inline-block;vertical-align:middle;width:28px;height:28px;position:relative;background:url('../images/close-line-28-black.svg') no-repeat;background-size:cover;}
+
+.form_wrap{position:relative;}
+.form_wrap .input_delete{display:none;width:16px;height:16px;line-height:16px;border-radius:100%;background-color:#DBDBDB;position:absolute;right:60px;bottom:18px;}
+.form_wrap .input_delete .ico_input_delete{display:inline-block;width:10px;height:10px;background:url('../images/close-line-28-black.svg') no-repeat center;background-size:14px;}
+.input1:not(:-moz-placeholder-shown) + .input_delete{display:block;}
+.input1:not(:-ms-input-placeholder) + .input_delete{display:block;}
+.input1:not(:placeholder-shown) + .input_delete{display:block;}
+
+.form_wrap .btn_search{position:absolute;right:0;bottom:0;width:52px;height:52px;}
+.form_wrap .btn_search .ico_search_inner{display:inline-block;vertical-align:middle;width:32px;height:32px;background-position:top;background:url('../images/search-line-black.svg') no-repeat;background-size:cover;}
+</style>
+
+
+<script>
+$(function() {
+    //통합검색 열기 닫기
+    $('.h_search_btn').on('click',function(){
+        $(this).addClass('open');
+        $('.search_box').addClass('open');
+        //$('.search_box').stop().slideDown({duration: 400, easing: "easeInQuad"});
+        $('.search_box').stop().slideDown();
+    });
+    $('.btn_close_sch').on('click',function(){
+        $('.h_search_btn').removeClass('open');
+        $('.search_box').removeClass('open');
+        //$('.search_box').stop().delay(100).slideUp({duration: 400, easing: "easeInQuad"});
+        $('.search_box').stop().delay(100).slideUp();
+    });
+
+    //통합검색 검색
+    $('#util_total_search #h-btn-search').on('click', function() {
+        if($.trim($('#util_total_search #utilSrchText').val()) == ''){
+            alert('검색어를 입력하세요.');
+            $('#util_total_search #utilSrchText').val('');
+            $('#util_total_search #utilSrchText').focus();
+        }else{
+            $('#util_total_search #utilSrchText').val($.trim($('#util_total_search #utilSrchText').val()));
+            $('#util_total_search').submit();
+        }
+    });
+    $('.input_delete').on('click',function() {
+      $(this).parents('.form_wrap').find('.input1').val('');
+    });
+
+    $('.search_hash a').on('click', function() {
+        $('#util_total_search #utilSrchText').val($.trim($(this).data('keyword')));
+        $('#util_total_search #h-btn-search').click();
+    });
+
+});
+</script>
+
+
+
+
+
+샘플 https://www.mobis.co.kr/kr/util/integrated_search.do
+<h3>통합검색</h3>
+
+<header>
+    <div class="h_search_wrap">
+        <button class="h_search_btn" title="통합검색">
+            <i class="h-ico-search"></i>
+        </button>
+    </div>
+</header>
+
+
+<!-- 통합검색 내용 -->
+<div class="search_box">
+    <div class="search_wrap">
+        <div class="search_inner">
+            <form id="util_total_search" method="post" action="../form/search01.html">
+                <div class="form_wrap">
+                    <label for="utilSrchText" class="blind">검색어 입력 영역</label>
+                    <input type="text" name="utilSrchText" id="utilSrchText" class="input1" placeholder="검색어를 입력하세요">
+                    <button type="button" class="input_delete" title="입력내용 삭제"><i class="ico_input_delete"></i></button>
+                    <button type="button" class="btn_search" id="h-btn-search" title="검색하기"><i class="ico_search_inner"></i></button>
+                </div>
+            </form>
+        </div>
+        <ul class="search_hash">
+            <li><a href="javascript:void();" data-keyword="채용">#채용</a></li>
+            <li><a href="javascript:void();" data-keyword="보도자료">#보도자료</a></li>
+            <li><a href="javascript:void();" data-keyword="지속가능보고서">#지속가능보고서</a></li>
+            <li><a href="javascript:void();" data-keyword="사업보고서">#사업보고서</a></li>
+        </ul>
+    </div>
+    <button class="btn_close_sch" title="검색영역 닫기"><i class="ico_close"></i></button>
+</div>
+<!-- //통합검색 내용 -->
+
+
+
+</body>
+</html>

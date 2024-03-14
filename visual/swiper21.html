@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+</head>
+<body>
+
+<link rel="stylesheet" href="../css/common.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<style>
+.slider{width:550px;height:260px;margin:0 auto;position:relative;overflow:hidden;}
+
+.slider .panel{width:100%;height:100%;position:relative;}
+.slider .panel li{width:100%;height:100%;position:absolute;top:0px;left:0px;color:#fff;font-size:30px;text-align:center;display:none;}
+
+.panel li:nth-child(1) {background-color:skyblue;display:block;}
+.panel li:nth-child(2) {background-color:green;}
+.panel li:nth-child(3) {background-color:violet;}
+
+.btn{position:absolute;bottom:30px;left:50%;margin-left:-70px;}
+.btn li{float:left;width:15px;height:15px;background-color:#000;border-radius:50%;text-indent: -9999px;margin:0 10px;cursor:pointer;}
+.btn .on{background-color:#fff;}
+.btn li:hover{background-color:#fff;}
+
+.prev{position:absolute;left:20px;top:50%;width:40px;height:40px;background:none !important;margin-top:-15px;text-indent:-9999px;cursor:pointer;}
+.prev:before{content:'';height:2px;position:absolute;left:0;top:67%;width:20px;background-color:#fff;display:block;border-radius:10px;
+transform:rotate(45deg);-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);-o-transform:rotate(45deg);-ms-transform:rotate(45deg); 
+}
+.prev:after{content:'';height:2px;position:absolute;left:0;top:33%;width:20px;background-color:#fff;display:block;border-radius:10px;
+transform:rotate(-45deg);-webkit-transform:rotate(-45deg);-moz-transform:rotate(-45deg);-o-transform:rotate(-45deg);-ms-transform:rotate(-45deg); 
+}
+
+.next{position:absolute;right:20px;top:50%;width:40px;height:40px;background:none;margin-top:-15px;text-indent:-9999px;cursor:pointer;}
+.next:before{content:'';height:2px;position:absolute;right:0;top:33%;width:20px;background-color:#fff;display:block;border-radius:10px;
+transform:rotate(45deg);-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);-o-transform:rotate(45deg);-ms-transform:rotate(45deg); 
+}
+.next:after{content:'';height:2px;position:absolute;right:0;top:67%;width:20px;background-color:#fff;display:block;border-radius:10px;
+transform:rotate(-45deg);-webkit-transform:rotate(-45deg);-moz-transform:rotate(-45deg);-o-transform:rotate(-45deg);-ms-transform:rotate(-45deg); 
+}
+</style>
+
+
+<script>
+$(function() {
+
+var wid = $('.slider').width();
+var btn = $('.btn li.on').index();
+var panel = $('.panel li').length;
+
+$('.prev').click(function() {
+  if (btn == 0) {
+    btn = panel - 1;
+  } else {
+    btn = btn - 1;
+  }
+  showSlide();
+});
+
+$('.next').click(function() {
+  if (btn == 2) {
+    btn = 0;
+  } else {
+    btn = btn + 1;
+  }
+  showSlide();
+});
+  
+setInterval(function() {
+    $('.next').click();
+  }, 4000);
+
+$('.btn li').click(function() {
+  btn = $(this).index();
+  showSlide();
+});
+
+function showSlide() {
+  $('.btn li').removeClass('on');
+  $('.btn li').eq(btn).addClass('on'); 
+  $('.panel li').stop(true, true).fadeOut(1000);
+  $('.panel li').eq(btn).stop(true, true).fadeIn(1000);
+}
+
+});
+</script>
+
+
+
+
+<div class="slider">
+    <ul class="panel">
+      <li>자동슬라이더1</li>
+      <li>자동슬라이더2</li>
+      <li>자동슬라이더3</li>
+    </ul>
+    <ul class="btn">
+      <li class="on">버튼1</li>
+      <li>버튼2</li>
+      <li>버튼3</li>
+    </ul>
+    <button class="prev">왼쪽화살표</button>
+    <button class="next">오른쪽화살표</button>
+</div>  
+
+
+
+</body>
+</html>

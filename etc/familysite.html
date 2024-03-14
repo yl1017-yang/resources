@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+</head>
+<body>
+
+<link rel="stylesheet" href="../css/common.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<style>
+/* 패밀리사이트 셀렉트 */
+.familysite_area{position:absolute;width:180px;border:1px solid #dcdcdc;left:10%;top:50%;margin-top:0;box-sizing:border-box;background-color: #fff;}
+
+.familysite_area > a{display:block;font-size:16px;line-height:50px;padding:0 18px;background-repeat:no-repeat;background-position:right center;-webkit-background-origin:content-box;background-origin:content-box;background-image: url('family_arrow.png');}
+
+.familysite_area ul{display:none;position:absolute;width:100%;border:1px solid #dcdcdc;border-bottom:none;bottom:51px;left:0;padding:15px 0;background-color:#fff;}
+
+.familysite_area ul li a{display:block;padding:0 15px;line-height:35px;}
+
+.familysite_area.on > a{background-image: url('family_arrow_on.png');}
+
+/* 화살표 */
+.familysite_area > a:after{display:block;content:'▲';position:absolute;top:1%;right:15px;font-size:12px;color:#555;}
+.familysite_area.on > a:after{display:block;content:'▼';position:absolute;top:1%;right:15px;font-size:12px;color:#555;}
+</style>
+
+
+<script>
+$(function() {
+
+// 패밀리사이트
+$('.familysite_area > a').on('click',function(e) {
+     e.preventDefault();
+     if($(this).parent().hasClass('on')){
+         $(this).parent().removeClass('on').find('ul').slideUp(200);
+     }else{
+         $(this).parent().addClass('on').find('ul').slideDown(200);
+     }
+});
+$('.familysite_area > ul > li > a').on('click',function(e){
+     e.preventDefault();
+     window.open($(this).attr('href'), '_blank');
+});
+
+});
+</script>
+
+
+
+<div class="familysite_area">
+    <a href="#">패밀리사이트</a>
+    <ul>
+        <li><a href="http://naver.com">네이버</a></li>
+        <li><a href="http://daum.com">다음</a></li>
+        <li><a href="http://www.charmpizza.com">참피자</a></li>
+        <li><a href="http://www.huntersmoon.co.kr">헌터스문</a></li>
+    </ul>
+</div>
+
+
+
+</body>
+</html>

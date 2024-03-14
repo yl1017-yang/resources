@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+</head>
+<body>
+
+<link rel="stylesheet" href="../css/common.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<style>
+.inner{width:650px;margin:0 auto;overflow:hidden;}
+
+/* 상단 */
+.header{position:relative;background:#eee;z-index:10;height:80px;}
+.header h1.logo{position:relative;float:left;margin-top:10px;}
+.gnb{position:absolute;margin-left:100px;z-index:10;}
+.gnb .gnbDep1{display:inline-block;}
+.gnb .gnbDep1 > a{display:block;font-size:22px;font-weight:bold;padding:20px 20px;}
+.gnb .gnbDep1 > a:hover,
+.gnb .gnbDep1 > a.on{color:skyblue;}
+
+.gnb .gnbDep2{position:absolute;top:80px;left:0;width:500px;padding:30px 0;z-index:30;}
+.gnb .gnbDep2 li{display:inline-block;}
+.gnb .gnbDep2 li > a{display:inline-block;color:#fff;padding:6px 15px;font-size:18px;}
+.gnb .gnbDep2 li > a:hover,
+.gnb .gnbDep2 li > a.on{color:skyblue;font-weight:bold;text-decoration:underline;}
+
+.header .gnb_bg{position:absolute;top:80px;left:0;width:100%;height:0;background:#444;z-index:0;}
+</style>
+
+
+<script>
+function gnbMenu(depth1, depth2, depth3) {
+	var $gnb = $('.gnb'),
+    	$gnbDep1 = $('.gnbDep1', $gnb);
+	
+	$('.gnb > li .gnbDep2').hide();
+    
+    $gnbDep1.on('mouseenter focusin', function(){        
+		$(this).children('.gnbDep2').stop().fadeIn('100');
+        
+        var bgHeight = $(this).find('.gnbDep2').innerHeight();
+        $('.header').find('.gnb_bg').stop().animate({height: bgHeight}, 300);
+    });
+    
+    $gnbDep1.on('mouseleave focusout',function(){
+        $(this).children('.gnbDep2').stop().fadeOut('0');        
+        
+        $('.header').find('.gnb_bg').stop().animate({height:0}, 400);
+    });
+    
+    if ($gnbDep1.length > depth1-1) {
+        $gnbDep1.eq(depth1-1).find('> a').addClass('on');
+        $gnbDep1.eq(depth1-1).find('.gnbDep2 > li').eq(depth2-1).find('> a').addClass('on');
+	}
+}
+</script>
+
+
+
+
+
+
+<script type="text/javascript">
+    $(function() {
+        gnbMenu(2,3); //초기번호 1
+    });
+    </script>
+    
+    <div class="header">
+    <div class="inner">
+        
+        <h1 class="logo">
+            LOGO
+        </h1>
+    
+        <ul class="gnb">
+            <li class="gnbDep1">
+                <a href="#">1차메뉴</a>            
+                <ul class="gnbDep2">
+                    <li><a href="#">서브메뉴1-1</a></li>
+                    <li><a href="#">서브메뉴1-2</a></li>
+                </ul>
+            </li>
+            <li class="gnbDep1">
+                <a href="#">2차메뉴</a>
+                <ul class="gnbDep2">
+                    <li><a href="#">세로고정메뉴2-1</a></li>
+                    <li><a href="#">세로고정메뉴2-2</a></li>
+                    <li><a href="#">세로메뉴2-3</a></li>
+                    <li><a href="#">세로고정메뉴2-4</a></li>
+                    <li><a href="#">세로고정메뉴2-5</a></li>
+                    <li><a href="#">세로고정메뉴2-6</a></li>
+                </ul>
+            </li>
+            <li class="gnbDep1">
+                <a href="#">3차메뉴</a>
+                <ul class="gnbDep2">
+                    <li><a href="#">메뉴3-1</a></li>
+                    <li><a href="#">메뉴3-2</a></li>
+                    <li><a href="#">메뉴3-3</a></li>
+                </ul>
+            </li>
+            <li class="gnbDep1">
+                <a href="#">4차메뉴</a>
+                <ul class="gnbDep2">
+                    <li><a href="#">4차메뉴01</a></li>
+                    <li><a href="#">4차메뉴02</a></li>
+                    <li><a href="#">4차메뉴03</a></li>
+                    <li><a href="#">4차메뉴01</a></li>
+                    <li><a href="#">4차메뉴02</a></li>
+                    <li><a href="#">4차메뉴03</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="gnb_bg"></div>
+        
+    </div>
+    </div>
+    
+    
+    <div class="content">
+    내용
+    </div>
+
+
+
+</body>
+</html>

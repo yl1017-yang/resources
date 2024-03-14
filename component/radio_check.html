@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+</head>
+<body>
+
+<link rel="stylesheet" href="../css/common.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<style>
+.wrap{padding:2% 5%;}
+.section{border:1px solid #eee;border-radius:15px;padding:2% 5%;margin-bottom:20px;}
+h3{font-size:26px;margin-bottom:10px;}
+
+/* 라디오버튼 - css */
+.btn_radio{display:flex;flex-wrap:wrap;}
+.btn_radio li{margin:0 30px 10px 0;}
+
+.btn_radio input[type='radio']{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
+.btn_radio input[type='radio'] + label{display:inline-block;position:relative;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;}
+.btn_radio input[type='radio'] + label:before{content:'';display:inline-block;width:20px;height:20px;margin:-2px 8px 0 0;vertical-align:middle;text-align:center;background:#fff;border:1px solid #ddd;border-radius:100%;}
+.btn_radio input[type='radio']:checked + label:before{background:#666;border:1px solid #666;}
+.btn_radio input[type='radio']:checked + label:after{content:'';position:absolute;top:7px;left:6px;width:10px;height:10px;background:#fff;border-radius:100%;}
+.btn_radio input[type='radio']:disabled + label:before{background:#ddd;border:1px solid #bbb;}
+.btn_radio input[type='radio']:disabled + label:after{content:'';position:absolute;top:7px;left:6px;width:10px;height:10px;background:#fff;border-radius:100%;}
+
+/* 라디오버튼 - 텍스트 */
+.txt_radio{display:flex;flex-wrap:wrap;}
+.txt_radio li{margin:0 20px 10px 0;}
+
+.txt_radio input[type='radio']{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
+.txt_radio input[type='radio'] + label{display:inline-block;position:relative;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;border:1px solid #ddd;padding:8px 30px;border-radius:6px;}
+.txt_radio input[type='radio']:checked + label{background:#666;border:1px solid #666;color:#fff;}
+.txt_radio input[type='radio']:disabled + label{cursor:not-allowed;opacity:.5;background:#eee;border:1px solid #eee;}
+
+/* 라디오버튼 - 이미지 */
+.img_radio{display:flex;flex-wrap:wrap;}
+.img_radio li{position:relative;margin:0 20px 20px 0;}
+
+.img_radio input[type='radio']{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
+.img_radio input[type='radio'] + label{display:block;position:relative;cursor:pointer;width:200px;height:140px;border-radius:8px;overflow:hidden;}
+.img_radio input[type='radio']:checked + label{position:relative;}
+.img_radio input[type='radio']:checked + label:after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;border-radius:8px;border:5px solid blueviolet;box-sizing:border-box;}
+.img_radio input[type='radio'] + label img{max-width:100%;min-height:100%;}
+.img_radio input[type='radio'] + label .text{position:absolute;bottom:10px;left:10px;color:#fff;font-weight:700;}
+
+/* 체크박스 - css */
+.btn_check{display:flex;flex-wrap:wrap;}
+.btn_check li{margin:0 30px 10px 0;}
+
+.btn_check input[type='checkbox']{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
+.btn_check input[type='checkbox'] + label{display:inline-block;position:relative;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;}
+.btn_check input[type='checkbox'] + label:before{content:'';display:inline-block;width:20px;height:20px;margin:-2px 8px 0 0;vertical-align:middle;text-align:center;background:#fff;border:1px solid #ddd;border-radius:6px;}
+.btn_check input[type='checkbox']:checked + label:before{content:'✔';font-size:12px;color:#fff;background:#666;border:1px solid #666;}
+.btn_check input[type='checkbox']:checked:disabled + label:before{content:'✔';color:#fff;background:#ddd;border:1px solid #aaa;}
+.btn_check input[type='checkbox']:disabled + label:before{cursor:not-allowed;opacity:.5;background:#ddd;}
+
+/* 체크박스 - 아이콘 */
+.icon_check{display:flex;flex-wrap:wrap;}
+.icon_check li{margin:0 30px 10px 0;}
+
+.icon_check input[type='checkbox']{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
+.icon_check input[type='checkbox'] + label{display:inline-block;position:relative;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;}
+.icon_check input[type='checkbox'] + label:before{content:'';display:inline-block;width:20px;height:20px;margin:-2px 8px 0 0;vertical-align:middle;text-align:center;background:#fff;border:1px solid #ddd;border-radius:6px;}
+.icon_check input[type='checkbox']:checked + label:before{content:'';border:1px solid #666;background:#666 url('../images/check-line-16.svg') no-repeat 50%;}
+.icon_check input[type='checkbox']:checked:disabled + label:before{content:'';color:#fff;background:#ddd url('../images/check-line-16.svg') no-repeat 50%;border:1px solid #aaa;}
+.icon_check input[type='checkbox']:disabled + label:before{cursor:not-allowed;opacity:.5;background:#ddd;}
+
+/* 체크박스 - 텍스트 */
+.txt_check{display:flex;flex-wrap:wrap;}
+.txt_check li{margin:0 20px 10px 0;}
+
+.txt_check input[type='checkbox']{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
+.txt_check input[type='checkbox'] + label{display:inline-block;position:relative;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;border:1px solid #ddd;padding:8px 30px;border-radius:6px;}
+.txt_check input[type='checkbox']:checked + label{background:#666;border:1px solid #666;color:#fff;}
+.txt_check input[type='checkbox']:checked:disabled + label{cursor:not-allowed;opacity:.5;color:#666;border:1px solid #aaa;}
+.txt_check input[type='checkbox']:disabled + label{cursor:not-allowed;opacity:.5;background:#ddd;}
+
+</style>
+
+
+<script>
+$(function() {
+});
+</script>
+
+<section class="wrap">
+
+    <div>특수문자 : https://snskeyboard.com/specialfont/</div>
+
+
+    <div class="section">
+        <h3>라디오버튼 - css</h3>
+        <ul class="btn_radio">
+            <li>
+                <input type="radio" id="btnradio_1" name="btnradio" checked="checked">
+                <label for="btnradio_1">주차가능</label>
+            </li>
+            <li>
+                <input type="radio" id="btnradio_3" name="btnradio">
+                <label for="btnradio_3">애견카페</label>
+            </li>
+            <li>
+                <input type="radio" id="btnradio_4" name="btnradio">
+                <label for="btnradio_4">놀이터</label>
+            </li>
+            <li>
+                <input type="radio" id="btnradio_5" name="btnradio">
+                <label for="btnradio_5">주말영업</label>
+            </li>
+            <li>
+                <input type="radio" id="btnradio_2" name="btnradio" disabled>
+                <label for="btnradio_2">disabled</label>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="section">
+        <h3>라디오버튼 - 텍스트</h3>
+        <ul class="txt_radio">
+            <li>
+                <input type="radio" id="txtradio_1" name="txtradio" checked="checked">
+                <label for="txtradio_1">주차가능</label>
+            </li>
+            <li>
+                <input type="radio" id="txtradio_3" name="txtradio">
+                <label for="txtradio_3">애견카페</label>
+            </li>
+            <li>
+                <input type="radio" id="txtradio_4" name="txtradio">
+                <label for="txtradio_4">놀이터</label>
+            </li>
+            <li>
+                <input type="radio" id="txtradio_5" name="txtradio">
+                <label for="txtradio_5">주말영업</label>
+            </li>
+            <li>
+                <input type="radio" id="txtradio_2" name="txtradio" disabled>
+                <label for="txtradio_2">disabled</label>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="section">
+        <h3>라디오버튼 - 이미지</h3>
+        <ul class="img_radio">
+            <li>
+                <input type="radio" id="imgradio_1" name="imgradio" value="1" checked="checked">
+                <label for="imgradio_1">
+                    <span class="text">반려견미용</span>
+                    <img src="https://cdn.pixabay.com/photo/2014/04/13/20/49/cat-323262__340.jpg" alt="">
+                </label>
+            </li>
+            <li>
+                <input type="radio" id="imgradio_2" name="imgradio" value="2">
+                <label for="imgradio_2">
+                    <span class="text">반려묘미용</span>
+                    <img src="https://cdn.pixabay.com/photo/2015/11/16/14/43/cat-1045782__340.jpg" alt="">
+                </label>
+            </li>
+            <li>
+                <input type="radio" id="imgradio_3" name="imgradio" value="3">
+                <label for="imgradio_3">
+                    <span class="text">호텔</span>
+                    <img src="https://cdn.pixabay.com/photo/2017/11/09/21/41/cat-2934720__340.jpg" alt="">
+                </label>
+            </li>
+            <li>
+                <input type="radio" id="imgradio_4" name="imgradio" value="4">
+                <label for="imgradio_4">
+                    <span class="text">유치원</span>
+                    <img src="https://cdn.pixabay.com/photo/2021/10/19/10/56/cat-6723256__340.jpg" alt="">
+                </label>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="section">
+        <h3>체크박스 - css</h3>
+        <ul class="btn_check">
+            <li>
+                <input type="checkbox" id="btncheck_1" name="btncheck" value="1" checked="checked">
+                <label for="btncheck_1">주차가능</label>
+            </li>
+            <li>
+                <input type="checkbox" id="btncheck_3" name="btncheck" value="2">
+                <label for="btncheck_3">애견카페</label>
+            </li>
+            <li>
+                <input type="checkbox" id="btncheck_4" name="btncheck" value="3">
+                <label for="btncheck_4">놀이터</label>
+            </li>
+            <li>
+                <input type="checkbox" id="btncheck_5" name="btncheck" value="4">
+                <label for="btncheck_5">주말영업</label>
+            </li>
+            <li>
+                <input type="checkbox" id="btncheck_6" name="btncheck" value="5" disabled>
+                <label for="btncheck_6">disabled</label>
+            </li>
+            <li>
+                <input type="checkbox" id="btncheck_2" name="btncheck" value="6" checked="checked" disabled>
+                <label for="btncheck_2">checked disabled</label>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="section">
+        <h3>체크박스 - 아이콘</h3>
+        <ul class="icon_check">
+            <li>
+                <input type="checkbox" id="imgcheck_1" name="imgcheck" value="1" checked="checked">
+                <label for="imgcheck_1">주차가능</label>
+            </li>
+            <li>
+                <input type="checkbox" id="imgcheck_3" name="imgcheck" value="2">
+                <label for="imgcheck_3">애견카페</label>
+            </li>
+            <li>
+                <input type="checkbox" id="imgcheck_4" name="imgcheck" value="3">
+                <label for="imgcheck_4">놀이터</label>
+            </li>
+            <li>
+                <input type="checkbox" id="imgcheck_5" name="imgcheck" value="4">
+                <label for="imgcheck_5">주말영업</label>
+            </li>
+            <li>
+                <input type="checkbox" id="imgcheck_6" name="imgcheck" value="5" disabled>
+                <label for="imgcheck_6">disabled</label>
+            </li>
+            <li>
+                <input type="checkbox" id="imgcheck_2" name="imgcheck" value="6" checked="checked" disabled>
+                <label for="imgcheck_2">checked disabled</label>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h3>체크박스 - 텍스트</h3>
+        <ul class="txt_check">
+            <li>
+                <input type="checkbox" id="txtcheck_1" name="txtcheck" value="1" checked="checked">
+                <label for="txtcheck_1">주차가능</label>
+            </li>
+            <li>
+                <input type="checkbox" id="txtcheck_3" name="txtcheck" value="2">
+                <label for="txtcheck_3">애견카페</label>
+            </li>
+            <li>
+                <input type="checkbox" id="txtcheck_4" name="txtcheck" value="3">
+                <label for="txtcheck_4">놀이터</label>
+            </li>
+            <li>
+                <input type="checkbox" id="txtcheck_5" name="txtcheck" value="4">
+                <label for="txtcheck_5">주말영업</label>
+            </li>
+            <li>
+                <input type="checkbox" id="txtcheck_6" name="txtcheck" value="5" disabled>
+                <label for="txtcheck_6">disabled</label>
+            </li>
+            <li>
+                <input type="checkbox" id="txtcheck_2" name="txtcheck" value="6" checked="checked" disabled>
+                <label for="txtcheck_2">checked disabled</label>
+            </li>
+        </ul>
+    </div>
+
+
+
+
+</section>
+
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+</head>
+<body>
+
+<link rel="stylesheet" href="../css/common.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<style>
+.btn_pop{display:inline-block;padding:10px 50px;font-size:22px;color:#fff;background:blueviolet;border-radius:100px;}
+
+.pop_wrap{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);opacity:0;visibility:hidden;z-index:-1;
+/* transition:all 0.3s ease-in-out; transform:scale(0.6);*/
+/* transition: all 250ms linear; */
+transition: opacity 250ms 250ms ease, transform 300ms 250ms ease;
+}
+.pop_wrap.on{opacity:1;z-index:1998;visibility:visible;overflow:auto;-webkit-overflow-scrolling:touch;}
+.pop_wrap .pop_inner{width:100%;min-height:100%;display:flex;justify-content:center;align-items:center;box-sizing:border-box;}
+.pop_wrap .pop_content{position:relative;width:500px;padding:60px 50px 30px;box-shadow:3px 3px 20px 0 rgba(0,0,0,.05);border-radius:10px;background-color:#fff;border:solid 1px #f2f2f2;box-sizing:border-box;}
+/* .pop_wrap .pop_close{display:block;position:absolute;width:33px;height:33px;right:30px;top:30px;text-indent:-999em;background:url('https://www.lgensol.com/assets/img/icon/x-o.svg') 50% 50% no-repeat;overflow:hidden} */
+.pop_wrap .pop_close{display:block;position:absolute;width:40px;height:40px;right:25px;top:25px;text-indent:-999em;overflow:hidden}
+.pop_wrap .pop_close:before{content:'';display:block;position:absolute;width:24px;height:2px;left:26%;top:47%;background-color:#444;transform:rotate(-45deg);-webkit-transform:rotate(-45deg);-moz-transform:rotate(-45deg);-o-transform:rotate(-45deg);-ms-transform:rotate(-45deg);}
+.pop_wrap .pop_close:after{content:'';display:block;position:absolute;width:24px;height:2px;left:26%;top:47%;background-color:#444;transform:rotate(45deg);-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);-o-transform:rotate(45deg);-ms-transform:rotate(45deg);}
+
+/* 두번째 레이어팝업 */
+.pop_wrap .pop_content.content_txt{width:700px;background-color:pink;border:0;}
+</style>
+
+
+<script>
+$(function(){
+
+function openPop(href){
+    $('.pop_wrap' + href).addClass('on');
+}
+
+$('.btn_pop').on('click',function(){
+    var href = $(this).attr("href");
+    openPop(href);
+    $('body').css({'height':$(window).height(), 'overflow':'hidden'});
+});
+
+function closePop() {
+    $('.pop_wrap').removeClass('on');
+    $('body').css({'height':'auto', 'overflow':'auto'});
+}
+
+$('.pop_wrap .pop_close').on('click', function(e){
+    e.preventDefault();
+    closePop();
+});
+
+// 빈영역 클릭 닫기
+$('.pop_wrap').on('click', function (e) {
+    if ($(e.target).is('.pop_inner') == true) {
+        closePop();
+    }
+});
+
+});
+</script>
+
+
+
+
+<a href="#pop1" class="btn_pop">1번째 모달팝업(APP 권한 동의)</a>
+<a href="#pop2" class="btn_pop">2번째 모달팝업(개인정보 동의)</a>
+
+<div>접근성 내용 : https://blog.naver.com/limlovesyou/222657370100</div>
+<div>머터리얼 디자인 가이드 : https://material.io/components/dialogs#actions</div>
+
+
+
+<div id="pop1" class="pop_wrap">
+    <div class="pop_inner">
+        <div class="pop_content">
+            
+            <a href="#" class="pop_close"><span>팝업닫기</span></a>
+
+            <h3>https://www.lgensol.com/</h3>
+            <p>본 홈페이지에 게시된 이메일 주소가 자동 수집되는 것을 거부하며,
+                이를 위반 시 정보통신망법에 의해 처벌됨을 유념하시기 바랍니다.
+            </p>
+            
+        </div>
+    </div>
+</div>
+
+<div id="pop2" class="pop_wrap">
+    <div class="pop_inner">
+        <div class="pop_content content_txt">
+            
+            <a href="#" class="pop_close"><span>팝업닫기</span></a>
+
+            <h3>두번째 레이어팝업</h3>
+            <p>
+                두번째 레이어팝업 내용<br>
+                .content_txt 클래스 사용<br>
+                https://blog.naver.com/yangwonder/221769135015
+            </p>
+            
+        </div>
+    </div>
+</div>
+
+<div>
+    참고사이트 <br>
+    https://webclub.tistory.com/189 <br>
+    https://dh5032.tistory.com/34
+</div>
+
+</body>
+</html>

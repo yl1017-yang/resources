@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+</head>
+<body>
+
+<link rel="stylesheet" href="../css/common.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<style>
+.gnb{margin:20px;position:relative;}
+.gnb ul{position:relative; z-index:10;}
+.gnb ul > li{float:left;}
+.gnb .dep1 > li > a {display:block;font-size:20px;font-weight:bold;padding:10px 20px;text-align:center;}
+
+
+.gnb .dep2{position:absolute;top:50px;left:0;width:70%;background:gray; height:0; overflow:hidden; transition:all 0.5s;}
+.gnb .dep2 > li{opacity:0;transition:all 0.3s;}
+.gnb .dep2 > li a{display:inline-block;color:#fff; padding:10px 20px;}
+.gnb .dep2 > li a:hover{color:#000;}
+
+.gnb .dep1 > li:hover .dep2 {height:60px;}
+.gnb .dep1 > li:hover .dep2 > li {margin-top:0;opacity:1;}
+.gnb .dep1 > li:hover .dep2 > li:nth-child(2){transition-delay:0.1s}
+.gnb .dep1 > li:hover .dep2 > li:nth-child(3){transition-delay:0.2s}
+.gnb .dep1 > li:hover .dep2 > li:nth-child(4){transition-delay:0.3s}
+.gnb .dep1 > li:hover .dep2 > li:nth-child(5){transition-delay:0.4s}
+.gnb .dep1 > li:hover .dep2 > li:nth-child(6){transition-delay:0.5s}
+.gnb .dep1 > li:hover .dep2 > li:nth-child(7){transition-delay:0.6s}
+.gnb .dep1 > li:hover .dep2 > li:nth-child(8){transition-delay:0.7s}
+.gnb .dep1 > li:hover .dep2 > li:nth-child(9){transition-delay:0.8s}
+.gnb .dep1 > li:hover .dep2 > li:nth-child(10){transition-delay:0.9s}
+</style>
+
+
+<script>
+</script>
+
+
+
+<div class="gnb">    
+    <ul class="dep1">
+        <li>
+            <a href="#" >간단배경메뉴</a>            
+            <ul class="dep2">
+                <li><a href="#">서브메뉴1-1</a></li>
+                <li><a href="#">서브메뉴1-2</a></li>
+            </ul>            
+        </li>
+        <li>
+            <a href="#">세로배경</a>
+            <ul class="dep2">
+                <li><a href="#">세로고정메뉴2-1</a></li>
+                <li><a href="#">메뉴2-2</a></li>
+                <li><a href="#">메뉴2-3</a></li>
+                <li><a href="#">메뉴2-4</a></li>
+                <li><a href="#">메뉴2-5</a></li>
+                <li><a href="#">메뉴2-6</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">3차메뉴</a>
+            <ul class="dep2">
+                <li><a href="#">메뉴3-1</a></li>
+                <li><a href="#">메뉴3-2</a></li>
+                <li><a href="#">메뉴3-3</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">4차메뉴</a>
+            <ul class="dep2">
+                <li><a href="#">4차메뉴01</a></li>
+                <li><a href="#">4차메뉴02</a></li>
+                <li><a href="#">4차메뉴03</a></li>
+                <li><a href="#">4차메뉴01</a></li>
+                <li><a href="#">4차메뉴02</a></li>
+                <li><a href="#">4차메뉴03</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+
+
+</body>
+</html>

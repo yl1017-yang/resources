@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+</head>
+<body>
+
+<link rel="stylesheet" href="../css/common.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<style>
+.gnb{margin:20px;position:relative;}
+.gnb ul{position:relative;z-index:10;}
+.gnb ul > li{float:left;}
+.gnb ul > li .dep1{display:block;font-size:20px;font-weight:bold;padding:10px 20px;text-align:center;}
+.gnb ul > li .dep1.on{color:#1b3b86;}
+
+.gnb ul li .dep2{position:absolute;top:50px;left:0;width:70%;padding:10px 0;border:1px solid red;}
+.gnb ul li .dep2 li{border:1px solid #000;}
+.gnb ul li .dep2 li a{display:inline-block;color:#fff;padding:10px 15px;}
+.gnb ul li .dep2 li a:hover{font-weight:bold;color:yellow;}
+
+.gnb .gnb_bg{position:absolute;top:50px;left:0;width:70%;background:#444;z-index:0;}
+</style>
+
+
+<script>
+$(function() {
+	$('.gnb ul li .dep2').hide();
+    
+    $('.gnb ul > li').on('mouseenter focusin', function(){
+        $(this).find('.dep1').addClass('on');
+//        $(this).find('.dep2').stop().slideDown('300');
+		$(this).find('.dep2').stop().fadeIn('300');
+        $('.gnb').find('.gnb_bg').stop(true, false).animate({'height':'150'}, 300);
+        
+    }).on('mouseleave focusout',function(){
+        $(this).find('.dep1').removeClass('on');
+//        $(this).find('.dep2').stop().slideUp('300');
+        $(this).find('.dep2').stop().fadeOut('0');
+        $('.gnb').find('.gnb_bg').stop(true, false).animate({'height':'0'}, 300);
+    });
+    
+
+});
+</script>
+
+
+
+<div class="gnb">    
+    <ul>
+        <li>
+            <a href="#" class="dep1">간단배경메뉴</a>
+            <ul class="dep2">
+                <li><a href="#">서브메뉴1-1</a></li>
+                <li><a href="#">서브메뉴1-2</a></li>
+            </ul>
+            <div class="gnb_bg"></div>
+        </li>
+        <li>
+            <a href="#" class="dep1">세로 배경고정</a>
+            <ul class="dep2">
+                <li><a href="#">세로고정메뉴2-1</a></li>
+                <li><a href="#">메뉴2-2</a></li>
+                <li><a href="#">메뉴2-3</a></li>
+                <li><a href="#">메뉴2-4</a></li>
+                <li><a href="#">메뉴2-5</a></li>
+                <li><a href="#">메뉴2-6</a></li>
+            </ul>
+            <div class="gnb_bg"></div>
+        </li>
+        <li>
+            <a href="#" class="dep1">3차메뉴</a>
+            <ul class="dep2">
+                <li><a href="#">메뉴3-1</a></li>
+                <li><a href="#">메뉴3-2</a></li>
+                <li><a href="#">메뉴3-3</a></li>
+            </ul>
+            <div class="gnb_bg"></div>
+        </li>
+    </ul>
+    
+    <!--<div class="gnb_bg"></div>-->
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+</head>
+<body>
+
+<link rel="stylesheet" href="../css/common.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<style>
+.gnb{margin:20px;}
+.gnb ul > li{float:left;position:relative;}
+.gnb ul li .dep1{display:block;font-size:20px;font-weight:bold;padding:10px 20px;text-align:center;}
+.gnb ul li .dep1.on{color:#1b3b86;}
+
+.gnb ul li .dep2{position:absolute;top:60px;left:0;background:#444;padding:10px 0;}
+.gnb ul li .dep2 li a{display:block;color:#fff;padding:4px 15px;}
+.gnb ul li .dep2 li a:hover{font-weight:bold;color:yellow;}
+</style>
+
+
+<script>
+$(function() {
+	$('.gnb ul li .dep2').hide();
+    $('.gnb ul > li').on('mouseenter focusin', function(){
+        $(this).find('.dep1').addClass('on');
+        $(this).find('.dep2').stop().slideDown('300');
+    }).on('mouseleave focusout',function(){
+        $(this).find('.dep1').removeClass('on');
+        $(this).find('.dep2').stop().slideUp('300');
+    });
+});
+</script>
+
+
+
+<div class="gnb">    
+    <ul>
+        <li>
+            <a href="#" class="dep1">1차메뉴</a>
+            <ul class="dep2">
+                <li><a href="#">메뉴1-1</a></li>
+                <li><a href="#">메뉴1-2</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#" class="dep1">2차메뉴</a>
+            <ul class="dep2">
+                <li><a href="#">메뉴2-1</a></li>
+                <li><a href="#">메뉴2-2</a></li>
+                <li><a href="#">메뉴2-3</a></li>
+                <li><a href="#">메뉴2-4</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#" class="dep1">3차메뉴</a>
+            <ul class="dep2">
+                <li><a href="#">메뉴3-1</a></li>
+                <li><a href="#">메뉴3-2</a></li>
+                <li><a href="#">메뉴3-3</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+
+
+</body>
+</html>

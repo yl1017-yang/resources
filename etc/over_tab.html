@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+</head>
+<body>
+
+<link rel="stylesheet" href="../css/common.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<style>
+body{background:#222;}
+h2{color:#fff;font-size:30px;padding:4%;}
+h2 p{font-size:20px;}
+
+.acodi_list{margin:2% 4%;}
+.acodi_list ul{display:flex}
+.acodi_list ul li{position:relative;background:#fff;border-radius:10px;margin-right:20px;width:110px;height:400px;color:#000;cursor:pointer;}
+.acodi_list ul li a{display:block;width:100%;height:100%;z-index:0}
+.acodi_list ul li.on{width:330px;}
+.acodi_list ul li:nth-child(1){background-color:#FFDA00;}
+.acodi_list ul li:nth-child(2){background-color:#17E076;}
+.acodi_list ul li:nth-child(3){background-color:#1F2A4E;color:#fff;}
+.acodi_list .acodi_title{display:flex;position:relative;cursor:pointer;padding:30px}
+.acodi_list .acodi_title .title_area{display:block;width:100%;font-size:20px;font-weight:600;white-space:nowrap;transform:rotate(90deg);letter-spacing:-0.5px}
+.acodi_list ul li.on .acodi_title .title_area{transform:rotate(0deg);}
+.acodi_list ul li.on .acodi_title:after{content:'';position:absolute;top:30px;right:30px;width:30px;height:30px;background:#bbb url('../images/down-line-20.svg') no-repeat 50% 50%/70%;border-radius:100px;transform:rotate(-90deg);filter:invert(100%);}
+
+.acodi_list .icon{position:absolute;top:0;left:30px;width:50%;margin-top:320px;}
+.acodi_list ul li.on .icon{width:30%;margin-top:270px;}
+
+.acodi_list .acodi_content{display:none;position:relative;padding:0 30px 20px 30px}
+.acodi_list .acodi_content .title{font-size:30px;line-height:34px;margin:20px 0 10px;}
+</style>
+
+
+<script>
+$(function() {
+    $('.acodi_list ul li').on('hover mouseenter', function() {
+        $('.acodi_list ul li').removeClass('on').find('.acodi_content').show();
+        // $(this).next().stop().slideToggle(300);
+        // $(this).next().stop().toggle(300);
+        //children
+        $(this).addClass('on').siblings('li').find('.acodi_content').hide();
+    });
+    $('.acodi_list ul li').eq(0).trigger("mouseenter");
+});
+</script>
+
+<div>https://campaign.naver.com/2022-year-end/</div>
+<h2>
+  마우스 over시 가로 펼침
+  <p>기본 : 110px X 400px / 펼침 : 330px X 400px</p>
+</h2>
+
+<div class="acodi_list">
+  <ul>
+    <li>
+      <a href="https://campaign.naver.com/2022-year-end/" target="_blank">
+        <div class="acodi_title">
+          <span class="title_area">풀무원 맴버십데이</span>
+          <i class="icon"><img src="./images/img_card_membership.png" alt=""></i>
+        </div>
+        <div class="acodi_content">
+          <p class="title">#Pulmuone<br>MEMBERSHIP</p>
+          <p class="desc">풀무원 연말특집 맴버십데이,<br>올해 마지막 특가 찬스!</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a href="https://campaign.naver.com/memday/2212_brand/" target="_blank">
+        <div class="acodi_title">
+          <span class="title_area">풀무원 감사이벤트</span>
+          <i class="icon"><img src="./images/img_card_juniver.png" alt=""></i>
+        </div>
+        <div class="acodi_content">
+          <p class="title">#Pulmuone<br>NEW</p>
+          <p class="desc">풀무원 신규회원 이벤트<br>올해 마지막 특가 찬스!</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a href="https://campaign.naver.com/2022-year-end/" target="_blank">
+        <div class="acodi_title">
+          <span class="title_area">2022 크리스마스</span>
+          <i class="icon"><img src="./images/img_card_happybean.png" alt=""></i>
+        </div>
+        <div class="acodi_content">
+          <p class="title">#Pulmuone<br>CHRISTMAS</p>
+          <p class="desc">아트스트들이 리메이크한 베스트 캐롤<br>100곡 무제한 감상</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a href="https://campaign.naver.com/2022-year-end/" target="_blank">
+        <div class="acodi_title">
+          <span class="title_area">연말 이벤트</span>
+          <i class="icon"><img src="./images/img_card_npay.png" alt=""></i>
+        </div>
+        <div class="acodi_content">
+          <p class="title">#Pulmuone<br>MEMBERSHIP</p>
+          <p class="desc">풀무원 연말특집 맴버십데이,<br>올해 마지막 특가 찬스!</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a href="https://campaign.naver.com/2022-year-end/" target="_blank">
+        <div class="acodi_title">
+          <span class="title_area">임직원 메일링</span>
+          <i class="icon"><img src="./images/img_card_npay.png" alt=""></i>
+        </div>
+        <div class="acodi_content">
+          <p class="title">#Pulmuone<br>MEMBERSHIP</p>
+          <p class="desc">풀무원 연말특집 맴버십데이,<br>올해 마지막 특가 찬스!</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a href="https://campaign.naver.com/2022-year-end/" target="_blank">
+        <div class="acodi_title">
+          <span class="title_area">#풀페스타</span>
+          <i class="icon"><img src="./images/img_card_npay.png" alt=""></i>
+        </div>
+        <div class="acodi_content">
+          <p class="title">#Pulmuone<br>MEMBERSHIP</p>
+          <p class="desc">풀무원 연말특집 맴버십데이,<br>올해 마지막 특가 찬스!</p>
+        </div>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+</body>
+</html>

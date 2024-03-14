@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+</head>
+<body>
+
+<link rel="stylesheet" href="../css/common.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<style>
+/* 리뷰박스 */
+.review_content_wrap{width:650px;padding:0 34px;margin:30px 0;}
+.review_content_wrap h2{font-size:30px;font-weight:500;color:#1a1a1a;margin-bottom:20px;}
+.review_content_wrap .text{font-size:20px;font-weight:500;color:#1a1a1a;margin-bottom:10px;}
+.review_content_wrap .review_contents{position:relative;margin:20px 0 24px;width:100%;height:180px;border:1px solid #e0e0e0;border-radius:10px;padding:12px 12px 40px 12px;}
+.review_content_wrap .review_contents #review_textarea{width:100%;height:100%;}
+.review_content_wrap .review_contents #review_cnt{position:absolute;bottom:12px;right:12px;}
+.review_content_wrap .review_contents #review_cnt span{color:#ff781e;font-weight:600;}
+
+/* 별점 */
+/* .rating_wrap .rate_check + label{position:relative;display:inline-block;margin-left:-4px;z-index:10;width:48px;height:48px;background:url('../images/star-filled-empty-22.svg') no-repeat 0 0/100%;cursor:pointer;}
+.rating_wrap .rate_check.on + label{background-image:url('../images/star-filled-22.svg');} */
+.rating_wrap{display:flex;flex-direction:row-reverse;justify-content:flex-end;}/* display:inline-block;direction:rtl; */
+.rating_wrap .rate_check + label{display:inline-block;width:48px;height:48px;background:url('../images/star-filled-empty-22.svg') no-repeat 0 0/100%;cursor:pointer;z-index:10;}/* float:right; */
+.rating_wrap .rate_check:checked ~ label{display:inline-block;background-image:url('../images/star-filled-22.svg');}
+
+/* 버튼 */
+.bottom_box{padding-top:40px;margin-top:40px;border-top:1px solid #eee;}
+.bottom_box .btn_comfirm{display:inline-block;width:100%;padding:20px 0;color:#fff;font-size:20px;background-color:#383532;border-radius:10px;}
+.bottom_box .btn_reset{display:inline-block;width:100%;padding:10px 0;border:1px solid #333;background:#fff;font-size:20px;border-radius:10px;margin-top:10px;}
+
+/* 이미지 추가하기 */
+.review_content_wrap .input_wrap{margin-bottom:5px;}
+.review_content_wrap .input_wrap input[type=file]{display:none;}
+.review_content_wrap .btn_add_photo{position:relative;display:block;width:100%;padding:16px 0;background:#fff;border:1px solid #333;border-radius:10px;color:#1a1a1a;font-weight:500;text-align:center;}
+
+.review_content_wrap .photo_box_wrap{display:flex;flex-wrap:wrap;}
+.review_content_wrap .photo_box{position:relative;width:15vw;height:15vw;overflow:hidden;border-radius:4px;margin-bottom:1vw;margin-left:1vw;}
+.review_content_wrap .photo_box:nth-child(4n+1){margin-left:0;}
+.review_content_wrap .photo_box .img{width:100%;height:100%;}
+.review_content_wrap .photo_box .btn_photo_del{position:absolute;top:0;right:0;width:36px;height:36px;background:url('../images/close-line-28-black.svg') no-repeat 50% 50%/100%;cursor:pointer;}
+</style>
+
+
+<div>http://ui.m.rocateerdev.co.kr/layout/layout_detail?page_name=login_b</div>
+
+<div class="review_content_wrap">
+    <form method="post" action="../etc/rating.html" name="form_review" id="form_review">
+        <fieldset>
+            <legend>이모지 별점</legend>
+            <h2>상품후기 작성</h2>
+            <p class="text">상품은 잘 받아 보셨나요?</p>
+            <!-- 별점 -->
+            <div class="rating_wrap">
+                <input type="radio" name="rating" id="stars1" value="1" class="rate_check" title="1점">
+                <label for="stars1"></label>
+                <input type="radio" name="rating" id="stars2" value="2" class="rate_check" title="2점">
+                <label for="stars2"></label>
+                <input type="radio" name="rating" id="stars3" value="3" class="rate_check" title="3점" >
+                <label for="stars3"></label>
+                <input type="radio" name="rating" id="stars4" value="4" class="rate_check" title="4점">
+                <label for="stars4"></label>
+                <input type="radio" name="rating" id="stars5" value="5" class="rate_check" title="5점">
+                <label for="stars5"></label>
+            </div>
+            <!-- //별점 -->
+            <div class="review_contents">
+                <textarea id="review_textarea" name="review" cols="30" placeholder="상품 후기 내용은 최소 10자 이상, 1,000자 이내로 작성해 주세요."></textarea>
+                <div id="review_cnt"><span>0</span> / 1000</div>
+            </div>
+
+            <!-- 이미지 추가하기 -->
+            <div class="input_wrap">
+                <a href="javascript:" onclick="fileUploadAction();" class="btn_add_photo">이미지 추가하기</a>
+                <input type="file" id="btnAtt" multiple="multiple" />
+            </div>
+            <div id="att_zone" class="photo_box_wrap" data-placeholder="파일을 첨부 하려면 파일 선택 버튼을 클릭하거나 파일을 드래그앤드롭 하세요"></div>
+            <!-- //이미지 추가하기 -->
+
+            <div class="bottom_box">
+                <button type="submit" class="btn_comfirm" name="submit" id="submit">저장</button>
+                <button type="reset" class="btn_reset" name="reset" id="reset">초기화</button>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+
+
+
+<script>
+$(function() {
+    //상품후기 저장폼
+    $('#form_review').on('submit',function(){
+        if ($('input[name=rating]').val()) {
+            alert('별점은 필수선택 입니다.');
+            return false;
+        } else if ($('input[name=rating]:checked').val()) {
+            console.log($(this).val())
+            alert('완료');
+        }
+        
+        if ($.trim($('#review_textarea').val()) =='') {
+            alert('상품 후기 내용은 최소 10자 이상, 1,000자 이내로 작성해 주세요.');
+            $('#review_textarea').focus();
+        return false;
+        }
+        
+        alert('상품후기를 저장하겠습니까?');
+    });
+
+    //별점 체크 https://miuus.tistory.com/2
+    // $('.rate_check').on('click', function() {
+    //     $(this).parent().children('input').removeClass('on');
+    //     $(this).addClass('on').prevAll('input').addClass('on');
+    //     console.log($(this).attr("value"));
+    //     return false;
+    // });
+
+    //textarea 최소/최대글자수 
+    $('#review_textarea').on('keyup', function() {
+        $('#review_cnt').html(" <span>"+ $(this).val().length +"</span> / 1000");
+        
+        if($(this).val().length < 10) {
+            $(this).val($(this).val().substring(0, 10));
+            $('#review_cnt').html("10자이상 작성 / 1000");
+        } else if($(this).val().length > 1000) {
+            $(this).val($(this).val().substring(0, 1000));
+            $('#review_cnt').html("300 / 1000");
+        }
+    });
+});
+    
+    
+// 첨부파일 이미지 업로드
+function fileUploadAction() {
+    console.log("fileUploadAction");
+    $("#btnAtt").trigger('click');
+}
+
+imageView = function imageView(att_zone, btn){
+
+var attZone = document.getElementById(att_zone);
+var btnAtt = document.getElementById(btn)
+var sel_files = [];
+
+// 이미지와 체크 박스를 감싸고 있는 div 속성
+var div_style = 'photo_box';
+// 미리보기 이미지 속성
+var img_style = 'img';
+// 이미지안에 표시되는 체크박스의 속성
+var chk_style = 'btn_photo_del';
+
+btnAtt.onchange = function(e){
+    var files = e.target.files;
+    var fileArr = Array.prototype.slice.call(files)
+    for(f of fileArr){
+        imageLoader(f);
+    }
+} 
+
+// 탐색기에서 드래그앤 드롭 사용
+attZone.addEventListener('dragenter', function(e){
+    e.preventDefault();
+    e.stopPropagation();
+}, false)
+
+attZone.addEventListener('dragover', function(e){
+    e.preventDefault();
+    e.stopPropagation();
+}, false)
+
+attZone.addEventListener('drop', function(e){
+    var files = {};
+    e.preventDefault();
+    e.stopPropagation();
+    var dt = e.dataTransfer;
+    files = dt.files;
+    for(f of files){
+        imageLoader(f);
+    }
+}, false)
+
+/*첨부된 이미리즐을 배열에 넣고 미리보기 */
+imageLoader = function(file){
+sel_files.push(file);
+var reader = new FileReader();
+reader.onload = function(ee){
+    let img = document.createElement('img')
+    img.setAttribute('class', img_style)
+    img.src = ee.target.result;
+    attZone.appendChild(makeDiv(img, file));
+}
+
+reader.readAsDataURL(file);
+}
+
+/*첨부된 파일이 있는 경우 checkbox와 함께 attZone에 추가할 div를 만들어 반환 */
+makeDiv = function(img, file){
+var div = document.createElement('div')
+div.setAttribute('class', div_style)
+
+var btn = document.createElement('input')
+btn.setAttribute('type', 'button')
+//btn.setAttribute('value', '삭제')
+btn.setAttribute('delFile', file.name);
+btn.setAttribute('class', chk_style);
+btn.onclick = function(ev){
+    var ele = ev.srcElement;
+    var delFile = ele.getAttribute('delFile');
+    for(var i=0 ;i<sel_files.length; i++){
+    if(delFile== sel_files[i].name){
+        sel_files.splice(i, 1);      
+    }
+    }
+    
+    dt = new DataTransfer();
+    for(f in sel_files) {
+    var file = sel_files[f];
+    dt.items.add(file);
+    }
+    btnAtt.files = dt.files;
+    var p = ele.parentNode;
+    attZone.removeChild(p)
+}
+div.appendChild(img)
+div.appendChild(btn)
+return div
+}
+}('att_zone', 'btnAtt')
+
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+</head>
+<body>
+
+<link rel="stylesheet" href="../css/common.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<style>
+body {
+  background: cornsilk;
+  box-sizing: border-box;
+}
+
+.bottom_sheet {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  /* width: 100%; */
+  height: 20%;
+  padding: 0 30px 80px 30px;
+  box-shadow: 3px 3px 20px 0 rgba(0, 0, 0, .07);
+  border-radius: 30px 30px 0 0;
+  background: #fff;
+  transition: all 0.2s ease-in-out;
+  overflow: hidden;  
+  z-index: 0;
+}
+.bottom_sheet.is_active {
+  height: 70%;
+}
+
+.bottom_sheet_handle {
+  position: absolute;
+  top: 0;
+  left: 0;   
+   width: 100%;
+   height: 60px;
+   background: linear-gradient(to bottom,rgba(255, 255, 255, 1) 20%,rgba(255, 255, 255, 0.75) 35%,rgba(255, 255, 255, 0.5) 60%,rgba(255, 255, 255, 0.25) 85%,rgba(255, 255, 255, 0) 100%);
+   z-index: 1;
+}
+.bottom_sheet_handle:after {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translatex(-50%);
+  width: 20%;
+  height: 6px;
+  background: #555;
+  border-radius: 100px;
+}
+
+
+.bottom_sheet .bottom_header {
+  margin-top: 70px;
+}
+.bottom_sheet .bottom_header h2 {
+  font-size: 25px;
+  font-weight: bold;
+  color: blueviolet;
+  margin-bottom: 10px;
+}
+
+.bottom_sheet .bottom_content {
+  height: 100%;
+  overflow-y: auto;
+}
+.bottom_sheet .bottom_content a{
+  display: inline-block;
+  width: 200px;
+  height: 50px;
+  background: #999;
+  margin-bottom: 5px;
+  z-index: 10;
+  border:1px solid red;
+  color:#fff;
+}
+
+.up_sensor {
+   z-index: 1;
+   position: absolute;
+   background: transparent;
+   width: inherit;
+   height: 100%;
+   bottom: 0;
+   height: 10%;
+   transition-duration: 1s;
+}
+</style>
+
+
+
+
+
+<div class="bottom_sheet">
+    <div class="bottom_sheet_handle"></div>
+    <div class="bottom_header">
+      <h2>바텀시트 핸들바 타이틀</h2>
+    </div>
+    <div class="bottom_content">
+      <a href="https://fastcampus.co.kr/">링크경로11</a> <br>
+      <a href="https://shop.pulmuone.co.kr/">링크경로22</a> <br>
+
+      Element.classList.add('클래스명') // 클래스 하나 추가<br>
+      Element.classList.add('클래스명a', '클래스명b', '클래스명c',) // 클래스 여러개 추가<br>
+      Element.classList.remove('클래스명') //제거<br>
+      Element.classList.replace('지금클래스명' , '바꿀 클래스명') //클래스명 변경<br>
+      Element.classList.toggle( '클래스명') // 클릭 시 클래스 제거, 생성 반복 <br>
+      Element.classList.contains( '클래스명') // 클래스 있는지 확인 <br>
+      bottomSheet .setAttribute("class", "on");<br>
+      https://bottlesun.tistory.com/45<br>
+      <div style="width:100%;height:120px;background:yellowgreen;">내용임111</div>
+      <div style="width:100%;height:120px;background:skyblue;">내용임2222</div>
+    </div>
+</div>
+  
+
+<script>
+    const bottomSheet = document.querySelector(".bottom_sheet");
+  
+    function handleSlide() {
+      bottomSheet.classList.toggle("is_active");
+    }
+    function handleSlideUp() {
+      bottomSheet.classList.add("is_active");
+    }
+    function handleSlideDown() {
+      bottomSheet.classList.remove("is_active");
+    }
+  
+    let startY;
+    let endY;
+
+    bottomSheet.addEventListener("mousedown", (e) => {
+      console.log("mousedown", e.pageY);
+      startY = e.pageY;
+      e.preventDefault();
+      handleSlide();
+    });  
+    bottomSheet.addEventListener("mouseup", (e) => {
+      console.log("mouseup", e.pageY);
+      endY = e.pageY;
+    });
+
+    bottomSheet.addEventListener("touchstart", (e) => {
+      console.log("touchstart", e.touches[0].pageY);
+
+      // 터치의 시작 지점을 저장
+      startY = e.touches[0].pageY;
+    });
+
+    // bottomSheet.addEventListener("touchmove", (e) => {
+    //   console.log("touchmove", e.changedTouches[0].pageY);
+    //   if (!startY) return;
+
+    //   // 현재 터치 위치
+    //   let currentY = e.changedTouches[0].pageY;
+
+    //   // 위아래로 이동한 거리 계산
+    //   let deltaY = currentY - startY;
+
+    //   // 일정 이동 거리 이상일 때 스와이프로 판단할 수 있습니다.
+    //   if (Math.abs(deltaY) > 50) {
+    //       if (deltaY < 0) {
+    //           console.log('아래로 스와이프');
+    //           handleSlideUp();
+    //       } else {
+    //           console.log('위로 스와이프');
+    //           handleSlideDown();
+    //       }
+
+    //       // 스와이프를 감지했으므로 시작 지점을 초기화
+    //       startY = null;
+    //   }
+    // });
+
+    // bottomSheet.addEventListener('touchend', function() {
+    //   // 터치 종료 시에는 시작 지점을 초기화
+    //   startY = null;
+    // });
+
+    bottomSheet.addEventListener('touchend', function(e) {
+      let endY = e.changedTouches[0].clientY;
+      let deltaY = endY - startY;
+      if (deltaY > 0) {
+          console.log("아래 방향으로 스와이프");
+          handleSlideDown();
+      } else if (deltaY < 0) {
+          console.log("위 방향으로 스와이프");
+          handleSlideUp();
+      }
+    });
+
+    // bottomSheet.addEventListener("click", (e) => {
+    //   e.preventDefault();
+    // });
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+</head>
+<body>
+
+<link rel="stylesheet" href="../css/common.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<style>
+.tab_area{width:80%;margin:50px auto;}
+.tab_area ul{padding:0;margin:0;list-style:none;width:100%;height:auto;display:flex;}
+.tab_area ul li{padding:10px 30px;cursor:pointer;}
+.tab_area ul li:hover,
+.tab_area ul li.on{border-bottom:2px solid blueviolet;color:blueviolet;}
+
+.tab_area .conBox{display:none;width:100%;height:auto;min-height:200px;border:1px solid #eee;border-radius:10px;padding:20px;overflow:hidden;}
+.tab_area .conBox.on{display:block;}
+</style>
+
+
+<script>
+$(function() {
+    //클릭시 폼상단
+    top_pos = $('.tab_area').offset().top;
+
+    $('.tab_area ul li').on('click', function(){
+        $('.tab_area ul li').removeClass('on');
+        $('.tab_area .conBox').removeClass('on');
+        $(this).addClass('on');
+        $('#' + $(this).data('id')).addClass('on');
+        $('html, body').animate({scrollTop:top_pos});
+    });
+});
+</script>
+
+<div style="height:100px"></div>
+
+
+<div class="tab_area">
+    <ul>
+        <li data-id="con1" class="on">탭메뉴 #1</li>
+        <li data-id="con2">탭메뉴 #2</li>
+        <li data-id="con3">탭메뉴 #3</li>
+    </ul>
+    <div id="con1" class="conBox on">
+        - 111 내용
+    </div>
+    <div id="con2" class="conBox">
+        - 2222 내용
+    </div>
+    <div id="con3" class="conBox">
+        - 333 내용
+    </div>
+</div>
+
+
+
+<div style="height:1000px"></div>
+
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+</head>
+<body>
+
+<link rel="stylesheet" href="../css/common.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<style>
+.nav_wrap {
+  position:relative;
+  overflow-x:scroll;
+  white-space:nowrap;
+  -webkit-overflow-scrolling:touch;
+  -ms-overflow-style:none;
+  scrollbar-width:none; 
+  -webkit-user-select: none;
+  -moz-user-select: moz-none;
+  -ms-user-select: none;
+  user-select: none;
+ 
+  margin: 50px auto;
+  background:#eee;
+}
+.nav_wrap::-webkit-scrollbar {
+    display: none;
+}
+.nav_list {
+  overflow: hidden;
+  display: flex;
+}
+
+.nav_slide {
+  /* width: auto; */
+  width: 100%;
+}
+.nav_slide a {
+  display: block;
+  position: relative;
+  margin: 0 10px;
+  padding: 30px 5px;
+  text-align: center;
+  white-space: nowrap;
+  font-size: 1.1rem;
+  line-height: 1rem;
+  color: #333;
+}
+.nav_slide.on > a {
+  color: #1b64bc;
+  font-weight: bold;
+}
+.nav_slide.on > a:after {
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: #1b64bc;
+}
+</style>
+
+
+
+<script>
+  //$(function() {
+  function gnbMenu(depth1, depth2) {
+      //탭메뉴 중앙위치
+      var $nav_slide = $('.nav_slide');
+      var scrIWidth = 0;
+      for (var i=0; i<$nav_slide.length; i++) {
+          scrIWidth += $nav_slide.eq(i).outerWidth();
+      }
+      $('.nav_list').css('width', scrIWidth);
+      
+      $nav_slide.on("click", function () {
+	      console.log("click. isDrag =",isDrag);	
+        var target = $(this);
+        $nav_slide.removeClass('on');
+        target.addClass('on');
+        muCenter(target);
+		  
+        if(!isDrag) {
+          var url = target.data("url");
+          console.log("url = ",url);
+          if(url != undefined) {
+          location.href = url;
+          }
+        }
+        
+        isDrag = false;
+      });
+	  	
+      function muCenter(target){
+          var box = $('.nav_wrap');
+          var boxItem = box.find('.nav_slide');
+          var boxHarf = box.width()/2;
+          var pos;
+          var listWidth = 0;
+          var targetLeft = 0;
+  
+          boxItem.each(function() { 
+            listWidth += $(this).outerWidth(); 
+          });
+          
+          for (var i=0; i<target.index(); i++) targetLeft += boxItem.eq(i).outerWidth();
+          
+          var selectTargetPos = (targetLeft + target.outerWidth()/2);
+          if (selectTargetPos <= boxHarf) {
+              pos = 0;
+          } else if (listWidth - selectTargetPos <= boxHarf) {
+              pos = listWidth-box.width();
+          } else {
+              pos = selectTargetPos - boxHarf;
+          }
+  
+          setTimeout(function() {
+              box.animate({scrollLeft:pos}, 300)
+          }, 200);
+          //box.stop().animate({ scrollLeft: pos }, 200);
+      }
+  
+      // //페이지인식
+      var target = $nav_slide.eq(depth1-1).addClass('on');
+      muCenter(target);
+	  	
+
+      //마우스 클릭여부
+      var isClick = false;
+	  // 마우스 드래그 여부
+	  var isDrag = false;
+      var x, y, pre_x, pre_y;
+      var $navWrap = $('.nav_wrap');
+
+      $navWrap.on('mousedown', function(e) {
+          console.log("mousedown");
+          isClick = true;
+          isDrag = false;
+          var obj = $(this);
+          x = obj.scrollLeft();
+          y = obj.scrollTop();
+
+          pre_x = e.screenX;
+          pre_y = e.screenY;
+      });
+      $navWrap.on('mousemove', function(e) {
+          console.log("mousemove");
+          if (isClick) {
+          isDrag = true;
+          var obj = $(this);
+          obj.scrollLeft(x - e.screenX + pre_x);
+          obj.scrollTop(y - e.screenY + pre_y);
+          return false;
+          }
+      });
+	  
+      $navWrap.on('mouseup', function(e) {
+		      console.log("mouseup");	
+          isClick = false;
+
+          //if(!isDrag) {	
+          //	location.href="http://naver.com";
+          //}
+          //isDrag = false;
+          return false;
+      });
+
+	  $navWrap.on('mouseleave', function(e) {
+		      console.log("mouseleave");	
+          isClick = false;
+		      isDrag = false;
+          return false;
+    });
+	
+  }
+  // });
+</script>
+
+
+
+<script type="text/javascript">
+  $(function() {
+      gnbMenu(4, 0); //초기번호 1
+  });
+</script>
+
+<div class="nav_wrap" style="max-width:460px">
+    <ul class="nav_list">
+        <li class="nav_slide"><a href="#none">고객 감사 할인쿠폰</a></li>
+        <li class="nav_slide" data-url="http://daum.net"><a href="#none">창립기념(링크있음)</a></li>
+        <li class="nav_slide" data-url="http://naver.com"><a href="#none">꽝 없는 랜덤(링크있음)</a></li>
+        <li class="nav_slide"><a href="#none">출석체크 EVENT</a></li>
+        <li class="nav_slide"><a href="#none">다섯번째 메뉴</a></li>
+        <li class="nav_slide"><a href="#none">여섯번째 메뉴</a></li>
+    </ul>
+</div>
+
+<div>https://sir.kr/qa/365313</div>
+
+
+
+
+
+
+
+</body>
+</html>

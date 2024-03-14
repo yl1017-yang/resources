@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+</head>
+<body>
+
+<link rel="stylesheet" href="../css/common.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<style>
+.inner{width:650px;margin:0 auto;overflow:hidden;}
+.sub_visual{display:table;width:100%;height:150px;table-layout:fixed;background:#eee;margin-top:70px;}
+.sub_visual p{text-align:center;display:table-cell;vertical-align:middle;}
+.content{height:1500px;background:#000;color:#fff;font-size:18px;padding:80px;}
+
+/* 상단고정-fixed */
+.fixed{position:fixed !important;top:0;left:0;animation:scrolldown 0.5s ease}
+@keyframes scrolldown {
+  0%{
+    transform: translateY(-20px)
+  }
+  100%{
+    transform: translateY(0px)
+  }
+}
+
+/* 상단 */
+.nav-up{top:-70px !important;}
+.header{position:absolute;width:100%;height:70px;z-index:20;background:#fff;transition:top 0.2s ease-in-out;border-bottom:1px solid red}
+.header div{display:flex;justify-content:space-between;}
+.header h1.logo{margin-top:10px;width:150px;}
+.gnb{display:flex;z-index:30;}
+.gnb .gnbDep1{position:relative;}
+.gnb .gnbDep1 > a{width:150px;height:80px;display:flex;align-items:center;justify-content:center;color:#000;font-size:20px;font-weight:bold;}
+.gnb .gnbDep1 > a.on{color:skyblue;}
+.gnb .gnbDep2{display:none;margin-top:20px;}
+.gnb .gnbDep2 li > a{display:block;color:#fff;padding:5px 45px;font-size:16px;}
+.gnb .gnbDep2 li > a:hover,
+.gnb .gnbDep2 li > a.on{color:skyblue;font-weight:bold;text-decoration:underline;}
+.gnbBg{position:absolute;top:70px;left:0;width:100%;background:#333;z-index:10px;}
+
+/* 서브 네비게이션 */
+.location{position:relative;z-index:10;background:#666;width:100%;height:50px;}
+.lnb{position:relative;margin:0 auto;width:650px;font-size:0;}
+.lnb .home{position:relative;display:inline-block;width:70px;line-height:50px;border-right:1px solid #999;color:#fff;font-size:14px}
+.lnb .lnbDep1{position:relative;display:inline-block;vertical-align:top;width:180px;}
+.lnb .lnbDep1 > a{display:block;color:#fff;font-size:16px;width:100%;line-height:50px;padding:0 20px;border-right:1px solid #999;}
+.lnb .lnbDep1 > a.on{color:yellow;font-weight:bold;}
+.lnb .lnbDep1 > a:after{display:block;content:'▼';position:absolute;top:0;right:10px;font-size:10px;}
+
+.lnb .lnbDep2{display:none;position:absolute;top:50px;left:0;width:180px;background:#fff;border:1px solid #999;border-top:0;padding:10px 0;}
+.lnb .lnbDep2 li > a{display:block;color:#444;padding:4px 20px;font-size:15px;}
+.lnb .lnbDep2 li > a:hover,
+.lnb .lnbDep2 li > a.on{color:blue;font-weight:bold;text-decoration:underline;}
+.lnb .lnbDep2 li .gnbDep2{display:none;} /* 1차 셀렉트 2차 숨김 */
+</style>
+
+
+<script>
+function gnbMenu(depth1, depth2, depth3) {
+	var $gnb = $('.gnb'),
+    	$gnbDep1 = $('.gnbDep1', $gnb),
+        $lnb = $('.lnb'),
+    	$lnbDep = $('.lnbDep1', $lnb),
+        $lnbDep1 = $('.dep1 .lnbDep2', $lnb),
+        $lnbDep2 = $('.dep2 .lnbDep2', $lnb),
+        $lnbDep3 = $('.dep3 .lnbDep2', $lnb);
+
+    
+    //gnb
+    $gnb.on('focusin mouseenter',function(){    	
+        $(this).children().find('.gnbDep2').stop().slideDown('200');
+        $(this).parent().find('.gnbBg').stop().animate({ 'height':'180px' });
+    });
+    
+    $gnb.on('focusout mouseleave',function(){        
+        $(this).children('.gnbDep1').find('.gnbDep2').stop().slideUp('0');
+        $(this).parent().find('.gnbBg').stop().animate({ 'height':'0' });
+    });
+    
+	if ($gnbDep1.length > depth1) {
+        $gnbDep1.eq(depth1).find('> a').addClass('on');
+        $gnbDep1.eq(depth1).find('.gnbDep2 > li').eq(depth2).find('> a').addClass('on');
+	}
+    
+    //lnb
+    $lnbDep.find('> a').on('click', function(e) {
+    	e.preventDefault();
+        $(this).parent().find('.lnbDep2').stop().slideToggle();    
+        $(this).addClass('on');
+        $(this).parent().siblings().find('.lnbDep2').css('display', 'none');
+        $(this).parent().siblings().find('> a').removeClass('on');
+    });
+    
+	if ($lnbDep.length > depth1) {
+		$lnbDep1.eq(depth1).find('> a').addClass('on');
+        $lnbDep2.eq(depth2).find('> a').addClass('on');
+        $('.dep2').find('> a').addClass('on');
+        $lnbDep3.eq(depth3).find('li a').addClass('on');
+    }
+    
+    $gnbDep1.eq(depth1).each(function(){
+        $('.dep1 > a').append( $(this).find('> a').html() );		
+        $('.dep2 > a').append( $(this).find('.gnbDep2 > li').eq(depth2).find('> a').html() );
+		
+        $lnbDep1.append( $gnb.html() );
+        $lnbDep2.append( $(this).find('.gnbDep2').html() );
+    });
+        
+    //header - 스크롤 상단고정 - 첫번째 방법(1)
+    $(window).scroll(function () {
+    	var scrollTopY = $(document).scrollTop();
+        
+        if (scrollTopY <= Math.ceil( $('.content').offset().top - 70) ) {
+            $('.header').addClass('fixed').removeClass('nav-up');
+        } else {
+            $('.header').removeClass('fixed').addClass('nav-up');
+        }
+    });
+    
+    //header - 스크롤 상단고정 - 두번째 방법(2)
+	/* var didScroll;
+	    var lastScrollTop = 0;
+	    var delta = 5;
+	    var navbarHeight = $('.header').outerHeight();
+	    
+	    $(window).scroll(function(event){
+	        didScroll = true;
+	    });
+	    
+	    setInterval(function() {
+	        if (didScroll) {
+	            hasScrolled();
+	            didScroll = false;
+	        }
+	    }, 250);
+	    
+	    function hasScrolled() {
+	    var st = $(this).scrollTop();
+	
+	    if(Math.abs(lastScrollTop - st) <= delta)
+	        return;
+	
+	        if (st > lastScrollTop && st > navbarHeight){
+	            $('.header').removeClass('nav-down').addClass('nav-up');
+	        } else {
+	            if(st + $(window).height() < $(document).height()) {
+	                $('.header').removeClass('nav-up').addClass('nav-down');
+	            }
+	        }
+	
+	    lastScrollTop = st;
+	    } */
+    
+    //lnb location - 스크롤 상단고정    
+    var $location = $(".location");
+    var locationTop = $location.offset().top;
+    
+    $(window).scroll(function() {
+        var scrollTopY = $(document).scrollTop();
+        
+        if ( scrollTopY > locationTop) {  // 상단 추가: .top - 70          
+            $location.addClass("fixed"); // .css("margin-top", "70px")
+        } else {
+            $location.removeClass("fixed");
+        }
+    
+    });
+        
+}
+</script>
+
+
+
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+<script type="text/javascript">
+$(function() {
+	gnbMenu(0,1,1); //초기번호 1
+});
+</script>
+
+<!-- 상단 : 고정 fixed -->
+<div class="header fixed">
+    <div class="inner">
+        <h1 class="logo">
+            LOGO
+        </h1>
+        <ul class="gnb">
+            <li class="gnbDep1">
+                <a href="#">1차메뉴</a>
+                <ul class="gnbDep2">
+                    <li><a href="https://www.daum.net/">메뉴1-1(링크)</a></li>
+                    <li><a href="https://www.daum.net/">메뉴1-2</a></li>
+                </ul>
+            </li>
+            <li class="gnbDep1">
+                <a href="#">2차메뉴</a>
+                <ul class="gnbDep2">
+                    <li><a href="https://www.naver.com/">메뉴2-1</a></li>
+                    <li><a href="#">메뉴2-2</a></li>
+                    <li><a href="#">메뉴2-3</a></li>
+                    <li><a href="#">메뉴2-4</a></li>
+                </ul>
+            </li>
+            <li class="gnbDep1">
+                <a href="#">3차메뉴</a>
+                <ul class="gnbDep2">
+                    <li><a href="#">메뉴3-1</a></li>
+                    <li><a href="#">메뉴3-2</a></li>
+                    <li><a href="#">메뉴3-3</a></li>
+                </ul>
+            </li>
+            <li class="gnbDep1">
+                <a href="#">4차메뉴</a>
+                <ul class="gnbDep2">
+                    <li><a href="#">메뉴4-1</a></li>
+                    <li><a href="#">메뉴4-2</a></li>
+                    <li><a href="#">메뉴4-3</a></li>
+                    <li><a href="#">메뉴4-4</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="gnbBg"></div>
+    </div>
+</div>
+<!-- //상단 -->
+
+<div class="sub_visual">
+    <p>
+        서브 비주얼
+    </p>
+</div>
+
+<!-- 서브 네비게이션 -->
+<div class="location">    
+    <ul class="lnb" title="네비게이션 페이지">
+        <li class="home">HOME</li>
+        <li class="lnbDep1 dep1">
+            <a href="#"></a>
+            <ul class="lnbDep2">
+            </ul>
+        </li>
+        <li class="lnbDep1 dep2">
+            <a href="#"></a>
+            <ul class="lnbDep2">
+            </ul>
+        </li>
+        <li class="lnbDep1 dep3">
+            <a href="#">메뉴33</a>
+            <ul class="lnbDep2">
+                <li><a href="#">뎁스3-1</a></li>
+                <li><a href="#">뎁스3-2</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<!-- //서브 네비게이션 -->
+
+
+
+<div class="content">
+1. 상단 1차,2차 페이지 인식 -> 상단에 gnbMenu(1,1,1)로 표시 / 초기번호 0<br>
+2. 셀렉트 탭메뉴 페이지 인식 -> 상단에 gnbMenu(1,1,1)로 표시<br>
+3. 셀렉트 서브 메뉴 (gnb) 에서 html파일 자동으로 가져옴<br>
+4. 셀렉트 depth3은 수동 작업 (자동 사용할 시 gnb > depth3 추가해야함)<br><br>
+https://webdir.tistory.com/481<br>
+
+<div>
+https://aljjabaegi.tistory.com/455<br>
+
+https://ungs.pe.kr/%EC%8A%A4%ED%81%AC%EB%A1%A4%EB%90%98%EB%8B%A4%EA%B0%80-%EC%83%81%EB%8B%A8%EC%97%90-%EA%B3%A0%EC%A0%95%EB%90%98%EB%8A%94-%EB%A9%94%EB%89%B4-%EB%A0%88%EC%9D%B4%EC%96%B4/<br>
+https://jsfiddle.net/wooong/e8k120sd/1/<br>
+
+view-source:http://static.pulmuone.info/shop_pulmuone/planshop/202107/0701_launch_guide/p_evt.html<br>
+https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=yongpal0070&logNo=80209092043
+</div>
+</div>
+
+
+
+</body>
+</html>

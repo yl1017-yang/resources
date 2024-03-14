@@ -1,0 +1,751 @@
+/* common */
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff") format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.nav-gnb .swiper-slide {
+    width: auto !important;
+}
+
+.content {
+    background-color: #EEEEEE;
+    padding-bottom: 0 !important;
+}
+
+.tentensale-march .right {
+    float: right;
+    width: calc(100% - 23.4vw);
+    z-index: 1111;
+}
+
+.tentensale-march .right section {
+    padding: 14.7vw 5.1vw;
+}
+
+.tentensale-march .right section h2 {
+    text-align: center;
+    font-size: 2.135rem;
+    line-height: 2.94rem;
+    font-family: var(--bd);
+    margin-bottom: 6.7vw;
+}
+
+.tentensale-march .right section h2 span {
+    display: block;
+    font-size: 1.28rem;
+    font-family: var(--rg);
+}
+
+.tentensale-march .right section h2 i {
+    display: block;
+    font-size: 2.99rem;
+    line-height: 2.94rem;
+    font-family: var(--sb);
+    color: #FF4895;
+}
+
+/* tab */
+/* .fixed-app {position:fixed; left:0; top:0; z-index:10;} */
+.tab-area.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 111;
+}
+
+.tentensale-march .tab-area {
+    background-color: #EEEEEE;
+    float: left;
+    width: 23.4vw;
+}
+
+.tentensale-march .tab-area .sidebar {
+    width: 23.4vw;
+}
+
+.tentensale-march .tab-area .sidebar > div {
+    width: 23.4vw;
+    overflow: hidden;
+    border-bottom: 1px solid #E4E4E4;
+}
+
+.tentensale-march .tab-area .sidebar > div:last-child {
+    border-bottom: 0;
+}
+
+.tentensale-march .tab-area .sidebar div a {
+    display: block;
+    padding-left: 0.85rem;
+    color: #999999;
+    font-family: var(--md);
+    font-size: 1.195rem;
+    line-height: 1.5rem;
+    height: 21.3vw;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.tentensale-march .tab-area .sidebar div span {
+    display: block;
+    color: #FF4895;
+    font-family: var(--md);
+    font-size: 1.195rem;
+    width: 13.07vw;
+    margin-top: 1vw;
+}
+
+.tentensale-march .tab-area .sidebar div.tab01.on {
+    background: #FF4895;
+}
+
+.tentensale-march .tab-area .sidebar div.tab01.on a {
+    color: #fff;
+    font-family: var(--bd);
+}
+
+.tentensale-march .tab-area .sidebar div.tab02.on {
+    background: #B0E6FF;
+}
+
+.tentensale-march .tab-area .sidebar div.tab02.on a {
+    color: #000;
+    font-family: var(--bd);
+}
+
+.tentensale-march .tab-area .sidebar div.tab03.on {
+    background: #FF4895;
+}
+
+.tentensale-march .tab-area .sidebar div.tab03.on a {
+    color: #fff;
+    font-family: var(--bd);
+}
+.tentensale-march .tab-area .sidebar div.tab03.on a span {
+    color: #fff;
+}
+
+.tentensale-march .tab-area .sidebar div.tab04.on {
+    background: #456CDF;
+}
+
+.tentensale-march .tab-area .sidebar div.tab04.on a {
+    color: #fff;
+    font-family: var(--bd);
+}
+
+.tentensale-march .tab-area .sidebar div.tab04.on span {
+    color: #fff;
+}
+
+.tentensale-march .tab-area .sidebar div.tab05.on {
+    background: var(--c_111);
+}
+
+.tentensale-march .tab-area .sidebar div.tab05.on a {
+    color: #fff;
+    font-family: var(--bd);
+}
+
+.tentensale-march .tab-area .sidebar div.tab06 {
+    padding-top: 1.96rem;
+}
+
+.tentensale-march .tab-area .sidebar div a img {
+    width: 18.9vw;
+    height: 18.9vw;
+}
+
+/* main */
+.tentensale-march .main {
+    position: relative;
+}
+.tentensale-march .main_visual {
+    position: relative;
+    overflow: hidden;
+}
+.tentensale-march .main_visual .txt {
+    position: absolute;
+    width: 94vw;
+    top: 25vw;
+    left: 50%;
+    margin-left: -47vw;
+}
+.tentensale-march .main_visual .float p {
+    position: absolute;
+    bottom: 0;
+}
+.tentensale-march .main_visual .float p.f11 {
+    width: 50vw;
+    left: -20vw;
+    bottom: 70vw;
+    animation: wobble3 3s infinite ease-in-out, rise01 3.8s linear;
+}
+.tentensale-march .main_visual .float p.f12 {
+    width: 50vw;
+    left: -5vw;
+    bottom: 24vw;
+    animation: wobble4 3s 1s infinite ease-in-out, rise02 5.5s 0.5s linear;
+}
+.tentensale-march .main_visual .float p.f13 {
+    width: 50vw;
+    left: 33vw;
+    bottom: -5vw;
+    animation: wobble3 4s 0.5s infinite ease-in-out, rise03 7.1s .8s linear;
+}
+.tentensale-march .main_visual .float p.f14 {
+    width: 50vw;
+    left: 68vw;
+    bottom: 11vw;
+    animation: wobble4 2s 2s infinite ease-in-out, rise04 4.5s .2s linear;
+}
+.tentensale-march .main_visual .float p.f01 {
+    width: 50vw;
+    left: -20vw;
+    bottom: -70vw;
+    animation: wobble2 3s infinite ease-in-out, rise 12.8s 2.1s infinite linear;
+}
+.tentensale-march .main_visual .float p.f02 {
+    width: 50vw;
+    left: -5vw;
+    bottom: -70vw;
+    animation: wobble 3s 1s infinite ease-in-out, rise2 13.2s 5.5s infinite linear;
+}
+.tentensale-march .main_visual .float p.f03 {
+    width: 50vw;
+    left: 33vw;
+    bottom: -70vw;
+    animation: wobble2 4s 0.5s infinite ease-in-out, rise 17.1s 6.8s infinite linear;
+}
+.tentensale-march .main_visual .float p.f04 {
+    width: 50vw;
+    left: 68vw;
+    bottom: -70vw;
+    animation: wobble 2s 2s infinite ease-in-out, rise2 12s 3.2s infinite linear;
+}
+.tentensale-march .main_visual .float p.f05 {
+    width: 13vw;
+    left: 15vw;
+    bottom: -70vw;
+    animation: wobble2 4s 1s infinite ease-in-out, rise 6.5s 3s infinite linear;
+}
+.tentensale-march .main_visual .float p.f06 {
+    width: 10vw;
+    left: 82vw;
+    bottom: -70vw;
+    animation: wobble 3s 3s infinite ease-in-out, rise2 5.5s 4.2s infinite linear;
+}
+.tentensale-march .main_visual .float p.f07 {
+    width: 12vw;
+    left: 40vw;
+    bottom: -70vw;
+    animation: wobble2 3s 0.5s infinite ease-in-out, rise 8.5s 3.8s infinite linear;
+}
+.tentensale-march .main_visual .float p.f08 {
+    width: 17vw;
+    left: 70vw;
+    bottom: -70vw;
+    animation: wobble 5s 0.1s infinite ease-in-out, rise2 7.5s 4.7s infinite linear;
+}
+@keyframes wobble {
+    50% {
+        transform: translateX(-15px) rotate(8deg);
+    }
+    0%,
+    100% {
+        transform: translateX(20px) rotate(-7deg);
+    }
+}
+@keyframes rise {
+    0% {
+        top: calc(100% + 10px);
+    }
+    100% {
+        top: -230px;
+    }
+}
+@keyframes wobble2 {
+    50% {
+        transform: translateX(-5px) rotate(9deg);
+    }
+    0%,
+    100% {
+        transform: translateX(35px) rotate(-3deg);
+    }
+}
+@keyframes rise2 {
+    0% {
+        top: calc(100% + 50px);
+    }
+    100% {
+        top: -230px;
+    }
+}
+@keyframes rise01 {
+    0% {
+        bottom: 70vw;
+    }
+    100% {
+        bottom: 500px;
+    }
+}
+@keyframes rise02 {
+    0% {
+        bottom: 24vw;
+    }
+    100% {
+        bottom: 500px;
+    }
+}
+@keyframes rise03 {
+    0% {
+        bottom: -5vw;
+    }
+    100% {
+        bottom: 500px;
+    }
+}
+@keyframes rise04 {
+    0% {
+        bottom: 11vw;
+    }
+    100% {
+        bottom: 500px;
+    }
+}
+@keyframes wobble3 {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(-17px) rotate(9deg);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+@keyframes wobble4 {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(20px) rotate(-8deg);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* just-one-day */
+.tentensale-march .right .section01 {
+    background: #FF4895;
+    color: #fff;
+    padding: 6.4vw 0 0;
+}
+
+.tentensale-march .right .section01 h2 {
+    width: 62.9vw;
+    margin: 0 auto;
+}
+
+.tentensale-march .section01 .thumbnail {
+    background: transparent;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -24vw;
+    width: 48vw;
+}
+
+.tentensale-march .section01 .content {
+    background-color: transparent;
+    padding: 4.7vw 5.1vw 0;
+}
+
+.tentensale-march .section01 .content .list {
+    background: linear-gradient(317.05deg, #FC4592 5.69%, #FFA8CD 76.88%);
+    height: 69.3vw;
+    border-radius: 20px;
+    padding: 5.3vw 4.5vw 0;
+    color: #000;
+    margin-bottom: 5.3vw;
+    position: relative;
+    filter:drop-shadow(4px 4px 12px #DB1D6D);
+    border: 0.5px solid #ff90c0;
+}
+
+.tentensale-march .section01 .content .list:last-child {
+    margin-bottom: 14.7vw;
+}
+
+.tentensale-march .section01 .content .list .tit {
+    position: absolute;
+    left: 4.5vw;
+    top: 5.3vw;
+    max-width: 12rem;
+    line-height: 1.8rem;
+    font-size: 1.15rem;
+    color: #000;
+    font-family: var(--sb);
+}
+
+.tentensale-march .section01 .content .list .tit span:first-child {
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tentensale-march .section01 .content .list .tit .price {
+    display: flex;
+    align-items: baseline;
+    padding-top: 0.3rem;
+    font-size: 1.3rem;
+    color: #111;
+    font-family: var(--bd);
+}
+
+.tentensale-march .section01 .content .list .discount {
+    position: absolute;
+    right: 4.5vw;
+    top: 9.3vw;
+    max-width:6rem;
+    font-size: 2.5rem;
+    color: #ADF5FF;
+    font-family: var(--bd);
+}
+
+.tentensale-march .section01 .content .list .discount span {
+    font-size: 1.62rem;
+}
+
+/* surprise */
+.tab02 {
+    position: relative;
+}
+
+.tab02 .coupon_more {
+    width: 100%;
+    height: 94vw;
+    position:absolute;
+    top:0;
+    left:0;
+}
+
+.tab02 .naver_evt {
+    width: 32vw;
+    height: 7vw;
+    text-indent: -9999px;
+    position: absolute;
+    bottom: 50vw;
+    right: 0;
+}
+
+/* saleItem, present-item */
+.tentensale-march .right section.saleItem.item-list {
+    background: #FFFFFF;
+}
+
+.tentensale-march .right section.item-list {
+    padding: 8.2vw 0 0;
+    color: #000;
+    background: #FFFAF4;
+}
+
+.tentensale-march .item-list .prd_tit {
+    padding: 4.7vw 1.3vw 3.7vw 3.7vw;
+    border-top: 0.5px solid #ccc;
+    border-bottom: 0.5px solid #ccc;
+    margin-bottom: 6.4vw;
+}
+
+.tentensale-march .saleItem.item-list .prd_tit {
+    padding-left: 3.2vw;
+}
+
+.tentensale-march .right .item-list h2 {
+    text-align: center;
+    font-size: 2.21rem;
+    line-height: 2.94rem;
+    font-family: var(--bd);
+    margin: 0 5.6vw 7.4vw;
+}
+
+.tentensale-march .right .item-list h2 span {
+    font-size: 1.27rem;
+    line-height: 2.81rem;
+    font-family: var(--rg);
+}
+
+.tentensale-march .item-list .prd_tit .main_copy {
+    font-size: 1.28rem;
+    line-height: 1.54rem;
+    margin-bottom: 0.53vw;
+    font-family: var(--bd);
+}
+
+.tentensale-march .item-list .prd_tit .sub_copy {
+    font-size: 1.11rem;
+    line-height: 1.33rem;
+    color: #333;
+    font-family: var(--md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.tentensale-march .saleItem.item-list .prd_tit .sub_copy {
+    font-family: var(--bd);
+    line-height: 1.53rem;
+    font-size: 1.27rem;
+}
+
+.tentensale-march .item-list .prd_tit .sub_copy span {
+    width: 4.3vw;
+    height: 4.3vw;
+    overflow: hidden;
+}
+
+.tentensale-march .item-list .prd_tit .sub_copy span img {
+    width: 100%;
+}
+
+.tentensale-march .item-list .prd_wrap {
+    padding: 0 5.6vw 10.6vw;
+}
+
+.tentensale-march .item-list .prd_wrap .more {
+    width: 65.3vw;
+    height: 12vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.5px solid #333;
+    margin-top: 0.5vw;
+    padding-top: 0.8vw;
+    font-size: 1.11rem;
+    line-height: 1.33rem;
+    font-family: var(--bd);
+}
+
+.tentensale-march .item-list .item_list {
+    display: flex;
+    flex-direction: column;
+    padding: 0 0.73rem;
+}
+
+.prd_item,
+.tentensale-march .item-list .item_list li a {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tentensale-march .item-list .item_list li a {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tentensale-march .item-list .item_list li .desc {
+    width: 27.7vw;
+    padding-top: 1vw;
+}
+
+.prd_item .prd_brand,
+.tentensale-march .item-list .item_list li .desc .brand {
+    padding: 1.06vw 0;
+    overflow: hidden;
+    font-family: var(--md);
+    font-size: 0.94rem;
+    color: var(--c_666);
+    line-height: 0.92rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.prd_img,
+.tentensale-march .item-list .item_list li .thumbnail {
+    width: 28.53vw;
+    height: 28.53vw;
+    margin-bottom: 7.4vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding-top: 0;
+    overflow: hidden;
+}
+
+.prd_img.free::after,
+.tentensale-march .item-list .item_list li .thumbnail.free::after {
+    content: '';
+    position: absolute;
+    top: -1.07vw;
+    left: 1.07vw;
+    z-index: 12;
+    background: url(//webimage.10x10.co.kr/fixevent/event/2022/ten_sale12/m/badge01.png)no-repeat 0 0;
+    width: 10.7vw;
+    height: 4.5vw;
+    background-size: 100%;
+}
+
+.prd_img.package::after,
+.tentensale-march .item-list .item_list li .thumbnail.package::after {
+    content: '';
+    position: absolute;
+    top: -1.07vw;
+    left: 1.07vw;
+    z-index: 11;
+    background: url(//webimage.10x10.co.kr/fixevent/event/2022/ten_sale12/m/badge02.png)no-repeat 0 0;
+    width: 10.7vw;
+    height: 4.5vw;
+    background-size: 100%;
+}
+
+.tentensale-march .item-list .item_list li .desc .price {
+    font-size: 1.19rem;
+    font-family: var(--bd);
+    color: var(--c_111);
+    letter-spacing: -0.025em;
+    margin-bottom: 1.06vw;
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+}
+
+.tentensale-march .prd_item .prd_info {
+    width: 28vw;
+}
+
+.tentensale-march .prd_item .prd_price {
+    overflow: hidden;
+}
+
+.tentensale-march .prd_item .set_price {
+    font-size: 1.19rem;
+    font-family: var(--bd);
+    color: var(--c_111);
+    letter-spacing: -0.025em;
+    margin-bottom: 1.06vw;
+    float: left;
+}
+
+.tentensale-march .prd_item .prd_badge {
+    display: none;
+}
+
+.tentensale-march .prd_item .user_side {
+    margin-top: 3vw;
+}
+
+.set_price_o,
+.tentensale-march .item-list .item_list li .desc .price s {
+    font-size: 0.94rem;
+    color: #999;
+    font-family: var(--rg);
+    margin-bottom: 1.06vw;
+    width: 100%;
+    text-decoration: line-through;
+    display: block;
+}
+
+.prd_item .discount,
+.tentensale-march .item-list .item_list li .desc .price .sale {
+    font-size: 0.94rem;
+    color: #FF214F;
+    margin-left: 1vw;
+    float: left;
+}
+
+.prd_item .prd_name,
+.tentensale-march .item-list .item_list li .desc .name {
+    font-size: 1.11rem;
+    line-height: 1.37rem;
+    color: var(--c_111);
+    max-height: 8.3vw;
+    margin-top: 1.06vw;
+    overflow: hidden;
+    word-break: break-all;
+    font-family: var(--md);
+}
+
+.tentensale-march .item-list .item_list li .desc .price s {
+    font-size: 0.94rem;
+    color: #666;
+    font-family: var(--rg);
+    margin-bottom: 1.06vw;
+    width: 100%;
+    text-decoration: line-through;
+    display: block;
+}
+
+.present-item .go-gift {
+    padding: 0.5vw 0 9.6vw 5.6vw;
+}
+
+/* app-benefit */
+.tentensale-march .right section.app-benefit {
+    padding: 8.2vw 5.6vw 7vw;
+    background: var(--c_111);
+}
+
+.tentensale-march .right h2.app-benefit__title {
+    color: var(--white);
+    text-align: center;
+    font-size: 2.21rem;
+    line-height: 2.94rem;
+    font-family: var(--bd);
+    margin-bottom: 7.2vw;
+
+}
+
+.app-benefit .right section h2 span.app-benefit__title-sub {
+    font-size: 1.27rem;
+    line-height: 2.81rem;
+    font-family: var(--rg);
+}
+
+.app-benefit .app-benefit__banner {
+    position: relative;
+    margin-bottom: 2.6vw;
+}
+
+.app-benefit .app-benefit__banner img {
+    width: 100%;
+}
+
+.app-benefit .app-benefit__banner-detail {
+    position: absolute;
+    bottom: 5vw;
+    left: 5.3vw;
+    width: 21.8vw;
+    height: 6.6vw;
+}
+
+.app-benefit .app-benefit__banner-badge {
+    position: absolute;
+    top: 2.7vw;
+    right: 2.9vw;
+    width: 10.6vw;
+    height: 10.9vw;
+}
+
+/* alarm-or-download */
+.app-alert {
+    position: relative;
+}
+
+.app-alert .app-alert__btn {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 10.6vw;
+    width: 66vw;
+    height: 12.8vw;
+    background: transparent;
+}

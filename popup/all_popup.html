@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+</head>
+<body>
+
+<link rel="stylesheet" href="../css/common.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<style>
+.allmenu_btn{position:absolute;top:0;left:0;z-index:50;width:100px;height:100px;}/*펼침버튼*/
+.allmenu_btn > a{display:block;position:absolute;top:20px;left:0;width:50px;height:50px;color:#000;}
+.allmenu_btn .bar1{display:block;width:26px;height:2px;position:absolute;left:0;top:16px;opacity:1;background:#666;border-radius:10px;}
+.allmenu_btn .bar2{display:block;width:26px;height:2px;position:absolute;left:0;top:24px;opacity:1;background:#666;border-radius:10px;}
+.allmenu_btn .bar3{display:block;width:22px;height:2px;position:absolute;left:0;top:32px;opacity:1;background:#666;border-radius:10px;}
+
+.allmenu_btn_close{display:none;position:absolute;top:20px;left:0;width:50px;height:50px;background:#444;cursor:pointer;}/*닫기버튼*/
+.allmenu_btn_close::before{content:'';width:24px;height:2px;position:absolute;left:26%;top:47%;opacity:1;background-color:#fff;display:block;border-radius:10px;transform:rotate(-45deg);-webkit-transform:rotate(-45deg);-moz-transform:rotate(-45deg);-o-transform:rotate(-45deg);-ms-transform:rotate(-45deg);}
+.allmenu_btn_close::after{content:'';width:24px;height:2px;position:absolute;left:26%;top:47%;opacity:1;background-color:#fff;display:block;border-radius:10px;transform:rotate(45deg);-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);-o-transform:rotate(45deg);-ms-transform:rotate(45deg);}
+
+.allmenu_area{display:none;position:fixed;top:0;left:0;width:100%;height:500px;z-index:100;}
+
+.allmenu_content{position:relative;width:100%;}
+.allmenu_content ul{position:absolute;top:80px;left:50px;width:100%;}
+.allmenu_content ul li{color:#fff;}
+
+.dim_bg{position:absolute;top:0;left:0;width:100%;height:100%;background:#000;opacity:.7;filter:alpha(opacity=8);} /* background: rgba(0,0,0,0.7); */
+</style>
+
+
+<script>
+$(function() {
+
+// 전체메뉴보기
+$('.allmenu_btn').on('click', function() {
+  $(this).hide();
+  $('.allmenu_btn_close').show();
+  $('.allmenu_area').stop().slideToggle(300); //슬라이딩효과
+  //$('.allmenu_area').fadeIn(300); //페이드효과
+});
+$('.allmenu_btn_close').on('click', function() { //닫기버튼만 닫힘
+  $('.allmenu_btn').show();
+  $('.allmenu_area').stop().delay(100).slideUp(300); //슬라이딩
+  //$('.allmenu_area').fadeOut(300); //페이드효과
+});
+
+
+});
+</script>
+
+
+<h2>json 파일 설정</h2>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.5.9/lottie.min.js"></script>
+<div style="width:500px;height:500px;border:1px solid red">
+	<div class="evt_lottie"></div>
+</div>
+<script>
+var lottieAnimation = lottie.loadAnimation({
+	container: document.querySelector(".evt_lottie"),
+	renderer: "svg",
+	loop: true,
+	autoplay: true,
+	// path: "https://shoppulmuone.cdn.ntruss.com/MALL/planshop/202306/0616_dance_singer/lottie/lottie_firecracker1.json"
+	path: "https://yl1017-yang.github.io/resources/popup/icon_AI.json"
+});
+</script>
+
+
+
+<!-- 전체메뉴 -->
+<div class="allmenu_btn">
+	<a href="javascript:;">
+		<span class="blind">전체메뉴보기</span>
+		<span class="bar1"></span><span class="bar2"></span><span class="bar3"></span>
+	</a>
+</div>
+
+<div class="allmenu_area">
+	<div class="dim_bg"></div>
+	<div class="allmenu_content">
+		<a href="javascript:;" class="allmenu_btn_close"><span class="blind">전체메뉴닫기</span></a>
+		<ul>
+		<li>내용</li>
+        <li>내용</li>
+        <li>내용</li>
+		</ul>
+	</div>
+</div>
+<!-- //전체메뉴 -->
+
+
+
+</body>
+</html>

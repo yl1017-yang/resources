@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Canvas to Image Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+
+    <script src="html2canvas.js"></script>
+</head>
+<body>
+    <div id="capture">
+        <img id="img" src="" alt="">
+    </div>
+    <div>
+        <h2>Hello world this is awesome</h2>
+        <iframe id='frame' src="http://tcpschool.com"
+            style="width:1024px; height:473px; border:0; overflow:hidden;">
+        </iframe>
+    </div>
+    <button onclick="onBtnClick()">Click Me</button>
+    <script src="domvas.js"></script>
+    <script src="iframe2image.js"></script>
+    <script>
+        function onBtnClick(){
+            console.log('btn click');
+
+            var image = document.getElementById("img");
+            var inner = document.getElementById('frame');
+                // Get the image
+                iframe2image(inner, function (err, img) {
+                    // If there is an error, log it
+                    if (err) { return console.error(err); }
+                    // Otherwise, add the image to dom
+                    image.src = img.src;
+
+                    html2canvas(document.querySelector("#capture")).then(canvas => {
+                        // getting the base 64 image converted data 
+                        var jpegUrl = canvas.toDataURL("image/jpeg");
+                        console.log('jpqgdata=' + jpegUrl);
+                    });
+                });
+            }
+    </script>
+</body>
+</html>

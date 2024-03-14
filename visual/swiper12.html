@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+</head>
+<body>
+<link rel="stylesheet" href="https://yl1017-yang.github.io/pet-page/resources/css/swiper.min.css">
+<script src="https://yl1017-yang.github.io/pet-page/resources/js/swiper.min.js"></script>
+
+<link rel="stylesheet" href="../css/common.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<style>
+html, body, .wrap, .fullscreen{width:100%;height:100%;}
+
+
+.fullscreen{
+    position: relative;
+}
+.fullscreen .swiper-slide {
+} 
+.fullscreen .swiper-slide .inner{
+    position:relative;
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.fullscreen .swiper-slide img {
+    position:absolute;
+    top:0;
+    left:0;
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:0;
+}
+.fullscreen .swiper-slide .mo {
+    display:none;
+}
+
+/* 텍스트 */
+.fullscreen .swiper-slide .text_wrap {
+    position:absolute;
+    left:12.5%;
+    right:0;
+    color:#fff;
+    z-index:10;
+} 
+.fullscreen .swiper-slide.section03 .text_wrap, 
+.fullscreen .swiper-slide.section05 .text_wrap{
+    left:50%;
+    margin-left:12%;
+}
+.fullscreen .swiper-slide .tag {
+    font-size:18px;
+    font-weight:500;
+    margin-bottom:10px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: transform 0.6s ease-in-out 0.1s, opacity 1s ease-in-out 0.10s;
+}
+.fullscreen .swiper-slide .tag span {
+    display:inline-block;
+    margin-right:18px;
+}
+.fullscreen .swiper-slide .title {
+    font-size:60px;
+    font-weight:600;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: transform 0.6s ease-in-out 0.4s, opacity 1s ease-in-out 0.10s;    
+}
+.fullscreen .swiper-slide .desc {
+    font-size:24px;
+    font-weight:300;
+    margin-top:10px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: transform 0.6s ease-in-out 0.6s, opacity 1s ease-in-out 0.5s;
+} 
+.fullscreen .swiper-slide .desc .mtop {
+    margin-top:20px;
+}
+.fullscreen .swiper-slide .desc strong {
+    font-weight:500;
+}
+.fullscreen .swiper-slide .desc span, 
+.fullscreen .swiper-slide .desc strong{
+    display:block;
+}
+.fullscreen .swiper-slide-active .tag,
+.fullscreen .swiper-slide-active .title, 
+.fullscreen .swiper-slide-active .desc{
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* pagination */
+.fullscreen .swiper-pagination{width:50px;}
+.swiper-container-vertical>.swiper-pagination-bullets{left:5%;right:0;}
+.fullscreen .swiper-pagination-bullet{position:relative;background:#fff !important;opacity:.4 !important;}
+.swiper-container-vertical>.swiper-pagination-bullets .swiper-pagination-bullet{margin:50px 0 !important;}
+.fullscreen .swiper-pagination-bullet-active{background:#fff !important;opacity:1 !important;}
+
+.swiper-container-vertical>.swiper-pagination-bullets .swiper-pagination-bullet:before{content:'';display:block;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);width:40px;height:40px;border-radius:50%;transition:all .3s;opacity:1;}
+.fullscreen .swiper-pagination-bullet-active:before{content:'';display:block;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);width:40px;height:40px;border-radius:50%;background-color:rgba(255,255,255,0.1);transition:all .3s;opacity:0;}
+.swiper-container-vertical>.swiper-pagination-bullets span:last-child{display:none;}
+
+/* 상단가기 버튼 */
+.btn_top_wrap{display:none;position:fixed;bottom:80px;right:4.16%;transition:1s;z-index:20;}
+.btn_top_wrap .btn_top{display:block;position:relative;width:60px;height:60px;border-radius:100%;background-color:rgba(0, 0, 0, 0.7);background-image:url("https://yl1017-yang.github.io/pet-page/images/common/icon_arrow_btn.png");background-repeat:no-repeat;background-position:50%;}
+.btn_top_wrap .btn_top:after{content:'';position:absolute;left:-50%;top:-50%;width:114px;height:114px;background:url('https://yl1017-yang.github.io/pet-page/images/common/ico_backtop.png') no-repeat 50% 50%;-webkit-animation:topRotate 2s linear both infinite;animation:topRotate 2s linear both infinite;}
+
+@-webkit-keyframes topRotate {
+    0% {
+    	transform:rotate(0deg);
+    }
+	100% {
+		transform:rotate(360deg);
+	}
+}
+@keyframes topRotate {
+    0% {
+    	transform:rotate(0deg);
+    }
+	100% {
+		transform:rotate(360deg);
+	}
+}
+
+/* 스크롤다운 */
+.fullscreen .scroll_down{position:absolute;width:24px;left:5%;bottom:4.5%;text-align:center;z-index:10;}
+.fullscreen .scroll_down i{display:block;position:relative;width:24px;height:36px;border:2px solid #fff;border-radius:15px;}
+.fullscreen .scroll_down i:after{content:'';position:absolute;left:50%;top:5px;margin-left:-2px;width:4px;height:8px;border-radius:2px;background:#fff;-webkit-animation:scrollDown 1.2s linear both infinite;animation:scrollDown 1.2s linear both infinite;}
+.fullscreen .scroll_down p{position:absolute;top:-20px;left:-2px;font-size:18px;font-weight:300;color:#fff;letter-spacing:0;transform:rotate(270deg);transform-origin:top left;white-space:nowrap;}
+
+@-webkit-keyframes scrollDown {
+    0% {
+    	top: 5px;
+    }
+	100% {
+		top: 20px;
+	}
+}
+@keyframes scrollDown {
+    0% {
+    	top: 5px;
+    }
+	100% {
+		top: 20px;
+	}
+}
+
+
+
+/* 반응형 */
+@media all and (max-width:1920px) {
+}
+
+@media all and (max-width:1440px) {
+    .fullscreen .swiper-slide.section03 .text_wrap, 
+    .fullscreen .swiper-slide.section05 .text_wrap{
+        margin-left:1%;
+    }
+    .fullscreen .swiper-slide .text_wrap {
+        left:8%;
+    } 
+    .swiper-container-vertical>.swiper-pagination-bullets{left:2%;}
+    .fullscreen .scroll-down{left:2%;}
+    .quick_sns{right:2%;}
+}
+
+@media all and (max-width:1024px) {
+    .fullscreen .swiper-slide.section03 .text_wrap, 
+    .fullscreen .swiper-slide.section05 .text_wrap{
+        left:8%;
+        margin-left:0;
+    }
+}
+
+@media all and (max-width:980px) {
+    .fullscreen .swiper-slide .tag {font-size:16px;}
+    .fullscreen .swiper-slide .title {font-size:50px;}
+    .fullscreen .swiper-slide .desc {font-size:22px;}
+    .btn_top_wrap .btn_top:after{display:none;}
+
+    .swiper-container-vertical>.swiper-pagination-bullets .swiper-pagination-bullet{margin:40px 0 !important;}
+}
+
+/* 모바일 */
+@media all and (max-width:720px) {
+    .swiper-container-vertical>.swiper-pagination-bullets{left:13px;}
+    .swiper-container-vertical>.swiper-pagination-bullets .swiper-pagination-bullet{width:6px;height:6px;margin:24px 0 !important;}
+    .swiper-container-vertical>.swiper-pagination-bullets .swiper-pagination-bullet:before{width:20px;height:20px;}
+
+    .quick_sns{right:20px;}
+    .quick_sns .quick_android{width:40px;height:40px;margin-bottom:20px;background-size:35%;}
+    .quick_sns .quick_iso{width:40px;height:40px;background-size:35%;}
+    .btn_top_wrap{right:20px;bottom:40px;}
+    .btn_top_wrap .btn_top{width:40px;height:40px;background-size:30%;}
+
+    .fullscreen .swiper-slide.section01 .text_wrap, 
+    .fullscreen .swiper-slide.section02 .text_wrap {top:auto;bottom:47.3333vw;}
+    .fullscreen .swiper-slide.section03 .text_wrap, 
+    .fullscreen .swiper-slide.section04 .text_wrap, 
+    .fullscreen .swiper-slide.section05 .text_wrap {top:26.666vw;}
+
+    .fullscreen .swiper-slide .pc {display:none;}
+    .fullscreen .swiper-slide .mo {display:block;}
+
+    .fullscreen .scroll_down{width:24px;left:50%;margin-left:12px;bottom:5vw;}
+    .fullscreen .scroll_down p{font-size:12px;}
+    .fullscreen .scroll_down i{border:0;width:20px;}
+    .fullscreen .scroll_down i:after{width:1px;height:20px;border-radius:0;animation:scrollDown 1s linear both infinite;}
+
+    @-webkit-keyframes scrollDown {
+        0% {
+            top: 5px;
+        }
+        100% {
+            top: 10px;
+        }
+    }
+    @keyframes scrollDown {
+        0% {
+            top: 5px;
+        }
+        100% {
+            top: 10px;
+        }
+    }
+}
+
+@media all and (max-width:640px) {
+    .fullscreen .swiper-slide .text_wrap{left:40px;}
+    .fullscreen .swiper-slide .tag {font-size:12px;margin-bottom:2px;}
+    .fullscreen .swiper-slide .title {font-size:36px;}
+    .fullscreen .swiper-slide .desc {font-size:14px;}
+}
+
+@media all and (max-width:480px) {
+}
+@media all and (max-width:360px) {
+}
+
+
+/************** 하단 /**************/
+#footer_wrap{width:100%;background:#232326;display:flex;justify-content:center;}
+.fullscreen .footer_section{display:flex;width:100%;height:350px !important;}
+
+</style>
+
+
+<script>
+$(function() {
+    $(window).on('resize load', function () {
+        //mainVertical();
+    });	
+	mainVertical();
+});
+
+// 메인 - 서비스소개
+function mainVertical() {
+    var mainVertical = new Swiper('.fullscreen', {
+        direction: 'vertical',
+        effect: 'slide',
+        slidesPerView: 'auto',
+        speed: 800,
+        allowTouchMove:false,
+        simulateTouch:false,
+        touchStartPreventDefault:false,
+		watchSlidesProgress: true,
+		watchSlidesVisibility: true,
+		observer : true,
+		observeParents : true,
+        mousewheel: {
+            releaseOnEdges: true,
+			invert: false,
+        },
+        mousewheelControl: true,
+        pagination: {
+            el: '.fullscreen .swiper-pagination',
+            clickable : true,
+        },
+
+        on:{
+			init: function(){
+			},
+			transitionStart: function(){
+				if(this.activeIndex != 0){
+					$('.btn_top_wrap').fadeIn(500);
+				}else{
+					$('.btn_top_wrap').fadeOut(500);
+				}
+				
+				var footHeight = $('.footer_section').outerHeight();
+				if($('.footer_section').hasClass('swiper-slide-visible')){
+					$('.btn_top_wrap').css('position','fixed').css('bottom',footHeight + 70).addClass('on');
+					$('.swiper-pagination').css({'display':'none'})
+				}else{
+					$('.btn_top_wrap').css('position','fixed').css('bottom','70px').removeClass('on');
+					$('.swiper-pagination').css({'display':'block'})
+				}
+
+				if ($(window).width() < 720) {
+					var footHeight = $('.footer_section').outerHeight();
+					if($('.footer_section').hasClass('swiper-slide-visible')){
+						$('.btn_top_wrap').css('position','fixed').css('bottom',footHeight + 40).addClass('on');
+					}else{
+						$('.btn_top_wrap').css('position','fixed').css('bottom','40px').removeClass('on');
+					}
+				}
+			},
+			transitionEnd: function(){		
+			},
+			// reachEnd: function () {
+			// 	$('.swiper-pagination').css({"display":"none"})
+			// },
+			// slidePrevTransitionStart: function () {
+			// 	$('.swiper-pagination').css({"display":"block"})
+			// },
+			// slideChangeTransitionEnd: function(){
+			// 	alert(this.activeIndex);
+			// },
+		},
+
+        breakpoints: {
+			1024: {
+				allowTouchMove:true,
+				simulateTouch:true,
+				grabCursor: true,
+				touchStartPreventDefault:true,
+			},
+		},
+    });
+
+    $('.btn_top_wrap a').click(function(){
+		mainVertical.slideTo(0,600);
+	});
+	
+}
+</script>
+
+
+
+
+<div class="wrap">
+
+<section class="swiper-container fullscreen">
+    <div class="swiper-pagination"></div>
+    <div class="swiper-wrapper">
+        <div class="swiper-slide section01">
+            <!-- 스크롤아이콘 / quick sns 버튼 -->
+            <div class="scroll_down">
+                <p>Scroll</p>
+                <i><span class="blind">스크롤아이콘</span></i>
+            </div>
+            <!-- //스크롤아이콘 / quick sns 버튼 -->
+            <div class="inner">
+                <div class="text_wrap">
+                    <p class="tag"><span># 반려견 미용</span> <span># 반려묘 미용</span># 호텔 <span># 유치원</span></p>
+                    <p class="title">반려생활의 동반자</p>
+                    <p class="desc">
+                        <strong>반려동물 미용부터 호텔까지!</strong>
+                        <span>나와 내 반려동물에게 꼭 필요한 서비스와 전문가를</span>
+                        <span>펫미에서 바로 만나 보세요.</span>
+                    </p>
+                </div>
+                <div>
+                    <span class="pc"><img src="https://yl1017-yang.github.io/pet-page/images/main/img_visual_01.jpg" alt="" /></span>
+                    <span class="mo"><img src="https://yl1017-yang.github.io/pet-page/images/main/img_mvisual_01.jpg" alt="" /></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="swiper-slide section02">
+            <div class="inner">
+                <div class="text_wrap">
+                    <p class="title">최고의 퀄리티</p>
+                    <p class="desc">
+                        <strong>깐깐한 심사로 업계 최고의 매장만</strong>
+                        <span>펫미에 입점함으로 최고의 퀄리티,</span>
+                        <span>합리적인 가격으로 서비스를 이용하실 수 있어요.</span>
+                    </p>
+                </div>
+                <div>
+                    <span class="pc"><img src="https://yl1017-yang.github.io/pet-page/images/main/img_visual_02.jpg" alt="" /></span>
+                    <span class="mo"><img src="https://yl1017-yang.github.io/pet-page/images/main/img_mvisual_02.jpg" alt="" /></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="swiper-slide section03">
+            <div class="inner">
+                <div class="text_wrap">
+                    <p class="title">스마트한 예약</p>
+                    <p class="desc">
+                        <span>일일이 전화해서 매장을 찾으셨나요?</span>
+                        <span class="mtop">이젠 매장과의 거리, 평점, 리뷰, 특징 등</span>
+                        <strong>한눈에 내 주변 매장을 보시고</strong>
+                        <strong>더욱 편리하게 예약, 결제하세요.</strong>
+                    </p>
+                </div>
+                <div>
+                    <span class="pc"><img src="https://yl1017-yang.github.io/pet-page/images/main/img_visual_03.jpg" alt="" /></span>
+                    <span class="mo"><img src="https://yl1017-yang.github.io/pet-page/images/main/img_mvisual_03.jpg" alt="" /></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="swiper-slide section04">
+            <div class="inner">
+                <div class="text_wrap">
+                    <p class="title">안심 서비스</p>
+                    <p class="desc">
+                        <span>내 반려동물을 맡기고 불안하셨나요?</span>
+                        <span>이제 걱정하지 마세요.</span>
+                        <strong class="mtop">실시간으로 서비스 단계별 상태를 전송 받음으로</strong>
+                        <strong>안심하고 서비스를 이용하실 수 있어요.</strong>
+                    </p>
+                </div>
+                <div>
+                    <span class="pc"><img src="https://yl1017-yang.github.io/pet-page/images/main/img_visual_04.jpg" alt="" /></span>
+                    <span class="mo"><img src="https://yl1017-yang.github.io/pet-page/images/main/img_mvisual_04.jpg" alt="" /></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="swiper-slide section05">
+            <div class="inner">
+                <div class="text_wrap">
+                    <p class="title">반려동물의 연결고리</p>
+                    <p class="desc">
+                        <strong>반려동물을 마음을 가장 잘 아는</strong>
+                        <strong>똑똑한 펫미와 함께 하세요.</strong>
+                        <span class="mtop">펫미를 만나면 즐거운 반려생활이 시작됩니다.</span>
+                    </p>
+                </div>
+                <div>
+                    <span class="pc"><img src="https://yl1017-yang.github.io/pet-page/images/main/img_visual_05.jpg" alt="" /></span>
+                    <span class="mo"><img src="https://yl1017-yang.github.io/pet-page/images/main/img_mvisual_05.jpg" alt="" /></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="swiper-slide footer_section">
+            <!-- 하단 -->
+            <div id="footer_wrap">
+                푸터내용
+            </div>
+            <!-- //하단 -->
+        </div>
+    </div>
+</section>
+
+
+</div>
+
+</body>
+</html>
