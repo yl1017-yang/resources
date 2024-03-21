@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <style>
+      *{padding:0;margin:0;border:0;box-sizing:border-box;}
+      .wrap {width:700px;margin:30px auto;}
+      h2{margin:40px 0 20px;}
+      p{margin:0 0 10px 20px;}
+      pre {background:#444;border-radius:10px;color:#fff;font-size:16px;}
+    </style>
+
+
+    <div class="wrap">
+      <h1>this & arrow function 연습문제 3개</h1>
+
+      <h2>1. 간단한 메소드 만들기</h2>
+      <p>사람이라는 오브젝트가 하나 있습니다. <br>이 오브젝트에 sayHi라는 함수를 (메소드를) 하나 추가하고 싶습니다. </p>
+
+      <pre>
+        <code>
+          var 사람 = {
+            name: '손흥민',
+          }
+          
+          사람.sayHi(); //안녕 나는 손흥민
+        </code>
+      </pre>
+
+    </div>
+
+
+    <script>
+      // 1. 간단한 메소드 만들기
+      var 사람 = {
+        name : '손흥민',
+        sayHi : function(){          
+          console.log(사람.name)
+        }
+      }
+          
+      사람.sayHi(); //안녕 나는 손흥민
+
+    </script>
+  </body>
+</html>

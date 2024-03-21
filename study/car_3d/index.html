@@ -194,11 +194,6 @@
         tab.addEventListener("click", (e) => {
           tabContent.forEach((content) => {
             content.classList.remove("is-show");
-
-            // let imgList = content.querySelector(".img-list");
-            // if (imgList) {
-            //   imgList.remove();
-            // }
           });
 
           tabListBtn.forEach((btn) => {
@@ -207,16 +202,6 @@
 
           tabListBtn[idx].classList.add("is-show");
           tabContent[idx].classList.add("is-show");
-
-          // const newImgList = document.createElement("div");
-          // newImgList.classList.add("img-list");
-          // newImgList.classList.add("car1");
-          // for (let i = 0; i < 36; i++){
-          //   const newImgItem = document.createElement("div");
-          //   newImgItem.classList.add("img-item");
-          //   newImgList.appendChild(newImgItem);
-          // }
-          // tabContent[idx].appendChild(newImgList);
         });
       });
       
