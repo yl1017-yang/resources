@@ -10,7 +10,6 @@ function getImageFiles(e) {
   const uploadFiles = [];
   const files = e.currentTarget.files;
   let imagePreview = document.querySelector('.image-preview');
-  const docFrag = new DocumentFragment();
   console.log(typeof files, files);
 
   if ([...files].length >= 2) {
@@ -31,38 +30,14 @@ function getImageFiles(e) {
       const reader = new FileReader();
       reader.onload = (e) => {
 
-        /* 정사이즈 이미지 생성 */
-        const preview1 = createElement1(e, file);
-        imagePreview.appendChild(preview1);
+        for (let i = 1; i <= 10; i++) {
+          const inRowCapture = i > 5; // 가로 이미지 여부
+          const count = inRowCapture ? i - 5 : i; // 이미지 번호 계산
 
-        const preview2 = createElement2(e, file);
-        imagePreview.appendChild(preview2);
-
-        const preview3 = createElement3(e, file);
-        imagePreview.appendChild(preview3);
-
-        const preview4 = createElement4(e, file);
-        imagePreview.appendChild(preview4);
-
-        const preview5 = createElement5(e, file);
-        imagePreview.appendChild(preview5);
-
-        /* 가로사이즈 이미지 생성 */
-        const preview7 = createElement7(e, file);
-        imagePreview.appendChild(preview7);
-
-        const preview8 = createElement8(e, file);
-        imagePreview.appendChild(preview8);
-
-        const preview9 = createElement9(e, file);
-        imagePreview.appendChild(preview9);
-
-        const preview10 = createElement10(e, file);
-        imagePreview.appendChild(preview10);
-
-        const preview11 = createElement11(e, file);
-        imagePreview.appendChild(preview11);
-
+          const preview = createElement(e, file, count, inRowCapture);
+          imagePreview.appendChild(preview);
+        }
+        
       };
       reader.readAsDataURL(file);
     }
@@ -90,41 +65,19 @@ categories.forEach(category => {
 });
 
 
-function createElement1(e, file) {
-  const divbox = document.createElement("div");
-  const img = document.createElement("img");
-
-  img.setAttribute("src", e.target.result);
-  img.setAttribute("data-file", file.name);
-
-  divbox.setAttribute("class", "img-box");
-  divbox.setAttribute("id", "capture1");
-  divbox.appendChild(img);
-
-  const p = document.createElement("p");
-  divbox.appendChild(p);
-
-  const input = document.createElement("input");
-  input.setAttribute("type","checkbox");
-  input.setAttribute("name","selectImg");
-  input.setAttribute("value","1");
-  input.setAttribute("class","check-box");
-  divbox.appendChild(input);
-
-  return divbox;
-}
-
-function createElement2(e, file) {
+function createElement(e, file, count, isRowCapture) {
   const divbox = document.createElement("div");
 
-  for (let i = 0; i < 2; i++) {
+  // const imgCount = isRowCapture ? count : 1;
+
+  for (let i = 0; i < count; i++) {
     const img = document.createElement("img");
-
     img.setAttribute("src", e.target.result);
     img.setAttribute("data-file", file.name);
 
-    divbox.setAttribute("class", "img-box");
-    divbox.setAttribute("id", "capture2");
+    divbox.setAttribute("class", isRowCapture ? "img-box-row" : "img-box");
+    divbox.setAttribute("id", isRowCapture ? "rowcapture" + count : "capture" + count);
+
     divbox.appendChild(img);
   }
 
@@ -132,190 +85,11 @@ function createElement2(e, file) {
   divbox.appendChild(p);
 
   const input = document.createElement("input");
-  input.setAttribute("type","checkbox");
-  input.setAttribute("name","selectImg");
-  input.setAttribute("value","2");
-  input.setAttribute("class","check-box");
+  input.setAttribute("type", "checkbox");
+  input.setAttribute("name", "selectImg");
+  input.setAttribute("value", count.toString());
+  input.setAttribute("class", "check-box");
   divbox.appendChild(input);
-
-  return divbox;
-}
-
-function createElement3(e, file) {
-  const divbox = document.createElement("div");
-
-  for (let i = 0; i < 3; i++) {
-    const img = document.createElement("img");
-
-    img.setAttribute("src", e.target.result);
-    img.setAttribute("data-file", file.name);
-
-    divbox.setAttribute("class", "img-box");
-    divbox.setAttribute("id", "capture3");
-    divbox.appendChild(img);
-  }
-
-  const p = document.createElement("p");
-  divbox.appendChild(p);
-
-  const input = document.createElement("input");
-  input.setAttribute("type","checkbox");
-  input.setAttribute("name","selectImg");
-  input.setAttribute("value","3");
-  input.setAttribute("class","check-box");
-  divbox.appendChild(input);
-
-  return divbox;
-}
-
-function createElement4(e, file) {
-  const divbox = document.createElement("div");
-
-  for (let i = 0; i < 4; i++) {
-    const img = document.createElement("img");
-
-    img.setAttribute("src", e.target.result);
-    img.setAttribute("data-file", file.name);
-
-    divbox.setAttribute("class", "img-box");
-    divbox.setAttribute("id", "capture4");
-    divbox.appendChild(img);
-  }
-
-  const p = document.createElement("p");
-  divbox.appendChild(p);
-
-  const input = document.createElement("input");
-  input.setAttribute("type","checkbox");
-  input.setAttribute("name","selectImg");
-  input.setAttribute("value","4");
-  input.setAttribute("class","check-box");
-  divbox.appendChild(input);
-
-  return divbox;
-}
-
-function createElement5(e, file) {
-  const divbox = document.createElement("div");
-
-  for (let i = 0; i < 5; i++) {
-    const img = document.createElement("img");
-
-    img.setAttribute("src", e.target.result);
-    img.setAttribute("data-file", file.name);
-
-    divbox.setAttribute("class", "img-box");
-    divbox.setAttribute("id", "capture5");
-    divbox.appendChild(img);
-  }
-
-  const p = document.createElement("p");
-  divbox.appendChild(p);
-
-  const input = document.createElement("input");
-  input.setAttribute("type","checkbox");
-  input.setAttribute("name","selectImg");
-  input.setAttribute("value","5");
-  input.setAttribute("class","check-box");
-  divbox.appendChild(input);
-
-  return divbox;
-}
-
-// 가로형 이미지
-function createElement7(e, file) {
-  const divbox = document.createElement("div");
-  const img = document.createElement("img");
-
-  img.setAttribute("src", e.target.result);
-  img.setAttribute("data-file", file.name);
-
-  divbox.setAttribute("class", "img-box-row");
-  divbox.setAttribute("id", "rowcapture1");
-  divbox.appendChild(img);
-
-  const p = document.createElement("p");
-  divbox.appendChild(p);
-
-  return divbox;
-}
-
-function createElement8(e, file) {
-  const divbox = document.createElement("div");
-  
-  for (let i = 0; i < 2; i++) {
-    const img = document.createElement("img");
-
-    img.setAttribute("src", e.target.result);
-    img.setAttribute("data-file", file.name);
-
-    divbox.setAttribute("class", "img-box-row");
-    divbox.setAttribute("id", "rowcapture2");
-    divbox.appendChild(img);
-  }
-
-  const p = document.createElement("p");
-  divbox.appendChild(p);
-
-  return divbox;
-}
-
-function createElement9(e, file) {
-  const divbox = document.createElement("div");
-
-  for (let i = 0; i < 3; i++) {
-    const img = document.createElement("img");
-
-    img.setAttribute("src", e.target.result);
-    img.setAttribute("data-file", file.name);
-
-    divbox.setAttribute("class", "img-box-row");
-    divbox.setAttribute("id", "rowcapture3");
-    divbox.appendChild(img);
-  }
-
-  const p = document.createElement("p");
-  divbox.appendChild(p);
-
-  return divbox;
-}
-
-function createElement10(e, file) {
-  const divbox = document.createElement("div");
-
-  for (let i = 0; i < 4; i++) {
-    const img = document.createElement("img");
-
-    img.setAttribute("src", e.target.result);
-    img.setAttribute("data-file", file.name);
-
-    divbox.setAttribute("class", "img-box-row");
-    divbox.setAttribute("id", "rowcapture4");
-    divbox.appendChild(img);
-  }
-
-  const p = document.createElement("p");
-  divbox.appendChild(p);
-
-  return divbox;
-}
-
-function createElement11(e, file) {
-  const divbox = document.createElement("div");
-
-  for (let i = 0; i < 5; i++) {
-    const img = document.createElement("img");
-
-    img.setAttribute("src", e.target.result);
-    img.setAttribute("data-file", file.name);
-
-    divbox.setAttribute("class", "img-box-row");
-    divbox.setAttribute("id", "rowcapture5");
-    divbox.appendChild(img);
-  }
-
-  const p = document.createElement("p");
-  divbox.appendChild(p);
 
   return divbox;
 }
