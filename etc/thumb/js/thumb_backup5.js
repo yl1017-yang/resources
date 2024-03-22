@@ -353,6 +353,11 @@ function partShot(download_index) {
 
   setTimeout(function () {
     html2canvas(document.querySelector("#capture" + arrNumber[download_index]), {
+      // logging: true,
+      // letterRendering: 1,
+      // allowTaint: true,
+      // taintTest: false,
+      // useCORS: true,
       scale: 4,
     })
     .then(canvas => {
