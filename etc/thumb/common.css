@@ -2,7 +2,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400&display=swap');
 
-*{border:0;margin:0;padding:0;list-style:none;text-decoration:none;color:#fff;}
+*{border:0;margin:0;padding:0;list-style:none;text-decoration:none;color:#fff;letter-spacing:-.02em;}
 /* body{overflow:hidden;image-rendering:-webkit-optimize-contrast;} 
 body:before, body:after{image-rendering:-webkit-optimize-contrast;} 
 img{image-rendering:-webkit-optimize-contrast;transform:translateZ(0);backface-visibility:hidden;} */
@@ -12,7 +12,7 @@ input, button{font-size:inherit;font-weight:bold;}
 .thumb-wrap .title{font-size:14px;padding:20px 0 0 150px;}
 .thumb-wrap .title h3{font-size:20px;}
 
-.thumb-wrap nav{position:fixed;top:0;left:0;width:120px;height:100vh;background:#eee;box-shadow:rgba(0, 0, 0, 0.3) 0 10px 30px;z-index:5;overflow-y:auto;-ms-overflow-style:none;scrollbar-width:none;}
+.thumb-wrap nav{position:fixed;top:0;left:0;width:120px;height:100vh;background:#eee;box-shadow:rgba(0, 0, 0, 0.3) 0 10px 30px;z-index:11;overflow-y:auto;-ms-overflow-style:none;scrollbar-width:none;}
 .thumb-wrap nav::-webkit-scrollbar {display:none;}
 .thumb-wrap nav a{display:block;color:#000;padding:10px;font-weight:bold;text-align:center;}
 .thumb-wrap nav a:nth-child(-n+2){padding:24px 10px;}
@@ -21,7 +21,7 @@ input, button{font-size:inherit;font-weight:bold;}
 .thumb-wrap nav a.is-active span{color:#fff;}
 .thumb-wrap nav img{height:52px;}
 
-.btn-box-wrap{position:sticky;top:0;left:0;max-width:1200px;width:100%;padding:20px 0 10px 20px;margin-left:120px;background:#444;display:flex;flex-wrap:wrap;justify-content:space-between;z-index:2;}
+.btn-box-wrap{position:sticky;top:0;left:0;max-width:1200px;width:100%;padding:20px 0 10px 20px;margin-left:120px;background:#444;display:flex;flex-wrap:wrap;justify-content:space-between;z-index:10;}
 .btn-box{padding-bottom:8px;display:flex;align-items:center;}
 .btn-normal{line-height:48px;background:#bbb;color:#000;border-radius:10px;cursor:pointer;text-align:center;margin:0 3px;padding:0 12px;box-shadow:rgba(0, 0, 0, 0.2) 2px 5px 10px;}
 .btn-small{line-height:38px;background:yellowgreen;font-size:14px;color:#000;border-radius:10px;cursor:pointer;text-align:center;margin:0 3px;padding:0 8px;box-shadow:rgba(0, 0, 0, 0.2) 2px 5px 10px;}
@@ -49,7 +49,7 @@ input, button{font-size:inherit;font-weight:bold;}
 .input-box label:nth-of-type(1){margin-left:10px;}
 .image-preview .number{display:none;}
 .image-preview .number-show{position:absolute;bottom:50px;right:50px;width:234px;height:234px;background:#8cc63f;font-size:116px;letter-spacing:-8px;font-family:'Lato';border-radius:100%;display:flex;align-items:center;justify-content:center;}
-.input{width:70px;height:46px;color:#000;font-size:20px;text-align:center;border-radius:10px;}
+.input{width:60px;height:46px;color:#000;font-size:18px;text-align:center;border-radius:10px;box-shadow:rgba(0, 0, 0, 0.2) 2px 5px 10px;}
 .image-preview .number-show::before{content:'X';font-size:82px;margin:5px 10px 0 0;}
 .input-name{width:40%;text-align:left;}
 
