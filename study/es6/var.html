@@ -17,7 +17,7 @@
     </style>
 
 
-    <div class="wrap">
+    <section class="wrap">
       <h1>변수 연습문제 6개</h1>
 
       <h2>1~4. 다음 코드의 콘솔창 출력결과는 무엇일까요?</h2>
@@ -153,15 +153,17 @@
             var 모달창들 = document.querySelectorAll('div');
 
             for (var i = 0; i < 3; i++){
-              버튼들[i].addEventListener('click', function(){
-                모달창들[i].style.display = 'block';
+              버튼들[i].addEventListener('click', function(){                
+                모달창들[i].style.display = 'block';              
               });
             }
+            
+            console.log(모달창들[i])            
           </script>
         </code>
       </pre>
 
 
-    </div>
+    </section>
   </body>
 </html>
