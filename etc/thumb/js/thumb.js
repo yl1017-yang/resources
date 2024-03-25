@@ -242,7 +242,7 @@ function showInputFileNm() {
 
 // zip 파일 저장
 function saveAllAsZip() {
-  const images = document.querySelectorAll('.image-preview img');
+  const images = document.querySelectorAll('.image-preview .img-box img');
   if (images.length === 0) {
     alert('이미지가 없습니다.');
     return;
@@ -280,4 +280,3 @@ function saveAllAsZip() {
         });
     });
 }
-
