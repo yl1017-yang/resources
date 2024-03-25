@@ -115,6 +115,11 @@ function checkShot() {
       rowsaveImg(canvas.toDataURL("image/jpeg", 0.4), ("1000X1000_" + arrNumber[i] + "_" + name + ".jpg"));
     });
   }
+
+  if (arrNumber.length === 0) {
+    alert('이미지를 선택하세요.');
+    return;
+  }
 }
 
 // 이미지 저장
@@ -234,3 +239,45 @@ function showInputFileNm() {
    var name = getInputFileNm();
    document.querySelector(".name-show").textContent = name;   
 }
+
+// zip 파일 저장
+function saveAllAsZip() {
+  const images = document.querySelectorAll('.image-preview img');
+  if (images.length === 0) {
+    alert('이미지가 없습니다.');
+    return;
+  }
+
+  const zip = new JSZip();
+  const promises = [];
+
+  images.forEach((image, index) => {
+    const url = image.src;
+    const filename = `image_${index}.jpg`;
+
+    // 이미지를 Blob 형태로 가져와 zip 파일에 추가하는 비동기 작업
+    const promise = fetch(url)
+      .then(response => response.blob())
+      .then(blob => {
+        zip.file(filename, blob);
+      })
+      .catch(error => {
+        console.error(`이미지를 가져오는 중 오류가 발생했습니다: ${error}`);
+      });
+
+    promises.push(promise);
+  });
+
+  // 모든 이미지를 다운로드할 때까지 기다린 후 zip 파일 생성 및 다운로드
+  Promise.all(promises)
+    .then(() => {
+      zip.generateAsync({ type: 'blob' })
+        .then(content => {
+          saveAs(content, 'images.zip');
+        })
+        .catch(error => {
+          console.error(`zip 파일을 생성하는 중 오류가 발생했습니다: ${error}`);
+        });
+    });
+}
+
