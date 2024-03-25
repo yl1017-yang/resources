@@ -96,7 +96,42 @@
         </code>
       </pre>
 
-      
+
+      <p>Spread Operator -- array를 파라미터형태로 집어넣고 싶을 때 씁니다. </p>
+      <pre>
+        <code>
+          function 더하기(a,b,c){
+            console.log(a + b + c)
+         }
+
+         var 어레이 = [10, 20, 30];
+
+         더하기(...어레이);  //요즘방식
+         더하기.apply(undefined, 어레이);  //옛날방식(몰라도됨)
+        </code>
+      </pre>
+
+      <p>Spread Operator -- apply, call  </p>
+      <pre>
+        <code>
+          var person = {
+            인사 : function(){
+              console.log(this.name + '안녕')
+            }
+          }
+            
+          var person2 = {
+              name : '손흥민',
+              //인사 : function(){
+              //  console.log(this.name + '안녕')
+              //}
+          }
+          
+          // person.인사();
+          person.인사.apply(person2, [1]);  //person내용을 person2에 적용해주세요
+          person.인사.call(person2, 1,2);  //동일하지만 apply는 배열사용
+        </code>
+      </pre>
 
     </section>
   </body>
