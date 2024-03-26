@@ -273,7 +273,7 @@ function showInputFileNm() {
 // zip 파일 저장
 function saveAllAsZip() {
   //const images = document.querySelectorAll('.image-preview .img-box img');  
-  //console.log("images = ",images);  
+  //console.log("images = ",images);
   //return;
   
   console.log("saveAllAsZip start!!");
@@ -289,11 +289,10 @@ function saveAllAsZip() {
 
   zipImages.forEach((image, index) => {
     //const url = image.src;
-	  const url = image;
-	
-	  console.log("url = ",url);	
+	  const url = image;	
+	  console.log("url = ",url);
     
-    const filename = `_${index}_${name}.jpg`;
+    const filename = `${wantedWidth}_${index}_${name}.jpg`;    
 
     // 이미지를 Blob 형태로 가져와 zip 파일에 추가하는 비동기 작업
     const promise = fetch(url)
