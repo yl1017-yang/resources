@@ -122,19 +122,11 @@ function checkShot() {
   }
 }
 
-let arrNumber = ['1', '2', '3', '4', '5'];
-var zipImages = [];
-
 // 이미지 저장
-function partShot(download_index, isZip) {
-	
-  // zip 이미지 어레이 초기화
-  if(isZip && download_index == 0)	
-	  zipImages = [];
-	
+function partShot(download_index) {
+  let arrNumber = ['1', '2', '3', '4', '5'];
   let name = getInputFileNm();
 
-  console.log("isZip = ", isZip);
   console.log("arrNumber.length = ", arrNumber.length);
   console.log("download_index = ", download_index);
 
@@ -150,34 +142,17 @@ function partShot(download_index, isZip) {
       // 1 번째 550
       wantedWidth = 550;
       wantedHeight = 550;
-
-	  saveImg(canvas.toDataURL("image/jpg")
-			, wantedWidth
-			, wantedHeight
-			, (wantedWidth + "X" + wantedHeight + "_" + arrNumber[download_index] + "_" + name + ".jpg")
-			, isZip
-			, false );
+      saveImg(canvas.toDataURL("image/jpg"), wantedWidth, wantedHeight, (wantedWidth + "X" + wantedHeight + "_" + arrNumber[download_index] + "_" + name + ".jpg"));
 
       // 2번째 1000
       wantedWidth = 1000;
       wantedHeight = 1000;
-	  
-	  var isZipLastData = false;
-	  if (download_index == arrNumber.length - 1) {
-			isZipLastData = true;
-	  }
-	  
-    // toDataUrL 함수로 이미지를 base64로 가져온다.jpeg사용 화질 1.0최고/0.5중간/0.1낮은
-	  saveImg(canvas.toDataURL("image/jpeg", 0.4)
-				, wantedWidth
-				, wantedHeight
-				,(wantedWidth + "X" + wantedHeight + "_" + arrNumber[download_index] + "_" + name + ".jpg")
-				, isZip
-				, isZipLastData);		
+      // toDataUrL 함수로 이미지를 base64로 가져온다.jpeg사용 화질 1.0최고/0.5중간/0.1낮은
+      saveImg(canvas.toDataURL("image/jpeg", 0.4), wantedWidth, wantedHeight, (wantedWidth + "X" + wantedHeight + "_" + arrNumber[download_index] + "_" + name + ".jpg"));
 
       if (download_index < arrNumber.length - 1) {
-        partShot(download_index + 1, isZip);
-      } 
+        partShot(download_index + 1);
+      }
 
     }).catch(function (err) {
       console.log(err);
@@ -185,7 +160,8 @@ function partShot(download_index, isZip) {
   }, 500);
 }
 
-function saveImg(dataURL, wantedWidth, wantedHeight, filename , isZip , isZipLastData) {
+
+function saveImg(dataURL, wantedWidth, wantedHeight, filename) {
   var img = document.createElement("img");
 
   img.onload = function () {
@@ -206,30 +182,23 @@ function saveImg(dataURL, wantedWidth, wantedHeight, filename , isZip , isZipLas
     var dataURI = canvas.toDataURL();
     console.log("dataURI.length : " + dataURI.length);
 
-	if(!isZip) {
-		var link = document.createElement("a");
-		if (typeof link.download === 'string') {
-		  link.href = dataURI;
-		  link.download = filename
-		  document.body.appendChild(link);
-		  link.click();
-		  document.body.removeChild(link);
-		} else {
-		  window.open(dataURI);
-		}
-		
-		console.log("image resize No");
-	} else {
-		zipImages.push(dataURI);
-	
-		if(isZipLastData) {
-			saveAllAsZip();
-		} 
-	}
+    var link = document.createElement("a");
+    if (typeof link.download === 'string') {
+      link.href = dataURI;
+      link.download = filename
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } else {
+      window.open(dataURI);
+    }
+
+    console.log("image resize No");
   };
 
   img.src = dataURL;
 }
+
 
 /* 640X320 이미지 저장 */
 function rowShot() {
@@ -273,13 +242,8 @@ function showInputFileNm() {
 
 // zip 파일 저장
 function saveAllAsZip() {
-  //const images = document.querySelectorAll('.image-preview .img-box img');  
-   //console.log("images = ",images);  
-  //return;
-  
-  console.log("saveAllAsZip start!!");
-  
-  if (zipImages.length == 0) {
+  const images = document.querySelectorAll('.image-preview .img-box img');
+  if (images.length === 0) {
     alert('이미지가 없습니다.');
     return;
   }
@@ -287,14 +251,9 @@ function saveAllAsZip() {
   const zip = new JSZip();
   const promises = [];
 
-  zipImages.forEach((image, index) => {
-    //const url = image.src;
-	  const url = image;
-	
-	  console.log("url = ",url);
-	
-    let name = getInputFileNm();
-    const filename = `image_${index}_${name}.jpg`;
+  images.forEach((image, index) => {
+    const url = image.src;
+    const filename = `image_${index}.jpg`;
 
     // 이미지를 Blob 형태로 가져와 zip 파일에 추가하는 비동기 작업
     const promise = fetch(url)
@@ -314,7 +273,7 @@ function saveAllAsZip() {
     .then(() => {
       zip.generateAsync({ type: 'blob' })
         .then(content => {
-          saveAs(content, 'thumb_images.zip');
+          saveAs(content, 'images.zip');
         })
         .catch(error => {
           console.error(`zip 파일을 생성하는 중 오류가 발생했습니다: ${error}`);
