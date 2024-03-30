@@ -52,7 +52,7 @@ del.addEventListener("click", () => {
 });
 
 //BI 변경
-const categories = ["bi-pulmuone", "bi-orga", "bi-foodmerce", "bi-water", "bi-danone", "bi-none"];
+const categories = ["bi-pulmuone", "bi-orga", "bi-foodmerce", "bi-water", "bi-danone", "bi-pulmuone-basic", "bi-orga-basic", "bi-foodmerce-basic", "bi-water-basic", "bi-danone-basic", "bi-none"];
 
 categories.forEach(category => {
   document.querySelector(`.${category}`).addEventListener("click", function () {
