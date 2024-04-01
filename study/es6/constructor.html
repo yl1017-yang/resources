@@ -23,6 +23,7 @@
       <h2>학생 오브젝트를 뽑을 때 각각 다른 name, age 값을 부여하고 싶다면</h2>
       <pre>
         <code>
+          // 부모 (상속)
           function 기계(이름){
             this.name = 이름;
             this.age = 15;
@@ -30,12 +31,45 @@
               console.log('안녕하세요' + this.name + ' 입니다');
             }
           }
+
+          기계.prototype.gender = '남'; //부모(기계) 유전자
+
+          // 자식 (상속)
           var 학생1 = new 기계('Park');
           var 학생2 = new 기계('Kim');
 
-          학생2.sayHi();
+          // 학생2.sayHi();          
         </code>
       </pre>
+      <script>
+        // 부모 (상속)
+        function 기계(이름){
+          this.name = 이름;
+          this.age = 15;
+          this.sayHi = function(){
+            console.log('안녕하세요' + this.name + ' 입니다');
+          }
+        }
+
+        기계.prototype.gender = '남'; //부모(기계) 유전자
+
+        // 자식 (상속)
+        var 학생1 = new 기계('Park');
+        var 학생2 = new 기계('Kim');
+
+        console.log(학생1.gender);
+        학생1.name;
+        학생1.toString();  //object/array에 붙일수 있는 내장함수
+
+        var arr = [1,2,3];
+        var arr = new Array(1,2,3); //실제 컴퓨터에서 array가 만들어지는 방식, array 기본함수 내장되어 있음
+        var obj = { name : 'kim' };
+        var obj = new Object();
+
+        Array.prototype;
+
+        arr.sort();
+      </script>
 
 
       <h2>간단 연습문제 : 쇼핑몰에 쓸 상품데이터를 오브젝트로 여러개 만들고 싶습니다.</h2>
@@ -78,7 +112,6 @@
 
         product1.부가세();
         product2.부가세();
-
       </script>
 
 
