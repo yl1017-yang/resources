@@ -58,8 +58,31 @@
           자식.__proto__  //자식 부모 prototype(부모 유전자)가 출력됨
           Object.getPrototypeOf(자식); 부모의 prototype을 출력
 
-          // 상속의 상속
           
+          // 상속의 상속   extends(클래스 상속) / super
+          class 할아버지 {
+            constructor(name, name2){
+              this.성 = 'kim';
+              this.이름 = name;
+              this.이름2 = name2;
+            }
+            sayHi(){
+              console.log('안녕');
+            }
+          }
+          var 할아버지1 = new 할아버지('만덕');
+
+          class 아버지 extends 할아버지 {
+            constructor(name){
+              super(name, name2); //부모 constructor사용
+              this.나이 = 50;
+            }
+            sayHi(){
+              console.log('안녕');
+            }
+          }
+          var 아버지1 = new 아버지('만수');
+          아버지1.sayHi();
         </code>
       </pre>
 
