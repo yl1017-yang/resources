@@ -42,16 +42,24 @@
       <pre>
         <code>
           class 부모 {
-            constructor(){
-              this.name = 'kim';
+            constructor(파라미터){
+              this.name = 파라미터;
               this.sayHi = function() { console.log('hellow') } //자식이 직접 함수를 가짐
             }
-            sayHi() {  //부모의 prototype에 추가 됨
+            sayHi() {  //부모의 prototype에 추가 됨 - 모든자식들이 쓸수 있는 내장함수 추가됨
               console.log('hellow') 
             }
           }
 
-          var 자식 = new 부모();
+          부모.prototype.sayHellow = function() {}
+
+          var 자식 = new 부모('파라미터');
+
+          자식.__proto__  //자식 부모 prototype(부모 유전자)가 출력됨
+          Object.getPrototypeOf(자식); 부모의 prototype을 출력
+
+          // 상속의 상속
+          
         </code>
       </pre>
 
