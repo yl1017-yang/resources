@@ -80,53 +80,36 @@
       const imgItem = document.querySelectorAll(".img-item");
       let imgLength = imgItem.length;
       let imgWidth = imgIist.clientWidth;
-      let imgSpeed = 2200;
       let startNum = 0;
+      
+      console.log(imgWidth)
 
       // imgIist.style.transform = "translate3d(-" + (imgWidth * (startNum + 1)) + "px, 0px, 0px)";
       // console.log("imgWidth:" + imgIist.clientWidth, "--imgLength:" + imgItem.length);
 
-      let curIndex = startNum;
-      let curSlide = imgItem[curIndex];
-      curSlide.classList.add('slide_active');
+      // let curIndex = startNum;
+      // let curSlide = imgItem[curIndex];
+      // curSlide.classList.add('slide_active');
 
-      function nextMove(){
-        if (curIndex <= imgLength - 1) {
-          imgIist.style.transition = imgSpeed + "ms";
-          imgIist.style.transform = "translate3d(-" + (imgWidth * (curIndex + 1)) + "px, 0px, 0px)";
-        } 
+      // function nextMove(){
+      //   if (curIndex <= imgLength - 1) {
+      //     imgIist.style.transition = imgSpeed + "ms";
+      //     imgIist.style.transform = "translate3d(-" + (imgWidth * (curIndex + 1)) + "px, 0px, 0px)";
+      //   } 
 
-        if (curIndex === imgLength - 1) {
-          setTimeout(function(){
-            imgIist.style.transition = "0ms";
-            imgIist.style.transform = "translate3d(-" + imgWidth + "px, 0px, 0px)";
-          }, imgSpeed);
-          curIndex = -1;
-        }
+      //   if (curIndex === imgLength - 1) {
+      //     setTimeout(function(){
+      //       imgIist.style.transition = "0ms";
+      //       imgIist.style.transform = "translate3d(-" + imgWidth + "px, 0px, 0px)";
+      //     }, imgSpeed);
+      //     curIndex = -1;
+      //   }
 
-        curSlide.classList.remove('slide_active');
-        curSlide = imgItem[++curIndex];
-        curSlide.classList.add('slide_active');
-      }
+      //   curSlide.classList.remove('slide_active');
+      //   curSlide = imgItem[++curIndex];
+      //   curSlide.classList.add('slide_active');
+      // }
 
-      function prevMove(){
-        // if (curIndex >= 0) {
-        //   imgIist.style.transition = imgSpeed + "ms";
-        //   imgIist.style.transform = "translate3d(-" + (imgWidth * curIndex) + "px, 0px, 0px)";
-        // } 
-
-        // if (curIndex === 0) {
-        //   setTimeout(function(){
-        //     imgIist.style.transition = "0ms";
-        //     imgIist.style.transform = "translate3d(-" + (imgWidth * imgLength) + "px, 0px, 0px)";
-        //   }, imgSpeed);
-        //   curIndex = imgLength;
-        // }
-
-        // curSlide.classList.remove('slide_active');
-        // curSlide = imgItem[--curIndex];
-        // curSlide.classList.add('slide_active');
-      }
 
       // 마우스 드래그
       let isDragging = false;
