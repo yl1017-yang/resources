@@ -41,7 +41,7 @@
       <div class="tab-content is-show">
         <div class="img-list-wrap">
           <div class="img-list car1">
-            <div class="img-item"></div>
+            <!-- <div class="img-item"></div> -->
           </div>
         </div>
       </div>
@@ -76,16 +76,30 @@
       });
       
       //360도 회전
-      const imgIist = document.querySelector(".img-list");
-      const imgItem = document.querySelectorAll(".img-item");
-      let imgLength = imgItem.length;
-      let imgWidth = imgIist.clientWidth;
+      let imgList = document.querySelector(".img-list");
+      let imgItem = document.querySelectorAll(".img-item");
+      // let imgLength = imgItem.length;
+      let imgLength = 36;
+      let imgWidth = imgList.clientWidth;
       let startNum = 0;
-      
-      console.log(imgWidth)
 
-      // imgIist.style.transform = "translate3d(-" + (imgWidth * (startNum + 1)) + "px, 0px, 0px)";
-      // console.log("imgWidth:" + imgIist.clientWidth, "--imgLength:" + imgItem.length);
+      for (let i = 0; i < 36; i++) {
+        const imgItemDiv = document.createElement('div');
+        imgItemDiv.classList.add('img-item');
+        imgList.appendChild(imgItemDiv);
+      }
+      const imgItemArray = Array.from(imgItem);
+      const newImgItems = document.querySelectorAll(".img-item");
+      newImgItems.forEach((item) => {
+        imgItemArray.push(item);
+      });
+      imgItem = document.querySelectorAll(".img-item");
+
+      console.log(imgWidth, imgLength);
+
+
+      // imgList.style.transform = "translate3d(-" + (imgWidth * (startNum + 1)) + "px, 0px, 0px)";
+      // console.log("imgWidth:" + imgList.clientWidth, "--imgLength:" + imgItem.length);
 
       // let curIndex = startNum;
       // let curSlide = imgItem[curIndex];
@@ -93,14 +107,14 @@
 
       // function nextMove(){
       //   if (curIndex <= imgLength - 1) {
-      //     imgIist.style.transition = imgSpeed + "ms";
-      //     imgIist.style.transform = "translate3d(-" + (imgWidth * (curIndex + 1)) + "px, 0px, 0px)";
+      //     imgList.style.transition = imgSpeed + "ms";
+      //     imgList.style.transform = "translate3d(-" + (imgWidth * (curIndex + 1)) + "px, 0px, 0px)";
       //   } 
 
       //   if (curIndex === imgLength - 1) {
       //     setTimeout(function(){
-      //       imgIist.style.transition = "0ms";
-      //       imgIist.style.transform = "translate3d(-" + imgWidth + "px, 0px, 0px)";
+      //       imgList.style.transition = "0ms";
+      //       imgList.style.transform = "translate3d(-" + imgWidth + "px, 0px, 0px)";
       //     }, imgSpeed);
       //     curIndex = -1;
       //   }
@@ -112,44 +126,44 @@
 
 
       // 마우스 드래그
-      let isDragging = false;
-      let startX = 0;
-      let endX = 0;
-      let startY = 0;
+      // let isDragging = false;
+      // let startX = 0;
+      // let endX = 0;
+      // let startY = 0;
 
-      imgIist.addEventListener("mousedown", (e) => {
-        console.log("mousedown", e.pageX);
-        isDragging = true;
-        startX = e.pageX;
-        startY = e.pageY;
-      });
+      // imgList.addEventListener("mousedown", (e) => {
+      //   console.log("mousedown", e.pageX);
+      //   isDragging = true;
+      //   startX = e.pageX;
+      //   startY = e.pageY;
+      // });
 
-      imgIist.addEventListener("mousemove", (e) => {
-        console.log("mousemove", e.pageX);
-        if (!isDragging) return;
-        e.preventDefault();
+      // imgList.addEventListener("mousemove", (e) => {
+      //   console.log("mousemove", e.pageX);
+      //   if (!isDragging) return;
+      //   e.preventDefault();
 
-        endX = e.pageX;
-        let endY = e.pageY;
+      //   endX = e.pageX;
+      //   let endY = e.pageY;
 
-        if (Math.abs(startX - endX) > Math.abs(startY - endY)) {
-          if (startX < endX) {
-            console.log("prev move");
-            prevMove();
-          } else if (startX > endX) {
-            console.log("next move");
-            nextMove();
-          }
-        }
-      });
+      //   if (Math.abs(startX - endX) > Math.abs(startY - endY)) {
+      //     if (startX < endX) {
+      //       console.log("prev move");
+      //       prevMove();
+      //     } else if (startX > endX) {
+      //       console.log("next move");
+      //       nextMove();
+      //     }
+      //   }
+      // });
 
-      imgIist.addEventListener("mouseup", () => {
-        isDragging = false;
-      });
+      // imgList.addEventListener("mouseup", () => {
+      //   isDragging = false;
+      // });
 
-      imgIist.addEventListener("click", (e) => {
-        e.preventDefault();
-      });
+      // imgList.addEventListener("click", (e) => {
+      //   e.preventDefault();
+      // });
     </script>
   </body>
 </html>

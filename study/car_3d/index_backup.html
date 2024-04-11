@@ -25,6 +25,48 @@
       .img-list .img-item{position:relative;left:0;width:100%;height:100%;cursor: move;cursor: grab;cursor:-webkit-grab;cursor: -moz-grab;flex-shrink:0;}/* transition:transform 0.3s ease-in-out; */
       .car1 > .img-item{background:url(images/3D_L.jpg) no-repeat;}
       .car2 > .img-item{background:url(images/ABP_L.jpg) no-repeat;}
+
+      /* .img-item:nth-child(1){background-position:0 0;}
+      .img-item:nth-child(2){background-position:-960px 0;}
+      .img-item:nth-child(3){background-position:-1920px 0;}
+      .img-item:nth-child(4){background-position:-2880px 0;}
+      .img-item:nth-child(5){background-position:-3840px 0;}
+      .img-item:nth-child(6){background-position:-4800px 0;}
+
+      .img-item:nth-child(7){background-position:0 -540px;}
+      .img-item:nth-child(8){background-position:-960px -540px;}
+      .img-item:nth-child(9){background-position:-1920px -540px;}
+      .img-item:nth-child(10){background-position:-2880px -540px;}
+      .img-item:nth-child(11){background-position:-3840px -540px;}
+      .img-item:nth-child(12){background-position:-4800px -540px;}
+
+      .img-item:nth-child(13){background-position:0 -1080px;}
+      .img-item:nth-child(14){background-position:-960px -1080px;}
+      .img-item:nth-child(15){background-position:-1920px -1080px;}
+      .img-item:nth-child(16){background-position:-2880px -1080px;}
+      .img-item:nth-child(17){background-position:-3840px -1080px;}
+      .img-item:nth-child(18){background-position:-4800px -1080px;}
+
+      .img-item:nth-child(19){background-position:0 -1620px;}
+      .img-item:nth-child(20){background-position:-960px -1620px;}
+      .img-item:nth-child(21){background-position:-1920px -1620px;}
+      .img-item:nth-child(22){background-position:-2880px -1620px;}
+      .img-item:nth-child(23){background-position:-3840px -1620px;}
+      .img-item:nth-child(24){background-position:-4800px -1620px;}
+
+      .img-item:nth-child(25){background-position:0 -2160px;}
+      .img-item:nth-child(26){background-position:-960px -2160px;}
+      .img-item:nth-child(27){background-position:-1920px -2160px;}
+      .img-item:nth-child(28){background-position:-2880px -2160px;}
+      .img-item:nth-child(29){background-position:-3840px -2160px;}
+      .img-item:nth-child(30){background-position:-4800px -2160px;}
+
+      .img-item:nth-child(31){background-position:0 -2700px;}
+      .img-item:nth-child(32){background-position:-960px -2700px;}
+      .img-item:nth-child(33){background-position:-1920px -2700px;}
+      .img-item:nth-child(34){background-position:-2880px -2700px;}
+      .img-item:nth-child(35){background-position:-3840px -2700px;}
+      .img-item:nth-child(36){background-position:-4800px -2700px;} */
     </style>
 
     <div class="car-title">
@@ -41,6 +83,47 @@
       
       <div class="tab-content is-show">
         <div class="img-list car1">
+          <!-- <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div>
+          <div class="img-item"></div> -->
         </div>
       </div>
 
@@ -86,7 +169,7 @@
       let imgWidth = imgList.clientWidth;
       // let imgLength = imgItem.length;
       let imgLength = 36;
-      let curIndex = 1;
+      let curIndex = 1;      
       
       for (let i = 0; i < 36; i++) {
         const imgItemDiv = document.createElement('div');
@@ -100,13 +183,24 @@
       });
       imgItem = document.querySelectorAll(".img-item");
 
+
       imgItem.forEach((item, index) => {
-        let xPos = (index % 6) * -960;
+        let xPos = (index % 6) * -960; 
         let yPos = Math.floor(index / 6) * -540;
         item.style.backgroundPosition = `${xPos}px ${yPos}px`;
       });
 
       console.log(imgWidth, imgLength);
+
+      //복제
+      // let firstChild = imgList.firstElementChild;
+      // let lastChild = imgList.lastElementChild;
+      // let clonedFirst = firstChild.cloneNode(true);
+      // let clonedLast = lastChild.cloneNode(true);
+      // imgList.appendChild(clonedFirst);
+      // imgList.insertBefore(clonedLast, imgList.firstElementChild);
+
+      // console.log(firstChild, lastChild, clonedFirst, clonedLast);
 
 
       function nextMove(){
@@ -117,6 +211,7 @@
           imgItem.forEach((i) => {
             // i.style.transition = "left 0.5s ease-in-out";
             i.style.left = `-${offset}px`;
+            // i.setAttribute("style", `left: ${-offset}px`);
           });
         } else {
           curIndex = 0;
@@ -133,6 +228,7 @@
           imgItem.forEach((i) => {
             // i.style.transition = "left 0.5s ease-in-out";
             i.style.left = `-${offset}px`;
+            // i.setAttribute("style", `left: ${-offset}px`);
           });
         } else {
           // curIndex ++;
