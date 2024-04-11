@@ -45,7 +45,8 @@
       </div>
 
       <div class="tab-content">
-        2번째 내용
+        <div class="img-list car2">
+        </div>
       </div>
 
       <div class="tab-content">
@@ -106,6 +107,7 @@
         item.style.backgroundPosition = `${xPos}px ${yPos}px`;
       });
 
+      console.log(imgItem);
       console.log(imgWidth, imgLength);
 
 
@@ -120,7 +122,6 @@
           });
         } else {
           curIndex = 0;
-          // curIndex --;
         }
         console.log("imgWidth" + imgWidth, "imgLength" + imgLength, "curIndex" + curIndex);
       }
@@ -135,7 +136,6 @@
             i.style.left = `-${offset}px`;
           });
         } else {
-          // curIndex ++;
           curIndex = imgLength + 1;
         }
       }
