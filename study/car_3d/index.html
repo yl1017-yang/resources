@@ -55,146 +55,159 @@
 
     <script>
       // 탭메뉴
-      const tabListBtn = document.querySelectorAll(".tab-list-btn");
-      const tabContent = document.querySelectorAll(".tab-content");
+      class TabMenu {
+        constructor() {
+          this.tabListBtn = document.querySelectorAll(".tab-list-btn");
+          this.tabContent = document.querySelectorAll(".tab-content");
 
-      tabListBtn.forEach((tab, idx) => {
-        tab.addEventListener("click", (e) => {
-          tabContent.forEach((content) => {
+          this.tabListBtn.forEach((tab, idx) => {
+            tab.addEventListener("click", (e) => {
+              this.toggleTab(idx);
+            });
+          });
+        }
+
+        toggleTab(idx) {
+          this.tabContent.forEach((content) => {
             content.classList.remove("is-show");
           });
 
-          tabListBtn.forEach((btn) => {
+          this.tabListBtn.forEach((btn) => {
             btn.classList.remove("is-show");
           });
 
-          tabListBtn[idx].classList.add("is-show");
-          tabContent[idx].classList.add("is-show");
-        });
-      });
+          this.tabListBtn[idx].classList.add("is-show");
+          this.tabContent[idx].classList.add("is-show");
+        }
+      }
+      const tabMenu = new TabMenu();
+      
       
       //360도 회전
-      let imgList = document.querySelector(".img-list");
-      let imgItem = document.querySelectorAll(".img-item");
-      let imgWidth = imgList.clientWidth;
-      // let imgLength = imgItem.length;
-      let imgLength = 36;
-      let curIndex = 1;
-      
-      for (let i = 0; i < 36; i++) {
-        const imgItemDiv = document.createElement('div');
-        imgItemDiv.classList.add('img-item');
-        imgList.appendChild(imgItemDiv);
-      }
-      const imgItemArray = Array.from(imgItem);
-      const newImgItems = document.querySelectorAll(".img-item");
-      newImgItems.forEach((item) => {
-        imgItemArray.push(item);
-      });
-      imgItem = document.querySelectorAll(".img-item");
+      class ImageSlider {
+        constructor() {
+          this.imgList = document.querySelector(".img-list");
+          this.imgItem = document.querySelectorAll(".img-item");
+          this.imgWidth = this.imgList.clientWidth;
+          this.imgLength = 36;
+          this.curIndex = 1;
 
-      imgItem.forEach((item, index) => {
-        let xPos = (index % 6) * -960;
-        let yPos = Math.floor(index / 6) * -540;
-        item.style.backgroundPosition = `${xPos}px ${yPos}px`;
-      });
-
-      console.log(imgItem);
-      console.log(imgWidth, imgLength);
-
-
-      function nextMove(){
-        curIndex ++;
-
-        if (curIndex <= imgLength) {
-          const offset = imgWidth * (curIndex - 1);
-          imgItem.forEach((i) => {
-            // i.style.transition = "left 0.5s ease-in-out";
-            i.style.left = `-${offset}px`;
-          });
-        } else {
-          curIndex = 0;
+          this.populateImages();
+          this.setImagesBackgroundPosition();
         }
-        console.log("imgWidth" + imgWidth, "imgLength" + imgLength, "curIndex" + curIndex);
-      }
 
-      function prevMove(){
-        curIndex --;
+        populateImages() {
+          for (let i = 0; i < this.imgLength; i++) {
+            const imgItemDiv = document.createElement('div');
+            imgItemDiv.classList.add('img-item');
+            this.imgList.appendChild(imgItemDiv);
+          }
 
-        if (curIndex > 0) {
-          const offset = imgWidth * (curIndex - 1);
-          imgItem.forEach((i) => {
-            // i.style.transition = "left 0.5s ease-in-out";
-            i.style.left = `-${offset}px`;
-          });
-        } else {
-          curIndex = imgLength + 1;
+          this.imgItem = document.querySelectorAll(".img-item");
         }
-      }
 
-      // 마우스 드래그
-      let isDragging = false;
-      let startX = 0;
-      let endX = 0;
-      let startY = 0;
+        setImagesBackgroundPosition() {
+          this.imgItem.forEach((item, index) => {
+            let xPos = (index % 6) * -960;
+            let yPos = Math.floor(index / 6) * -540;
+            item.style.backgroundPosition = `${xPos}px ${yPos}px`;
+          });
+        }
 
-      imgList.addEventListener("mousedown", (e) => {
-        console.log("mousedown", e.pageX);
-        isDragging = true;
-        startX = e.pageX;
-        startY = e.pageY;
-      });
+        nextMove() {
+          this.curIndex++;
 
-      imgList.addEventListener("mousemove", (e) => {
-        console.log("mousemove", e.pageX);
-        if (!isDragging) return;
-        e.preventDefault();
-
-        endX = e.pageX;
-        let endY = e.pageY;
-
-        // X축 이동 거리가 Y축 이동 거리보다 큰 경우에만 좌우로 움직이도록 설정
-        if (Math.abs(startX - endX) > Math.abs(startY - endY)) {
-          if (startX < endX) {
-            console.log("prev move");
-            prevMove();
-          } else if (startX > endX) {
-            console.log("next move");
-            nextMove();
+          if (this.curIndex <= this.imgLength) {
+            const offset = this.imgWidth * (this.curIndex - 1);
+            this.imgItem.forEach((i) => {
+              i.style.left = `-${offset}px`;
+            });
+          } else {
+            this.curIndex = 0;
           }
         }
-      });
 
-      imgList.addEventListener("mouseup", () => {
-        isDragging = false;
-      });
+        prevMove() {
+          this.curIndex--;
 
-      imgList.addEventListener("click", (e) => {
-        e.preventDefault();
-      });
-
-      // 모바일 터치 드래그
-      imgList.addEventListener("touchstart", (e) => {
-        console.log("touchstart", e.touches[0].pageX);
-        startX = e.touches[0].pageX;
-        startY = e.touches[0].pageY;
-      });
-      imgList.addEventListener("touchmove", (e) => {
-        console.log("touchend", e.changedTouches[0].pageX);
-
-        endX = e.changedTouches[0].pageX;
-        let endY = e.changedTouches[0].pageY;
-
-        if (Math.abs(startX - endX) > Math.abs(startY - endY)) {
-          if (startX < endX) {
-            console.log("prev move");
-            prevMove();
-          } else if (startX > endX) {
-            console.log("next move");
-            nextMove();
+          if (this.curIndex > 0) {
+            const offset = this.imgWidth * (this.curIndex - 1);
+            this.imgItem.forEach((i) => {
+              i.style.left = `-${offset}px`;
+            });
+          } else {
+            this.curIndex = this.imgLength + 1;
           }
         }
-      });
+      }
+
+      class ImageSliderController {
+        constructor() {
+          this.imageSlider = new ImageSlider();
+          this.isDragging = false;
+          this.startX = 0;
+          this.endX = 0;
+          this.startY = 0;
+
+          this.attachEventListeners();
+        }
+
+        attachEventListeners() {
+          this.imageSlider.imgList.addEventListener("mousedown", (e) => this.handleMouseDown(e));
+          this.imageSlider.imgList.addEventListener("mousemove", (e) => this.handleMouseMove(e));
+          this.imageSlider.imgList.addEventListener("mouseup", () => this.handleMouseUp());
+          this.imageSlider.imgList.addEventListener("click", (e) => e.preventDefault());
+
+          this.imageSlider.imgList.addEventListener("touchstart", (e) => this.handleTouchStart(e));
+          this.imageSlider.imgList.addEventListener("touchmove", (e) => this.handleTouchMove(e));
+        }
+
+        handleMouseDown(e) {
+          this.isDragging = true;
+          this.startX = e.pageX;
+          this.startY = e.pageY;
+        }
+
+        handleMouseMove(e) {
+          if (!this.isDragging) return;
+          e.preventDefault();
+
+          this.endX = e.pageX;
+          let endY = e.pageY;
+
+          if (Math.abs(this.startX - this.endX) > Math.abs(this.startY - endY)) {
+            if (this.startX < this.endX) {
+              this.imageSlider.prevMove();
+            } else if (this.startX > this.endX) {
+              this.imageSlider.nextMove();
+            }
+          }
+        }
+
+        handleMouseUp() {
+          this.isDragging = false;
+        }
+
+        handleTouchStart(e) {
+          this.startX = e.touches[0].pageX;
+          this.startY = e.touches[0].pageY;
+        }
+
+        handleTouchMove(e) {
+          this.endX = e.changedTouches[0].pageX;
+          let endY = e.changedTouches[0].pageY;
+
+          if (Math.abs(this.startX - this.endX) > Math.abs(this.startY - endY)) {
+            if (this.startX < this.endX) {
+              this.imageSlider.prevMove();
+            } else if (this.startX > this.endX) {
+              this.imageSlider.nextMove();
+            }
+          }
+        }
+      }
+
+      const imageSliderController = new ImageSliderController();
     </script>
   </body>
 </html>
