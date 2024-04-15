@@ -46,6 +46,7 @@
           var obj = { name : name, age : age };
           var obj = { name, age };  //es6 문법
 
+
           함수 파라미터 만들때도 destructuring 문법 사용가능
           var obj = { name : 'kim', age : 30 };
 
@@ -54,8 +55,34 @@
             console.log(age);
           }
           함수({ name : 'kim', age : 30 });
+        </code>
+      </pre>
 
 
+      <h1>import / export 를 이용한 파일간 모듈식 개발</h1>
+      <pre>
+        <code>
+          <script></script>
+
+          <script type="module">
+
+            // es6에서는 libraray에 있는 특정변수(a)만 가져옴
+            import 변수 from './libraray.js';
+            console.log(변수);
+
+            import 작명,{a,b} from './libraray.js';
+            console.log(작명);
+
+            import {a as 별명} from './libraray.js';  //변수명이 마음에 들지 않으면   import {변수 as 새변수명} from '경로';
+            console.log(별명);
+
+            import 디폴트, * as 별명 from './libraray.js';  //*는 모든걸 inport 해올수 있음
+            console.log(디폴트);
+
+            // 예전 방식
+            var 임포트해온것들 = require('/library.js');
+
+          </script>
         </code>
       </pre>     
 
