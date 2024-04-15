@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <style>
+      *{padding:0;margin:0;border:0;box-sizing:border-box;font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard Variable", Pretendard, Roboto, "Noto Sans KR", "Segoe UI", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;line-height:1.4;}
+      .wrap {width:700px;margin:30px auto;}
+      h2{margin:40px 0 20px;}
+      p{margin:20px 0 10px 20px;}
+      pre {background:#444;border-radius:10px;color:#fff;font-size:16px;}
+      button{padding:14px;background:#333;color:#fff;margin:20px;cursor:pointer;}
+    </style>
+
+    <section class="wrap">
+      <h1>틀린그림 찾기능력이 향상되는 Destructuring 문법</h1>
+      <pre>
+        <code>
+          var arr = [2,3,4];
+
+          var a = arr[0];
+          var b = arr[1];
+
+          var [a,b,c] = [2,3,4]; //array 데이터를 전부 변수에 담으러면
+          var [a,b,c = 10] = [2,3];  //array destructuring 할때 몇개를 빼먹는 다면 - 등호로 기본값 지정 가능
+
+          
+          var obj = { name : 'kim', age : 30 };
+          var name = obj.name;
+          var age = obj.age;
+
+          var { name, age } = { name : 'kim', age : 30 };
+          var { name, age = 31 } = { name : 'kim' };
+          var { name : 나이 } = { name : 'kim' };
+          var { name : 나이 = 'park' } = {  };
+
+
+
+          var name = 'kim';
+          var age = 30;
+
+          var obj = { name : name, age : age };
+          var obj = { name, age };  //es6 문법
+
+          함수 파라미터 만들때도 destructuring 문법 사용가능
+          var obj = { name : 'kim', age : 30 };
+
+          function 함수( {name, age} ) {
+            console.log(name);
+            console.log(age);
+          }
+          함수({ name : 'kim', age : 30 });
+
+
+        </code>
+      </pre>     
+
+    </section>
+  </body>
+</html>
