@@ -12,7 +12,7 @@
       body{background:#444;}
       
       .item_box{position:relative;width:640px;height:460px;overflow:hidden;-webkit-backface-visibility:hidden;user-select:none;margin:0 auto}
-      .item_box .item_list{display:flex;width:100%;}
+      .item_box .item_list{position:relative;display:flex;width:100%;}
       .item_box .item_list li{position:relative;left:0;width:100%;height:100%;background:#fff;cursor:move;cursor:grab;cursor:-webkit-grab;cursor:-moz-grab;flex-shrink:0;transition:transform 0.4s ease-in-out;}
       .item_box .item_list a{display:block;width:100%;height:100%}
 
@@ -20,9 +20,10 @@
       .item_box .item_btn .prev{left:0}
       .item_box .item_btn .next{right:0;border-radius:12px 0 0 12px}
 
-      .item_box .item_pagination{position:absolute;width:100%;bottom:20px;left:50%;transform:translateX(-50%);text-align:center}
-      .item_box .item_pagination .dot{display:inline-block;width:16px;height:16px;margin:0 10px;background:rgba(0,0,0,.6);border-radius:100px;transition:0.3s}
+      .item_box .item_pagination{position:absolute;width:100%;bottom:20px;left:50%;transform:translateX(-50%);text-align:center;display:flex;}
+      .item_box .item_pagination .dot{display:block;width:16px;height:16px;margin:0 10px;background:rgba(0,0,0,.6);border-radius:100px;transition:0.3s}
       .item_box .item_pagination .dot a{display:block;width:100%;height:100%}
+      .item_box .item_pagination .active{background:red;}
     </style>
 
     <!-- slide -->
@@ -37,7 +38,7 @@
         <li class="slide_item">
           <a href="https://shop.pulmuone.co.kr/shop/goodsView?goods=127">
             2222 텍스트
-            <img src="https://shoppulmuone.cdn.ntruss.com/MALL/planshop/202404/0411_airfryer/img/item/item1_2.jpg" alt="" />
+            <img src="https://shoppulmuone.cdn.ntruss.com/MALL/planshop/202404/0411_airfryer/img/item/item2_2.jpg" alt="" />
           </a>
         </li>
         <li class="slide_item">
@@ -47,7 +48,11 @@
           </a>
         </li>
       </ul>
-      <ul class="item_pagination slide_pagination"></ul>
+      <ul class="item_pagination slide_pagination">
+        <!-- <li class="dot"><a href="#none"></a></li>
+        <li class="dot"><a href="#none"></a></li>
+        <li class="dot"><a href="#none"></a></li> -->
+      </ul>
       <div class="item_btn">
         <button type="button" class="prev slide_btn_prev">&#10094;</button>
         <button type="button" class="next slide_btn_next">&#10095;</button>
@@ -58,23 +63,34 @@
     <script>
       const slideList = document.querySelector('.slide_list');
       const slideItem = document.querySelectorAll('.slide_item');
+      const prevBtn = document.querySelector('.slide_btn_prev');
+      const nextBtn = document.querySelector('.slide_btn_next');
+      const pagination = document.querySelectorAll('.slide_pagination');
       let slideWidth = slideList.clientWidth;
       let slideLen = slideItem.length;
-      let curIndex = 0;
+      let curIndex = 1;
+
+      //복제
+      let firstChild = slideList.firstElementChild;
+      let lastChild = slideList.lastElementChild;
+      let clonedFirst = firstChild.cloneNode(true);
+      let clonedLast = lastChild.cloneNode(true);
+      slideList.appendChild(clonedFirst);
+      slideList.insertBefore(clonedLast, slideList.firstElementChild);
+
+      slideList.style.transform = `translateX(-${slideWidth}px)`;
 
       function nextMove() {
         curIndex++;
-        
-        if (curIndex < slideLen) {
+
+        if (curIndex <= slideLen) {
           const offset = -slideWidth * curIndex;
-          slideItem.forEach((item, index) => {
-            item.style.transform = `translateX(${offset}px)`;
-          });
+          slideList.style.transition = 'transform 0.4s ease-in-out';
+          slideList.style.transform = `translateX(${offset}px)`;
         } else {
-          curIndex = 0;
-          slideItem.forEach((item, index) => {
-            item.style.transform = `translateX(0)`;
-          });
+          slideList.style.transition = 'none';
+          slideList.style.transform = `translateX(-${slideWidth}px)`;
+          curIndex = 1;
         }
       }
 
@@ -83,15 +99,12 @@
 
         if (curIndex >= 0) {
           const offset = -slideWidth * curIndex;
-          slideItem.forEach((item, index) => {
-            item.style.transform = `translateX(${offset}px)`;
-          });
+          slideList.style.transition = 'transform 0.4s ease-in-out';
+          slideList.style.transform = `translateX(${offset}px)`;
         } else {
-          curIndex = slideLen - 1;
-          const offset = -slideWidth * curIndex;
-          slideItem.forEach((item, index) => {
-            item.style.transform = `translateX(${offset}px)`;
-          });
+          slideList.style.transition = 'none';
+          slideList.style.transform = `translateX(-${slideWidth * slideLen}px)`;
+          curIndex = slideLen;
         }
       }
 
@@ -101,9 +114,6 @@
       });
 
       // 이전,다음 버튼
-      const prevBtn = document.querySelector('.slide_btn_prev');
-      const nextBtn = document.querySelector('.slide_btn_next');
-
       prevBtn.addEventListener("click", () => {
         prevMove();
         stopPlay();
@@ -113,6 +123,10 @@
         stopPlay();
       });
 
+      // 페이지
+      // pagination.addEventListener("click", (e) => {
+      //     pagination.classList.add("active");
+      // });
 
       // 자동 플레이
       function startPlay() {
@@ -132,6 +146,7 @@
       // 마우스 드래그
       let isDragging = false;
       let startX = 0;
+      let startY = 0;
 
       slideList.addEventListener("mousedown", (e) => {
         console.log("mousedown", e.pageX);
@@ -141,6 +156,7 @@
       });
 
       slideList.addEventListener("mousemove", (e) => {
+        console.log("mousemove", e.pageX);
         if (isDragging) {
           const currentX = e.pageX;
           const currentY = e.pageY;
