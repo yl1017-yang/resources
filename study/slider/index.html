@@ -104,8 +104,14 @@
       const prevBtn = document.querySelector('.slide_btn_prev');
       const nextBtn = document.querySelector('.slide_btn_next');
 
-      prevBtn.addEventListener('click', prevMove);
-      nextBtn.addEventListener('click', nextMove);
+      prevBtn.addEventListener("click", () => {
+        prevMove();
+        stopPlay();
+      });
+      nextBtn.addEventListener("click", () => {
+        nextMove();
+        stopPlay();
+      });
 
 
       // 자동 플레이
