@@ -66,7 +66,7 @@
       const prevBtn = document.querySelector('.slide_btn_prev');
       const nextBtn = document.querySelector('.slide_btn_next');
       const pagination = document.querySelectorAll('.slide_pagination');
-      let slideWidth = slideItem[0].offsetWidth;
+      let slideWidth = slideList.clientWidth;
       let slideLen = slideItem.length;
       let curIndex = 0;
 
@@ -82,7 +82,7 @@
           cloneSlide.classList.add("clone");
           slideList.insertBefore(cloneSlide, slideList.firstElementChild);
         }
-        slideLen = slideList.querySelectorAll(".slide_item").length;
+        slideLen = slideList.querySelectorAll(".slide_item").length;        
       }
       createClone();
 
@@ -93,13 +93,13 @@
         curIndex++;
 
         if (curIndex <= slideLen) {
-          slideList.style.transition = 'transform 0.4s ease-in-out';
-          slideList.style.transform = `translateX(-${slideWidth * curIndex}px)`;
-        }
+            slideList.style.transition = 'transform 0.4s ease-in-out';
+            slideList.style.transform = `translateX(-${slideWidth * curIndex}px)`;
+        } 
         if (curIndex === slideLen) {
           setTimeout(() => {
-            curIndex = 0;
             slideList.style.transition = 'none';
+            curIndex = 0;
             slideList.style.transform = `translateX(-${slideWidth * curIndex}px)`;
           }, 400);
         }
@@ -120,7 +120,8 @@
             slideList.style.transition = 'none';
             curIndex = slideLen - 1;
             // slideList.style.transform = `translateX(-${slideWidth * (slideLen - 2)}px)`;
-            slideList.style.transform = `translateX(-${slideWidth * curIndex}px)`;
+            const offset = -slideWidth * curIndex;
+            slideList.style.transform = `translateX(${offset}px)`;
           }, 400);
         }
       }
