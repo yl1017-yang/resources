@@ -8,12 +8,12 @@
   </head>
   <body>
     <style>
-      *{padding:0;margin:0;border:0;box-sizing:border-box;}
+      *{padding:0;margin:0;border:0;box-sizing:border-box;list-style:none;}
       body{background:#444;}
       
       .item_box{position:relative;width:640px;height:460px;overflow:hidden;-webkit-backface-visibility:hidden;user-select:none;margin:0 auto}
       .item_box .item_list{display:flex;width:100%;}
-      .item_box .item_list li{position:relative;left:0;width:100%;height:100%;cursor:move;cursor:grab;cursor:-webkit-grab;cursor:-moz-grab;flex-shrink:0;transition: transform 0.5s ease;}
+      .item_box .item_list li{position:relative;left:0;width:100%;height:100%;background:#fff;cursor:move;cursor:grab;cursor:-webkit-grab;cursor:-moz-grab;flex-shrink:0;transition:transform 0.4s ease-in-out;}
       .item_box .item_list a{display:block;width:100%;height:100%}
 
       .item_box .item_btn button{position:absolute;width:60px;height:60px;top:45%;font-size:26px;color:#fff;border-radius:0 12px 12px 0;border:0;background:rgba(0,0,0,.6);cursor:pointer;touch-action:none}
@@ -72,6 +72,9 @@
       // let clonedLast = lastChild.cloneNode(true);
       // slideList.appendChild(clonedFirst);
       // slideList.insertBefore(clonedLast, slideList.firstElementChild);
+      
+
+      slideList.style.transform = `translateX(-${slideWidth}px)`;
 
       function nextMove() {
         curIndex = (curIndex + 1) % slideLen;

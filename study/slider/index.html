@@ -13,7 +13,7 @@
       
       .item_box{position:relative;width:640px;height:460px;overflow:hidden;-webkit-backface-visibility:hidden;user-select:none;margin:0 auto}
       .item_box .item_list{position:relative;display:flex;width:100%;}
-      .item_box .item_list li{position:relative;left:0;width:100%;height:100%;background:#fff;cursor:move;cursor:grab;cursor:-webkit-grab;cursor:-moz-grab;flex-shrink:0;transition:transform 0.4s ease-in-out;}
+      .item_box .item_list li{width:100%;height:100%;background:#fff;cursor:move;cursor:grab;cursor:-webkit-grab;cursor:-moz-grab;flex-shrink:0;transition:transform 0.4s ease-in-out;}
       .item_box .item_list a{display:block;width:100%;height:100%}
 
       .item_box .item_btn button{position:absolute;width:60px;height:60px;top:45%;font-size:26px;color:#fff;border-radius:0 12px 12px 0;border:0;background:rgba(0,0,0,.6);cursor:pointer;touch-action:none}
@@ -31,19 +31,19 @@
       <ul class="item_list slide_list">
         <li class="slide_item">
           <a href="https://shop.pulmuone.co.kr/shop/goodsView?goods=127">
-            11111 텍스트
+            <p>11111 텍스트</p>
             <img src="https://shoppulmuone.cdn.ntruss.com/MALL/planshop/202404/0411_airfryer/img/item/item1_1.jpg" alt="" />
           </a>
         </li>
         <li class="slide_item">
           <a href="https://shop.pulmuone.co.kr/shop/goodsView?goods=127">
-            2222 텍스트
+            <p>2222 텍스트</p>
             <img src="https://shoppulmuone.cdn.ntruss.com/MALL/planshop/202404/0411_airfryer/img/item/item2_2.jpg" alt="" />
           </a>
         </li>
         <li class="slide_item">
           <a href="https://shop.pulmuone.co.kr/shop/goodsView?goods=127">
-            33333 텍스트
+            <p>3333 텍스트</p>
             <img src="https://shoppulmuone.cdn.ntruss.com/MALL/planshop/202404/0411_airfryer/img/item/item1_3.jpg" alt="" />
           </a>
         </li>
@@ -68,32 +68,47 @@
       const pagination = document.querySelectorAll('.slide_pagination');
       let slideWidth = slideList.clientWidth;
       let slideLen = slideItem.length;
-      let curIndex = 1;
+      let curIndex = 0;
 
-      //복제
-      let firstChild = slideList.firstElementChild;
-      let lastChild = slideList.lastElementChild;
-      let clonedFirst = firstChild.cloneNode(true);
-      let clonedLast = lastChild.cloneNode(true);
-      slideList.appendChild(clonedFirst);
-      slideList.insertBefore(clonedLast, slideList.firstElementChild);
+      //노드 복제
+      function createClone() {
+        for (let i = 0; i < slideLen; i++) {
+          const cloneSlide = slideItem[i].cloneNode(true);
+          cloneSlide.classList.add("clone");
+          slideList.appendChild(cloneSlide);
+        }
+        for (let i = slideLen - 1; i >= slideLen - slideLen; i--) {
+          const cloneSlide = slideItem[i].cloneNode(true);
+          cloneSlide.classList.add("clone");
+          slideList.insertBefore(cloneSlide, slideList.firstElementChild);
+        }
 
-      slideList.style.transform = `translateX(-${slideWidth}px)`;
+        let firstChild = slideList.firstElementChild;
+        let clonedFirst = firstChild.cloneNode(true);
 
+        slideLen = slideList.querySelectorAll(".slide_item").length;
+      }
+      createClone();
+
+      //다음 이동
       function nextMove() {
         curIndex++;
 
         if (curIndex <= slideLen) {
-          const offset = -slideWidth * curIndex;
-          slideList.style.transition = 'transform 0.4s ease-in-out';
-          slideList.style.transform = `translateX(${offset}px)`;
-        } else {
-          slideList.style.transition = 'none';
-          slideList.style.transform = `translateX(-${slideWidth}px)`;
-          curIndex = 1;
+            const offset = -slideWidth * curIndex;
+            slideList.style.transition = 'transform 0.4s ease-in-out';
+            slideList.style.transform = `translateX(${offset}px)`;
+        } 
+        if (curIndex === slideLen) {
+          setTimeout(() => {
+            slideList.style.transition = 'none';
+            slideList.style.transform = `translateX(-${slideWidth}px)`;
+            curIndex = 1;
+          }, 300);
         }
       }
 
+      //이전 이동
       function prevMove() {
         curIndex--;
 
@@ -101,10 +116,13 @@
           const offset = -slideWidth * curIndex;
           slideList.style.transition = 'transform 0.4s ease-in-out';
           slideList.style.transform = `translateX(${offset}px)`;
-        } else {
-          slideList.style.transition = 'none';
-          slideList.style.transform = `translateX(-${slideWidth * slideLen}px)`;
-          curIndex = slideLen;
+        } 
+        if (curIndex === -1) {
+          setTimeout(() => {
+            slideList.style.transition = 'none';
+            slideList.style.transform = `translateX(-${slideWidth * (slideLen - 1)}px)`;
+            curIndex = slideLen - 1;
+          }, 300);
         }
       }
 
@@ -113,34 +131,36 @@
         slideWidth = slideList.clientWidth;
       });
 
+      // 자동 플레이
+      function startAutoPlay() {
+        autoPlayInterval = setInterval(nextMove, 1000);
+      }
+      function stopAutoPlay() {
+        clearInterval(autoPlayInterval);
+      }
+      slideList.addEventListener("mouseenter", stopAutoPlay);
+      slideList.addEventListener("mouseleave", startAutoPlay);
+      slideList.addEventListener("touchstart", stopAutoPlay);
+      slideList.addEventListener("touchend", startAutoPlay);
+
+      startAutoPlay();
+
       // 이전,다음 버튼
       prevBtn.addEventListener("click", () => {
+        stopAutoPlay();
         prevMove();
-        stopPlay();
+        startAutoPlay();
       });
       nextBtn.addEventListener("click", () => {
+        stopAutoPlay();
         nextMove();
-        stopPlay();
+        startAutoPlay();
       });
 
       // 페이지
       // pagination.addEventListener("click", (e) => {
       //     pagination.classList.add("active");
       // });
-
-      // 자동 플레이
-      function startPlay() {
-        autoPlayInterval = setInterval(nextMove, 2000);
-      }
-      function stopPlay() {
-        clearInterval(autoPlayInterval);
-      }
-      slideList.addEventListener("mouseenter", stopPlay);
-      slideList.addEventListener("mouseleave", startPlay);
-      slideList.addEventListener("touchstart", stopPlay);
-      slideList.addEventListener("touchend", startPlay);
-
-      startPlay();
       
 
       // 마우스 드래그
