@@ -66,12 +66,12 @@
       let curIndex = 0;
 
       //복제
-      // let firstChild = slideList.firstElementChild;
-      // let lastChild = slideList.lastElementChild;
-      // let clonedFirst = firstChild.cloneNode(true);
-      // let clonedLast = lastChild.cloneNode(true);
-      // slideList.appendChild(clonedFirst);
-      // slideList.insertBefore(clonedLast, slideList.firstElementChild);
+      let firstChild = slideList.firstElementChild;
+      let lastChild = slideList.lastElementChild;
+      let clonedFirst = firstChild.cloneNode(true);
+      let clonedLast = lastChild.cloneNode(true);
+      slideList.appendChild(clonedFirst);
+      slideList.insertBefore(clonedLast, slideList.firstElementChild);
       
 
       slideList.style.transform = `translateX(-${slideWidth}px)`;

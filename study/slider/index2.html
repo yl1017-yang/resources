@@ -15,6 +15,7 @@
       .item_box .item_list{position:relative;display:flex;width:100%;}
       .item_box .item_list li{width:100%;height:100%;background:#fff;cursor:move;cursor:grab;cursor:-webkit-grab;cursor:-moz-grab;flex-shrink:0;transition:transform 0.4s ease-in-out;}
       .item_box .item_list a{display:block;width:100%;height:100%}
+      .item_box .item_list img{display:block;width:100%}
 
       .item_box .item_btn button{position:absolute;width:60px;height:60px;top:45%;font-size:26px;color:#fff;border-radius:0 12px 12px 0;border:0;background:rgba(0,0,0,.6);cursor:pointer;touch-action:none}
       .item_box .item_btn .prev{left:0}
@@ -70,23 +71,18 @@
       let slideLen = slideItem.length;
       let curIndex = 0;
 
-      //노드 복제
+      //노드 복제 - 양옆 1개만
       function createClone() {
-        for (let i = 0; i < slideLen; i++) {
-          const cloneSlide = slideItem[i].cloneNode(true);
-          cloneSlide.classList.add("clone");
-          slideList.appendChild(cloneSlide);
-        }
-        for (let i = slideLen - 1; i >= 0; i--) {
-          const cloneSlide = slideItem[i].cloneNode(true);
-          cloneSlide.classList.add("clone");
-          slideList.insertBefore(cloneSlide, slideList.firstElementChild);
-        }
-        slideLen = slideList.querySelectorAll(".slide_item").length;        
+        let firstChild = slideList.firstElementChild;
+        let lastChild = slideList.lastElementChild;
+        let clonedFirst = firstChild.cloneNode(true);
+        let clonedLast = lastChild.cloneNode(true);
+        slideList.appendChild(clonedFirst);
+        slideList.insertBefore(clonedLast, slideList.firstElementChild);     
       }
       createClone();
 
-      // slideList.style.transform = `translateX(-${slideWidth}px)`;
+      slideList.style.transform = `translateX(-${slideWidth}px)`;
       
       //다음 이동
       function nextMove() {
@@ -118,10 +114,8 @@
         if (curIndex === -1) {
           setTimeout(() => {
             slideList.style.transition = 'none';
+            slideList.style.transform = `translateX(-${slideWidth * (slideLen - 1)}px)`;
             curIndex = slideLen - 1;
-            // slideList.style.transform = `translateX(-${slideWidth * (slideLen - 2)}px)`;
-            const offset = -slideWidth * curIndex;
-            slideList.style.transform = `translateX(${offset}px)`;
           }, 400);
         }
       }
