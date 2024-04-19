@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ko" class="windows desktop portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="https://shoppulmuone.cdn.ntruss.com/newProduct21/common/css/font.css" />
+    <link rel="stylesheet" type="text/css" href="http://static.pulmuone.info/shop_pulmuone/css/pc.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+  <body class="fb">
+    <main class="fb__event">
+      <div class="promotion">
+        <div class="promotion__content">
+          <div class="event">
+            <!-- 작업영역 -->
+            <div class="templete_wrap">
+              <div class="event_wrap">
+                <style>
+                  .event_wrap *{font-family:'NotoSans','맑은 고딕', 'malgun gothic','Apple SD Gothic Neo', 'Apple SD 산돌고딕 Neo', 'Microsoft NeoGothic', 'Droid sans', sans-serif;-webkit-text-size-adjust:100%}
+                  .event_wrap .tit1{margin:0 40px 30px 40px;font-size:40px;font-weight:700}
+                  .event_wrap .tit2{margin:0 40px 30px 40px;font-size:30px;font-weight:700}
+                  .event_wrap .tit3{position: absolute; top:20%;left:8%;transform:translate(-8%,-20%);font-weight:200; font-size: 30px; color: #fff;line-height: 1.5;}
+                  .event_wrap .tit3 strong{font-weight: 500;}
+
+                  /* reset */
+                  .desktop .fb__event .event__detail__wrapper .detail .event_wrap img{max-width:none;margin:0 -376px auto} 
+                  .event_wrap{overflow:hidden;background:#f2f2f2}
+                  /* wide common */
+                  .event_wrap .evt_wide_wrap{position:relative;max-width:1920px;min-width:1168px;margin:0 auto;text-align:left;padding:60px 0}
+                  .event_wrap .evt_section,.event_wrap .evt_notice{position:relative;width:1168px;margin:0 auto}
+                  .event_wrap .evt_section img{max-width:none;margin:0 -376px auto;vertical-align:top}
+                  .event_wrap .btn{position:absolute;border:0}
+
+                  /* product - swipe ver1 */
+                  .event_wrap .slide_box{position:relative;width:620px;overflow-x:hidden;-webkit-backface-visibility:hidden;margin:0 auto}
+                  .event_wrap .slide_box .slide_list{display:flex}
+                  .event_wrap .slide_box .slide_list li{position:relative;width:100%}
+                  .event_wrap .slide_box .slide_list a{display:block;width:100%;height:100%}
+                  .event_wrap .slide_box .slide_list .inner{position:relative}
+                  
+                  .slide_box .slide_btn_box button{position:absolute;width:50px;height:50px;top:200px;color:#a9a9a9;border:1px solid #a9a9a9 !important;border-radius:100px;border:0;cursor:pointer;touch-action:none}
+                  .slide_box .slide_btn_box .slide_btn_prev{left:0}
+                  .slide_box .slide_btn_box .slide_btn_next{right:0}
+                  .slide_box .slide_pagination{display:none}
+
+                  .slide_box .slide_thumb{position:relative;display:flex;justify-content:center}
+                  .slide_box .slide_thumb .thumb{position:relative;width:140px;height:140px;margin:0 5px;background:#fff}
+                  .slide_box .slide_thumb .thumb img{width:100%;margin:0 !important}
+                  .slide_box .slide_thumb .thumb.thumb_active:after{content:'';position:absolute;width:100%;height:100%;top:0;left:0;box-sizing:border-box;border:3px solid #80c342}
+                  .slide_box .slide_thumb a{display:flex;align-content:center;flex-wrap:wrap;width:100%;height:100%}
+
+                  .event_wrap .product_img{display:block}
+                  .event_wrap .product_img img{width:100%;margin:0 !important}
+                  .event_wrap .product_info{display:flex;flex-wrap:wrap;justify-content:center;padding:20px 0 30px;text-align:center;box-sizing:border-box}
+                  .event_wrap .product_brand{font-size:16px;font-weight:700;color:#333;line-height:24px}
+                  .event_wrap .product_title{flex-basis:100%;font-size:20px;font-weight:400;color:#222;line-height:26px;letter-spacing:-1.5px;word-break:keep-all;margin-bottom:10px}
+                  .event_wrap .tag{position:absolute;top:0;left:0;width:60px;height:60px;line-height:20px;text-align:center;background:#ff752a;display:flex;align-content:center;justify-content:center;flex-wrap:wrap}
+                  .event_wrap .tag .txt{font-size:16px;font-weight:600;color:#fff;letter-spacing:-.3px;}
+                  .event_wrap .original{margin:6px 8px 0 0}
+                  .event_wrap .original del{font-size:18px;color:#999;letter-spacing:-.6px;font-family:'Lato'}
+                  .event_wrap .sale ins{font-size:24px;font-weight:600;color:#222;letter-spacing:-.6px;text-decoration:none;font-family:'Lato'}
+                  .event_wrap .sale .won{font-size:18px;font-weight:500;color:#222;margin-left:-3px}
+                  .event_wrap .percent{margin-left:8px}
+                  .event_wrap .percent .num{font-size:24px;font-weight:600;color:#ff752a;font-family:'Lato'}
+                  .event_wrap .percent .unit{font-size:24px;font-weight:600;color:#ff752a;margin-left:-4px;font-family:'Lato'}
+
+                  /* product - swipe ver2 */
+                  .event_wrap .item_box{position:relative;width:1088px;overflow-x:hidden;-webkit-backface-visibility:hidden;margin:0 auto;padding:50px 0 30px;background:#fff}
+                  .event_wrap .item_box ul{display:flex;width:25%}
+                  .event_wrap .item_box ul .inner{position:relative}
+                  .event_wrap .item_box ul .item{position:relative;width:100%}
+                  .event_wrap .item_box ul .item img{width:100%;height:100%;margin:0 !important}
+                  .event_wrap .item_box ul .item a{display:block;width:100%;height:100%}
+
+                  .item_box .item_btn button{position:absolute;width:52px;height:52px;top:190px;color:#fff;background:rgba(0,0,0,0.5);border:none;cursor:pointer;touch-action:none}
+                  .item_box .item_btn .prev{left:0;border-radius:0 8px 8px 0}
+                  .item_box .item_btn .next{right:0;border-radius:8px 0 0 8px}
+
+                  .item_box .item_show button{position:absolute;left:54%;width:40px;height:40px;bottom:17px;font-size:12px;color:#888;border:none;background-color:transparent;cursor:pointer;touch-action:none;z-index:10}
+                  .item_box .item_show .play{display:none}
+                  .item_box .item_show .stop{transform:rotate(90deg)}
+                  
+                  .item_box .item_pagination{position:relative;text-align:center}
+                  .item_box .item_pagination .dot{display:inline-block;width:8px;height:8px;margin:0 3px;background:#ddd;border-radius:100px;transition:0.3s}
+                  .item_box .item_pagination .dot.dot_active2{background:#525252}
+                  .item_box .item_pagination .dot.dot_active3{background:#525252}
+                  .item_box .item_pagination .dot a{display:block;width:100%;height:100%}
+
+                </style>
+
+                <div class="evt_wide_wrap">
+
+
+                    <h2 class="tit2" style="margin-top:100px">V5_PC_예외형_(상품 리스트형)</h2>
+                    <!-- 상품영역 - swipe ver2 -->
+                    <div class="item_box slide_box_ver2">
+                      <ul class="slide_list2">
+                        <li class="item slide_content2">
+                          <a href="https://shop.pulmuone.co.kr/shop/goodsView?goods=127">
+                            <div class="inner" role="text">
+                              <figure class="product_img">
+                                <img src="https://shoppulmuone.cdn.ntruss.com/BOS/il/2021/03/11/640_E29A1D81898E43B3A821.jpg" alt="">
+                              </figure>
+                              <span class="product_info">
+                                <span class="product_brand">풀무원</span>
+                                <span class="product_title">1-탱글어묵 가래떡 떡볶이</span>
+                                <span class="original">
+                                  <span class="blind">정상가</span>
+                                  <del>14,900</del>
+                                </span>
+                                <span class="sale">
+                                  <span class="blind">행사가</span>
+                                  <ins>7,450</ins>
+                                  <span class="won">원</span>
+                                </span>
+                                <span class="percent">
+                                  <span class="blind">할인율</span>
+                                  <span class="num">31</span>
+                                  <span class="unit">%</span>
+                                </span>
+                              </span>
+                            </div>
+                          </a>
+                        </li>
+                        <li class="item slide_content2">
+                          <a href="https://shop.pulmuone.co.kr/shop/goodsView?goods=65">
+                            <div class="inner" role="text">
+                              <figure class="product_img">
+                                <img src="https://shoppulmuone.cdn.ntruss.com/BOS/il/2021/06/23/640_25D7488413DD461783B3.jpg" alt="">
+                              </figure>
+                              <span class="product_info">
+                                <span class="product_brand">올가</span>
+                                <span class="product_title">2-의성 옥산사과 5-8입</span>
+                                <span class="original">
+                                  <span class="blind">정상가</span>
+                                  <del>14,900</del>
+                                </span>
+                                <span class="sale">
+                                  <span class="blind">행사가</span>
+                                  <ins>7,450</ins>
+                                  <span class="won">원</span>
+                                </span>
+                                <span class="percent">
+                                  <span class="blind">할인율</span>
+                                  <span class="num">10</span>
+                                  <span class="unit">%</span>
+                                </span>
+                              </span>
+                            </div>
+                          </a>
+                        </li>
+                        <li class="item slide_content2">
+                          <a href="https://shop.pulmuone.co.kr/shop/goodsView?goods=31788">
+                            <div class="inner" role="text">
+                              <figure class="product_img">
+                                <img src="https://shoppulmuone.cdn.ntruss.com/BOS/il/2022/01/28/640_7D129A0E837F48C8ABBF.jpg" alt="">
+                              </figure>
+                              <span class="product_info">
+                                <span class="product_brand">풀무원</span>
+                                <span class="product_title">3-통통새우 쉬림프카츠</span>
+                                <span class="original">
+                                  <span class="blind">정상가</span>
+                                  <del>6,600</del>
+                                </span>
+                                <span class="sale">
+                                  <span class="blind">행사가</span>
+                                  <ins>4,980</ins>
+                                  <span class="won">원</span>
+                                </span>
+                                <span class="percent">
+                                  <span class="blind">할인율</span>
+                                  <span class="num">20</span>
+                                  <span class="unit">%</span>
+                                </span>
+                              </span>
+                            </div>
+                          </a>
+                        </li>
+                        <li class="item slide_content2">
+                          <a href="https://shop.pulmuone.co.kr/shop/goodsView?goods=1987">
+                            <div class="inner" role="text">
+                              <figure class="product_img">
+                                <img src="https://shoppulmuone.cdn.ntruss.com/BOS/il/2021/02/24/640_4ACE85DE7BD74A15AA08.jpg" alt="">
+                              </figure>
+                              <span class="product_info">
+                                <span class="product_brand">올가</span>
+                                <span class="product_title">4-풀무원 톡톡 포기김치</span>
+                                <span class="original">
+                                  <span class="blind">정상가</span>
+                                  <del>13,900</del>
+                                </span>
+                                <span class="sale">
+                                  <span class="blind">행사가</span>
+                                  <ins>8,900</ins>
+                                  <span class="won">원</span>
+                                </span>
+                                <span class="percent">
+                                  <span class="blind">할인율</span>
+                                  <span class="num">31</span>
+                                  <span class="unit">%</span>
+                                </span>
+                              </span>
+                            </div>
+                          </a>
+                        </li>
+                        <li class="item slide_content2">
+                          <a href="https://shop.pulmuone.co.kr/shop/goodsView?goods=1987">
+                            <div class="inner" role="text">
+                              <figure class="product_img">
+                                <img src="https://shoppulmuone.cdn.ntruss.com/BOS/il/2021/02/16/640_1040224C852C4277BF35.jpg" alt="">
+                              </figure>
+                              <span class="product_info">
+                                <span class="product_brand">아임리얼</span>
+                                <span class="product_title">5-네번 구워 김밥이 향긋한 김밥김</span>
+                                <span class="original">
+                                  <span class="blind">정상가</span>
+                                  <del>10,000</del>
+                                </span>
+                                <span class="sale">
+                                  <span class="blind">행사가</span>
+                                  <ins>8,900</ins>
+                                  <span class="won">원</span>
+                                </span>
+                                <span class="percent">
+                                  <span class="blind">할인율</span>
+                                  <span class="num">25</span>
+                                  <span class="unit">%</span>
+                                </span>
+                              </span>
+                            </div>
+                          </a>
+                        </li>
+                        <li class="item slide_content2">
+                          <a href="https://shop.pulmuone.co.kr/shop/goodsView?goods=1987">
+                            <div class="inner" role="text">
+                              <figure class="product_img">
+                                <img src="https://shoppulmuone.cdn.ntruss.com/BOS/il/2021/06/02/640_B5A4BF8F7E3144559A91.jpg" alt="">
+                              </figure>
+                              <span class="product_info">
+                                <span class="product_brand">풀무원</span>
+                                <span class="product_title">6-얄피꽉찬 한식교자</span>
+                                <span class="original">
+                                  <span class="blind">정상가</span>
+                                  <del>10,000</del>
+                                </span>
+                                <span class="sale">
+                                  <span class="blind">행사가</span>
+                                  <ins>8,900</ins>
+                                  <span class="won">원</span>
+                                </span>
+                                <span class="percent">
+                                  <span class="blind">할인율</span>
+                                  <span class="num">30</span>
+                                  <span class="unit">%</span>
+                                </span>
+                              </span>
+                            </div>
+                          </a>
+                        </li>
+                        <li class="item slide_content2">
+                          <a href="https://shop.pulmuone.co.kr/shop/goodsView?goods=1987">
+                            <div class="inner" role="text">
+                              <figure class="product_img">
+                                <img src="https://shoppulmuone.cdn.ntruss.com/BOS/il/2023/04/03/640_82B528E5072442738E3A.jpg" alt="">
+                              </figure>
+                              <span class="product_info">
+                                <span class="product_brand">풀무원</span>
+                                <span class="product_title">7-가쓰오 메밀소바 [4인분]</span>
+                                <span class="original">
+                                  <span class="blind">정상가</span>
+                                  <del>10,000</del>
+                                </span>
+                                <span class="sale">
+                                  <span class="blind">행사가</span>
+                                  <ins>8,900</ins>
+                                  <span class="won">원</span>
+                                </span>
+                                <span class="percent">
+                                  <span class="blind">할인율</span>
+                                  <span class="num">40</span>
+                                  <span class="unit">%</span>
+                                </span>
+                              </span>
+                            </div>
+                          </a>
+                        </li>
+                      </ul>
+
+                      <div class="item_btn slide_btn_box2">
+                        <button type="button" class="prev slide_btn_prev2">&#10094;</button>
+                        <button type="button" class="next slide_btn_next2">&#10095;</button>
+                      </div>
+                      <div class="item_show slide_btn_show2">
+                        <button type="button" class="play slide_btn_play2">▶<span class="blind">시작</span></button>
+                        <button type="button" class="stop slide_btn_stop2">〓<span class="blind">멈춤</span></button>
+                      </div>
+                      <ul class="item_pagination slide_pagination2"></ul>
+                    </div>
+                    <script type="text/javascript" src="slide_ver2.js"></script>
+                    <!-- //상품영역 - swipe ver2 -->
+
+
+                    <h2 class="tit2" style="margin-top:100px">V5_PC_예외형_(상품 flow형)</h2>
+                    <!-- 상품영역 - swipe ver3 -->
+                    <div class="item_box slide_box_ver3">
+                      <ul class="slide_list3">
+                        <li class="item slide_content3">
+                          <a href="https://shop.pulmuone.co.kr/shop/goodsView?goods=127">
+                            <div class="inner" role="text">
+                              <figure class="product_img">
+                                <img src="https://shoppulmuone.cdn.ntruss.com/BOS/il/2021/03/11/640_E29A1D81898E43B3A821.jpg" alt="">
+                              </figure>
+                              <span class="product_info">
+                                <span class="product_brand">풀무원</span>
+                                <span class="product_title">1-탱글어묵 가래떡 떡볶이</span>
+                                <span class="original">
+                                  <span class="blind">정상가</span>
+                                  <del>14,900</del>
+                                </span>
+                                <span class="sale">
+                                  <span class="blind">행사가</span>
+                                  <ins>7,450</ins>
+                                  <span class="won">원</span>
+                                </span>
+                                <span class="percent">
+                                  <span class="blind">할인율</span>
+                                  <span class="num">31</span>
+                                  <span class="unit">%</span>
+                                </span>
+                              </span>
+                            </div>
+                          </a>
+                        </li>
+                        <li class="item slide_content3">
+                          <a href="https://shop.pulmuone.co.kr/shop/goodsView?goods=65">
+                            <div class="inner" role="text">
+                              <figure class="product_img">
+                                <img src="https://shoppulmuone.cdn.ntruss.com/BOS/il/2021/06/23/640_25D7488413DD461783B3.jpg" alt="">
+                              </figure>
+                              <span class="product_info">
+                                <span class="product_brand">올가</span>
+                                <span class="product_title">2-의성 옥산사과 5-8입</span>
+                                <span class="original">
+                                  <span class="blind">정상가</span>
+                                  <del>14,900</del>
+                                </span>
+                                <span class="sale">
+                                  <span class="blind">행사가</span>
+                                  <ins>7,450</ins>
+                                  <span class="won">원</span>
+                                </span>
+                                <span class="percent">
+                                  <span class="blind">할인율</span>
+                                  <span class="num">10</span>
+                                  <span class="unit">%</span>
+                                </span>
+                              </span>
+                            </div>
+                          </a>
+                        </li>
+                        <li class="item slide_content3">
+                          <a href="https://shop.pulmuone.co.kr/shop/goodsView?goods=31788">
+                            <div class="inner" role="text">
+                              <figure class="product_img">
+                                <img src="https://shoppulmuone.cdn.ntruss.com/BOS/il/2022/01/28/640_7D129A0E837F48C8ABBF.jpg" alt="">
+                              </figure>
+                              <span class="product_info">
+                                <span class="product_brand">풀무원</span>
+                                <span class="product_title">3-통통새우 쉬림프카츠</span>
+                                <span class="original">
+                                  <span class="blind">정상가</span>
+                                  <del>6,600</del>
+                                </span>
+                                <span class="sale">
+                                  <span class="blind">행사가</span>
+                                  <ins>4,980</ins>
+                                  <span class="won">원</span>
+                                </span>
+                                <span class="percent">
+                                  <span class="blind">할인율</span>
+                                  <span class="num">20</span>
+                                  <span class="unit">%</span>
+                                </span>
+                              </span>
+                            </div>
+                          </a>
+                        </li>
+                        <li class="item slide_content3">
+                          <a href="https://shop.pulmuone.co.kr/shop/goodsView?goods=1987">
+                            <div class="inner" role="text">
+                              <figure class="product_img">
+                                <img src="https://shoppulmuone.cdn.ntruss.com/BOS/il/2021/02/24/640_4ACE85DE7BD74A15AA08.jpg" alt="">
+                              </figure>
+                              <span class="product_info">
+                                <span class="product_brand">올가</span>
+                                <span class="product_title">4-풀무원 톡톡 포기김치</span>
+                                <span class="original">
+                                  <span class="blind">정상가</span>
+                                  <del>13,900</del>
+                                </span>
+                                <span class="sale">
+                                  <span class="blind">행사가</span>
+                                  <ins>8,900</ins>
+                                  <span class="won">원</span>
+                                </span>
+                                <span class="percent">
+                                  <span class="blind">할인율</span>
+                                  <span class="num">31</span>
+                                  <span class="unit">%</span>
+                                </span>
+                              </span>
+                            </div>
+                          </a>
+                        </li>
+                        <li class="item slide_content3">
+                          <a href="https://shop.pulmuone.co.kr/shop/goodsView?goods=1987">
+                            <div class="inner" role="text">
+                              <figure class="product_img">
+                                <img src="https://shoppulmuone.cdn.ntruss.com/BOS/il/2021/02/16/640_1040224C852C4277BF35.jpg" alt="">
+                              </figure>
+                              <span class="product_info">
+                                <span class="product_brand">아임리얼</span>
+                                <span class="product_title">5-네번 구워 김밥이 향긋한 김밥김</span>
+                                <span class="original">
+                                  <span class="blind">정상가</span>
+                                  <del>10,000</del>
+                                </span>
+                                <span class="sale">
+                                  <span class="blind">행사가</span>
+                                  <ins>8,900</ins>
+                                  <span class="won">원</span>
+                                </span>
+                                <span class="percent">
+                                  <span class="blind">할인율</span>
+                                  <span class="num">25</span>
+                                  <span class="unit">%</span>
+                                </span>
+                              </span>
+                            </div>
+                          </a>
+                        </li>
+                        <li class="item slide_content3">
+                          <a href="https://shop.pulmuone.co.kr/shop/goodsView?goods=1987">
+                            <div class="inner" role="text">
+                              <figure class="product_img">
+                                <img src="https://shoppulmuone.cdn.ntruss.com/BOS/il/2021/06/02/640_B5A4BF8F7E3144559A91.jpg" alt="">
+                              </figure>
+                              <span class="product_info">
+                                <span class="product_brand">풀무원</span>
+                                <span class="product_title">6-얄피꽉찬 한식교자</span>
+                                <span class="original">
+                                  <span class="blind">정상가</span>
+                                  <del>10,000</del>
+                                </span>
+                                <span class="sale">
+                                  <span class="blind">행사가</span>
+                                  <ins>8,900</ins>
+                                  <span class="won">원</span>
+                                </span>
+                                <span class="percent">
+                                  <span class="blind">할인율</span>
+                                  <span class="num">30</span>
+                                  <span class="unit">%</span>
+                                </span>
+                              </span>
+                            </div>
+                          </a>
+                        </li>
+                        <li class="item slide_content3">
+                          <a href="https://shop.pulmuone.co.kr/shop/goodsView?goods=1987">
+                            <div class="inner" role="text">
+                              <figure class="product_img">
+                                <img src="https://shoppulmuone.cdn.ntruss.com/BOS/il/2023/04/03/640_82B528E5072442738E3A.jpg" alt="">
+                              </figure>
+                              <span class="product_info">
+                                <span class="product_brand">풀무원</span>
+                                <span class="product_title">7-가쓰오 메밀소바 [4인분]</span>
+                                <span class="original">
+                                  <span class="blind">정상가</span>
+                                  <del>10,000</del>
+                                </span>
+                                <span class="sale">
+                                  <span class="blind">행사가</span>
+                                  <ins>8,900</ins>
+                                  <span class="won">원</span>
+                                </span>
+                                <span class="percent">
+                                  <span class="blind">할인율</span>
+                                  <span class="num">40</span>
+                                  <span class="unit">%</span>
+                                </span>
+                              </span>
+                            </div>
+                          </a>
+                        </li>
+                      </ul>
+
+                      <div class="item_btn slide_btn_box3">
+                        <button type="button" class="prev slide_btn_prev3">&#10094;</button>
+                        <button type="button" class="next slide_btn_next3">&#10095;</button>
+                      </div>
+                      <div class="item_show slide_btn_show3">
+                        <button type="button" class="play slide_btn_play3">▶<span class="blind">시작</span></button>
+                        <button type="button" class="stop slide_btn_stop3">〓<span class="blind">멈춤</span></button>
+                      </div>
+                      <ul class="item_pagination slide_pagination3"></ul>
+                    </div>
+                    <script src="slide_ver3.js"></script>
+                    <!-- //상품영역 - swipe ver3 -->
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- //작업영역 -->
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

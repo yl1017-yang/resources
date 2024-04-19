@@ -67,23 +67,36 @@
       const prevBtn = document.querySelector('.slide_btn_prev');
       const nextBtn = document.querySelector('.slide_btn_next');
       const pagination = document.querySelectorAll('.slide_pagination');
-      let slideWidth = slideItem[0].offsetWidth;
+      let slideWidth = slideItem.offsetWidth;
       let slideLen = slideItem.length;
-      let curIndex = 1;
+      let curIndex = 0;
 
       //노드 복제
       const createClone = () => {
-        for (let i = 0; i < slideLen; i++) {
-          const cloneSlide = slideItem[i].cloneNode(true);
-          cloneSlide.classList.add("clone");
+        // for (let i = 0; i < slideLen; i++) {
+        //   const cloneSlide = slideItem[i].cloneNode(true);
+        //   cloneSlide.classList.add("clone");
+        //   slideList.appendChild(cloneSlide);
+        // }
+        // for (let i = slideLen - 1; i >= 0; i--) {
+        //   const cloneSlide = slideItem[i].cloneNode(true);
+        //   cloneSlide.classList.add("clone");
+        //   slideList.insertBefore(cloneSlide, slideList.firstElementChild);
+        // }
+        // slideLen = slideList.querySelectorAll(".slide_item").length;
+        for (var i = 0; i < slideLen; i++) {
+          var cloneSlide = slideItem[i].cloneNode(true);
+          cloneSlide.classList.add('clone');
           slideList.appendChild(cloneSlide);
         }
-        for (let i = slideLen - 1; i >= 0; i--) {
-          const cloneSlide = slideItem[i].cloneNode(true);
-          cloneSlide.classList.add("clone");
-          slideList.insertBefore(cloneSlide, slideList.firstElementChild);
-        }
-        slideLen = slideList.querySelectorAll(".slide_item").length;
+
+        let firstChild = slideList.lastElementChild;
+        let clonedFirst = firstChild.cloneNode(true);
+        slideList.insertBefore(clonedFirst, slideList.firstElementChild);
+
+        var currentSlides = document.querySelectorAll('.slide_content2');
+        var newSlideCount = currentSlides.length;
+        slideList.style.width = slideWidth * (newSlideCount) + "px";
       }
       createClone();
 
@@ -95,14 +108,14 @@
 
         if (curIndex <= slideLen) {
           slideList.style.transition = 'transform 0.4s ease-in-out';
-          slideList.style.transform = `translateX(-${(slideWidth) * curIndex}px)`;
+          slideList.style.transform = `translateX(-${slideWidth * curIndex}px)`;
         }
 
-        if (curIndex === slideLen - 2) {
+        if (curIndex === slideLen - 1) {
           setTimeout(() => {
-            curIndex = 1;
+            curIndex = -1;
             slideList.style.transition = 'none';
-            slideList.style.transform = `translateX(-${(slideWidth) * curIndex}px)`;
+            slideList.style.transform = `translateX(-${slideWidth * curIndex}px)`;
           }, 400);
         }
         console.log('curIndex -- ' + curIndex);
@@ -118,11 +131,11 @@
           slideList.style.transform = `translateX(-${slideWidth * curIndex}px)`;
         }
 
-        if (curIndex < 0) {
+        if (curIndex === 0) {
           setTimeout(() => {
-            curIndex = slideLen - 1;
+            curIndex = slideLen;
             slideList.style.transition = 'none';
-            // slideList.style.transform = `translateX(-${slideWidth * (slideLen - 2)}px)`;
+            // slideList.style.transform = `translateX(-${slideWidth * (slideLen)}px)`;
             slideList.style.transform = `translateX(-${slideWidth * curIndex}px)`;
           }, 400);
         }
