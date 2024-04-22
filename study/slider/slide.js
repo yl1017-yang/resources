@@ -1,12 +1,12 @@
-(function () {
-  const slideBox = document.querySelector('.slide_box_ver2');
-  const slideList = document.querySelector('.slide_list2');
-  const slideContents = document.querySelectorAll('.slide_content2');
-  const slideBtnNext = document.querySelector('.slide_btn_next2');
-  const slideBtnPrev = document.querySelector('.slide_btn_prev2');
-  const slideBtnPlay = document.querySelector('.slide_btn_play2');
-  const slideBtnStop = document.querySelector('.slide_btn_stop2');
-  const pagination = document.querySelector('.slide_pagination2');
+function initializeSlide(slideBoxClass, slideListClass, slideContentClass, slideBtnNextClass, slideBtnPrevClass, slideBtnPlayClass, slideBtnStopClass, paginationClass) {
+  const slideBox = document.querySelector(slideBoxClass);
+  const slideList = document.querySelector(slideListClass);
+  const slideContents = document.querySelectorAll(slideContentClass);
+  const slideBtnNext = document.querySelector(slideBtnNextClass);
+  const slideBtnPrev = document.querySelector(slideBtnPrevClass);
+  const slideBtnPlay = document.querySelector(slideBtnPlayClass);
+  const slideBtnStop = document.querySelector(slideBtnStopClass);
+  const pagination = document.querySelector(paginationClass);
   let slideLen = slideContents.length;
   let slideWidth = slideList.clientWidth;
   let slideSpeed = 300;
@@ -23,7 +23,7 @@
     let clonedFirst = firstChild.cloneNode(true);
     slideList.insertBefore(clonedFirst, slideList.firstElementChild);
 
-    var currentSlides = document.querySelectorAll('.slide_content2');
+    var currentSlides = document.querySelectorAll(slideContentClass);
     slideList.style.width = slideWidth * (currentSlides.length) + "px";
   }
 
@@ -31,12 +31,12 @@
 
   let pageChild = '';
   for (var i = 0; i < slideLen; i++) {
-    pageChild += '<li class="dot dot2';
+    pageChild += '<li class="dot';
     pageChild += (i === curIndex) ? ' dot_active2' : '';
     pageChild += '" data-index="' + i + '"><a href="#"></a></li>';
   }
   pagination.innerHTML = pageChild;
-  const pageDots = document.querySelectorAll('.dot2');
+  const pageDots = document.querySelectorAll('.dot');
 
   slideList.style.transform = "translate3d(-" + (slideWidth * (curIndex + 1)) + "px, 0px, 0px)";
 
@@ -272,4 +272,4 @@
     console.log("prevMove");
   });
 
-})();
+}

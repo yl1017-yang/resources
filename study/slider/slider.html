@@ -69,24 +69,23 @@
                   /* product - swipe ver2 */
                   .event_wrap .item_box{position:relative;width:1088px;overflow-x:hidden;-webkit-backface-visibility:hidden;margin:0 auto;padding:50px 0 30px;background:#fff}
                   .event_wrap .item_box ul{display:flex;width:25%}
-                  .event_wrap .item_box ul .inner{position:relative}
-                  .event_wrap .item_box ul .item{position:relative;width:100%}
-                  .event_wrap .item_box ul .item img{width:100%;height:100%;margin:0 !important}
-                  .event_wrap .item_box ul .item a{display:block;width:100%;height:100%}
+                  .event_wrap .item_box ul li{position:relative;width:100%}
+                  .event_wrap .item_box ul li img{width:100%;height:100%;margin:0 !important}
+                  .event_wrap .item_box ul li a{display:block;width:100%;height:100%}
 
                   .item_box .item_btn button{position:absolute;width:52px;height:52px;top:190px;color:#fff;background:rgba(0,0,0,0.5);border:none;cursor:pointer;touch-action:none}
                   .item_box .item_btn .prev{left:0;border-radius:0 8px 8px 0}
                   .item_box .item_btn .next{right:0;border-radius:8px 0 0 8px}
 
-                  .item_box .item_show button{position:absolute;left:54%;width:40px;height:40px;bottom:17px;font-size:12px;color:#888;border:none;background-color:transparent;cursor:pointer;touch-action:none;z-index:10}
+                  .item_box .item_show button{position:absolute;left:60%;width:40px;height:40px;bottom:10px;font-size:12px;color:#888;border:none;background-color:transparent;cursor:pointer;touch-action:none;z-index:10}
                   .item_box .item_show .play{display:none}
                   .item_box .item_show .stop{transform:rotate(90deg)}
                   
-                  .item_box .item_pagination{position:relative;text-align:center}
-                  .item_box .item_pagination .dot{display:inline-block;width:8px;height:8px;margin:0 3px;background:#ddd;border-radius:100px;transition:0.3s}
-                  .item_box .item_pagination .dot.dot_active2{background:#525252}
-                  .item_box .item_pagination .dot.dot_active3{background:#525252}
-                  .item_box .item_pagination .dot a{display:block;width:100%;height:100%}
+                  .event_wrap .item_box .item_pagination{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);right:0;}
+                  .event_wrap .item_box .item_pagination .dot{display:flex;width:16px;height:16px;margin:0 10px;background:rgba(0,0,0,.6);border-radius:100px;transition:0.3s}
+                  .event_wrap .item_box .item_pagination .dot a{display:block;width:100%;height:100%}
+                  .event_wrap .item_box .item_pagination .dot_active2{background:#ff752a}
+                  .event_wrap .item_box .item_pagination .dot_active3{background:#ff752a}
 
                 </style>
 
@@ -96,7 +95,7 @@
                     <h2 class="tit2" style="margin-top:100px">V5_PC_예외형_(상품 리스트형)</h2>
                     <!-- 상품영역 - swipe ver2 -->
                     <div class="item_box slide_box_ver2">
-                      <ul class="slide_list2">
+                      <ul class="item_list slide_list2">
                         <li class="item slide_content2">
                           <a href="https://shop.pulmuone.co.kr/shop/goodsView?goods=127">
                             <div class="inner" role="text">
@@ -288,24 +287,25 @@
                         </li>
                       </ul>
 
-                      <div class="item_btn slide_btn_box2">
+                      <div class="item_btn">
                         <button type="button" class="prev slide_btn_prev2">&#10094;</button>
                         <button type="button" class="next slide_btn_next2">&#10095;</button>
                       </div>
-                      <div class="item_show slide_btn_show2">
+                      <div class="item_show">
                         <button type="button" class="play slide_btn_play2">▶<span class="blind">시작</span></button>
                         <button type="button" class="stop slide_btn_stop2">〓<span class="blind">멈춤</span></button>
                       </div>
                       <ul class="item_pagination slide_pagination2"></ul>
                     </div>
-                    <script type="text/javascript" src="slide_ver2.js"></script>
+                    <script type="text/javascript" src="slide.js"></script>
+                    <script>initializeSlide('.slide_box_ver2', '.slide_list2', '.slide_content2', '.slide_btn_next2', '.slide_btn_prev2', '.slide_btn_play2', '.slide_btn_stop2', '.slide_pagination2', '.dot_active2');</script>
                     <!-- //상품영역 - swipe ver2 -->
 
 
                     <h2 class="tit2" style="margin-top:100px">V5_PC_예외형_(상품 flow형)</h2>
                     <!-- 상품영역 - swipe ver3 -->
                     <div class="item_box slide_box_ver3">
-                      <ul class="slide_list3">
+                      <ul class="item_list slide_list3">
                         <li class="item slide_content3">
                           <a href="https://shop.pulmuone.co.kr/shop/goodsView?goods=127">
                             <div class="inner" role="text">
@@ -497,17 +497,18 @@
                         </li>
                       </ul>
 
-                      <div class="item_btn slide_btn_box3">
+                      <div class="item_btn">
                         <button type="button" class="prev slide_btn_prev3">&#10094;</button>
                         <button type="button" class="next slide_btn_next3">&#10095;</button>
                       </div>
-                      <div class="item_show slide_btn_show3">
+                      <div class="item_show">
                         <button type="button" class="play slide_btn_play3">▶<span class="blind">시작</span></button>
                         <button type="button" class="stop slide_btn_stop3">〓<span class="blind">멈춤</span></button>
                       </div>
                       <ul class="item_pagination slide_pagination3"></ul>
                     </div>
-                    <script src="slide_ver3.js"></script>
+                    <script src="slide.js"></script>
+                    <script>initializeSlide('.slide_box_ver3', '.slide_list3', '.slide_content3', '.slide_btn_next3', '.slide_btn_prev3', '.slide_btn_play3', '.slide_btn_stop3', '.slide_pagination3', '.dot_active3');</script>
                     <!-- //상품영역 - swipe ver3 -->
 
 
