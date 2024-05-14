@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko" class="windows desktop portrait">
+<head>
+<style>
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+*{margin:0;padding:0;border:0;list-style:none;line-height:1.3;font-size:28px;box-sizing: border-box;font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;}
+h1{font-size:60px;margin:30px 0;}
+h2{font-size:40px;margin-bottom:5px;}
+
+
+
+.section01 {  position: relative; aspect-ratio: 1830/1500;   overflow: hidden;}  /* aspect-ratio: 2560/2880; background:#eee url(https://d3phaj0sisr2ct.cloudfront.net/site/images/tools/aitools-background-01.jpg) 100% 100% / cover no-repeat; */
+.section01 .inner { position: relative; width: 100%; height: 100%; overflow: hidden;}
+/* .section01 .inner .img_con { position: sticky; top: 0; z-index: 1; margin: 0 auto; height: auto; overflow: hidden; transform: scale(.6); } */
+.section01 .text_con1 { position: fixed; top:0;left:0;width: 100%;height:100%; text-align: center;color:#fff;}
+.section01 .img_con { position: relative;  display: flex; flex-direction: column; width: 1400px; aspect-ratio: 1830/860; overflow: hidden; z-index: 0; margin:250px auto 0;} /* aspect-ratio: 2560/1226; */
+.section01 .img_con video { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: auto; transition: transform 0.2s ease-in-out; }
+.section01 .text_con2 { position: relative;width:1000px;margin:50px 0 0 50px;color:#fff;}
+.section01 .img_bg { position: absolute;top:0;left:0;width:100%;height:100%;}
+.section01 .img_bg img{height:100%}
+
+
+.section02 { position: relative;background: #ddd; height: 100vh;  overflow: hidden;}
+.section02 .inner{width:1000px;margin:0 auto;display:flex;justify-content: space-between;}
+.section02 .inner > div{width: 310px; height: 500px;text-align:center;color:#fff;}
+.box1 {margin-top: 100px; background: #444; }
+.box2 {margin-top: 150px; background: rgb(43, 136, 167); }
+.box3 {margin-top: 200px; background: green; }
+
+.section03 { position: relative;background: goldenrod; height: 100vh; }
+
+
+
+</style>	
+</head>
+<body>
+
+
+<section class="section01">
+  <div class="inner">
+    <div class="img_bg">
+      <img src="https://d3phaj0sisr2ct.cloudfront.net/site/images/tools/aitools-background-01.jpg" alt="">
+    </div>
+    <div class="text_con1">
+      <h1>Everything you need<br>to make anything you want.</h1>
+      <p>Wherever you are in the ideation or production process, Runway’s full suite of creative AI tools<br> can help turn the ideas in your head into something you can share on screen.</p>
+    </div>
+    <div class="img_con">
+        <!-- <img width="1830" height="860" src="https://p645224.mittwaldserver.info/wp-content/uploads/2023/09/leistungen-planung-waermebild.jpg" alt="">-->
+        <video autoplay="" muted="" loop="" playsinline="" poster="https://d3phaj0sisr2ct.cloudfront.net/site/videos/tools/Header_1.1+1.jpg">
+          <source src="https://d3phaj0sisr2ct.cloudfront.net/site/videos/tools/Header_1.1+1.webm" type="video/webm">
+          <source src="https://d3phaj0sisr2ct.cloudfront.net/site/videos/tools/Header_1.1+1.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="text_con2">
+      <h2>Go from ideation <br> to execution in seconds.</h2>
+      <p>With Text to Image and Text to Video, it’s easier than ever to explore ideas<br> visually instead of in the abstract.</p>
+    </div>
+  </div>
+</section>
+
+
+<section class="section02">
+  <h1>스크롤시 교차되는 이미지</h1>
+  <div class="inner">
+    <div class="box1">1번 사진</div>
+    <div class="box2">2번 사진</div>
+    <div class="box3">3번 사진</div>
+  </div>
+</section>
+
+
+<section class="section03">
+  <div class="inner">
+    세번째 내용
+  </div>
+</section>
+
+
+
+
+<div>
+  https://codepen.io/Patrick-Palfinger/pen/bGOoORK  
+  http://piinodx.com/
+</div>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.to(".text_con1", {
+  scrollTrigger: {
+    trigger: '.section01',//객체기준범위
+    start: "0% 0%",//시작 지점
+    end: "100% 50%",//끝 지점
+    //end: "+=500",//시작 부분부터 500px까지 스크롤 한 후종료
+    scrub: 1,//부드러운 스크러빙
+    markers: true,//개발가이드선
+  },  
+  top: "-100%",
+  // duration: 1
+});
+
+gsap.to(".text_con2", {
+  scrollTrigger: {
+    trigger: '.img_con',
+    start: "0% 0%",
+    end: "100% 100%",
+    //end: "+=500",
+    scrub: 1,
+    markers: true,
+  },  
+  top: "-10%",
+  duration: 1
+});
+
+
+let images = gsap.utils.toArray(".section01 .img_con");
+images.forEach((image, i) => {
+  gsap.fromTo(
+    image,
+    { scale: 0.7 },
+    {
+      scale: 1,
+      ease: "none",
+      force3D: true,
+      scrollTrigger: {
+        pin: ".section01",
+        trigger: ".section01",
+        start: "0% 0%",
+        end: "bottom top",
+        scrub: 0.5,
+        markers: true,        
+      },
+      y: -100,
+    }
+  );
+});
+
+gsap.to(".box2", {
+  scrollTrigger: {
+    trigger: '.section02',
+    start: "0% 30%",
+    end: "100% 80%",
+    // end: "+=500"
+    scrub: 1,
+    markers: true,
+  },
+  // scale: 2,
+  // borderRadius: 0,
+  duration: 1,
+  y: 100,
+});
+
+gsap.to(".box3", {
+  scrollTrigger: {
+    trigger: '.section02',
+    start: "0% 30%",
+    end: "100% 80%",
+    // end: "+=500"
+    scrub: 1,
+    markers: true,
+  }, 
+  y: -100,
+  // rotation: 360
+});
+
+// gsap.to(".section01 .inner .text_con2", {
+//     yPercent: -100, // Start with the text above the viewport
+//     ease: "none",
+//     scrollTrigger: {
+//         trigger: ".section01",
+//         start: $('.section01 .inner .text_con2').offsetTop, // Start when .img_con reaches 100vw
+//         end: () => {
+//             // Calculate the point where the text should stop scrolling
+//             const viewportHeight = window.innerHeight;
+//             const textContainerHeight = document.querySelector(".section01 .inner .text_con2").offsetHeight;
+//             const stopScrollingPoint = viewportHeight - (5 * window.innerWidth) / 100 - textContainerHeight;
+
+//             return `+=${stopScrollingPoint}`;
+//         },
+//         scrub: 0.5,
+//         markers: true,
+//     },
+// });
+</script>
+
+
+</body>
+
+</html>
