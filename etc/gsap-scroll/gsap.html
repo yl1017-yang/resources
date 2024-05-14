@@ -15,8 +15,8 @@ h2{font-size:40px;margin-bottom:5px;}
 .section01 .text_con1 { position: fixed; top:0;left:0;width: 100%;height:100%; text-align: center;color:#fff;}
 .section01 .img_con { position: relative;  display: flex; flex-direction: column; width: 1400px; aspect-ratio: 1830/860; overflow: hidden; z-index: 0; margin:250px auto 0;} /* aspect-ratio: 2560/1226; */
 .section01 .img_con video { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: auto; transition: transform 0.2s ease-in-out; }
-.section01 .text_con2 { position: relative;width:1000px;margin:50px 0 0 50px;color:#fff;}
-.section01 .img_bg { position: absolute;top:0;left:0;width:100%;height:100%;}
+.section01 .text_con2 { position: relative;width:1000px;margin:100px 0 0 50px;color:#fff;}
+.section01 .img_bg { position: absolute;top:0;left:0;right:0;height:100%;}
 .section01 .img_bg img{height:100%}
 
 
@@ -82,6 +82,8 @@ h2{font-size:40px;margin-bottom:5px;}
 <div>
   https://codepen.io/Patrick-Palfinger/pen/bGOoORK  
   http://piinodx.com/
+
+  https://runwayml.com/ai-tools/
 </div>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -114,6 +116,17 @@ gsap.to(".text_con2", {
   },  
   top: "-10%",
   duration: 1
+});
+
+gsap.to(".img_bg", {
+  scrollTrigger: {
+    trigger: '.section01 .inner',
+    start: "0% 0%",
+    end: "100% 0%",
+    scrub: 0.5,
+    markers: true,
+  },
+  scale: 1,
 });
 
 
