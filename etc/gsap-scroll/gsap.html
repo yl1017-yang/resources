@@ -1,35 +1,49 @@
 <!DOCTYPE html>
 <html lang="ko" class="windows desktop portrait">
+  <title>https://runwayml.com/ai-tools/</title>
 <head>
 <style>
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
 *{margin:0;padding:0;border:0;list-style:none;line-height:1.3;font-size:28px;box-sizing: border-box;font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;}
-h1{font-size:60px;margin:30px 0;}
+h1{font-size:60px;}
 h2{font-size:40px;margin-bottom:5px;}
+html, body {
+  position: relative;
+  height: unset;
+  overflow-x: hidden;
+  margin: 0;
+  -webkit-overflow-scrolling: touch;
+	overflow-scrolling: touch;
+}
 
 
 
-.section01 {  position: relative; aspect-ratio: 1830/1500;   overflow: hidden;}  /* aspect-ratio: 2560/2880; background:#eee url(https://d3phaj0sisr2ct.cloudfront.net/site/images/tools/aitools-background-01.jpg) 100% 100% / cover no-repeat; */
+.section01 {  position: relative; aspect-ratio: 1830/1500;overflow: hidden;}  /* aspect-ratio: 2560/2880; background:#eee url(https://d3phaj0sisr2ct.cloudfront.net/site/images/tools/aitools-background-01.jpg) 100% 100% / cover no-repeat; */
 .section01 .inner { position: relative; width: 100%; height: 100%; overflow: hidden;}
 /* .section01 .inner .img_con { position: sticky; top: 0; z-index: 1; margin: 0 auto; height: auto; overflow: hidden; transform: scale(.6); } */
 .section01 .text_con1 { position: fixed; top:0;left:0;width: 100%;height:100%; text-align: center;color:#fff;}
+.section01 .text_con1 > h1 {margin-top:100px;}
 .section01 .img_con { position: relative;  display: flex; flex-direction: column; width: 1400px; aspect-ratio: 1830/860; overflow: hidden; z-index: 0; margin:250px auto 0;} /* aspect-ratio: 2560/1226; */
 .section01 .img_con video { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: auto; transition: transform 0.2s ease-in-out; }
-.section01 .text_con2 { position: relative;width:1000px;margin:100px 0 0 50px;color:#fff;}
-.section01 .img_bg { position: absolute;top:0;left:0;right:0;height:100%;}
+.section01 .text_con2 { position: relative;width:1000px;margin:-50px 0 0 50px;}
+.section01 .img_bg { position: absolute;top:0;left:0;right:0;height:100%;opacity:1;}
 .section01 .img_bg img{height:100%}
 
-
-.section02 { position: relative;background: #ddd; height: 100vh;  overflow: hidden;}
+.section02 { position: relative; background: #ddd; height: 100vh; overflow: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; }
 .section02 .inner{width:1000px;margin:0 auto;display:flex;justify-content: space-between;}
-.section02 .inner > div{width: 310px; height: 500px;text-align:center;color:#fff;}
+.section02 .inner > div{width: 310px; height: 500px;text-align:center;color:#fff;overflow: hidden;}
+.section02 .inner > div > img{width:100%;height:100%;}
 .box1 {margin-top: 100px; background: #444; }
 .box2 {margin-top: 150px; background: rgb(43, 136, 167); }
 .box3 {margin-top: 200px; background: green; }
 
-.section03 { position: relative;background: goldenrod; height: 100vh; }
+.section03 { position: relative;background: goldenrod; padding:150px 0;}
+.row_img{width: 100%; height: auto; display: flex; flex-wrap: nowrap;}
+.row_img .panel{flex: 1 1;height:320px;margin:.25rem;aspect-ratio: 16 / 9;}
+.row_img .panel video{max-width:100%;width:100%;height:100%;object-fit:cover;border-radius:.375rem;overflow:hidden;}
 
-
+.section04 {position: relative;background: goldenrod;}
+.section05 { position: relative;background:#ddd; height: 100vh; overflow:hidden; display: flex;}
 
 </style>	
 </head>
@@ -42,8 +56,8 @@ h2{font-size:40px;margin-bottom:5px;}
       <img src="https://d3phaj0sisr2ct.cloudfront.net/site/images/tools/aitools-background-01.jpg" alt="">
     </div>
     <div class="text_con1">
-      <h1>Everything you need<br>to make anything you want.</h1>
-      <p>Wherever you are in the ideation or production process, Runway’s full suite of creative AI tools<br> can help turn the ideas in your head into something you can share on screen.</p>
+      <h1>#Sustainable Lifestyle</h1>
+      <p>나와 지구를 위한 바른먹거리 마켓,<br>사람과 자연을 함께 사랑하는 풀무원이 권하는 지혜로운 라이프 스타일</p>
     </div>
     <div class="img_con">
         <!-- <img width="1830" height="860" src="https://p645224.mittwaldserver.info/wp-content/uploads/2023/09/leistungen-planung-waermebild.jpg" alt="">-->
@@ -63,31 +77,91 @@ h2{font-size:40px;margin-bottom:5px;}
 <section class="section02">
   <h1>스크롤시 교차되는 이미지</h1>
   <div class="inner">
-    <div class="box1">1번 사진</div>
-    <div class="box2">2번 사진</div>
-    <div class="box3">3번 사진</div>
+    <div class="box1"><img src="https://cdn.pixabay.com/photo/2024/04/16/16/25/ai-generated-8700383_1280.jpg" alt=""></div>
+    <div class="box2"><img src="https://cdn.pixabay.com/photo/2023/08/17/05/55/ai-generated-8195533_1280.png" alt=""></div>
+    <div class="box3"><img src="https://cdn.pixabay.com/photo/2023/09/17/22/25/witch-8259351_1280.jpg" alt=""></div>
   </div>
 </section>
 
 
 <section class="section03">
-  <div class="inner">
-    세번째 내용
-  </div>
+  <h1>스크롤시 가로흐름 이미지</h1>
+    <div class="row_img flow1">
+      <div class="panel">
+        <video loop="" playsinline="" autoplay="" muted="" poster="https://d3phaj0sisr2ct.cloudfront.net/site/videos/tools/custom-styles/CustomStyle_Video_1.jpg"><source src="https://d3phaj0sisr2ct.cloudfront.net/site/videos/tools/custom-styles/CustomStyle_Video_1.mp4" type="video/mp4"></video>
+      </div>
+      <div class="panel">
+        <video loop="" playsinline="" autoplay="" muted="" poster="https://d3phaj0sisr2ct.cloudfront.net/site/videos/tools/custom-styles/CustomStyle_Video_2.jpg"><source src="https://d3phaj0sisr2ct.cloudfront.net/site/videos/tools/custom-styles/CustomStyle_Video_2.mp4" type="video/mp4"></video>
+      </div>
+      <div class="panel">
+        <video loop="" playsinline="" autoplay="" muted="" poster="https://d3phaj0sisr2ct.cloudfront.net/site/videos/tools/custom-styles/CustomStyle_Video_3.jpg"><source src="https://d3phaj0sisr2ct.cloudfront.net/site/videos/tools/custom-styles/CustomStyle_Video_3.mp4" type="video/mp4"></video>
+      </div>
+      <div class="panel">
+        <video loop="" playsinline="" autoplay="" muted="" poster="https://d3phaj0sisr2ct.cloudfront.net/site/videos/tools/custom-styles/CustomStyle_Video_4.jpg"><source src="https://d3phaj0sisr2ct.cloudfront.net/site/videos/tools/custom-styles/CustomStyle_Video_4.mp4" type="video/mp4"></video>
+      </div>
+      <div class="panel">
+        <video loop="" playsinline="" autoplay="" muted="" poster="https://d3phaj0sisr2ct.cloudfront.net/site/videos/tools/custom-styles/CustomStyle_Video_1.jpg"><source src="https://d3phaj0sisr2ct.cloudfront.net/site/videos/tools/custom-styles/CustomStyle_Video_1.mp4" type="video/mp4"></video>
+      </div>
+      <div class="panel">
+        <video loop="" playsinline="" autoplay="" muted="" poster="https://d3phaj0sisr2ct.cloudfront.net/site/videos/tools/custom-styles/CustomStyle_Video_2.jpg"><source src="https://d3phaj0sisr2ct.cloudfront.net/site/videos/tools/custom-styles/CustomStyle_Video_2.mp4" type="video/mp4"></video>
+      </div>
+      <div class="panel">
+        <video loop="" playsinline="" autoplay="" muted="" poster="https://d3phaj0sisr2ct.cloudfront.net/site/videos/tools/custom-styles/CustomStyle_Video_3.jpg"><source src="https://d3phaj0sisr2ct.cloudfront.net/site/videos/tools/custom-styles/CustomStyle_Video_3.mp4" type="video/mp4"></video>
+      </div>
+      <div class="panel">
+        <video loop="" playsinline="" autoplay="" muted="" poster="https://d3phaj0sisr2ct.cloudfront.net/site/videos/tools/custom-styles/CustomStyle_Video_4.jpg"><source src="https://d3phaj0sisr2ct.cloudfront.net/site/videos/tools/custom-styles/CustomStyle_Video_4.mp4" type="video/mp4"></video>
+      </div>
+    </div>
+    
 </section>
 
 
+<section class="section04">
+  <div class="row_img flow2">
+    <div class="panel">
+      <video  loop="" playsinline="" autoplay="" muted="" poster="https://d3phaj0sisr2ct.cloudfront.net/site/videos/tools/custom-styles/CustomStyle_Video_5.jpg"><source src="https://d3phaj0sisr2ct.cloudfront.net/site/videos/tools/custom-styles/CustomStyle_Video_5.mp4" type="video/mp4"></video>
+    </div>
+    <div class="panel">
+      <video  loop="" playsinline="" autoplay="" muted="" poster="https://d3phaj0sisr2ct.cloudfront.net/site/videos/tools/custom-styles/CustomStyle_Video_6.jpg"><source src="https://d3phaj0sisr2ct.cloudfront.net/site/videos/tools/custom-styles/CustomStyle_Video_6.mp4" type="video/mp4"></video>
+    </div>
+    <div class="panel">
+      <video  loop="" playsinline="" autoplay="" muted="" poster="https://d3phaj0sisr2ct.cloudfront.net/site/videos/tools/custom-styles/CustomStyle_Video_7.jpg"><source src="https://d3phaj0sisr2ct.cloudfront.net/site/videos/tools/custom-styles/CustomStyle_Video_7.mp4" type="video/mp4"></video>
+    </div>
+    <div class="panel">
+      <video  loop="" playsinline="" autoplay="" muted="" poster="https://d3phaj0sisr2ct.cloudfront.net/site/videos/tools/custom-styles/CustomStyle_Video_8.jpg"><source src="https://d3phaj0sisr2ct.cloudfront.net/site/videos/tools/custom-styles/CustomStyle_Video_8.mp4" type="video/mp4"></video>
+    </div>
+    <div class="panel">
+      <video  loop="" playsinline="" autoplay="" muted="" poster="https://d3phaj0sisr2ct.cloudfront.net/site/videos/tools/custom-styles/CustomStyle_Video_5.jpg"><source src="https://d3phaj0sisr2ct.cloudfront.net/site/videos/tools/custom-styles/CustomStyle_Video_5.mp4" type="video/mp4"></video>
+    </div>
+    <div class="panel">
+      <video  loop="" playsinline="" autoplay="" muted="" poster="https://d3phaj0sisr2ct.cloudfront.net/site/videos/tools/custom-styles/CustomStyle_Video_6.jpg"><source src="https://d3phaj0sisr2ct.cloudfront.net/site/videos/tools/custom-styles/CustomStyle_Video_6.mp4" type="video/mp4"></video>
+    </div>
+    <div class="panel">
+      <video  loop="" playsinline="" autoplay="" muted="" poster="https://d3phaj0sisr2ct.cloudfront.net/site/videos/tools/custom-styles/CustomStyle_Video_7.jpg"><source src="https://d3phaj0sisr2ct.cloudfront.net/site/videos/tools/custom-styles/CustomStyle_Video_7.mp4" type="video/mp4"></video>
+    </div>
+    <div class="panel">
+      <video  loop="" playsinline="" autoplay="" muted="" poster="https://d3phaj0sisr2ct.cloudfront.net/site/videos/tools/custom-styles/CustomStyle_Video_8.jpg"><source src="https://d3phaj0sisr2ct.cloudfront.net/site/videos/tools/custom-styles/CustomStyle_Video_8.mp4" type="video/mp4"></video>
+    </div>
+  </div>
+</section>
 
+<section class="section05">
+  <h1>네번째 영역</h1>
+</section>
 
 <div>
   https://codepen.io/Patrick-Palfinger/pen/bGOoORK  
   http://piinodx.com/
-
   https://runwayml.com/ai-tools/
+
+  gsap 설명 : https://agal.tistory.com/212
+  리액트 가로스크롤 : https://velog.io/@jinseob102/GSAP-%EA%B0%80%EB%A1%9C-Scroll-%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%EC%85%98-%EB%A7%8C%EB%93%A4%EA%B8%B0
+  가로스크롤 : https://gsap.com/community/forums/topic/33311-using-gsap-scrolltrigger-for-horizontal-scroll/
 </div>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.1/ScrollToPlugin.min.js"></script> -->
 
 <script>
 gsap.registerPlugin(ScrollTrigger);
@@ -105,7 +179,7 @@ gsap.to(".text_con1", {
   // duration: 1
 });
 
-gsap.to(".text_con2", {
+gsap.from(".text_con2", {
   scrollTrigger: {
     trigger: '.img_con',
     start: "0% 0%",
@@ -114,7 +188,7 @@ gsap.to(".text_con2", {
     scrub: 1,
     markers: true,
   },  
-  top: "-10%",
+  top: "30%",
   duration: 1
 });
 
@@ -127,6 +201,7 @@ gsap.to(".img_bg", {
     markers: true,
   },
   scale: 1,
+  opacity: 0,
 });
 
 
@@ -177,8 +252,36 @@ gsap.to(".box3", {
     markers: true,
   }, 
   y: -100,
+  // yPercent: 50,
   // rotation: 360
 });
+
+let flow1 = gsap.utils.toArray(".flow1 .panel");
+gsap.to(flow1, {
+  xPercent: -100 * (flow1.length - 1),
+  ease: "none",
+  scrollTrigger: {
+    trigger: ".section03",
+    pin: true,
+    scrub: 1,
+    snap: 1 / (flow1.length - 1),
+    end: () => "+=" + document.querySelector(".section03").offsetWidth
+  }
+});
+
+let flow2 = gsap.utils.toArray(".flow2 .panel");
+gsap.to(flow2, {
+  xPercent: 100 * (flow2.length - 1),
+  ease: "none",
+  scrollTrigger: {
+    trigger: ".section04",
+    pin: true,
+    scrub: 1,
+    snap: 1 / (flow2.length - 1),
+    end: () => "+=" + document.querySelector(".section04").offsetWidth
+  }
+});
+
 
 // gsap.to(".section01 .inner .text_con2", {
 //     yPercent: -100, // Start with the text above the viewport
