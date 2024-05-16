@@ -7,15 +7,7 @@
 *{margin:0;padding:0;border:0;list-style:none;line-height:1.3;font-size:28px;box-sizing: border-box;font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;}
 h1{font-size:60px;}
 h2{font-size:40px;margin-bottom:5px;}
-html, body {
-  position: relative;
-  height: unset;
-  overflow-x: hidden;
-  margin: 0;
-  -webkit-overflow-scrolling: touch;
-	overflow-scrolling: touch;
-}
-
+html, body { position: relative; height: unset; overflow-x: hidden; margin: 0; -webkit-overflow-scrolling: touch; overflow-scrolling: touch; }
 
 
 .section01 {  position: relative; padding-bottom:100px; overflow: hidden;}  /* aspect-ratio: 2560/2880; background:#eee url(https://d3phaj0sisr2ct.cloudfront.net/site/images/tools/aitools-background-01.jpg) 100% 100% / cover no-repeat; */
@@ -150,6 +142,7 @@ html, body {
   https://codepen.io/Patrick-Palfinger/pen/bGOoORK  
   http://piinodx.com/
   https://runwayml.com/ai-tools/
+  cdn :  https://cdnjs.com/libraries/gsap
 
   gsap 설명 : https://agal.tistory.com/212
   리액트 가로스크롤 : https://velog.io/@jinseob102/GSAP-%EA%B0%80%EB%A1%9C-Scroll-%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%EC%85%98-%EB%A7%8C%EB%93%A4%EA%B8%B0
@@ -207,26 +200,24 @@ gsap.fromTo(".img_bg",
 
 
 let images = gsap.utils.toArray(".section01 .img_con");
-images.forEach((image, i) => {
-  gsap.fromTo(
-    image,
-    { scale: 0.7 },
-    {
-      scale: 1,
-      ease: "none",
-      force3D: true,
-      scrollTrigger: {
-        pin: ".section01",
-        trigger: ".section01",
-        start: "0% 0%",
-        end: "bottom top",
-        scrub: 0.5,
-        markers: true,        
-      },
-      y: -100,
-    }
-  );
-});
+gsap.fromTo(
+  images,
+  { scale: 0.7 },
+  {
+    scale: 1,
+    ease: "none",
+    force3D: true,
+    scrollTrigger: {
+      pin: ".section01",
+      trigger: ".section01",
+      start: "0% 0%",
+      end: "bottom top",
+      scrub: 0.5,
+      markers: true,
+    },
+    y: -100,
+  }
+);
 
 gsap.to(".box2", {
   scrollTrigger: {
