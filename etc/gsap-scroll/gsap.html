@@ -317,34 +317,19 @@ gsap.fromTo(".section01 .img_con",
   }
 );
 
-gsap.to(".box2", {
-  scrollTrigger: {
-    trigger: '.section02',
-    start: "0% 30%",
-    end: "100% 80%",
-    // end: "+=500"
-    scrub: 1,
-    markers: false,
-  },
-  // scale: 2,
-  // borderRadius: 0,
-  duration: 1,
-  y: 100,
-});
 
-gsap.to(".box3", {
+const boxScroll = gsap.timeline({
   scrollTrigger: {
     trigger: '.section02',
     start: "0% 30%",
     end: "100% 80%",
-    // end: "+=500"
     scrub: 1,
-    markers: false,
-  }, 
-  y: -100,
-  // yPercent: 50,
-  // rotation: 360
+    markers: false
+  }
 });
+boxScroll.to(".box2", {y: 100, duration: 1})
+boxScroll.to(".box3", {y: -100})
+
 
 let flow1 = gsap.utils.toArray(".flow1 .panel");
 gsap.to(flow1, {
