@@ -38,7 +38,7 @@
 
 
 .section04 { position: relative;background:#ddd; padding:140px 0;overflow:hidden; }
-.section05 .inner{width:1000px;margin:0 auto;}
+.section04 .inner{width:1000px;margin:0 auto;}
 
 .img-hover {position: relative;width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; overflow: hidden; }
 .img-hover li{position: relative;  width: 300px; height:500px; transition: width 0.3s; cursor: pointer;}
@@ -185,20 +185,20 @@
 <section class="section04">
   <h1>마우스 오버시 이미지 확장</h1>
   <div class="inner">
-    <ul class="img-hover fade_movie">
-      <li class="on">
+    <ul class="img-hover">
+      <li class="on fade1">
         <a>
           <h2>첫번째 내용</h2>
           <p>서브내용</p>
         </a>
       </li>
-      <li>
+      <li class="fade2">
         <a>
           <h2>두번째 내용</h2>
           <p>서브내용</p>
         </a>
       </li>
-      <li>
+      <li class="fade3">
         <a>
           <h2>세번째 내용</h2>
           <p>서브내용</p>
@@ -435,6 +435,19 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
+
+// const boxFade = gsap.timeline({
+//   scrollTrigger: {
+//     trigger: '.section04',
+//     start: "top top",
+//     end: "100% 100%",
+//     scrub: 4,
+//     markers: false,
+//   }
+// });
+// boxFade.to(".fade1", {opacity:1, y: 100})
+// boxFade.to(".fade2", {opacity:1, y: 100, stagger:0.2})
+// boxFade.to(".fade3", {opacity:1, y: 100, stagger:0.4})
 
 </script>
 
