@@ -7,6 +7,7 @@
 *{margin:0;padding:0;border:0;list-style:none;line-height:1.3;font-size:28px;box-sizing: border-box;font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;}
 .sustainable_wrap h1{font-size:60px;margin-bottom:20px;text-align:center;}
 .sustainable_wrap h2{font-size:40px;margin-bottom:5px;}
+.sustainable_wrap img{max-width:100%;}
 
 .sustainable_wrap{position:relative;overflow: hidden;}
 
@@ -75,6 +76,14 @@
 .img-active li a:hover {display: block; position: absolute;top:0;left:0; width:1100px; height:100%;background: rgba(0, 0, 0, .9);}
 .img-active li:nth-child(2) a:hover{left:-100%}
 .img-active li:nth-child(3) a:hover{left:-200%}
+
+
+.section06 { position: relative;background:aquamarine; padding:140px 0;overflow:hidden; }
+.section06 .inner{display:flex;flex-wrap: wrap;width:1000px;margin:0 auto;}
+
+.section06 .img1{width:40%;margin-right:20px;}
+.section06 .text1{width:55%}
+.section06 .img2{margin-top:120px;}
 </style>	
 </head>
 <body>
@@ -176,7 +185,7 @@
 <section class="section04">
   <h1>마우스 오버시 이미지 확장</h1>
   <div class="inner">
-    <ul class="img-hover">
+    <ul class="img-hover fade_movie">
       <li class="on">
         <a>
           <h2>첫번째 내용</h2>
@@ -227,6 +236,24 @@
         </a>
       </li>
     </ul>
+  </div>
+</section>
+
+
+
+<section class="section06">
+  <h1>스크롤시 모션 나타나기</h1>
+  <div class="inner">
+    <div class="fade_left fade_movie img1">
+      <img src="https://cdn.pixabay.com/photo/2023/06/22/07/13/soil-8080788_1280.jpg" alt="">
+    </div>
+    <div class="text1">
+      <h2 class="fade_movie">건강에 좋은 것이<br>환경에도 좋습니다.</h2>
+      <p class="fade_movie">사람과 자연을 함께 사랑하는 풀무원이 권하는 지혜로운 라이프 스타일</p>
+    </div>
+    <div class="fade_movie img2">
+      <img src="https://cdn.pixabay.com/photo/2024/04/12/18/18/ai-generated-8692405_1280.jpg" alt="">
+    </div>
   </div>
 </section>
 
@@ -365,24 +392,50 @@ gsap.to(flow2, {
 });
 
 
-// gsap.to(".section01 .inner .text_con2", {
-//     yPercent: -100, // Start with the text above the viewport
-//     ease: "none",
-//     scrollTrigger: {
-//         trigger: ".section01",
-//         start: $('.section01 .inner .text_con2').offsetTop, // Start when .img_con reaches 100vw
-//         end: () => {
-//             // Calculate the point where the text should stop scrolling
-//             const viewportHeight = window.innerHeight;
-//             const textContainerHeight = document.querySelector(".section01 .inner .text_con2").offsetHeight;
-//             const stopScrollingPoint = viewportHeight - (5 * window.innerWidth) / 100 - textContainerHeight;
+function animateFrom(elem, direction) {
+  direction = direction || 1;
+  var x = 0,
+      y = direction * 100;
+  if(elem.classList.contains("fade_left")) {
+    x = -100;
+    y = 0;
+  } else if (elem.classList.contains("fade_right")) {
+    x = 100;
+    y = 0;
+  }
+  elem.style.transform = "translate(" + x + "px, " + y + "px)";
+  elem.style.opacity = "0";
+  gsap.fromTo(elem, {x: x, y: y, autoAlpha: 0}, {
+    duration: 1.25, 
+    x: 0,
+    y: 0, 
+    autoAlpha: 1, 
+    ease: "expo", 
+    overwrite: "auto"
+  });
+}
 
-//             return `+=${stopScrollingPoint}`;
-//         },
-//         scrub: 0.5,
-//         markers: true,
-//     },
-// });
+function hide(elem) {
+  gsap.set(elem, {autoAlpha: 0});
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  gsap.registerPlugin(ScrollTrigger);
+  
+  gsap.utils.toArray(".fade_movie").forEach(function(elem) {
+    hide(elem);
+    
+    ScrollTrigger.create({
+      trigger: elem,
+      markers: false,
+      onEnter: function() { animateFrom(elem) }, 
+      onEnterBack: function() { animateFrom(elem, -1) },
+      onLeave: function() { hide(elem) }
+    });
+  });
+});
+
+
 </script>
 
 
