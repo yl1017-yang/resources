@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <style>
+      *{padding:0;margin:0;border:0;box-sizing:border-box;font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard Variable", Pretendard, Roboto, "Noto Sans KR", "Segoe UI", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;line-height:1.4;}
+      .wrap {width:700px;margin:30px auto;}
+      h2{margin:40px 0 20px;}
+      p{margin:20px 0 10px 20px;}
+      pre {background:#444;border-radius:10px;color:#fff;font-size:16px;}
+      button{padding:14px;background:#333;color:#fff;margin:20px;cursor:pointer;}
+      input{border:1px solid #999;padding:4px;}
+    </style>
+
+
+    <section class="wrap">
+      <h1>Web Components : 커스텀 HTML 태그 만들기</h1>
+      <p>
+        커스텀 태그로 길고 복잡함 html 축약<br>
+        this.innerHTML 10배 느려서 가급적 appendChild 사용
+      </p>
+
+      <!-- name = "attribute" 와 동일함 -->
+      <custom-input name="비번"></custom-input>
+      <custom-input name="이메일"></custom-input>
+      <custom-input name="123"></custom-input>
+
+      <br><br>
+
+      <!-- shadow DOM 숨겨놓는 html 태그 -->
+      <input type="range">
+      <div id="mordor"></div>
+
+
+      <!-- shadow DOM + web component -->
+      <shadow-input></shadow-input>
+
+      <!-- html 임시 보관함 -->
+      <template id="template1">
+        <div>안보이는 html내용</div>
+        <label>숨겨놓은 내용임</label><input type='input'>
+        <style>label { color : blue } </style>
+      </template>
+
+
+    </section>
+
+    <script>
+      //스크립트가 아닌 브라우저 기본기능
+      class 클래스 extends HTMLElement {
+        connectedCallback() {
+          // let 변수 = document.createElement('label');
+          // this.appendChild(변수);
+          let name = this.getAttribute('name');
+          this.innerHTML = `<label>${name} 이메일 인풋이예요</label><input type='input'>`
+        }
+
+        static get observedAttributes() {
+          //name 이라는 attiribute 바뀌는지 감시해주세요
+          return ['name', '여러개도 가능']
+        }
+        // 바뀌면 아래 실행해줌
+        attributeChangedCallback() {
+          // console.log(this.getAttribute('name'));          
+          // <custom-input name="123"> name 내용을 바꾸면 콘솔창에서 name이 바뀜
+          this.innerHTML = `<label>${name} 이메일 인풋이예요</label><input type='input'>`; //바뀐내용 재 랜더링 해주세요 (이 기능 라이브러리가 vue나 리액트임)
+        }
+      }
+
+      customElements.define('custom-input', 클래스);
+
+      // mordor shadow DOM 만들기
+      document.querySelector('#mordor').attachShadow({ mode : 'open' });
+      document.querySelector('#mordor').shadowRoot.innerHTML = 
+      '<p>심연에서 왔도다 - shadow DOM이니 찾아봐</p>'
+      '<p>개발자도구 - 환경설정 - 사용자 에이전트 그림자 DOM 표시</p>'
+
+
+
+      class 가상돔 extends HTMLElement {
+        connectedCallback() {
+          this.attachShadow({ mode : 'open' });
+          this.shadowRoot.append(template1.content.cloneNode(true));
+
+          let el = this.shadowRoot.querySelector('label');
+          el.addEventListener('click', function(){
+            console.log('클릭함');
+          })
+        }
+      }
+      customElements.define('shadow-input', 가상돔);
+
+
+
+
+      // 여러문자, 숫자를 한 변수에 저장하려면 object 자료
+      var user = {
+        name : 'kim', 
+        age : {value : 20}
+      }
+      console.log(user.name);
+      
+
+      // 자바스크립트 신문법: optional chaning  연산자 ?. 왼쪽이 비어 있으면 오른쪽 안해줌
+      console.log(user?.name);
+
+      console.log(user.age?.value);  // 중첩된 자료형일때 에러 방지용 
+
+      document.querySelector('.a')?.innerHTML; //이렇게 사용해도 됨
+
+
+      var user;
+      console.log ( user ?? '로딩중');
+      
+
+    </script>
+
+  </body>
+</html>
