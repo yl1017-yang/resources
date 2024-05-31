@@ -86,6 +86,12 @@
 .section06 .text1{width:55%}
 .section06 .img2{margin-top:120px;}
 
+/* swiper js */
+.section07 { position: relative;background:burlywood; padding:140px 0;overflow:hidden; }
+.swiper { width: 100%; height: 100%; }
+.swiper-slide { height:500px; background: #fff; display: flex; justify-content: center; align-items: center; }
+.swiper-slide img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
 
 /* 모달팝업 */
 .btn_open{display:inline-flex;font-size:20px;border:1px solid #444;padding:8px 40px;}
@@ -97,7 +103,8 @@
 .modal_wrap{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;z-index:100;opacity:0;visibility:hidden;transition:all 0.2s ease-in-out;}
 .modal_wrap.is_active{opacity:1;visibility:visible;}
 .modal_wrap .inner{position:relative;background:#fff;width:900px;padding:70px 50px;}
-</style>	
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
 <body>
 
@@ -292,6 +299,47 @@
 </section>
 
 
+
+<section class="section07">
+  <h1>swiper js 사용</h1>
+  <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <img src="https://cdn.pixabay.com/photo/2024/03/22/16/58/lighthouse-8650151_1280.jpg" alt="">
+        Slide 1
+      </div>
+      <div class="swiper-slide">
+        <img src="https://cdn.pixabay.com/photo/2015/06/24/16/54/lighthouse-820431_1280.jpg" alt="">
+        Slide 2
+      </div>
+      <div class="swiper-slide">
+        <img src="https://cdn.pixabay.com/photo/2023/09/28/21/14/abstract-8282554_1280.jpg" alt="">
+        Slide 3
+      </div>
+      <div class="swiper-slide">
+        <img src="https://cdn.pixabay.com/photo/2024/03/02/00/09/woman-8607385_1280.png" alt="">
+        Slide 4
+      </div>
+      <div class="swiper-slide">
+        <img src="https://cdn.pixabay.com/photo/2024/04/12/15/46/beautiful-8692180_1280.png" alt="">
+        Slide 5
+      </div>
+      <div class="swiper-slide">
+        <img src="https://cdn.pixabay.com/photo/2017/08/06/08/55/key-chain-2590442_1280.jpg" alt="">
+        Slide 6
+      </div>
+      <div class="swiper-slide">
+        <img src="https://cdn.pixabay.com/photo/2016/10/13/14/28/unicorn-1737897_1280.jpg" alt="">
+        Slide 7
+      </div>
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-pagination"></div>
+  </div>
+</section>
+
+
 </div>
 
 
@@ -308,6 +356,8 @@
   가로스크롤 : https://gsap.com/community/forums/topic/33311-using-gsap-scrolltrigger-for-horizontal-scroll/
   https://velog.io/@kmmkyung/GSAP  
   https://agal.tistory.com/213
+
+  swiper js : https://swiperjs.com/demos
  -->
 
 
@@ -315,6 +365,8 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script> -->
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <script>
 gsap.registerPlugin(ScrollTrigger);
@@ -502,9 +554,27 @@ modalClose.forEach( number => {
   });
 });
 
+//mySwiper.js
+var swiper = new Swiper(".mySwiper", {
+  slidesPerView: 4,
+  spaceBetween: 20,
+  centeredSlides: true,  
+  autoplay: {
+    delay: 2000,
+    disableOnInteraction: false,
+  },
+  // loop: true,
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+  },
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+});
 </script>
 
 
 </body>
-
 </html>
