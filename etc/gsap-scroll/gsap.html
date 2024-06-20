@@ -15,7 +15,7 @@
 
 .section01 {position: relative; background: #ddd;}  /*aspect-ratio: 1920/1100;  background:#eee url(https://d3phaj0sisr2ct.cloudfront.net/site/images/tools/aitools-background-01.jpg) 100% 100% / cover no-repeat; */
 .section01 .inner { position: relative; width: 100%; overflow: hidden;}
-.section01 .text_con1 { position: fixed; top:0;left:0;width: 100%;height:100%; text-align: center;}
+.section01 .text_con1 { position: absolute; top:0;left:0;width: 100%;height:100%; text-align: center;}
 .section01 .text_con1 > h1 {margin-top:100px;color:#fff;}
 .section01 .img_con { position: relative;  display: flex; flex-direction: column; width: 1400px; aspect-ratio: 1830/880; overflow: hidden; z-index: 0; margin:200px auto 0;} /* aspect-ratio: 2560/1226; */
 .section01 .img_con video { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: auto; transition: transform 0.2s ease-in-out; }
@@ -112,6 +112,15 @@
 .scale-swiper .swiper-slide img { width: 100%; height: auto; object-fit: cover;}
 .scale-swiper .swiper-slide-active { z-index: 10;}
 .scale-swiper .swiper-slide-active img { transform: scale(1.3); border:2px solid red}
+
+
+/* 원페이지 스크롤 */
+.section10 { position: relative;background:#eee}
+.section10 .one{position: relative;width: 600px; height: 100vh;  display: flex; justify-content: center; align-items: center; margin:0 auto}
+.one01 { background: yellowgreen; width: 100%; height: 100%;}
+.one02 { background: firebrick; }
+.one03 { background: cornflowerblue; }
+.one04 { background: seagreen; }
 
 
 /* 모달팝업 */
@@ -504,6 +513,78 @@
 </section>
 
 
+
+<h1>원페이지 스크롤</h1>
+
+
+
+
+<div class="section_various_wrap">
+  <section id="section_various" class="section_various">
+      <div class="inner">
+          <h3 class="section_title motion">
+              쫙- 펼쳐보는<br class="mo_show">
+              정보와<i class="icon_eyes"></i>볼거리
+          </h3>
+          <div class="card_wrap">
+              <div class="card_box">
+                  <div class="card_item card_01">
+                      <h3 class="card_title">
+                          날씨 · 증시
+                      </h3>
+                      <h4 class="card_main_title">
+                          <strong class="accent">
+                              오늘 날씨와 환율,<br>
+                              관심 있는 종목 주가</strong>를<br>
+                              더 빠르게 체크
+                      </h4>
+                  </div>
+                  <div class="card_item card_02">
+                      <h3 class="card_title">
+                          새소식 블록
+                      </h3>
+                      <h4 class="card_main_title">
+                          <strong class="accent">
+                              모바일에서 구독한<br>
+                              언론사 뉴스</strong>와 엔터, 스포츠,<br>
+                              경제 소식을 한눈에-
+                      </h4>
+                  </div>
+                  <div class="card_item card_03">
+                      <h3 class="card_title">
+                          쇼핑 블록
+                      </h3>
+                      <h4 class="card_main_title">
+                          더 쉬워진 소비 지름길!<br>
+                          <strong class="accent">
+                              내 쇼핑 내역과 혜택</strong>을<br>
+                          더 편리하게 발견하세요
+                      </h4>
+                  </div>
+                  <div class="card_item card_04">
+                      <h3 class="card_title">
+                          관심사 블록
+                      </h3>
+                      <h4 class="card_main_title white">
+                          자동차, 웹툰, 패션뷰티까지<br>
+                          <strong class="accent">
+                              내 관심사에 따라 골라 보는
+                          </strong><br>
+                          매일의 정보
+                      </h4>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+</div>
+
+
+
+
+
+
+
 </div>
 
 
@@ -536,7 +617,7 @@
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
@@ -694,18 +775,21 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-// const boxFade = gsap.timeline({
-//   scrollTrigger: {
-//     trigger: '.section04',
-//     start: "top top",
-//     end: "100% 100%",
-//     scrub: 4,
-//     markers: false,
-//   }
-// });
-// boxFade.to(".fade1", {opacity:1, y: 100})
-// boxFade.to(".fade2", {opacity:1, y: 100, stagger:0.2})
-// boxFade.to(".fade3", {opacity:1, y: 100, stagger:0.4})
+
+// 원페이지 스크롤
+gsap.utils.toArray("one").forEach((section, i) => {
+  ScrollTrigger.create({
+    trigger: section,
+    start: "top top", 
+    pin: true,
+    // pin: ".section10 .one",
+    pinSpacing: false,
+    markers: true,
+  });
+});
+ScrollTrigger.create({
+  snap: 1 / 4
+});
 
 
 //모달팝업
