@@ -116,11 +116,11 @@
 
 /* 원페이지 스크롤 */
 .section10 { position: relative;background:#eee}
-.section10 .one{position: relative;width: 600px; height: 100vh;  display: flex; justify-content: center; align-items: center; margin:0 auto}
-.one01 { background: yellowgreen; width: 100%; height: 100%;}
-.one02 { background: firebrick; }
-.one03 { background: cornflowerblue; }
-.one04 { background: seagreen; }
+.section10 .panel_box{width:60%;height:500px;margin:0 auto;}
+.blue { background: blue;}
+.red { background: red;}
+.orange { background: orange; }
+.purple { background: purple; }
 
 
 /* 모달팝업 */
@@ -516,70 +516,27 @@
 
 <h1>원페이지 스크롤</h1>
 
+<section class="section10">
+  <div class="panel_box green">
+    <h1>https://agal.tistory.com/213</h1>
+    <p>스크롤 여러개 사이트 : https://odada.me/303</p>
+  </div>
+  <div class="panel_box red">
+    ONE
+  </div>
+  <div class="panel_box orange">
+    TWO
+  </div>
+  <div class="panel_box purple">
+    THREE
+  </div>
+</section>
 
 
 
-<div class="section_various_wrap">
-  <section id="section_various" class="section_various">
-      <div class="inner">
-          <h3 class="section_title motion">
-              쫙- 펼쳐보는<br class="mo_show">
-              정보와<i class="icon_eyes"></i>볼거리
-          </h3>
-          <div class="card_wrap">
-              <div class="card_box">
-                  <div class="card_item card_01">
-                      <h3 class="card_title">
-                          날씨 · 증시
-                      </h3>
-                      <h4 class="card_main_title">
-                          <strong class="accent">
-                              오늘 날씨와 환율,<br>
-                              관심 있는 종목 주가</strong>를<br>
-                              더 빠르게 체크
-                      </h4>
-                  </div>
-                  <div class="card_item card_02">
-                      <h3 class="card_title">
-                          새소식 블록
-                      </h3>
-                      <h4 class="card_main_title">
-                          <strong class="accent">
-                              모바일에서 구독한<br>
-                              언론사 뉴스</strong>와 엔터, 스포츠,<br>
-                              경제 소식을 한눈에-
-                      </h4>
-                  </div>
-                  <div class="card_item card_03">
-                      <h3 class="card_title">
-                          쇼핑 블록
-                      </h3>
-                      <h4 class="card_main_title">
-                          더 쉬워진 소비 지름길!<br>
-                          <strong class="accent">
-                              내 쇼핑 내역과 혜택</strong>을<br>
-                          더 편리하게 발견하세요
-                      </h4>
-                  </div>
-                  <div class="card_item card_04">
-                      <h3 class="card_title">
-                          관심사 블록
-                      </h3>
-                      <h4 class="card_main_title white">
-                          자동차, 웹툰, 패션뷰티까지<br>
-                          <strong class="accent">
-                              내 관심사에 따라 골라 보는
-                          </strong><br>
-                          매일의 정보
-                      </h4>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </section>
-</div>
-
-
+<section class="section11" style="height:2000px">
+섹션11
+</section>
 
 
 
@@ -776,20 +733,32 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-// 원페이지 스크롤
-gsap.utils.toArray("one").forEach((section, i) => {
+// 원페이지 스크롤 https://agal.tistory.com/213
+let panels = gsap.utils.toArray(".panel_box");
+let tops = panels.map(panelBox => ScrollTrigger.create({trigger: panelBox, start: "top top"}));
+
+panels.forEach((panelBox, i) => {
   ScrollTrigger.create({
-    trigger: section,
-    start: "top top", 
-    pin: true,
-    // pin: ".section10 .one",
-    pinSpacing: false,
-    markers: true,
+    trigger: panelBox,
+    // trigger: ".section10",
+    start: () => panelBox.offsetHeight < window.innerHeight ? "top top" : "bottom bottom",
+    pin: true, 
+    pinSpacing: false 
   });
 });
-ScrollTrigger.create({
-  snap: 1 / 4
-});
+
+// ScrollTrigger.create({
+//   snap: {
+//     snapTo: (progress, self) => {
+//       let panelStarts = tops.map(st => st.start),
+//           snapScroll = gsap.utils.snap(panelStarts, self.scroll()); 
+//       return gsap.utils.normalize(0, ScrollTrigger.maxScroll(window), snapScroll);
+//     },
+//     duration: 0.5
+//   }
+// });
+
+
 
 
 //모달팝업
