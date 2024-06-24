@@ -123,6 +123,39 @@
 .purple { background: purple; }
 
 
+/* 네이버 스크롤 */
+.section11 { position: relative;background:#fff;height:100vh;}
+
+.section_various_wrap .pin-spacer { width: 100% !important; max-width: 100%;}
+.section_various { overflow: hidden; will-change: contents; border:1px solid red}
+.section_title { font-size: 50px; font-weight: 900; text-align: center;padding-top:100px}
+.section_various .card_wrap {margin-top: 100px; animation-delay: 0.3s; }
+.section_various .card_wrap .card_box { position: relative; height: 482px; }
+.section_various .card_wrap .card_item { will-change: transform; overflow: hidden; padding: 138px 0 0 60px; position: absolute; width: 100%; top: 0px; height: 482px; -webkit-border-radius: 20px; -ms-border-radius: 20px; border-radius: 20px; filter: drop-shadow(0px 8px 40px rgba(86, 91, 101, 0.05)); }
+.section_various .card_wrap .card_item .card_title { display: inline-block; vertical-align: top; font-size: 17px; line-height: 38px; letter-spacing: -0.2px; font-weight: 500; color: #579AFF; padding: 2px 27px; -webkit-border-radius: 150px; border-radius: 150px; background-color: #f5f6f8; }
+.section_various .card_wrap .card_item .card_title.white { background-color: #fff; }
+.section_various .card_wrap .card_item .card_main_title { display: block; margin-top: 27px; font-weight: 500; font-size: 30px; line-height: 46px; letter-spacing: -0.5px; color: #222; }
+.section_various .card_wrap .card_item .card_main_title.white { color: #fff; }
+.section_various .card_wrap .card_item .card_main_title .accent { font-weight: 900; }
+.section_various .card_wrap .card_item .card_desc { margin-top: 19px; font-weight: 500; font-size: 18px; line-height: 30px; letter-spacing: -0.2px; color: #fff; opacity: 0.8; }
+.section_various .card_wrap .card_01 { background-color: #fff; }
+.section_various .card_wrap .card_01:before { content: ''; position: absolute; bottom: 27px; right: 60px; width: 654px; height: 379px; background: url(https: //campaign-cdn.pstatic.net/0/campaign/2023/05/naverdetails_newpc/img/bg_card_01.png) no-repeat;
+	-webkit-background-size: 654px 379px; background-size: 654px 379px; }
+.section_various .card_wrap .card_02 { background-color: #CCDFFF; }
+.section_various .card_wrap .card_02:before { content: ''; position: absolute; bottom: 0; right: 0; width: 675px; height: 395px; background: url(https: //campaign-cdn.pstatic.net/0/campaign/2023/05/naverdetails_newpc/img/bg_card_02.png) no-repeat;
+	-webkit-background-size: 675px 395px; background-size: 675px 395px; }
+.section_various .card_wrap .card_03 { background-color: #AC96F8; }
+.section_various .card_wrap .card_03 .card_title { color: #8767F3; }
+.section_various .card_wrap .card_03:before { content: ''; position: absolute; bottom: 0; right: 0; width: 675px; height: 395px; background: url(https: //campaign-cdn.pstatic.net/0/campaign/2023/05/naverdetails_newpc/img/bg_card_03.png) no-repeat;
+	-webkit-background-size: 675px 395px; background-size: 675px 395px; }
+.section_various .card_wrap .card_04 { background-color: #5290FF; }
+.section_various .card_wrap .card_04:before { content: ''; position: absolute; bottom: 0; right: 0; width: 675px; height: 395px; background: url(https: //campaign-cdn.pstatic.net/0/campaign/2023/05/naverdetails_newpc/img/bg_card_04.png) no-repeat;
+	-webkit-background-size: 675px 395px; background-size: 675px 395px; }
+
+
+
+
+
 /* 모달팝업 */
 .btn_open{display:inline-flex;font-size:20px;border:1px solid #444;padding:8px 40px;}
 /* .btn_close{display:inline-flex;font-size:20px;background:none;border:1px solid #444;padding:8px 40px;cursor:pointer;} */
@@ -535,8 +568,67 @@
 
 
 
-<section class="section11" style="height:2000px">
-섹션11
+<section class="section11">
+
+  <div class="section_various_wrap">
+    <section id="section_various" class="section_various">
+        <div class="inner">
+            <h3 class="section_title motion">
+                한페이지 섹션 내용 네이버 참고
+            </h3>
+            <div class="card_wrap">
+                <div class="card_box">
+                    <div class="card_item card_01">
+                        <h3 class="card_title">
+                            날씨 · 증시
+                        </h3>
+                        <h4 class="card_main_title">
+                            <strong class="accent">
+                                오늘 날씨와 환율,<br>
+                                관심 있는 종목 주가</strong>를<br>
+                                더 빠르게 체크
+                        </h4>
+                    </div>
+                    <div class="card_item card_02">
+                        <h3 class="card_title">
+                            새소식 블록
+                        </h3>
+                        <h4 class="card_main_title">
+                            <strong class="accent">
+                                모바일에서 구독한<br>
+                                언론사 뉴스</strong>와 엔터, 스포츠,<br>
+                                경제 소식을 한눈에-
+                        </h4>
+                    </div>
+                    <div class="card_item card_03">
+                        <h3 class="card_title">
+                            쇼핑 블록
+                        </h3>
+                        <h4 class="card_main_title">
+                            더 쉬워진 소비 지름길!<br>
+                            <strong class="accent">
+                                내 쇼핑 내역과 혜택</strong>을<br>
+                            더 편리하게 발견하세요
+                        </h4>
+                    </div>
+                    <div class="card_item card_04">
+                        <h3 class="card_title">
+                            관심사 블록
+                        </h3>
+                        <h4 class="card_main_title white">
+                            자동차, 웹툰, 패션뷰티까지<br>
+                            <strong class="accent">
+                                내 관심사에 따라 골라 보는
+                            </strong><br>
+                            매일의 정보
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
 </section>
 
 
