@@ -43,6 +43,8 @@ fetch('./js/data.json') // URL fetch 요청
 	.then((json) => console.log(json)); // 응답 객체가 JSON -> 순수 JS 객체로 변환
 
 
+  let obj = JSON.parse(json);
+  console.log(obj.date.getDate());
 
 
 
