@@ -9,47 +9,45 @@
 </head>
 <body>
 
-<div class="todolist-wrap">
+  <div class="todolist-wrap">
 
-  <header class="todo-header">
-    <h1>todoList 스크립트</h1>
-  </header>
+    <header class="todo-header">
+      <h1>todoList 스크립트</h1>
+    </header>
 
-  <main class="todo-container">
-    <div class="todo-input-warp">
-      <form action="/" method="POST">
-          <input type="text" class="todo-input" placeholder="입력해봐요~" />
-          <button class="btn btn-gray">입력</button>
-        </form>
-    </div>
+    <main class="todo-container">
+      <div class="todo-input-warp">
+        <input type="text" class="todo-input" placeholder="입력해봐요~" />
+        <button class="btn btn-gray btn-todo">입력</button>
+      </div>
+      <p class="todo-content">내용</p>
+      <br><br>
 
-    <!-- <div class="btn-wrap">
-      <button class="btn btn-sort">가나다순 정렬</button>
-    </div> -->
+      <!-- <div class="btn-wrap">
+        <button class="btn btn-sort">가나다순 정렬</button>
+      </div> -->
 
-    <ul class="todo-list">
-      <li>
-        <div class="checkbox"><input type="checkbox" />✔</div>
-        <div class="num">1</div>
-        <div class="list">할일 내용내용내용</div>
-        <div class="btn-wrap">
-          <button class="btn btn-graya">수정</button>
-          <button class="btn btn-red">삭제</button>
-        </div>
-      </li>
-      
-    </ul>
-  </main>
+      <ul class="todo-list">
+        <!-- <li>
+          <div class="checkbox"><input type="checkbox" />✔</div>
+          <div class="num">1</div>
+          <div class="list">할일 내용내용내용</div>
+          <div class="btn-wrap">
+            <button class="btn btn-graya">수정</button>
+            <button class="btn btn-red">삭제</button>
+          </div>
+        </li> -->
+      </ul>
+    </main>
 
-  <footer class="todo-bottom">
-    <button class="btn btn-red" data-type="all">전체 삭제</button>
-  </footer>
+    <footer class="todo-bottom">
+      <button class="btn btn-red" data-type="all">전체 삭제</button>
+    </footer>
 
-</div>
-
+  </div>
 
 
-<script src="todolist.js" ></script>
+  <script src="./js/todolist.js"></script>
 
 </body>
 </html>

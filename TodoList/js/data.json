@@ -1,0 +1,16 @@
+{
+  "tododata" : [
+    {
+      "id": 1,
+      "content": "할일 리스트 내용",
+      "completed": false,
+      "date": "2024-05-20"
+    },
+    {
+      "id": 2,
+      "content": "할일 리스트 내용 2222",
+      "completed": false,
+      "date": "2024-05-20"
+    }
+  ]
+}
