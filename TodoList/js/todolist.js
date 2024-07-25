@@ -38,13 +38,13 @@ const listTodos = (text) => {
 
 
 // fetch API
-fetch('./js/data.json') // URL fetch 요청
+fetch('https://yl1017-yang.github.io/resources/TodoList/js/data.json') // URL fetch 요청
 	.then((response) => response.json()) // Fetch 응답 객체를 받아옴
-	.then((json) => console.log(json)); // 응답 객체가 JSON -> 순수 JS 객체로 변환
+	.then((json) => console.log(json)) // 응답 객체가 JSON -> 순수 JS 객체로 변환
+  .then((data) => console.log(data + ' ---data'));
 
 
-  let obj = JSON.parse(json);
-  console.log(obj.date.getDate());
+
 
 
 
