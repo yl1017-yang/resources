@@ -1,14 +1,14 @@
 {
-  "tododata" : [
+  "items" : [
     {
       "id": 1,
-      "content": "할일 리스트 내용",
+      "content": "할일 내용 fetch API 사용",
       "completed": false,
       "date": "new Date()"
     },
     {
       "id": 2,
-      "content": "할일 리스트 내용 2222",
+      "content": "할일 내용 json 더미파일 사용",
       "completed": false,
       "date": "2024-05-20"
     }

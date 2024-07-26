@@ -2,14 +2,41 @@ const todoBtn = document.querySelector('.btn-todo');
 const todoInput = document.querySelector('.todo-input');
 const todoList = document.querySelector('.todo-list');
 
-const p = document.querySelector('.todo-content');
+const p = document.querySelector('.todo-content');  // 내용 받기
 
 let masterKey = 0;
-let totoData = [];
+let todos = [];
+
+// function setTodos(obj) {
+//   localStorage.setItem('todos', JSON.stringify(obj));
+//   console.log(todos);
+// }
+
+const appendTodos = (text) => {
+  const todoId = masterKey++;
+  todoInput.value = '';
+
+  // setTodos(obj);
+
+
+  p.innerText += ` ${text}`;
+  todoList.innerHTML = '';
+}
 
 todoBtn.addEventListener('click', (e) => {
   if ( todoInput.value ) {
     appendTodos(todoInput.value);
+    const obj = {
+      completed: false,
+      id: todoId,
+      item: todoItem,
+      todayDate: new Date().toISOString().substring(0, 10),
+    }
+    
+    const objString = JSON.stringify(obj);
+    window.localStorage.setItem('person', objString);
+    console.log(todoId, todoItem, obj.todayDate);
+
   } else {
     alert('입력해봐유~~~');
   }
@@ -22,30 +49,40 @@ todoInput.addEventListener('keypress', (e) => {
   }
 });
 
-const appendTodos = (text) => {
-  const newMasterKey = masterKey++;  
-  todoInput.value = '';
-
-  listTodos(text);
-}
-
-const listTodos = (text) => {
-  p.innerText += ` ${text}`;
-
-  todoList.innerHTML = '';
-}
 
 
 
-// fetch API
-fetch('./js/data.json') // URL fetch 요청
-	.then((response) => response.json()) // Fetch 응답 객체를 받아옴
-	.then((json) => console.log(json)); // 응답 객체가 JSON -> 순수 JS 객체로 변환
 
 
-  let obj = JSON.parse(json);
-  console.log(obj.date.getDate());
 
+
+
+// fetch API + nodejs가 필요함
+// function getData() {
+//   return fetch('./js/data.json')
+//     .then((response) => response.json())
+//     .then((json) => json.items);
+// }
+
+// getData().then((items) => {
+//   console.log(items);
+//   showTodoList(items); 
+// });
+
+// function showTodoList(items) {
+//   const content = document.querySelector('.todo-list');
+//   content.innerHTML = items.map((item) => createHTMLStrign(item)).join('');
+// }
+
+// function createHTMLStrign(item) {
+//   return `
+//     <li>
+//       <div class="num">${item.id}</div>
+//       <div class="list">${item.content}</div>
+//       <div class="date">${item.date}</div>
+//     </li>
+//   `
+// }
 
 
 
@@ -60,3 +97,6 @@ fetch('./js/data.json') // URL fetch 요청
 // https://woojong92.tistory.com/entry/JS-%EB%B0%94%EB%8B%90%EB%9D%BC-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EB%A1%9C-ToDo-List-%EB%A7%8C%EB%93%A4%EA%B8%B0-2-%ED%95%A0-%EC%9D%BC-%EC%B6%94%EA%B0%80%ED%95%98%EA%B8%B0
 
 // https://velog.io/@rlorxl/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EB%A1%9C-%EC%84%9C%EB%B2%84%EC%99%80-%ED%86%B5%EC%8B%A0%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95feat.-JSON
+
+// json파일 fetch로 동적 가져오기 -- https://namhandong.tistory.com/99
+// https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
