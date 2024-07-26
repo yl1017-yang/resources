@@ -7,35 +7,57 @@ const p = document.querySelector('.todo-content');  // 내용 받기
 let masterKey = 0;
 let todos = [];
 
-// function setTodos(obj) {
-//   localStorage.setItem('todos', JSON.stringify(obj));
-//   console.log(todos);
-// }
+const getAllTodos = () => {
+  return todos;
+}
 
-const appendTodos = (text) => {
-  const todoId = masterKey++;
-  todoInput.value = '';
+const appendTodos = (item) => {
+  p.innerText += ` ${item}`;
 
-  // setTodos(obj);
+  const allTodos = getAllTodos();
+  allTodos.forEach(todo => {
+    const todoLiElem = document.createElement('li');
+    const todoDivElem = document.createElement('div');
+    todoElem.classList.add('list');
+    todoElem.innerText = todo.item;
 
+    todoLiElem.appendChild(todoLiElem);
+    todoLiElem.appendChild(todoDivElem);
+  });
 
-  p.innerText += ` ${text}`;
-  todoList.innerHTML = '';
+  // todoList.innerHTML += `
+  //   <li>
+  //     <div class="num">${todos.id}</div>
+  //     <div class="list">${todos.item}</div>
+  //     <div class="date">${todos.todayDate}</div>
+  //   </li>
+  // `;
 }
 
 todoBtn.addEventListener('click', (e) => {
   if ( todoInput.value ) {
-    appendTodos(todoInput.value);
-    const obj = {
-      completed: false,
-      id: todoId,
-      item: todoItem,
-      todayDate: new Date().toISOString().substring(0, 10),
-    }
+  
+    const todoId = masterKey++;
+    const todoItem = todoInput.value;
+
+    const obj = [...getAllTodos(), 
+      {
+        completed: false,
+        id: todoId,
+        item: todoItem,
+        todayDate: new Date().toISOString().substring(0, 10),
+      }
+    ]
+
+
+    console.log(todoId, todoItem, obj.todayDate);
     
     const objString = JSON.stringify(obj);
-    window.localStorage.setItem('person', objString);
-    console.log(todoId, todoItem, obj.todayDate);
+    localStorage.setItem(todoId, objString);
+    todos.push(obj.id);
+
+    todoInput.value = '';
+    appendTodos(todoInput.value);
 
   } else {
     alert('입력해봐유~~~');
@@ -44,6 +66,7 @@ todoBtn.addEventListener('click', (e) => {
 
 todoInput.addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
+    todoInput.value = '';
     appendTodos(todoInput.value);
     console.log('keypress');
   }
