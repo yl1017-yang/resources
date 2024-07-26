@@ -52,11 +52,6 @@ todoInput.addEventListener('keypress', (e) => {
 
 
 
-
-
-
-
-
 // fetch API + nodejs가 필요함
 // function getData() {
 //   return fetch('./js/data.json')
