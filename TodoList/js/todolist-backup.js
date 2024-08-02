@@ -19,11 +19,6 @@ const appendTodos = (todo) => {
   `;
 }
 
-const removeTodos = (todo) => {
-  localStorage.removeItem(todo.id);
-  todo.splice(id, 1);
-}
-
 document.addEventListener('DOMContentLoaded', () => {
   todos.forEach(todo => appendTodos(todo));
 });
