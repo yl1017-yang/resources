@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+</head>
+<body>
+
+<link rel="stylesheet" href="../../css/common.css">
+
+<style>
+.total_map_wrap{position:relative;width:1120px;margin:50px auto;}
+.total_map_wrap .total_map{position:absolute;top:0;left:0;right:0;bottom:0;}
+.total_map_wrap .total_map > li{transition:all 0.5s;}
+.total_map_wrap .total_map > li:hover{transform:translateY(-10px);}
+
+.total_map_wrap .card{position:absolute;display:inline-block;padding:8px 40px 8px 15px;background-color:#116067;border-radius:8px;color:#fff;font-size:18px;font-weight:500;line-height:1.2;transition:all 0.5s;animation:step 0.6s 0s ease-in-out both}
+.total_map_wrap .card::before{content:'';position:absolute;top:34%;right:14px;width:9px;height:16px;background:url(./icon_arrow.png) no-repeat;}
+.total_map_wrap .card::after{content:'';position:absolute;top:54px;left:130px;width:0;height:0;border-top:44px solid #116067;border-left:14px solid transparent;border-right:0px solid transparent;transform:rotate(-15deg);transition:all 0.5s;}
+.total_map_wrap .card:hover{background-color:#25c37d;box-shadow:rgba(0, 0, 0, 0.3) 6px 6px 20px 0px;}
+.total_map_wrap .card:hover::after{border-top:44px solid #25c37d;}
+
+@keyframes step {
+    0% { 
+        opacity: 0;
+        transform:translateY(10px);
+    }
+    100% { 
+        opacity: 1; 
+        transform:translateY(0);
+    }
+}
+
+.total_map_wrap .map1 .card01{top:110px;left:140px;}
+.total_map_wrap .map1 .card02{top:95px;left:322px;animation-delay:0.3s;}
+.total_map_wrap .map1 .card02::after{left:26px;border-left:0px solid transparent;border-right:14px solid transparent;transform:rotate(15deg);}
+.total_map_wrap .map1 .card03{top:122px;left:556px;animation-delay:0.1s;}
+.total_map_wrap .map1 .card03::after{left:24px;border-left:0px solid transparent;border-right:14px solid transparent;transform:rotate(15deg);}
+.total_map_wrap .map1 .card04{top:246px;left:382px;animation-delay:0.5s;}
+.total_map_wrap .map1 .card04::after{left:120px;}
+.total_map_wrap .map1 .card05{top:232px;left:724px;animation-delay:0.4s;}
+.total_map_wrap .map1 .card05::after{left:24px;border-left:0px solid transparent;border-right:14px solid transparent;transform:rotate(15deg);}
+
+.total_map_wrap .map2 .card01{top:206px;left:286px;}
+.total_map_wrap .map2 .card02{top:206px;left:444px;animation-delay:0.3s;}
+.total_map_wrap .map2 .card02::after{left:26px;border-left:0px solid transparent;border-right:14px solid transparent;transform:rotate(15deg);}
+.total_map_wrap .map2 .card03{top:286px;left:518px;animation-delay:0.1s;}
+.total_map_wrap .map2 .card03::after{top:0;left:-28px;border-left:0px solid transparent;border-right:14px solid transparent;transform:rotate(90deg);}
+.total_map_wrap .map2 .card04{top:120px;left:626px;animation-delay:0.5s;}
+.total_map_wrap .map2 .card04::after{left:26px;border-left:0px solid transparent;border-right:14px solid transparent;transform:rotate(15deg);}
+.total_map_wrap .map2 .card05{top:203px;left:700px;animation-delay:0.4s;}
+.total_map_wrap .map2 .card05::after{top:0;left:-28px;border-left:0px solid transparent;border-right:14px solid transparent;transform:rotate(90deg);}
+</style>
+
+
+
+
+
+<div class="total_map_wrap">
+    <img src="./map01.jpg" alt="">
+    <ul class="total_map map1">
+        <li>
+            <a href="https://helper.skku.edu/helper/index.do" target="_blank" class="card card01">
+                인권센터 <br />
+                다산경제관 3층
+            </a>
+        </li>
+        <li>
+            <a href="https://scc.skku.edu/scc/index.do" target="_blank" class="card card02">
+                카운슬링센터 <br />
+                다산경제관 1층
+            </a>
+        </li>
+        <li>
+            <a href="https://support.skku.edu/support/index.do" target="_blank" class="card card03">
+                장애학생지원센터 <br />
+                중앙학술정보관 3층
+            </a>
+        </li>
+        <li>
+            <a href="https://health.skku.edu/health/index.do" target="_blank" class="card card04">
+                건강센터 <br />
+                학생회관 2층
+            </a>
+        </li>
+        <li>
+            <a href="https://success.skku.edu/success/index.do" target="_blank" class="card card05">
+                학생성공센터 <br />
+                국제관 1층
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+<div class="total_map_wrap">
+    <img src="./map02.jpg" alt="">
+    <ul class="total_map map2">
+        <li>
+            <a href="https://health.skku.edu/health/index.do" target="_blank" class="card card01">
+                건강센터 <br />
+                복지회관 2층
+            </a>
+        </li>
+        <li>
+            <a href="https://scc.skku.edu/scc/index.do" target="_blank" class="card card02">
+                카운슬링센터 <br />
+                복지회관 3층
+            </a>
+        </li>
+        <li>
+            <a href="https://helper.skku.edu/helper/index.do" target="_blank" class="card card03">
+                인권센터 <br />
+                복지회관 3층
+            </a>
+        </li>
+        <li>
+            <a href="https://support.skku.edu/support/index.do" target="_blank" class="card card04">
+                장애학생지원센터 <br />
+                삼성학술정보관 3층
+            </a>
+        </li>
+        <li>
+            <a href="https://success.skku.edu/success/index.do" target="_blank" class="card card05">
+                학생성공센터 <br />
+                삼성학술정보관 1층
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+</body>
+</html>
