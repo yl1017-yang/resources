@@ -1,68 +1,88 @@
 const todoBtn = document.querySelector('.btn-todo');
 const todoInput = document.querySelector('.todo-input');
 const todoList = document.querySelector('.todo-list');
+const clearAllBtn = document.querySelector('.all-delete');
 
 let masterKey = localStorage.length ? Math.max(...Object.keys(localStorage).map(Number)) + 1 : 0;
 let todos = Object.keys(localStorage).map(key => JSON.parse(localStorage.getItem(key)));
 
+function pushTodos(todos) {
+  const todoId = masterKey++;
+  const todoItem = todoInput.value;
+
+  const obj = {
+    completed: false,
+    id: todoId,
+    item: todoItem,
+    todayDate: new Date().toISOString().substring(0, 10),
+  }
+
+  console.log(todoId, todoItem, obj.todayDate);
+  
+  const objString = JSON.stringify(obj);
+  localStorage.setItem(todoId, objString);
+  todos.push(obj);
+  todos.sort((a, b) => a.id - b.id);
+
+  return obj; // obj를 반환하여 appendTodos에 전달합니다.
+}
+
 const appendTodos = (todo) => {
   todoList.innerHTML += `
-    <li>
+    <li data-id="${todo.id}">
       <div class="num">${todo.id}</div>
       <div class="list">${todo.item}</div>
       <div class="date">${todo.todayDate}</div>
       <div class="btn-wrap">
         <button class="btn btn-graya">수정</button>
-        <button class="btn btn-red">삭제</button>
+        <button class="btn btn-red" onclick="removeTodos(${todo.id})">삭제</button>
       </div>
     </li>
   `;
 }
 
-const removeTodos = (todo) => {
-  localStorage.removeItem(todo.id);
-  todo.splice(id, 1);
+
+const removeTodos = (id) => {
+  localStorage.removeItem(id);
+  todos = todos.filter(todo => todo.id !== id);
+  const todoItem = document.querySelector(`li[data-id='${id}']`);
+  todoItem.remove();
 }
+
+clearAllBtn.addEventListener('click', () => {
+  localStorage.clear();
+  todos = [];
+  todoList.innerHTML = '';
+});
 
 document.addEventListener('DOMContentLoaded', () => {
   todos.forEach(todo => appendTodos(todo));
 });
 
-todoBtn.addEventListener('click', (e) => {
-  if ( todoInput.value ) {  
-    const todoId = masterKey++;
-    const todoItem = todoInput.value;
-
-    const obj = {
-      completed: false,
-      id: todoId,
-      item: todoItem,
-      todayDate: new Date().toISOString().substring(0, 10),
-    }
-
-    console.log(todoId, todoItem, obj.todayDate);
-    
-    const objString = JSON.stringify(obj);
-    localStorage.setItem(todoId, objString);
-    todos.push(obj);
-    todos.sort((a, b) => a.id - b.id);
-
-    appendTodos(obj);
+todoBtn.addEventListener('click', () => {
+  if ( todoInput.value ) { 
+    const newTodo = pushTodos(todos); 
+    appendTodos(newTodo);
     todoInput.value = '';
-
   } else {
-    alert('내용이 없구만요. 입력해봐유~~~');
+    alert('click 내용이 없구만요. 입력해봐유~~~');
   }
 });
-
 
 todoInput.addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
-    todoInput.value = '';
-    appendTodos(todoInput.value);
-    console.log('keypress');
-  }
+    if (todoInput.value) {
+      const newTodo = pushTodos(todos);
+      appendTodos(newTodo);
+      todoInput.value = '';
+    } else {
+      alert('keypress 내용이 없구만요. 입력해봐유~~~');
+    }
+  } 
 });
+
+
+
 
 
 
