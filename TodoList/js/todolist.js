@@ -6,7 +6,7 @@ const clearAllBtn = document.querySelector('.all-delete');
 let masterKey = localStorage.length ? Math.max(...Object.keys(localStorage).map(Number)) + 1 : 0;
 let todos = Object.keys(localStorage).map(key => JSON.parse(localStorage.getItem(key)));
 
-function pushTodos(todos) {
+function setTodos(todos) {
   const todoId = masterKey++;
   const todoItem = todoInput.value;
 
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 todoBtn.addEventListener('click', () => {
   if ( todoInput.value ) { 
-    const newTodo = pushTodos(todos); 
+    const newTodo = setTodos(todos); 
     appendTodos(newTodo);
     todoInput.value = '';
   } else {
@@ -72,7 +72,7 @@ todoBtn.addEventListener('click', () => {
 todoInput.addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
     if (todoInput.value) {
-      const newTodo = pushTodos(todos);
+      const newTodo = setTodos(todos);
       appendTodos(newTodo);
       todoInput.value = '';
     } else {
@@ -86,37 +86,6 @@ todoInput.addEventListener('keypress', (e) => {
 
 
 
-
-
-
-
-
-// fetch API + nodejs가 필요함
-// function getData() {
-//   return fetch('./js/data.json')
-//     .then((response) => response.json())
-//     .then((json) => json.items);
-// }
-
-// getData().then((items) => {
-//   console.log(items);
-//   appendTodos(items); 
-// });
-
-// function appendTodos(items) {
-//   const content = document.querySelector('.todo-list');
-//   content.innerHTML = items.map((item) => createHTMLStrign(item)).join('');
-// }
-
-// function createHTMLStrign(item) {
-//   return `
-//     <li>
-//       <div class="num">${item.id}</div>
-//       <div class="list">${item.content}</div>
-//       <div class="date">${item.date}</div>
-//     </li>
-//   `
-// }
 
 
 
