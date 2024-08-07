@@ -1,26 +1,35 @@
 @charset "utf-8";
 @import url("../../css/common.css");
 
-.todolist-wrap{max-width:680px;margin:0 auto;font-size:20px;font-weight:500;color:#555;}
-.todo-header{text-align:center;margin:60px 0;}
+.todolist-wrap{max-width:700px;margin:60px auto;font-size:20px;font-weight:500;color:#444;}
+.todo-header{text-align:center;margin-bottom:30px;}
 .todo-header h1{font-size:50px;color: #000;font-weight:800;}
 
 .todo-container{}
-.todo-input-warp{display:flex;margin-bottom:50px;}
+.todo-input-warp{position:sticky;display:flex;top:0;margin-bottom:50px;z-index:1;}
 .todo-input-warp .todo-input{flex:1;background:#aaa;color:#fff;padding:20px;font-weight:600;}
 
 .todo-list{border-top:1px solid #eee;}
 .todo-list > li{display:flex;justify-content:space-between;align-items:center;padding:20px 0;border-bottom:1px solid #eee;}
 .todo-list .num{color:#999;min-width:50px;text-align:center;}
-.todo-list .list{flex:1}
+.todo-list .list{flex:1;font-weight:600;}
+.todo-list .date{font-size:16px;color:#999;}
+/* .todo-list .checkbox > i{position:relative;display:inline-block;width:20px;height:20px;border: 1px solid #ddd; border-radius: 4px;}
+.todo-list .checkbox .checked{content: '✔'; position: absolute; left: 0; top: 0; width: 18px; height: 18px; background: #eee; border-radius: 4px; font-size: 12px; text-align: center;} */
 
 .todo-bottom{text-align:right;margin-top:50px;}
 
 
 /* 버튼 */
-.btn{padding:8px 20px;background:#999;color:#fff;font-size:16px;font-weight:inherit;}
+.btn-wrap{margin-left:20px;}
+.btn{padding:8px 18px;background:#999;color:#fff;font-size:16px;font-weight:inherit;}
 .btn-sky{background:#0092be;}
 .btn-red{background:#b91f6c;}
 .btn-green{background:#0f9e3e;}
 .btn-gray{background:#333;}
 .btn-graya{background:#aaa;}
+
+.btn-todo{padding:0 50px;font-size:20px;}
+
+input[type="checkbox"] + label { position: relative; display: inline-block; width: 20px; height: 20px; border: 1px solid #ddd; border-radius: 4px; }
+input[id="check"]:checked + label::after { content: '✔'; position: absolute; left: 0; top: 0; width: 18px; height: 18px; background: #eee; border-radius: 4px; font-size: 12px; text-align: center; }

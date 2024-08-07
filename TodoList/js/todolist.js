@@ -6,10 +6,10 @@ const clearAllBtn = document.querySelector('.all-delete');
 // let masterKey = localStorage.length ? Math.max(...Object.keys(localStorage).map(Number)) + 1 : 0;
 // let todos = Object.keys(localStorage).map(key => JSON.parse(localStorage.getItem(key)));
 
-let { todos, masterKey } = getTodos();
+let { todoItems, masterKey } = getTodos();
 
 function getTodos() {
-  let todos = [];
+  let todoItems = [];
   let masterKey = parseInt(localStorage.getItem('masterKey')) || 0;
 
   if (localStorage.length > 0) {
@@ -18,18 +18,18 @@ function getTodos() {
       if (key !== 'masterKey') {
         let item = JSON.parse(localStorage.getItem(key));
         if (item && item.item) {
-          todos.push(item);
+          todoItems.push(item);
         }
       }
     }
-    todos.sort((a, b) => a.id - b.id);
+    todoItems.sort((a, b) => a.id - b.id);
   }
 
-  return { todos, masterKey };
+  return { todoItems, masterKey };
 }
 
 
-function setTodos(todos) {
+function setTodos(todoItems) {
   const todoId = masterKey++;
   const todoItem = todoInput.value;
 
@@ -42,53 +42,80 @@ function setTodos(todos) {
 
   console.log(todoId, todoItem, obj.todayDate);
   
-  const objString = JSON.stringify(obj);
-  localStorage.setItem(todoId, objString);
-  localStorage.setItem('masterKey', masterKey);
-  todos.push(obj);
-  todos.sort((a, b) => a.id - b.id);
+  // 내용 중복 값 체크
+  if (!todoItems.some(data => data.item == todoItem)) {
+    todoItems.push(obj);
 
-  return obj; // obj를 반환하여 appendTodos에 전달합니다.
+    localStorage.setItem(todoId, JSON.stringify(obj));
+    localStorage.setItem('masterKey', masterKey);
+  } else {
+    alert('동일 내용이 있슈! 다른 내용으로 입력해주!');
+  }
+
+  todoItems.sort((a, b) => a.id - b.id);
+
+  return obj; // obj를 반환하여 appendTodos 에 전달합니다.
 }
 
-const appendTodos = (todos) => {
+const appendTodos = (todo, index) => {
   todoList.innerHTML += `
-    <li data-id="${todos.id}">
-      <div class="num">${todos.id}</div>
-      <div class="list">${todos.item}</div>
-      <div class="date">${todos.todayDate}</div>
+    <li data-id="${todo.id}">
+      <div><input type="checkbox" id="check${todo.id}" class="checkbox"/><label for="check${todo.id}"></label></div>
+      <div class="num">${index + 1}</div>
+      <div class="list">${todo.item}</div>
+      <div class="date">${todo.todayDate}</div>
       <div class="btn-wrap">
         <button class="btn btn-graya">수정</button>
-        <button class="btn btn-red" onclick="removeTodos(${todos.id})">삭제</button>
+        <button class="btn btn-red" onclick="removeTodos(${todo.id})">삭제</button>
       </div>
     </li>
   `;
 }
 
-
 const removeTodos = (id) => {
   localStorage.removeItem(id);
-  todos = todos.filter(todo => todo.id !== id);
-  const todoItem = document.querySelector(`li[data-id='${id}']`);
-  todoItem.remove();
+  todoItems = todoItems.filter(todo => todo.id !== id);
+  // const todoItem = document.querySelector(`li[data-id='${id}']`);
+  // todoItem.remove();
+  indexTodos();
 }
 
 clearAllBtn.addEventListener('click', () => {
   localStorage.clear();
   localStorage.setItem('masterKey', 0); // masterKey 초기화
   masterKey = 0;
-  todos = [];
+  todoItems = [];
   todoList.innerHTML = '';
 });
 
+const indexTodos = () => {
+  todoList.innerHTML = '';
+  todoItems.forEach((todo, index) => appendTodos(todo, index));
+
+  // 체크박스 이벤트 리스너 추가
+  const toggleBtns = document.querySelectorAll('.checkbox');
+  toggleBtns.forEach((toggleBtn) => {
+    toggleBtn.addEventListener("change", () => {
+      if (toggleBtn.checked) {
+        console.log(`Checkbox ${toggleBtn.id} is checked`);
+        todoItems[index].completed = !todoItems[index].completed;
+      } else {
+        console.log(`Checkbox ${toggleBtn.id} is unchecked`);
+      }
+    });
+  });
+
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-  todos.forEach(todo => appendTodos(todo));
+  indexTodos();
 });
 
 todoBtn.addEventListener('click', () => {
   if (todoInput.value) { 
-    const newTodo = setTodos(todos); 
-    appendTodos(newTodo);
+    const newTodo = setTodos(todoItems);
+    // appendTodos(newTodo);
+    indexTodos();
     todoInput.value = '';
   } else {
     alert('click 내용이 없구만요. 입력해봐유~~~');
@@ -98,8 +125,9 @@ todoBtn.addEventListener('click', () => {
 todoInput.addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
     if (todoInput.value) {
-      const newTodo = setTodos(todos);
-      appendTodos(newTodo);
+      const newTodo = setTodos(todoItems);
+      // appendTodos(newTodo);
+      indexTodos();
       todoInput.value = '';
     } else {
       alert('keypress 내용이 없구만요. 입력해봐유~~~');
