@@ -14,8 +14,6 @@
 .todo-list .num{color:#999;min-width:50px;text-align:center;}
 .todo-list .list{flex:1;font-weight:600;}
 .todo-list .date{font-size:16px;color:#999;}
-/* .todo-list .checkbox > i{position:relative;display:inline-block;width:20px;height:20px;border: 1px solid #ddd; border-radius: 4px;}
-.todo-list .checkbox .checked{content: '✔'; position: absolute; left: 0; top: 0; width: 18px; height: 18px; background: #eee; border-radius: 4px; font-size: 12px; text-align: center;} */
 
 .todo-bottom{text-align:right;margin-top:50px;}
 
@@ -31,5 +29,25 @@
 
 .btn-todo{padding:0 50px;font-size:20px;}
 
-input[type="checkbox"] + label { position: relative; display: inline-block; width: 20px; height: 20px; border: 1px solid #ddd; border-radius: 4px; }
-input[id="check"]:checked + label::after { content: '✔'; position: absolute; left: 0; top: 0; width: 18px; height: 18px; background: #eee; border-radius: 4px; font-size: 12px; text-align: center; }
+input[type="checkbox"] + label { 
+  position: relative; 
+  display: inline-block; 
+  width: 20px; 
+  height: 20px; 
+  border: 1px solid #ddd; 
+  border-radius: 4px; 
+}
+input[type="checkbox"]:checked + label::after { 
+  content: '✔'; 
+  position: absolute; 
+  left: 0; 
+  top: 0; 
+  width: 18px; 
+  height: 18px; 
+  background: #444;
+  border: 1px solid #444; 
+  border-radius: 4px; 
+  font-size: 12px; 
+  text-align: center; 
+  line-height: 18px;
+}

@@ -60,7 +60,7 @@ function setTodos(todoItems) {
 const appendTodos = (todo, index) => {
   todoList.innerHTML += `
     <li data-id="${todo.id}">
-      <div><input type="checkbox" id="check${todo.id}" class="checkbox"/><label for="check${todo.id}"></label></div>
+      <div><input type="checkbox" id="check${todo.id}" ${todo.completed ? 'checked' : ''}/><label for="check${todo.id}"></label></div>
       <div class="num">${index + 1}</div>
       <div class="list">${todo.item}</div>
       <div class="date">${todo.todayDate}</div>
@@ -70,6 +70,18 @@ const appendTodos = (todo, index) => {
       </div>
     </li>
   `;
+
+  document.querySelector(`#check${todo.id}`).addEventListener('click', () => toggleTodoCompletion(todo.id));
+  console.log(`#check${todo.id}`, todo.completed);
+}
+
+const toggleTodoCompletion = (id) => {
+  const todo = todoItems.find(todo => todo.id === id);
+  if (todo) {
+    todo.completed = !todo.completed;
+    localStorage.setItem(id, JSON.stringify(todo));
+    indexTodos();
+  }
 }
 
 const removeTodos = (id) => {
@@ -91,20 +103,6 @@ clearAllBtn.addEventListener('click', () => {
 const indexTodos = () => {
   todoList.innerHTML = '';
   todoItems.forEach((todo, index) => appendTodos(todo, index));
-
-  // 체크박스 이벤트 리스너 추가
-  const toggleBtns = document.querySelectorAll('.checkbox');
-  toggleBtns.forEach((toggleBtn) => {
-    toggleBtn.addEventListener("change", () => {
-      if (toggleBtn.checked) {
-        console.log(`Checkbox ${toggleBtn.id} is checked`);
-        todoItems[index].completed = !todoItems[index].completed;
-      } else {
-        console.log(`Checkbox ${toggleBtn.id} is unchecked`);
-      }
-    });
-  });
-
 }
 
 document.addEventListener('DOMContentLoaded', () => {
