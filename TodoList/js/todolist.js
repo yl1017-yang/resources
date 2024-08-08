@@ -38,6 +38,7 @@ function setTodos(todoItems) {
     id: todoId,
     item: todoItem,
     todayDate: new Date().toISOString().substring(0, 10),
+    editMode: false,
   }
 
   console.log(todoId, todoItem, obj.todayDate);
@@ -58,23 +59,26 @@ function setTodos(todoItems) {
 }
 
 const appendTodos = (todo, index) => {
-  todoList.innerHTML += `
-    <li data-id="${todo.id}">
-      <div><input type="checkbox" id="check${todo.id}" ${todo.completed ? 'checked' : ''}/><label for="check${todo.id}"></label></div>
-      <div class="num">${index + 1}</div>
-      <div class="list">${todo.item}</div>
-      <div class="date">${todo.todayDate}</div>
-      <div class="btn-wrap">
-        <button class="btn btn-graya">수정</button>
-        <button class="btn btn-red" onclick="removeTodos(${todo.id})">삭제</button>
-      </div>
-    </li>
+  const todoElement = document.createElement('li');
+  todoElement.setAttribute('data-id', todo.id);
+  todoElement.innerHTML = `
+    <div><input type="checkbox" id="check${todo.id}" ${todo.completed ? 'checked' : ''}/><label for="check${todo.id}"></label></div>
+    <div class="num">${index + 1}</div>
+    <div class="list">${todo.item}</div>
+    <div class="date">${todo.todayDate}</div>
+    <div class="btn-wrap">
+      <button class="btn btn-graya" onclick="editTodos(${todo.id})">수정</button>
+      <button class="btn btn-red" onclick="removeTodos(${todo.id})">삭제</button>
+    </div>
   `;
 
-  document.querySelector(`#check${todo.id}`).addEventListener('click', () => toggleTodoCompletion(todo.id));
-  console.log(`#check${todo.id}`, todo.completed);
+  const checkbox = todoElement.querySelector(`#check${todo.id}`);
+  checkbox.addEventListener('change', () => toggleTodoCompletion(todo.id));
+
+  todoList.appendChild(todoElement);
 }
 
+// 할일 체크 토글
 const toggleTodoCompletion = (id) => {
   const todo = todoItems.find(todo => todo.id === id);
   if (todo) {
@@ -84,6 +88,7 @@ const toggleTodoCompletion = (id) => {
   }
 }
 
+// 삭제
 const removeTodos = (id) => {
   localStorage.removeItem(id);
   todoItems = todoItems.filter(todo => todo.id !== id);
@@ -92,6 +97,50 @@ const removeTodos = (id) => {
   indexTodos();
 }
 
+// 수정
+const editTodos = (id) => {
+  const todo = todoItems.find(todo => todo.id === id);
+  if (todo) {
+    const todoElement = document.querySelector(`li[data-id='${id}']`);
+    todoElement.innerHTML = `
+      <div><input type="checkbox" id="check${todo.id}" ${todo.completed ? 'checked' : ''}/><label for="check${todo.id}"></label></div>
+      <div class="num">${todoItems.indexOf(todo) + 1}</div>
+      <div class="list"><input type="text" class="edit-input" value="${todo.item}"/></div>
+      <div class="date">${todo.todayDate}</div>
+      <div class="btn-wrap">
+        <button class="btn btn-green" onclick="saveEdit(${todo.id})">저장</button>
+        <button class="btn btn-graya" onclick="cancelEdit(${todo.id})">취소</button>
+      </div>
+    `;
+
+    const checkbox = todoElement.querySelector(`#check${todo.id}`);
+    checkbox.addEventListener('change', () => toggleTodoCompletion(todo.id));
+  }
+}
+
+const saveEdit = (id) => {
+  const todoElement = document.querySelector(`li[data-id='${id}']`);
+  const editInput = todoElement.querySelector('.edit-input');
+  const newValue = editInput.value.trim();
+
+  if (newValue) {
+    const todo = todoItems.find(todo => todo.id === id);
+    if (todo) {
+      todo.item = newValue;
+      localStorage.setItem(id, JSON.stringify(todo));
+      indexTodos();
+    }
+  } else {
+    alert('수정할 내용을 입력해 주세요.');
+  }
+}
+
+const cancelEdit = (id) => {
+  indexTodos();
+}
+
+
+// 전체삭제
 clearAllBtn.addEventListener('click', () => {
   localStorage.clear();
   localStorage.setItem('masterKey', 0); // masterKey 초기화
@@ -100,6 +149,7 @@ clearAllBtn.addEventListener('click', () => {
   todoList.innerHTML = '';
 });
 
+// 렌더링된 화면
 const indexTodos = () => {
   todoList.innerHTML = '';
   todoItems.forEach((todo, index) => appendTodos(todo, index));
@@ -109,6 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
   indexTodos();
 });
 
+// 입력 버튼
 todoBtn.addEventListener('click', () => {
   if (todoInput.value) { 
     const newTodo = setTodos(todoItems);
@@ -120,6 +171,7 @@ todoBtn.addEventListener('click', () => {
   }
 });
 
+// 입력 버튼 엔터
 todoInput.addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
     if (todoInput.value) {

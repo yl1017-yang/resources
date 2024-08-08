@@ -29,6 +29,8 @@
 
 .btn-todo{padding:0 50px;font-size:20px;}
 
+.edit-input{width:90%;background:#eee;padding:4px 0;color:#0f9e3e;}
+
 input[type="checkbox"] + label { 
   position: relative; 
   display: inline-block; 
@@ -37,6 +39,7 @@ input[type="checkbox"] + label {
   border: 1px solid #ddd; 
   border-radius: 4px; 
 }
+
 input[type="checkbox"]:checked + label::after { 
   content: '✔'; 
   position: absolute; 
@@ -44,8 +47,7 @@ input[type="checkbox"]:checked + label::after {
   top: 0; 
   width: 18px; 
   height: 18px; 
-  background: #444;
-  border: 1px solid #444; 
+  background: #eee; 
   border-radius: 4px; 
   font-size: 12px; 
   text-align: center; 
