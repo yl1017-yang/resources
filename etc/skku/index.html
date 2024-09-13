@@ -13,8 +13,8 @@
 <style>
 .total_map_wrap{position:relative;width:1120px;margin:50px auto;}
 .total_map_wrap .total_map{position:absolute;top:0;left:0;right:0;bottom:0;}
-.total_map_wrap .total_map > li{transition:all 0.5s;}
-.total_map_wrap .total_map > li:hover{transform:translateY(-10px);}
+/* .total_map_wrap .total_map > li{transition:all 0.5s;}
+.total_map_wrap .total_map > li:hover{transform:translateY(-10px);} */
 
 .total_map_wrap .card{position:absolute;display:inline-block;padding:8px 40px 8px 15px;background-color:#116067;border-radius:8px;color:#fff;font-size:18px;font-weight:500;line-height:1.2;transition:all 0.5s;animation:step 0.6s 0s ease-in-out both}
 .total_map_wrap .card::before{content:'';position:absolute;top:34%;right:14px;width:9px;height:16px;background:url(./icon_arrow.png) no-repeat;}
@@ -32,6 +32,18 @@
         transform:translateY(0);
     }
 }
+
+/* hover 시 모션 추가 */
+.total_map_wrap .total_map > li:hover{animation:move-up 0.7s 0s ease-in-out infinite both}
+@keyframes move-up {
+    0%, 100% { 
+        transform:translateY(0);
+    }
+    50% { 
+        transform:translateY(-14px);
+    }
+}
+
 
 .total_map_wrap .map1 .card01{top:110px;left:140px;}
 .total_map_wrap .map1 .card02{top:95px;left:322px;animation-delay:0.3s;}
