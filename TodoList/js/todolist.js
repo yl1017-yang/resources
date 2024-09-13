@@ -1,13 +1,13 @@
+// 초기 설정
 const todoBtn = document.querySelector('.btn-todo');
 const todoInput = document.querySelector('.todo-input');
 const todoList = document.querySelector('.todo-list');
 const clearAllBtn = document.querySelector('.all-delete');
-
+let { todoItems, masterKey } = getTodos();
 // let masterKey = localStorage.length ? Math.max(...Object.keys(localStorage).map(Number)) + 1 : 0;
 // let todos = Object.keys(localStorage).map(key => JSON.parse(localStorage.getItem(key)));
 
-let { todoItems, masterKey } = getTodos();
-
+// 로컬 스토리지에서 데이터 불러오기 -> 로컬 스토리지에서 저장된 할 일 항목을 불러와 초기화, masterKey는 각 할 일 항목의 고유 ID를 관리
 function getTodos() {
   let todoItems = [];
   let masterKey = parseInt(localStorage.getItem('masterKey')) || 0;
@@ -28,7 +28,7 @@ function getTodos() {
   return { todoItems, masterKey };
 }
 
-
+// 할 일 추가 -> 새로운 할 일 항목을 생성하고 로컬 스토리지에 저장. 동일한 내용의 할 일이 중복되지 않도록 체크
 function setTodos(todoItems) {
   const todoId = masterKey++;
   const todoItem = todoInput.value;
@@ -38,6 +38,7 @@ function setTodos(todoItems) {
     id: todoId,
     item: todoItem,
     todayDate: new Date().toISOString().substring(0, 10),
+    editMode: false,
   }
 
   console.log(todoId, todoItem, obj.todayDate);
@@ -45,6 +46,7 @@ function setTodos(todoItems) {
   // 내용 중복 값 체크
   if (!todoItems.some(data => data.item == todoItem)) {
     todoItems.push(obj);
+    todoItems.sort((a, b) => a.id - b.id);
 
     localStorage.setItem(todoId, JSON.stringify(obj));
     localStorage.setItem('masterKey', masterKey);
@@ -52,30 +54,32 @@ function setTodos(todoItems) {
     alert('동일 내용이 있슈! 다른 내용으로 입력해주!');
   }
 
-  todoItems.sort((a, b) => a.id - b.id);
-
   return obj; // obj를 반환하여 appendTodos 에 전달합니다.
 }
 
-const appendTodos = (todo, index) => {
-  todoList.innerHTML += `
-    <li data-id="${todo.id}">
-      <div><input type="checkbox" id="check${todo.id}" ${todo.completed ? 'checked' : ''}/><label for="check${todo.id}"></label></div>
-      <div class="num">${index + 1}</div>
-      <div class="list">${todo.item}</div>
-      <div class="date">${todo.todayDate}</div>
-      <div class="btn-wrap">
-        <button class="btn btn-graya">수정</button>
-        <button class="btn btn-red" onclick="removeTodos(${todo.id})">삭제</button>
-      </div>
-    </li>
+// 할 일 렌더링 -> 할 일 항목을 HTML 요소로 생성하고 화면에 추가. 체크박스 이벤트 리스너를 추가하여 완료 상태를 토글
+function appendTodos(todo, index) {
+  const todoElement = document.createElement('li');
+  todoElement.setAttribute('data-id', todo.id);
+  todoElement.innerHTML = `
+    <div><input type="checkbox" id="check${todo.id}" ${todo.completed ? 'checked' : ''}/><label for="check${todo.id}"></label></div>
+    <div class="num">${index + 1}</div>
+    <div class="list">${todo.item}</div>
+    <div class="date">${todo.todayDate}</div>
+    <div class="btn-wrap">
+      <button class="btn btn-graya" onclick="editTodos(${todo.id})">수정</button>
+      <button class="btn btn-red" onclick="removeTodos(${todo.id})">삭제</button>
+    </div>
   `;
 
-  document.querySelector(`#check${todo.id}`).addEventListener('click', () => toggleTodoCompletion(todo.id));
-  console.log(`#check${todo.id}`, todo.completed);
+  const checkbox = todoElement.querySelector(`#check${todo.id}`);
+  checkbox.addEventListener('change', () => toggleTodoCompletion(todo.id));
+
+  todoList.appendChild(todoElement);
 }
 
-const toggleTodoCompletion = (id) => {
+// 할 일 완료 토글 -> 할 일 항목의 완료 상태를 토글. 완료 상태를 로컬 스토리지에 업데이트하고, 화면을 다시 렌더링
+function toggleTodoCompletion(id) {
   const todo = todoItems.find(todo => todo.id === id);
   if (todo) {
     todo.completed = !todo.completed;
@@ -84,7 +88,8 @@ const toggleTodoCompletion = (id) => {
   }
 }
 
-const removeTodos = (id) => {
+// 할 일 삭제 -> 로컬 스토리지에서 해당 할 일 항목을 삭제하고, 화면을 다시 렌더링
+function removeTodos(id) {
   localStorage.removeItem(id);
   todoItems = todoItems.filter(todo => todo.id !== id);
   // const todoItem = document.querySelector(`li[data-id='${id}']`);
@@ -92,6 +97,52 @@ const removeTodos = (id) => {
   indexTodos();
 }
 
+// 할 일 수정 -> 할 일 항목을 수정모드로 전환
+function editTodos(id) {
+  const todo = todoItems.find(todo => todo.id === id);
+  if (todo) {
+    const todoElement = document.querySelector(`li[data-id='${id}']`);
+    todoElement.innerHTML = `
+      <div><input type="checkbox" id="check${todo.id}" ${todo.completed ? 'checked' : ''}/><label for="check${todo.id}"></label></div>
+      <div class="num">${todoItems.indexOf(todo) + 1}</div>
+      <div class="list"><input type="text" class="edit-input" value="${todo.item}"/></div>
+      <div class="date">${todo.todayDate}</div>
+      <div class="btn-wrap">
+        <button class="btn btn-green" onclick="saveEdit(${todo.id})">저장</button>
+        <button class="btn btn-graya" onclick="cancelEdit(${todo.id})">취소</button>
+      </div>
+    `;
+
+    const checkbox = todoElement.querySelector(`#check${todo.id}`);
+    checkbox.addEventListener('change', () => toggleTodoCompletion(todo.id));
+  }
+}
+
+// 할 일 수정 -> 수정된 내용을 저장
+function saveEdit(id) {
+  const todoElement = document.querySelector(`li[data-id='${id}']`);
+  const editInput = todoElement.querySelector('.edit-input');
+  const newValue = editInput.value.trim();
+
+  if (newValue) {
+    const todo = todoItems.find(todo => todo.id === id);
+    if (todo) {
+      todo.item = newValue;
+      localStorage.setItem(id, JSON.stringify(todo));
+      indexTodos();
+    }
+  } else {
+    alert('수정할 내용을 입력해 주세요.');
+  }
+}
+
+// 할 일 수정 -> 수정 모드를 취소하고 화면을 다시 렌더링
+function cancelEdit() {
+  indexTodos();
+}
+
+
+// 전체 삭제 -> 모든 할 일 항목을 삭제하고, masterKey를 초기화
 clearAllBtn.addEventListener('click', () => {
   localStorage.clear();
   localStorage.setItem('masterKey', 0); // masterKey 초기화
@@ -100,15 +151,18 @@ clearAllBtn.addEventListener('click', () => {
   todoList.innerHTML = '';
 });
 
-const indexTodos = () => {
+// 할 일 목록 렌더링 -> 현재 할 일 목록을 화면에 다시 렌더링
+function indexTodos() {
   todoList.innerHTML = '';
   todoItems.forEach((todo, index) => appendTodos(todo, index));
 }
 
+// 초기 로딩 및 이벤트 리스너 - > 페이지가 로드될 때 할 일 목록을 렌더링
 document.addEventListener('DOMContentLoaded', () => {
   indexTodos();
 });
 
+// 초기 로딩 및 이벤트 리스너 - > 할 일 항목을 추가
 todoBtn.addEventListener('click', () => {
   if (todoInput.value) { 
     const newTodo = setTodos(todoItems);
@@ -120,6 +174,7 @@ todoBtn.addEventListener('click', () => {
   }
 });
 
+// 초기 로딩 및 이벤트 리스너 - > 키보드 입력 이벤트 리스너는 엔터 키를 눌렀을 때 할 일 항목을 추가
 todoInput.addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
     if (todoInput.value) {
