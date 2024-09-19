@@ -1,0 +1,251 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Total Care Map</title>
+    <link rel="stylesheet" href="http://ssghakbu.webziggy.co.kr/html/chn/web/css/common.css">
+    <!-- <link rel="stylesheet" href="http://ssghakbu.webziggy.co.kr/html/chn/web/css/map.css"> -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+
+    <style>
+.map_wrap{background:#e9f2ed url(http://ssghakbu.webziggy.co.kr/html/chn/web/img/map/map_bg.jpg) top center no-repeat; background-size:cover; padding:88px 0;}
+.map_wrap_inner{width:1120px; margin: 0 auto;}
+
+.map_header{position:relative;padding:0 0 77px;text-align: center;}
+.map_header .menu_language{position:absolute; top:107px; right:0;}
+.map_header .menu_language ul li a{display:flex; align-items:center; justify-content:center; width:160px; height:36px; margin-bottom:4px; border-radius:18px; background-color: #fff; color:#777; font-size: 16px;}
+.map_cont{position: relative; margin-bottom:80px;}
+
+/* 20240919 - 탭메뉴 수정 */
+.map_tapMenu{position:relative;height:90px;}
+.map_tapMenu ul{display:flex;position:absolute;top:0;left:0;width:1120px;height:90px;background-color:#008c99;border-radius:100px;}
+.map_tapMenu.addFixMap ul{position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:10;}
+
+.map_tapMenu ul li{position:relative;border-radius:100px;width:100%;height:100%;}
+.map_tapMenu ul li a{display:block;width:100%;height:100%;font-size:26px;color:#fff;display:flex;align-items:center;justify-content:center;}
+.map_tapMenu ul li:nth-child(1){background-color:#008c99;}
+.map_tapMenu ul li:nth-child(1).on a{color:#000;}
+.map_tapMenu ul li:nth-child(2){background-color:#e1dc92;}
+.map_tapMenu ul li:nth-child(2).on a{color:#000;}
+/* 20240919 - 탭메뉴 수정 */
+
+.map_container{margin-top:20px;}
+.map_footer ul{display:flex; align-items:center; justify-content:space-between;}
+
+.total_map_wrap{position:relative;width:1120px;margin:50px auto;}
+.total_map_wrap .total_map{position:absolute;top:0;left:0;right:0;bottom:0;}
+.total_map_wrap .total_map > li:hover{animation:move-up 0.7s 0s ease-in-out infinite both}
+@keyframes move-up {
+    0%, 100% { 
+        transform:translateY(0);
+    }
+    50% { 
+        transform:translateY(-14px);
+    }
+}
+
+
+.total_map_wrap .card{opacity: 0; position:absolute;display:inline-block;padding:8px 40px 8px 15px;background-color:#116067;border-radius:8px;color:#fff;font-size:18px;font-weight:500;line-height:1.2;transition:all 0.5s;}
+.total_map_wrap .card::before{content:'';position:absolute;top:34%;right:14px;width:9px;height:16px;background:url('../img/map/icon_arrow.png') no-repeat;}
+.total_map_wrap .card::after{content:'';position:absolute;top:54px;left:130px;width:0;height:0;border-top:44px solid #116067;border-left:14px solid transparent;border-right:0px solid transparent;transform:rotate(-15deg);transition:all 0.5s;}
+.total_map_wrap .card:hover{background-color:#25c37d;box-shadow:rgba(0, 0, 0, 0.3) 6px 6px 20px 0px;}
+.total_map_wrap .card:hover::after{border-top:44px solid #25c37d;}
+
+.total_map_wrap.on .card{animation:step 0.6s 0s ease-in-out both;}
+@keyframes step {
+    0% { 
+        opacity: 0;
+        transform:translateY(10px);
+    }
+    100% { 
+        opacity: 1; 
+        transform:translateY(0);
+    }
+}
+
+.total_map_wrap .map1 .card01{top:110px;left:140px;}
+.total_map_wrap .map1 .card02{top:95px;left:322px;animation-delay:0.3s;}
+.total_map_wrap .map1 .card02::after{left:26px;border-left:0px solid transparent;border-right:14px solid transparent;transform:rotate(15deg);}
+.total_map_wrap .map1 .card03{top:122px;left:556px;animation-delay:0.1s;}
+.total_map_wrap .map1 .card03::after{left:24px;border-left:0px solid transparent;border-right:14px solid transparent;transform:rotate(15deg);}
+.total_map_wrap .map1 .card04{top:246px;left:382px;animation-delay:0.5s;}
+.total_map_wrap .map1 .card04::after{left:120px;}
+.total_map_wrap .map1 .card05{top:232px;left:724px;animation-delay:0.4s;}
+.total_map_wrap .map1 .card05::after{left:24px;border-left:0px solid transparent;border-right:14px solid transparent;transform:rotate(15deg);}
+
+.total_map_wrap .map2 .card01{top:206px;left:286px;}
+.total_map_wrap .map2 .card02{top:206px;left:444px;animation-delay:0.3s;}
+.total_map_wrap .map2 .card02::after{left:26px;border-left:0px solid transparent;border-right:14px solid transparent;transform:rotate(15deg);}
+.total_map_wrap .map2 .card03{top:286px;left:518px;animation-delay:0.1s;}
+.total_map_wrap .map2 .card03::after{top:0;left:-28px;border-left:0px solid transparent;border-right:14px solid transparent;transform:rotate(90deg);}
+.total_map_wrap .map2 .card04{top:120px;left:626px;animation-delay:0.5s;}
+.total_map_wrap .map2 .card04::after{left:26px;border-left:0px solid transparent;border-right:14px solid transparent;transform:rotate(15deg);}
+.total_map_wrap .map2 .card05{top:203px;left:700px;animation-delay:0.4s;}
+.total_map_wrap .map2 .card05::after{top:0;left:-28px;border-left:0px solid transparent;border-right:14px solid transparent;transform:rotate(90deg);}
+    </style>
+</head>
+
+<body>
+    <div class="map_wrap">
+        <div class="map_wrap_inner">
+            <div class="map_header">
+                <img src="http://ssghakbu.webziggy.co.kr/html/chn/web/img/map/map_logo_eng.png" alt="Total Care Map Logo">
+                <div class="menu_language">
+                    <ul>
+                        <li>
+                            <a href="../../../korean/web/map/map_01.html">KOREA</a>
+                        </li>
+                        <li>
+                            <a href="../../../english/web/map/map_01.html">ENGLISH</a>
+                        </li>
+                        <li>
+                            <a href="map_01.html">CHINESE</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="map_cont">
+                <div class="map_tapMenu">
+                    <ul>
+                        <li>
+                            <a href="#cont01">
+                                人文社会科学校区
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#cont02">
+                                自然科学校区
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="map_container">
+                    <div id="cont01" class="total_map_wrap">
+                        <img src="http://ssghakbu.webziggy.co.kr/html/chn/web/img/map/map01.jpg" alt="">
+                        <ul class="total_map map1">
+                            <li>
+                                <a href="https://helper.skku.edu/helper/index.do" target="_blank" class="card card01">
+                                    人权中心<br />
+                                    茶山经济馆3层
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://scc.skku.edu/scc/index.do" target="_blank" class="card card02">
+                                    咨询中心<br />
+                                    茶山经济馆1层
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://support.skku.edu/support/index.do" target="_blank" class="card card03">
+                                    残疾学生支援中心<br />
+                                    中央学术信息馆3层
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://health.skku.edu/health_eng/index.do" target="_blank"
+                                    class="card card04">
+                                    健康中心 <br />
+                                    学生会馆2层
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://success.skku.edu/success_chi/index.do" target="_blank"
+                                    class="card card05">
+                                    学生成功中心 <br />
+                                    国际馆1楼
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="cont02" class="total_map_wrap">
+                        <img src="http://ssghakbu.webziggy.co.kr/html/chn/web/img/map/map02.jpg" alt="">
+                        <ul class="total_map map2">
+                            <li>
+                                <a href="https://health.skku.edu/health_eng/index.do" target="_blank"
+                                    class="card card01">
+                                    健康中心 <br />
+                                    福利会馆2层
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://scc.skku.edu/scc/index.do" target="_blank" class="card card02">
+                                    咨询中心 <br />
+                                    福利会馆3层
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://helper.skku.edu/helper/index.do" target="_blank" class="card card03">
+                                    人权中心 <br />
+                                    福利会馆3层
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://support.skku.edu/support/index.do" target="_blank" class="card card04">
+                                    残疾学生支援中心 <br />
+                                    三星学术信息馆3层
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://success.skku.edu/success_chi/index.do" target="_blank"
+                                    class="card card05">
+                                    学生成功中心 <br />
+                                    三星学术信息馆1层
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="map_footer">
+                <ul>
+                    <li><a href="https://www.skku.edu/eng/"><img src="http://ssghakbu.webziggy.co.kr/html/chn/web/img/map/map_btn_cn01.png" alt=""></a></li>
+                    <li><a href="https://success.skku.edu/success_chi/index.do"><img src="http://ssghakbu.webziggy.co.kr/html/chn/web/img/map/map_btn_cn02.png" alt=""></a></li>
+                    <li><a href="../main.html"><img src="http://ssghakbu.webziggy.co.kr/html/chn/web/img/map/map_btn_cn03.png" alt=""></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            var $nav = $('.map_tapMenu');
+            var $navItems = $('.map_tapMenu ul a');
+            var navHeight = 110; //탭메뉴 세로사이즈
+            // var navHeight = $(".map_tapMenu").outerHeight(); //모바일 탭메뉴 세로사이즈 추가할때
+
+            $(window).on('scroll load', function () {
+                var scrollTop = $(window).scrollTop();
+                var navTop = $nav.offset().top;
+
+                if (scrollTop >= navTop) {
+                    $nav.addClass('addFixMap');
+                } else {
+                    $nav.removeClass('addFixMap');
+                    $('.map_tapMenu li').removeClass('on');
+                }
+
+                $navItems.each(function () {
+                    var $content = $($(this).attr('href'));
+                    var contentOffsetTop = $content.offset().top - navHeight;
+
+                    if (scrollTop >= contentOffsetTop) {
+                        $(this).parent().addClass('on').siblings().removeClass('on');
+                    }
+                });
+            });
+
+            $navItems.on('click', function (e) {
+                e.preventDefault();
+                var $content = $($(this).attr('href'));
+                var contentOffsetTop = $content.offset().top - navHeight;
+                $('html, body').animate({ scrollTop: contentOffsetTop + 'px' }, 500);
+            });
+        });
+    </script>
+
+</body>
+
+</html>
