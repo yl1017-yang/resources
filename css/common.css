@@ -33,7 +33,6 @@ a, button, [role=button], [role=link], [role=tab]{-webkit-touch-callout:none;}
 /* form select */
 input,textarea,select{box-sizing:border-box;-webkit-appearance:none;-moz-appearance:none;appearance:none;border:none;outline-style:none;border-radius:0;font-size:inherit;font-family:inherit;color:inherit;}
 input[type='text'], input[type='password']{resize:none;box-shadow:none !important;border-radius:0;outline:none;}
-input:checked{-webkit-appearance:checkbox;}
 input[type='text']::-ms-clear, input[type='tel']::-ms-clear{display:none;}
 input[disabled], select[disabled], input[readonly], textarea[disabled], button[disabled] {cursor:default;}
 input, textarea{-webkit-tap-highlight-color:rgba(0, 0, 0, 0)}
@@ -46,7 +45,7 @@ input[type='checkbox']{position:absolute;width:1px;height:1px;padding:0;margin:-
 
 /* input textarea focus */
 input[type='text'], input[type='password'], textarea{transition:all 0.1s ease-in-out !important;}
-/* input[type='text']:focus, input[type='password']:focus,textarea:focus{border:2px solid #555 !important;} */
+input[type='text']:focus, input[type='password']:focus,textarea:focus{border:2px solid #555 !important;}
 
 /* placeholder, focus */
 ::placeholder{font-size:inherit;color:#999;letter-spacing:-0.0375em;opacity:1;}
