@@ -1,121 +1,122 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
-  </head>
-  <body>
-    <style>
-      *{padding:0;margin:0;border:0;box-sizing:border-box;}
-      body{background:#444;line-height:1.4;}
-      .box{max-width:920px;width:100%;background:#fff;border-radius:20px;padding:20px 40px;margin:20px auto;box-shadow:rgba(0, 0, 0, 0.2) 10px 10px 20px;}
-      .box > h1{font-size:28px;border-bottom:1px solid #eee;margin-bottom:15px;}
-      .box > h2{font-size:16px;margin-bottom:20px;color:#555;}
-      .box > p{color:palevioletred;margin-top:10px;font-size:15px;}
-      .box > span{display:block;margin:10px 0;padding:10px 20px;border-radius:10px;background:#eee;font-size:20px;font-weight:bold;}
-      .box pre{margin:20px 0;background:#eee;font-size:12px;}
-      .box .result{margin:10px 0 10px;padding:10px 20px;background:rgb(255, 234, 242);}
-    </style>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title></title>
+</head>
+<body>
+<style>
+  *{padding:0;margin:0;border:0;box-sizing:border-box;}
+  body{background:#444;line-height:1.4;}
+  .box{max-width:920px;width:100%;background:#fff;border-radius:20px;padding:20px 40px;margin:20px auto;box-shadow:rgba(0, 0, 0, 0.2) 10px 10px 20px;}
+  .box > h1{font-size:28px;border-bottom:1px solid #eee;margin-bottom:15px;}
+  .box > h2{font-size:16px;margin-bottom:20px;color:#555;}
+  .box > p{color:palevioletred;margin-top:10px;font-size:15px;}
+  .box > span{display:block;margin:10px 0;padding:10px 20px;border-radius:10px;background:#eee;font-size:20px;font-weight:bold;}
+  .box pre{margin:20px 0;background:#eee;font-size:12px;}
+  .box .result{margin:10px 0 10px;padding:10px 20px;background:rgb(255, 234, 242);}
+</style>
 
-    <div class="box">
-      <h1>문제 1)</h1>
-      <h2>
-        arrays에서 deliveryType이 'STORE_SHIPPING'인 데이터만 가져와서 <br>
-        모든 age가 40이상인지 여부에 따라 각자 다른 문구 출력하시오. <br>
-        (단, arrays가 넘겨받은 api 데이터라고 가정하였을 때, 호출 이슈로 인하여 빈 배열로 넘어올 가능성 또한 고려할 것)
-      </h2>
-      <p>age 데이터 모두가 40이상이면 "매장배송의 age는 모두 40 이상입니다." 출력<br>
-      age 데이터 중 하나라도 40이상이 아니라면 "매장배송의 age는 모두 40 이상은 아닙니다." 출력</p>
-      <pre>
-        const arrays = [
+
+<div class="box">
+  <h1>문제 1)</h1>
+  <h2>
+    arrays에서 deliveryType이 'STORE_SHIPPING'인 데이터만 가져와서 <br>
+    모든 age가 40이상인지 여부에 따라 각자 다른 문구 출력하시오. <br>
+    (단, arrays가 넘겨받은 api 데이터라고 가정하였을 때, 호출 이슈로 인하여 빈 배열로 넘어올 가능성 또한 고려할 것)
+  </h2>
+  <p>age 데이터 모두가 40이상이면 "매장배송의 age는 모두 40 이상입니다." 출력<br>
+  age 데이터 중 하나라도 40이상이 아니라면 "매장배송의 age는 모두 40 이상은 아닙니다." 출력</p>
+  <pre>
+    const arrays = [
+    {
+      data: [
         {
-          data: [
-            {
-              age: 50,
-              id: 546231,
-              deliveryType: "STORE_SHIPPING",
-            },
-            {
-              age: 30,
-              id: 54231,
-              deliveryType: "NORMAL_SHIPPING",
-            },
-            {
-              age: 25,
-              id: 6549814,
-              deliveryType: "STORE_SHIPPING",
-            },
-            {
-              age: 55,
-              id: 12121212,
-              deliveryType: "STORE_SHIPPING",
-            },
-          ],
+          age: 50,
+          id: 546231,
+          deliveryType: "STORE_SHIPPING",
         },
-      ]
-
-      const deleveryfilter = arrays
-      .flatMap(array => array.data)  // deliveryType을 확인하기 위해 배열을 반복해야 하며 data 배열을 평탄화
-      .filter(item => item.deliveryType === "STORE_SHIPPING")  //STORE_SHIPPING 필터링
-      .map(item => { //필터링 된 자료중 40이상 구분
-        if (item.age >= 40 ) {
-          return "매장배송의 age는 모두 40 이상 ▲"
-        } else {
-          return "매장배송의 age는 모두 40 이상은 아닙니다."
-        }
-      });
-
-      console.log(deleveryfilter);
-      document.querySelector(".result_data").innerHTML = deleveryfilter.join("<br>");
-      </pre>
-
-      <div class="result result_data1"></div>
-      <div>참고 : https://velog.io/@phrygia/2023-01-23-array-to-object <br> 사용문법 : flatMap, filter, map, every</div>
-    </div>
-    <script>
-      const arrays = [
         {
-          data: [
-            {
-              age: 50,
-              id: 546231,
-              deliveryType: "STORE_SHIPPING",
-            },
-            {
-              age: 30,
-              id: 54231,
-              deliveryType: "NORMAL_SHIPPING",
-            },
-            {
-              age: 25,
-              id: 6549814,
-              deliveryType: "STORE_SHIPPING",
-            },
-            {
-              age: 55,
-              id: 12121212,
-              deliveryType: "STORE_SHIPPING",
-            },
-          ],
+          age: 30,
+          id: 54231,
+          deliveryType: "NORMAL_SHIPPING",
         },
-      ]
+        {
+          age: 25,
+          id: 6549814,
+          deliveryType: "STORE_SHIPPING",
+        },
+        {
+          age: 55,
+          id: 12121212,
+          deliveryType: "STORE_SHIPPING",
+        },
+      ],
+    },
+  ]
 
-      const deleveryfilter = arrays
-      .flatMap(array => array.data)  // deliveryType을 확인하기 위해 배열을 반복해야 하며 data 배열을 평탄화
-      .filter(item => item.deliveryType === "STORE_SHIPPING")  //STORE_SHIPPING 필터링
-      .map(item => { //필터링 된 자료중 40이상 구분
-        if (item.age >= 40 ) {
-          return `[id: ${item.id}] 매장배송의 age는 모두 40 이상 ▲`
-        } else {
-          return `[id: ${item.id}] 매장배송의 age는 모두 40 이상은 아닙니다.`
-        }
-      });
+  const deleveryfilter = arrays
+  .flatMap(array => array.data)  // deliveryType을 확인하기 위해 배열을 반복해야 하며 data 배열을 평탄화
+  .filter(item => item.deliveryType === "STORE_SHIPPING")  //STORE_SHIPPING 필터링
+  .map(item => { //필터링 된 자료중 40이상 구분
+    if (item.age >= 40 ) {
+      return "매장배송의 age는 모두 40 이상 ▲"
+    } else {
+      return "매장배송의 age는 모두 40 이상은 아닙니다."
+    }
+  });
 
-      console.log(deleveryfilter);
-      document.querySelector(".result_data1").innerHTML = deleveryfilter.join("<br>");
-    </script>
+  console.log(deleveryfilter);
+  document.querySelector(".result_data").innerHTML = deleveryfilter.join("<br>");
+  </pre>
+
+  <div class="result result_data1"></div>
+  <div>참고 : https://velog.io/@phrygia/2023-01-23-array-to-object <br> 사용문법 : flatMap, filter, map, every</div>
+</div>
+<script>
+  const arrays = [
+    {
+      data: [
+        {
+          age: 50,
+          id: 546231,
+          deliveryType: "STORE_SHIPPING",
+        },
+        {
+          age: 30,
+          id: 54231,
+          deliveryType: "NORMAL_SHIPPING",
+        },
+        {
+          age: 25,
+          id: 6549814,
+          deliveryType: "STORE_SHIPPING",
+        },
+        {
+          age: 55,
+          id: 12121212,
+          deliveryType: "STORE_SHIPPING",
+        },
+      ],
+    },
+  ]
+
+  const deleveryfilter = arrays
+  .flatMap(array => array.data)  // deliveryType을 확인하기 위해 배열을 반복해야 하며 data 배열을 평탄화
+  .filter(item => item.deliveryType === "STORE_SHIPPING")  //STORE_SHIPPING 필터링
+  .map(item => { //필터링 된 자료중 40이상 구분
+    if (item.age >= 40 ) {
+      return `[id: ${item.id}] 매장배송의 age는 모두 40 이상 ▲`
+    } else {
+      return `[id: ${item.id}] 매장배송의 age는 모두 40 이상은 아닙니다.`
+    }
+  });
+
+  console.log(deleveryfilter);
+  document.querySelector(".result_data1").innerHTML = deleveryfilter.join("<br>");
+</script>
 
 
 
@@ -184,5 +185,5 @@
     
 
 
-  </body>
+</body>
 </html>
