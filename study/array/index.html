@@ -116,6 +116,71 @@
       console.log(deleveryfilter);
       document.querySelector(".result_data1").innerHTML = deleveryfilter.join("<br>");
     </script>
+
+
+
+
+<div class="box">
+  <h1>문제 2)</h1>
+  <h2>다음 teams 배열에서 나이가 30미만인 선수들의 객체만 새로운 배열로 반환하시오.  </h2>
+  <p>(map또는 flatMap을 활용할 것)</p>
+  <pre>
+    const teams = [
+    {
+      name: "Team A",
+      players: [
+        { name: "Alice", age: 25 },
+        { name: "Bob", age: 30 },
+      ],
+    },
+    {
+      name: "Team B",
+      players: [
+        { name: "Charlie", age: 35 },
+        { name: "David", age: 22 },
+      ],
+    },
+  ]
+
+  const teamsfilter = teams
+  .flatMap(array => array.players) 
+  .filter(item => item.age <= 30 )
+  .map(item => `${item.name}, ${item.age}` );
+
+
+  console.log(teamsfilter);
+  document.querySelector(".result_data2").innerHTML = teamsfilter.join(" / ");
+  </pre>
+
+  <div class="result result_data2"></div>
+</div>
+<script>
+  const teams = [
+    {
+      name: "Team A",
+      players: [
+        { name: "Alice", age: 25 },
+        { name: "Bob", age: 30 },
+      ],
+    },
+    {
+      name: "Team B",
+      players: [
+        { name: "Charlie", age: 35 },
+        { name: "David", age: 22 },
+      ],
+    },
+  ]
+
+  const teamsfilter = teams
+  .flatMap(array => array.players) 
+  .filter(item => item.age <= 30 )
+  .map(item => `${item.name}, ${item.age}` );
+
+
+  console.log(teamsfilter);
+  document.querySelector(".result_data2").innerHTML = teamsfilter.join(" / ");
+</script>
     
 
 
