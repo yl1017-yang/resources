@@ -57,19 +57,23 @@
     },
   ]
 
-  const deleveryfilter = arrays
-  .flatMap(array => array.data)  // deliveryType을 확인하기 위해 배열을 반복해야 하며 data 배열을 평탄화
-  .filter(item => item.deliveryType === "STORE_SHIPPING")  //STORE_SHIPPING 필터링
-  .map(item => { //필터링 된 자료중 40이상 구분
-    if (item.age >= 40 ) {
-      return "매장배송의 age는 모두 40 이상 ▲"
-    } else {
-      return "매장배송의 age는 모두 40 이상은 아닙니다."
-    }
-  });
-
-  console.log(deleveryfilter);
-  document.querySelector(".result_data").innerHTML = deleveryfilter.join("<br>");
+  if (arrays.length === 0 || arrays[0].data.length === 0) {
+    console.log("빈배열");
+    document.querySelector(".result_data1").innerHTML = "빈배열 일때 츌룍";
+  } else {
+    const deleveryfilter = arrays
+    .flatMap(array => array.data)  // deliveryType을 확인하기 위해 배열을 반복해야 하며 data 배열을 평탄화
+    .filter(item => item.deliveryType === "STORE_SHIPPING")  //STORE_SHIPPING 필터링
+    .map(item => { //필터링 된 자료중 40이상 구분
+      if (item.age >= 40) {
+        return `[id: ${item.id}] 매장배송의 age는 모두 40 이상 ▲`;
+      } else {
+        return `[id: ${item.id}] 매장배송의 age는 모두 40 이상은 아닙니다.`;
+      }
+    });
+    console.log(deleveryfilter);
+    document.querySelector(".result_data1").innerHTML = deleveryfilter.join("<br>");
+  }
   </pre>
 
   <div class="result result_data1"></div>
@@ -103,19 +107,23 @@
     },
   ]
 
-  const deleveryfilter = arrays
-  .flatMap(array => array.data)  // deliveryType을 확인하기 위해 배열을 반복해야 하며 data 배열을 평탄화
-  .filter(item => item.deliveryType === "STORE_SHIPPING")  //STORE_SHIPPING 필터링
-  .map(item => { //필터링 된 자료중 40이상 구분
-    if (item.age >= 40 ) {
-      return `[id: ${item.id}] 매장배송의 age는 모두 40 이상 ▲`
-    } else {
-      return `[id: ${item.id}] 매장배송의 age는 모두 40 이상은 아닙니다.`
-    }
-  });
-
-  console.log(deleveryfilter);
-  document.querySelector(".result_data1").innerHTML = deleveryfilter.join("<br>");
+  if (arrays.length === 0 || arrays[0].data.length === 0) {
+    console.log("빈배열");
+    document.querySelector(".result_data1").innerHTML = "빈배열 일때 츌룍";
+  } else {
+    const deleveryfilter = arrays
+    .flatMap(array => array.data)  // deliveryType을 확인하기 위해 배열을 반복해야 하며 data 배열을 평탄화
+    .filter(item => item.deliveryType === "STORE_SHIPPING")  //STORE_SHIPPING 필터링
+    .map(item => { //필터링 된 자료중 40이상 구분
+      if (item.age >= 40) {
+        return `[id: ${item.id}] 매장배송의 age는 모두 40 이상 ▲`;
+      } else {
+        return `[id: ${item.id}] 매장배송의 age는 모두 40 이상은 아닙니다.`;
+      }
+    });
+    console.log(deleveryfilter);
+    document.querySelector(".result_data1").innerHTML = deleveryfilter.join("<br>");
+  }
 </script>
 
 
@@ -182,7 +190,8 @@
   console.log(teamsfilter);
   document.querySelector(".result_data2").innerHTML = teamsfilter.join(" / ");
 </script>
-    
+
+
 
 
 </body>
