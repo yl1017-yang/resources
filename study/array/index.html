@@ -156,7 +156,6 @@
   .filter(item => item.age <= 30 )
   .map(item => `${item.name}, ${item.age}` );
 
-
   console.log(teamsfilter);
   document.querySelector(".result_data2").innerHTML = teamsfilter.join(" / ");
   </pre>
@@ -185,7 +184,6 @@
   .flatMap(array => array.players) 
   .filter(item => item.age <= 30 )
   .map(item => `${item.name}, ${item.age}` );
-
 
   console.log(teamsfilter);
   document.querySelector(".result_data2").innerHTML = teamsfilter.join(" / ");
